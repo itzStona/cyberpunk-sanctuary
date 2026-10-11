@@ -699,7 +699,7 @@ display:none;pointer-events:none;z-index:20}
 <div class="ipf" id="rsg_s" style="width:220px"><label>SLEEP (DAYS LEFT)</label><div class="pair"><input data-k="rest_s" type="number" min="0"><span>OUT OF</span><input data-k="rest_smax" type="number" min="0"></div></div>
 <div class="ipf" id="rsg_p" style="width:220px"><label>POWER (DAYS LEFT)</label><div class="pair"><input data-k="rest_p" type="number" min="0"><span>OUT OF</span><input data-k="rest_pmax" type="number" min="0"></div></div>
 <div class="ipa"><button class="g" data-rest="-1">−1 DAY</button><button class="g" data-rest="1">+1 DAY</button><button data-rest="max" id="rbtn">SLEEP</button><span class="badge" id="restb">RESTED</span></div>
-<p class="iph">Organic: max days of sleep = 3 + WILL (WILL 4 is 7 days). 5 left or fewer is −2 to all rolls, 3 or fewer is −4, 1 is −6 and 0 is out. Clanker: 3 days of power. 2 left is −2, 1 is −4 and 0 is powered off. At 0, rolls are blocked until you rest or recharge. </p></div>
+<p class="iph">Organic: max days of sleep = your WILL (WILL 4 means 4 days). The penalties scale with that max and round down, so low WILL is not punished at once: at 4/7 of it left or fewer you get −2 to all rolls, at 2/7 −4, at 1/7 −6 (this last tier only exists from max 7), and 0 is out. With WILL 4: 4 and 3 days left are fine, 2 left is −2, 1 left is −4. With WILL 2: 1 left is −2. Clanker: 3 days of power. 2 left is −2, 1 is −4 and 0 is powered off. At 0, rolls are blocked until you rest or recharge. </p></div>
 <div class="ip" id="scbp"><h4>STREET CRED</h4>
 <div class="ipf" style="width:130px"><label>CRED POINTS</label><input data-k="sc_t" type="number" min="0"></div>
 <div class="ipf av" style="width:110px"><label>LEVEL</label><input id="sc_lv" readonly></div>
@@ -1029,7 +1029,7 @@ const LOG=[];
 function logRoll(l,t,n,c){LOG.unshift({l,t,n,c});LOG.length=Math.min(LOG.length,40);$("#logl").innerHTML=LOG.map((r,i)=>`<div class="le ${r.c||""} ${i?"":"new"}"><div><b>${r.l}</b><small>${r.t}</small></div><span>${r.n}</span></div>`).join("");$("#log").classList.remove("min")}
 function restState(){const r=isRobot(),k=r?"rest_p":"rest_s",c=+val(k).value||0,mx=+val(k+"max").value||0;if(!mx)return{pen:0,out:false,off:true};
  if(r)return c<=0?{pen:0,out:true}:{pen:c>=3?0:c==2?-2:-4,out:false};
- return c<=0?{pen:0,out:true}:{pen:c<=1?-6:c<=3?-4:c<=5?-2:0,out:false}}
+ return c<=0?{pen:0,out:true}:{pen:c<=Math.floor(mx/7)?-6:c<=Math.floor(mx*2/7)?-4:c<=Math.floor(mx*4/7)?-2:0,out:false}}
 function roll(l,m,skillBonus=0,bl="skill bonus",xp=0,xl=""){const rs=restState();if(rs.out){logRoll(l,isRobot()?"powered off: recharge first":"0 sleep left: out","✗","bad");return{tot:0,win:false,dv:0}}const r=d(10);let x=0,tag="";if(r==10){x=d(10);tag="crit"}else if(r==1){x=-d(10);tag="fumble"}
  const p=pen(),md=+$("#md").value||0,dv=+$("#dv").value,lk=takeLuck();
  const lw=rs.pen,tot=r+x+m+skillBonus+p+md+lk+xp+lw,sg=n=>(n<0?"−":"+")+" "+Math.abs(n),win=dv&&tot>=dv;
@@ -1195,7 +1195,7 @@ function robotUpd(){const r=isRobot();$("#rbp").hidden=!r;
  set($("#hlost").previousElementSibling,"LOST","CORRUPTED");
  document.querySelectorAll('[data-hp="1"],[data-hp="5"],[data-hp="full"]').forEach(b=>b.style.display=r?"none":"");
  restUpd()}
-function syncSleepMax(){const w=+val("st_WILL").value||0,mx=val("rest_smax"),c=val("rest_s");if(!mx)return;mx.readOnly=true;mx.title="Max sleep = 3 + WILL";if(w<1)return;const nm=3+w,om=+mx.value||0;if(om===nm)return;const cc=+c.value||0;mx.value=nm;c.value=cc>=om||cc>nm?nm:cc}
+function syncSleepMax(){const w=+val("st_WILL").value||0,mx=val("rest_smax"),c=val("rest_s");if(!mx)return;mx.readOnly=true;mx.title="Max sleep = WILL";if(w<1)return;const nm=w,om=+mx.value||0;if(om===nm)return;const cc=+c.value||0;mx.value=nm;c.value=cc>=om||cc>nm?nm:cc}
 function restUpd(){syncSleepMax();const r=isRobot(),st=restState(),b=$("#restb");$("#rsg_s").style.display=r?"none":"";$("#rsg_p").style.display=r?"":"none";$("#rbtn").textContent=r?"RECHARGE":"SLEEP";
  b.className="badge"+(st.out?" mw":st.pen?" sw":"");
  b.textContent=st.off?"RULE OFF":st.out?(r?"POWERED OFF":"DEAD"):st.pen?(r?"LOW POWER ":"SLEEP DEPRIVED ")+String(st.pen).replace("-","−"):(r?"POWERED":"RESTED")}
@@ -4193,7 +4193,9 @@ window.SATURN={audio:aInit,open:open,close:close,get st(){return ST},start:start
  frame:function(){ST.t+=.016;stepDyn(ST.t,.016);render(ST.t);return cv.toDataURL('image/png')},get counts(){return {lines:B.s.ln,pts:B.s.pn+SB.pn+HB.pn,tris:B.s.tn,occ:B.o.tn,cols:COL.length,floors:FLR.length}}};
 })();
 
-
+/* secret entrances into Sanctuary:
+   1) tap the BREACH PROTOCOL title 5 times fast
+   2) switch on the sequence chips in this exact order: Cloak, Slide, Backdoor, Zap */
 (function(){var ov=document.getElementById('breach-overlay'),t=document.getElementById('bp-title'),chips=document.getElementById('bp-chips');
 function enter(){var ex=document.getElementById('breach-exit');
 if(ov){ov.style.transition='filter .35s';ov.style.filter='invert(1) hue-rotate(160deg) contrast(1.4)'}
