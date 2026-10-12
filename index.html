@@ -1356,7 +1356,7 @@ pl.addEventListener("click",function(){
   <details class="bp-how">
     <summary>HOW IT PLAYS</summary>
     <ul>
-      <li><b>Program effects:</b> every sequence does something the moment it uploads, and the PROGRAM EFFECTS feed under SEQUENCES (and your Roll Log) says what. <b>Scanner</b> lights the next good cell and finds a hidden terminal (you sell its data: eb goes straight onto your sheet) or a lurking enemy. <b>Backdoor</b> refunds 1 Net action (once per run) and, from the Quickhacks panel, marks the Passwall breached. <b>Pathfinder</b> adds 1 buffer slot on top of its floor preview. <b>Slide</b> lets your next pick be any unused code on top of its floor skip. <b>Eye-Dee</b> exposes ICE for -1 Rez. <b>Cloak</b> cancels backlash and ICE retaliation when you jack out. <b>Control</b> seizes a system and adds 10 s. <b>Virus</b> eats 2 Rez of ICE on top of the bottom-floor payload. <b>Zap</b> destroys ICE outright; with no ICE it wipes your trace like Cloak.</li>
+      <li><b>Program effects:</b> every sequence does something the moment it uploads, and the PROGRAM EFFECTS feed under SEQUENCES (and your Roll Log) says what. <b>Scanner</b> lights the next good cell and finds a hidden terminal (you sell its data: eb goes straight onto your sheet) or a lurking enemy. <b>Backdoor</b> refunds 1 Net action (once per run) and, from the Quickhacks panel, marks the Passwall breached. <b>Pathfinder</b> adds 1 buffer slot on top of its floor preview. <b>Slide</b> skips a floor. <b>Eye-Dee</b> exposes ICE for -1 Rez. <b>Cloak</b> cancels backlash and ICE retaliation when you jack out. <b>Control</b> seizes a system and adds 10 s. <b>Virus</b> eats 2 Rez of ICE on top of the bottom-floor payload. <b>Zap</b> destroys ICE outright; with no ICE it wipes your trace like Cloak.</li>
       <li><b>Net actions:</b> Jack In (free if a Netrunning Suit is in your inventory), starting the breach, every move to a deeper floor (Descend, Slide or a fork door) and Unplug each cost 1 Net action. You get 2 at Interface 1 to 3, 3 at 4 to 6, 4 at 7 to 9 and 5 at 10, unless you type your own total in the Quickhacks panel. END TURN refreshes them.</li>
       <li><b>Damage:</b> when ICE is still standing as you jack out, or a breach locks you out, the hit is rolled for you and taken straight off your HP (armor skipped). ICE hits 2d6 at Black Site, 3d6 at Militech and 4d6 at Arasaka, half as many dice if you wounded it. A failed breach costs 1d6, or 2d6 from Black Site up. The GM can waive a hit with one tap.</li>
       <li><b>Virus payload:</b> land the Virus on the bottom floor and you can write what you rewrite in the system. Your party sees it in the Roll Log.</li>
@@ -1448,7 +1448,7 @@ var DAEMONS=[
   {id:'scanner',   name:'Scanner',   base:2, text:'Reveal a hidden data terminal, or an enemy lurking on this floor. EFFECT: lights the next good cell; a terminal pays eb.'},
   {id:'backdoor',  name:'Backdoor',  base:2, text:'Force the password wall open and get a foothold. EFFECT: refunds 1 Net action (once per run).'},
   {id:'pathfinder',name:'Pathfinder',base:2, text:'Map the floors ahead before you commit to diving into them. EFFECT: +1 buffer slot.'},
-  {id:'slide',     name:'Slide',     base:3, text:'Slip to an adjacent floor of the architecture without a fight. EFFECT: your next pick can be any unused code.'},
+  {id:'slide',     name:'Slide',     base:3, text:'Slip past a floor of the architecture without a fight. EFFECT: skips a floor.'},
   {id:'eyedee',    name:'Eye-Dee',   base:3, text:'Identify the icons on this floor as friend, foe, or file. EFFECT: exposes ICE for -1 Rez.'},
   {id:'cloak',     name:'Cloak',     base:3, text:'Erase your presence here so the trace stays cold. EFFECT: no backlash and no ICE retaliation.'},
   {id:'control',   name:'Control',   base:3, text:'Seize a Basic system: a camera, a door, a turret, a drone. EFFECT: +10 s while you hold it.'},
@@ -2063,7 +2063,7 @@ function isLost(s){
 function hasMove(){
   for(var i=0;i<cells.length;i++){
     var o=cells[i];
-    var inLine=game.free||(game.axis==='row'?o.r===game.idx:o.c===game.idx);
+    var inLine=(game.axis==='row'?o.r===game.idx:o.c===game.idx);
     if(inLine && !game.used.has(o.r*game.size+o.c)) return true;
   }
   return false;
@@ -2120,7 +2120,7 @@ function applyFx(id){
     else fxPush('PATHFINDER','Route mapped. The buffer is already at its maximum of 9.');
   }
   else if(id==='slide'){
-    g.free=true; fxPush('SLIDE','You slip sideways: your next pick can be any unused code on the matrix.');
+    fxPush('SLIDE','You slip past a floor: it is skipped without a fight.');
   }
   else if(id==='eyedee'){
     if(g.ice&&g.ice.rez>0){
@@ -2155,10 +2155,10 @@ function play(r,c){
   if(!game||!game.running||game.paused||game.booting) return;
   var k=r*game.size+c;
   if(game.used.has(k)) return;
-  if(!game.free&&(game.axis==='row'?r!==game.idx:c!==game.idx)) return;
+  if(game.axis==='row'?r!==game.idx:c!==game.idx) return;
   game.used.add(k); game.buffer.push(game.grid[r][c]);
   if(game.axis==='row'){game.axis='col';game.idx=c;} else {game.axis='row';game.idx=r;}
-  game.free=false; game.hint=null;
+  game.hint=null;
   var justDone=[];
   game.seqs.forEach(function(s){ if(!s.done && evalSeq(game.buffer,s.codes).done){s.done=true;justDone.push(s.id);} });
   if(justDone.length){
@@ -2185,20 +2185,20 @@ function paint(){
   var active=g.running&&!g.paused&&!g.booting;
   cells.forEach(function(o){
     var k=o.r*g.size+o.c, used=g.used.has(k);
-    var band=active&&(g.free||(g.axis==='row'?o.r===g.idx:o.c===g.idx));
+    var band=active&&(g.axis==='row'?o.r===g.idx:o.c===g.idx);
     o.btn.className='cell'+(used?' used':'')+(band?' band':'')+(band&&!used?' live':'')+(g.hint===k&&!used&&!g.ended?' hint':'');
     o.btn.disabled=!(band&&!used);
     o.btn.removeAttribute('data-step');
   });
-  rowLabels.forEach(function(l,i){l.className='axis'+(active&&!g.free&&g.axis==='row'&&g.idx===i?' on':'');});
-  colLabels.forEach(function(l,i){l.className='axis'+(active&&!g.free&&g.axis==='col'&&g.idx===i?' on':'');});
+  rowLabels.forEach(function(l,i){l.className='axis'+(active&&g.axis==='row'&&g.idx===i?' on':'');});
+  colLabels.forEach(function(l,i){l.className='axis'+(active&&g.axis==='col'&&g.idx===i?' on':'');});
   if(g.showSol){
     g.path.forEach(function(p,i){cells[p[0]*g.size+p[1]].btn.setAttribute('data-step',String(i+1));});
   }
   if(g.ended) el.status.textContent='Breach ended.';
   else if(g.booting) el.status.textContent='Linking.';
   else if(g.paused) el.status.textContent='Paused.';
-  else el.status.textContent=g.free?'Slide: pick any unused code on the matrix.':(g.axis==='row'?'Pick a code in row '+(g.idx+1)+'.':'Pick a code in column '+(g.idx+1)+'.');
+  else el.status.textContent=(g.axis==='row'?'Pick a code in row '+(g.idx+1)+'.':'Pick a code in column '+(g.idx+1)+'.');
 
   el.bufferView.innerHTML='';
   for(var i=0;i<g.B;i++){
