@@ -95,7 +95,7 @@ td.rb{white-space:nowrap;padding:3px!important;width:112px;text-align:center}
 .help{margin:14px 22px 0;border:1px solid var(--p2);background:var(--deep);padding:16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px;font-size:15px;line-height:1.4;box-shadow:0 0 22px color-mix(in srgb,var(--p1) 25%,transparent)}
 .help[hidden]{display:none}.help h5{margin:0 0 6px;font:700 11px "Orbitron",sans-serif;letter-spacing:.25em;color:var(--p2)}.help p{margin:0 0 6px}.help b{color:var(--soft)}
 .help table{width:100%;font-size:14px}.help td{padding:3px 6px;border-color:var(--deep2)}.help td:first-child{font-weight:700;color:var(--soft);width:40px;text-align:center}
-.skg{columns:2 440px;column-gap:16px}.cg{break-inside:avoid;margin-bottom:16px;border:1px solid var(--line);background:var(--field)}
+.skg{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:0 16px;align-items:start}.skc{min-width:0}.cg{break-inside:avoid;margin-bottom:16px;border:1px solid var(--line);background:var(--field)}
 .cg h4{margin:0;padding:8px 10px;font:700 12px "Orbitron",sans-serif;letter-spacing:.3em;color:var(--p2);background:var(--deep3);border-bottom:1px solid var(--line)}
 .cg th{font-size:9px}.cg .nm{padding:5px 8px;font-weight:600}.cg .nm em{font-style:normal;color:var(--hot);font-size:11px;margin-left:6px}
 .cg .sp2{display:inline-block;width:48%;margin-left:8px;padding:2px 6px;font-size:14px;border-bottom:1px dashed var(--line)}
@@ -275,7 +275,7 @@ html body th{background:#ddd!important;font:700 7.5pt Arial,sans-serif!important
 html body td{border:1px solid #aaa!important;padding:0!important;font-size:9pt!important}
 html body td input,html body td select{padding:2px 3px!important;font-size:9pt!important;border:0!important}
 html body td.base{font-weight:700!important;font-size:10pt!important}
-html body .skg{columns:2!important;column-gap:8px!important}
+html body .skg{display:grid!important;grid-template-columns:1fr 1fr!important;gap:0 8px!important}
 html body .cg{margin-bottom:8px!important}
 html body .wgrid{grid-template-columns:1fr 1fr!important;gap:8px!important}
 html body .wc{padding:5px!important;gap:5px!important}
@@ -382,7 +382,7 @@ button{min-height:42px}.mini{min-height:38px;padding:8px 12px;font-size:11px}
 input,select,textarea{font-size:16px}
 .ip{margin:14px 12px 0;padding:10px}.ipf{width:auto!important;flex:1 1 calc(50% - 6px)}.ipf input{font-size:24px}.ipa{width:100%}.ipa input{flex:1}.ipc{margin-left:0}
 .sec{margin:16px 12px 0}.sec>h3{letter-spacing:.16em;font-size:13px;flex-wrap:wrap}.sec>h3:after{display:none}
-.skg{columns:1}.cg{overflow-x:auto}.cg td.nm{min-width:130px}
+.skg{grid-template-columns:minmax(0,1fr)}.cg{overflow-x:auto}.cg td.nm{min-width:130px}
 .sk{grid-template-columns:1fr}
 .wgrid{grid-template-columns:1fr}.wm{grid-template-columns:1fr 1fr}.wh{flex-wrap:wrap}.wh .fi{width:100%}.wh .wn{flex:1 1 60%}
 .wb button{flex:1 1 40%}
@@ -932,9 +932,9 @@ const ST=["INT","REF","DEX","TECH","COOL","WILL","MOVE","BODY","EMP"];
 document.getElementById("stats").innerHTML=ST.map(s=>`<div class="st"><b data-roll="${s}" title="Click to roll">${s}</b><input type="number" min="0" max="20" data-k="st_${s}"></div>`).join("");
 const CATS=["Awareness","Body","Controls","Education","Fighting","Performance","Ranged Weapon","Social","Technique"],CN=[5,6,4,16,4,3,5,9,15],SL={"Language":3,"Local Expert":2,"Science":2,"Martial Arts":2,"Play Instrument":2};
 const idOf=(n,k)=>n.replace(/\W/g,"")+k;
-{let ix=0,html="";CATS.forEach((c,ci)=>{let h=`<div class="cg"><h4>${c}</h4><table><tr><th>SKILL</th><th>LVL</th><th>BONUS</th><th>STAT</th><th>BASE</th><th>IP</th></tr>`;
+{let ix=0,html="";CATS.forEach((c,ci)=>{let h=(ci==0?`<div class="skc">`:ci==4?`</div><div class="skc">`:"")+`<div class="cg"><h4>${c}</h4><table><tr><th>SKILL</th><th>LVL</th><th>BONUS</th><th>STAT</th><th>BASE</th><th>IP</th></tr>`;
  for(let j=0;j<CN[ci];j++){const s=S[ix++],n=SL[s.n]||1;for(let k=1;k<=n;k++){const id=idOf(s.n,k);h+=`<tr data-sk="${s.n}" data-st="${s.st}" data-m="${s.m}"><td class="nm">${s.n}${s.m>1?"<em>×2</em>":""}${SL[s.n]?`<input class="sp2" data-k="S_${id}" placeholder="specify…">`:""}</td><td class="c"><input class="lv" type="number" min="0" max="10" data-k="L_${id}"></td><td class="c bonus"><input class="bonus" type="number" step="1" data-k="B_${id}" placeholder="0"></td><td class="stat">${s.st}</td><td class="base" data-b></td><td class="ipb"><button class="ipu" data-up></button></td></tr>`}}
- html+=h+"</table></div>"});document.getElementById("skg").innerHTML=html}
+ html+=h+"</table></div>"});html+="</div>";document.getElementById("skg").innerHTML=html}
 const ROLES={
 "Rockerboy":{a:"Charismatic Impact",d:"Your art and fame move crowds. You can charm, rally or sway people who know and love your work. Higher rank means a bigger audience and stronger pull.",k:"Play Instrument, Persuasion, Wardrobe & Style, Performance"},
 "Solo":{a:"Combat Awareness",d:"A trained fighter's edge. Your rank is spread over combat perks such as faster initiative, spotting threats and weaknesses, and punching through defenses.",k:"Handgun, Shoulder Arms, Autofire, Evasion, Brawling"},
@@ -3569,7 +3569,7 @@ html body #cyt tr.emp td:nth-child(1) input{border-bottom:0!important;padding-le
 @media print{#cyt tr.emp,#cyt td:nth-child(6){display:none!important}}
 
 /* ===== EXPERIMENTAL: skill tables as tiles (matches inventory / cyberware) ===== */
-html body .skg{columns:2 440px;column-gap:14px}
+html body .skg{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:0 14px;align-items:start}
 html body .cg{position:relative;margin:0 0 14px;border:1px solid var(--line);border-left:4px solid var(--p2);background:var(--deep);clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,0 100%);padding:0 0 4px}
 html body .cg h4{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--deep3);border-bottom:1px solid var(--line)}
 html body .cg h4:after{content:none}
@@ -3589,7 +3589,7 @@ html body .cg td.base{font-size:20px}
 html body .cg .lv,html body .cg .bonus input{background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important}
 html body .cg .sp2{border-radius:0}
 html body .cg .ipu{border-radius:999px}
-@media(max-width:760px){html body .skg{columns:1}}
+@media(max-width:760px){html body .skg{grid-template-columns:minmax(0,1fr)}}
 </style>
 
 <script>
