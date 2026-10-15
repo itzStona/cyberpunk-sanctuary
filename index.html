@@ -870,7 +870,7 @@ html[data-theme="spooktober"] .spookfx{display:block}
 <div class="rx" id="stg" hidden></div>
 <div class="wgrid" id="wgrid"></div></div></section>
 <section class="pn" id="p-act"><div class="sec"><h3>ACTIONS <small>one MOVE + one ACTION per turn · tap a card to use it</small></h3><div id="actRoot"></div></div></section>
-<section class="pn" id="p-inv"><div class="sec"><h3>INVENTORY</h3><div class="ip" style="margin:0 0 12px"><div class="ipf av"><label>EUROBUCKS</label><input data-k="eb" type="number" placeholder="0"></div><div class="ebr"><input class="fi" id="ebadd" type="number" min="0" placeholder="amount"><input class="fi" id="ebwhy" maxlength="60" placeholder="what for? (optional)" style="width:180px"><button data-ebadd="1">+ GAIN</button><button class="g" data-ebadd="-1">− SPEND</button></div></div><details class="ebl" id="ebld"><summary>EUROBUCKS LEDGER <small id="eblc"></small></summary><div id="ebl"></div><div class="rr"><button class="mini" id="ebundo">UNDO LAST</button><button class="mini g" id="ebclr">CLEAR LEDGER</button></div></details><input type="hidden" data-k="invcount"><input type="hidden" data-k="eblog"><div class="itb"><input class="fi" id="invq" placeholder="Search items, notes, place…"><select class="fi" id="invft"></select><select class="fi" id="invfp"><option value="">All places</option><option value="on">On me</option><option value="off">Stored / elsewhere</option></select><button class="mini" data-isort="n">SORT A–Z</button><button class="mini" data-isort="t">BY TYPE</button><button class="mini" data-isort="v">BY VALUE</button></div><div class="isum" id="invsum"></div><div class="box scroll"><table id="inv"></table></div><datalist id="invwhere"></datalist><datalist id="invweap"></datalist><datalist id="vplaces"></datalist><datalist id="vtypes"><option>Car</option><option>Bike</option><option>Truck</option><option>Van</option><option>Aerodyne</option><option>AV</option><option>Boat</option><option>Drone</option><option>Mech</option><option>Other</option></datalist></div><div class="sec"><h3>VEHICLES <button class="mini" id="addv" style="margin-left:12px">+ ADD VEHICLE</button><button class="mini" data-pay="v|all" style="margin-left:6px">PAY ALL UPKEEP</button><small id="vehsum"></small></h3><input type="hidden" data-k="vcount"><div class="vh" id="vlist"></div></div><div class="sec"><h3>HOUSING <button class="mini" id="addh" style="margin-left:12px">+ ADD HOME</button><button class="mini" data-pay="h|all" style="margin-left:6px">PAY ALL RENT</button><small id="rentsum"></small></h3><input type="hidden" data-k="hcount"><div class="vh" id="hlist"></div><datalist id="hstypes"><option>Capsule</option><option>Cargo container</option><option>Apartment</option><option>House</option><option>Safehouse</option><option>Penthouse</option><option>Shared flat</option></datalist></div></section>
+<section class="pn" id="p-inv"><div class="sec"><h3>INVENTORY</h3><div class="ip" style="margin:0 0 12px"><div class="ipf av"><label>EUROBUCKS</label><input data-k="eb" type="number" placeholder="0"></div><div class="ebr"><input class="fi" id="ebadd" type="number" min="0" placeholder="amount"><input class="fi" id="ebwhy" maxlength="60" placeholder="what for? (optional)" style="width:180px"><button data-ebadd="1">+ GAIN</button><button class="g" data-ebadd="-1">− SPEND</button><button id="blikbtn" type="button">PAY WITH CODE</button></div></div><details class="ebl" id="ebld"><summary>EUROBUCKS LEDGER <small id="eblc"></small></summary><div id="ebl"></div><div class="rr"><button class="mini" id="ebundo">UNDO LAST</button><button class="mini g" id="ebclr">CLEAR LEDGER</button></div></details><input type="hidden" data-k="invcount"><input type="hidden" data-k="eblog"><div class="itb"><input class="fi" id="invq" placeholder="Search items, notes, place…"><select class="fi" id="invft"></select><select class="fi" id="invfp"><option value="">All places</option><option value="on">On me</option><option value="off">Stored / elsewhere</option></select><button class="mini" data-isort="n">SORT A–Z</button><button class="mini" data-isort="t">BY TYPE</button><button class="mini" data-isort="v">BY VALUE</button></div><div class="isum" id="invsum"></div><div class="box scroll"><table id="inv"></table></div><datalist id="invwhere"></datalist><datalist id="invweap"></datalist><datalist id="vplaces"></datalist><datalist id="vtypes"><option>Car</option><option>Bike</option><option>Truck</option><option>Van</option><option>Aerodyne</option><option>AV</option><option>Boat</option><option>Drone</option><option>Mech</option><option>Other</option></datalist></div><div class="sec"><h3>VEHICLES <button class="mini" id="addv" style="margin-left:12px">+ ADD VEHICLE</button><button class="mini" data-pay="v|all" style="margin-left:6px">PAY ALL UPKEEP</button><small id="vehsum"></small></h3><input type="hidden" data-k="vcount"><div class="vh" id="vlist"></div></div><div class="sec"><h3>HOUSING <button class="mini" id="addh" style="margin-left:12px">+ ADD HOME</button><button class="mini" data-pay="h|all" style="margin-left:6px">PAY ALL RENT</button><small id="rentsum"></small></h3><input type="hidden" data-k="hcount"><div class="vh" id="hlist"></div><datalist id="hstypes"><option>Capsule</option><option>Cargo container</option><option>Apartment</option><option>House</option><option>Safehouse</option><option>Penthouse</option><option>Shared flat</option></datalist></div></section>
 <section class="pn" id="p-cyber"><div class="sec"><h3>CYBERWARE </h3><input type="hidden" data-k="cwcount"><div class="ip" style="margin:0 0 12px"><div class="ipf"><label>HUMANITY</label><input id="hcur" readonly></div><div class="ipf"><label>MAX</label><input id="hmax" readonly></div><div class="ipf av"><label>LOST</label><input id="hlost" readonly></div><div class="ipf"><label>EFFECTIVE EMP</label><input id="heff" readonly></div><span class="badge" id="hbadge">STABLE</span><p class="iph">Max Humanity is EMP × 10. Every full 10 points lost costs 1 EMP, and the sheet applies that to EMP skills automatically. Press INSTALL on a location to add that foundation, then pick the location on each option and how many slots it uses. Type dice like 2d6 and press ROLL to fill in the loss.</p></div>
 <div class="ip" style="margin:0 0 12px"><h4>THERAPY &amp; EVENTS</h4>
 <div class="ipf"><label>RECOVERED</label><input data-k="hrec" type="number" min="0"></div>
@@ -1367,6 +1367,38 @@ function invUpd(){
  $("#invsum").innerHTML=(named?`<span class="chip"><b>${fmtN(cnt)}</b> items</span>`:`<span class="chip">No items yet</span>`)+(tv?`<span class="chip">value <b>${fmtN(tv)}</b> eb</span>`:"")+(wAll?`<span class="chip"><b>${fmtN(wOn)}</b> kg on me</span><span class="chip"><b>${fmtN(wAll)}</b> kg total</span>`:"")+(filt?`<span class="chip">showing <b>${shown}</b></span>`:"");
  setDL("invweap",wp);
  {const el=$("#ebl"),a=ebArr(),h=a.length?a.map(x=>{const d=+x.d||0;return`<div class="ebe ${d<0?"neg":"pos"}"><span>${invEsc(x.t)}</span><em>${invEsc(x.w||"")}</em><b>${d<0?"−":"+"}${fmtN(Math.abs(d))}</b><i>${fmtN(+x.b||0)}</i></div>`}).join(""):"<small>No transactions yet.</small>";if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h}$("#eblc").textContent=a.length?"("+a.length+")":""}}
+var BLIK={t:0,exp:0,code:"",used:false,el:null};
+function blikCode(){const a=new Uint32Array(1);(window.crypto||window.msCrypto).getRandomValues(a);const n=String(a[0]%1000000).padStart(6,"0");return n.slice(0,3)+" "+n.slice(3)}
+function blikOpen(){
+ if(!BLIK.el){const m=document.createElement("div");m.id="blik";m.className="bk";m.setAttribute("role","dialog");m.setAttribute("aria-label","BLIK payment");m.hidden=true;
+  m.innerHTML='<div class="bk-card"><div class="bk-head"><span class="bk-logo">BLIK</span><span class="bk-sub">Pay with a one-time code</span><button class="bk-x" data-bk="x" aria-label="Close">✕</button></div>'
+  +'<div class="bk-main"><div class="bk-lbl">YOUR CODE</div><div class="bk-code" id="bkcode"></div><div class="bk-bar"><i id="bkbar"></i></div><div class="bk-t" id="bkt"></div>'
+  +'<div class="bk-f"><label>AMOUNT (eb)<input id="bkamt" type="number" min="1" inputmode="numeric"></label><label>PAYEE / REASON<input id="bkwhy" maxlength="60" placeholder="Optional"></label></div>'
+  +'<div class="bk-msg" id="bkmsg" aria-live="polite"></div>'
+  +'<div class="bk-btns"><button class="bk-ok" data-bk="ok">CONFIRM IN APP</button><button class="bk-new" data-bk="new">NEW CODE</button></div></div>'
+  +'<div class="bk-done" id="bkdone" hidden><div class="bk-tick"></div><b>PAYMENT ACCEPTED</b><span id="bkres"></span><button class="bk-ok" data-bk="x">DONE</button></div></div>';
+  document.body.appendChild(m);BLIK.el=m;
+  m.addEventListener("click",e=>{const b=e.target.closest("[data-bk]");if(e.target===m||(b&&b.dataset.bk=="x"))blikClose();else if(b&&b.dataset.bk=="new")blikNew();else if(b&&b.dataset.bk=="ok")blikPay()});
+  document.addEventListener("keydown",e=>{if(e.key=="Escape"&&!BLIK.el.hidden)blikClose()})}
+ const g=id=>document.getElementById(id);
+ g("bkamt").value=($("#ebadd")&&$("#ebadd").value)||"";g("bkwhy").value=($("#ebwhy")&&$("#ebwhy").value)||"";
+ g("bkdone").hidden=true;BLIK.el.querySelector(".bk-main").hidden=false;BLIK.el.hidden=false;blikNew();setTimeout(()=>g("bkamt").value?g("bkwhy").focus():g("bkamt").focus(),30)}
+function blikNew(){const g=id=>document.getElementById(id);BLIK.code=blikCode();BLIK.exp=Date.now()+120000;BLIK.used=false;g("bkcode").textContent=BLIK.code;g("bkcode").classList.remove("dead");g("bkmsg").textContent="";g("bkmsg").className="bk-msg";BLIK.el.querySelector(".bk-ok").disabled=false;clearInterval(BLIK.t);BLIK.t=setInterval(blikTick,250);blikTick()}
+function blikTick(){const g=id=>document.getElementById(id),left=Math.max(0,BLIK.exp-Date.now()),s=Math.ceil(left/1000);
+ g("bkbar").style.width=(left/1200)+"%";g("bkbar").classList.toggle("low",left<20000);
+ if(!left){clearInterval(BLIK.t);g("bkt").textContent="Code expired";g("bkcode").classList.add("dead");BLIK.el.querySelector(".bk-ok").disabled=true;if(!BLIK.used){g("bkmsg").textContent="This code is no longer valid. Generate a new one.";g("bkmsg").className="bk-msg bad"}}
+ else g("bkt").textContent="Valid for "+Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+function blikClose(){clearInterval(BLIK.t);if(BLIK.el)BLIK.el.hidden=true}
+function blikPay(){const g=id=>document.getElementById(id),msg=(t,c)=>{g("bkmsg").textContent=t;g("bkmsg").className="bk-msg "+(c||"")};
+ if(BLIK.used||Date.now()>=BLIK.exp){msg("This code is no longer valid. Generate a new one.","bad");return}
+ const amt=Math.round(+g("bkamt").value||0),eb=+val("eb").value||0,why=g("bkwhy").value.trim();
+ if(!(amt>0)){msg("Enter an amount to pay.","bad");g("bkamt").focus();return}
+ if(amt>eb){msg("Payment declined. You have "+fmtN(eb)+" eb.","bad");return}
+ BLIK.used=true;clearInterval(BLIK.t);val("eb").value=eb-amt;ebLog(-amt,"BLIK: "+(why||"payment"));
+ logRoll("BLIK",why||"payment","−"+fmtN(amt)+" eb","");
+ if($("#ebadd"))$("#ebadd").value="";if($("#ebwhy"))$("#ebwhy").value="";upd();
+ g("bkres").textContent="−"+fmtN(amt)+" eb  ·  balance "+fmtN(eb-amt)+" eb";BLIK.el.querySelector(".bk-main").hidden=true;g("bkdone").hidden=false}
+document.addEventListener("click",e=>{if(e.target.closest("#blikbtn"))blikOpen()});
 function payBills(c,which){const f=c=="h"?"r":"u",label=c=="h"?"Rent":"Upkeep",n=Math.max(1,Math.min(LMAX,+cin(c).value||1)),idx=which=="all"?[...Array(n).keys()]:[+which];let tot=0;const nm=[],paid=[];
  idx.forEach(i=>{const a=+val(lk(c,i,f)).value||0;if(a>0){tot+=a;paid.push(i);nm.push(val(lk(c,i,"n")).value.trim()||(c=="h"?"Home ":"Vehicle ")+(i+1))}});
  if(!tot){logRoll(label,"nothing to pay","—","");return}
@@ -3590,6 +3622,42 @@ html body .cg .lv,html body .cg .bonus input{background:transparent!important;bo
 html body .cg .sp2{border-radius:0}
 html body .cg .ipu{border-radius:999px}
 @media(max-width:760px){html body .skg{grid-template-columns:minmax(0,1fr)}}
+/* ===== BLIK ===== */
+#p-inv .ebr #blikbtn{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:10px;background:#0b0b10;border:1px solid #3a3a48;color:#fff;font-weight:700;letter-spacing:.14em}
+#p-inv .ebr #blikbtn:before{content:"BLIK";padding:2px 9px;border-radius:5px;background:#fff;color:#0b0b10;font:900 13px "Orbitron",sans-serif;letter-spacing:.08em}
+#p-inv .ebr #blikbtn:hover{border-color:#ff4d6d;filter:none;box-shadow:0 0 0 1px #ff4d6d inset}
+.bk{position:fixed;inset:0;z-index:90000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(5,3,12,.78);backdrop-filter:blur(4px)}
+.bk[hidden]{display:none}
+.bk-card{width:min(100%,420px);background:var(--deep);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.bk-head{display:flex;align-items:center;gap:12px;padding:14px 18px;background:#0b0b10;border-bottom:1px solid var(--line)}
+.bk-logo{padding:3px 12px;border-radius:6px;background:#fff;color:#0b0b10;font:900 16px "Orbitron",sans-serif;letter-spacing:.1em}
+.bk-sub{flex:1;font:600 13px "Rajdhani",sans-serif;letter-spacing:.06em;color:var(--soft)}
+.bk-x{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;clip-path:none;padding:0}
+.bk-main,.bk-done{padding:20px 20px 22px}
+.bk-main[hidden],.bk-done[hidden]{display:none}
+.bk-lbl{font:700 10px "Orbitron",sans-serif;letter-spacing:.3em;color:var(--mute);text-align:center}
+.bk-code{margin:8px 0 12px;text-align:center;font:800 54px/1 "Orbitron",monospace;letter-spacing:.12em;color:var(--ink);font-variant-numeric:tabular-nums;user-select:all}
+.bk-code.dead{color:var(--mute);text-decoration:line-through;opacity:.6}
+.bk-bar{height:8px;border-radius:999px;background:var(--field);border:1px solid var(--line);overflow:hidden}
+.bk-bar i{display:block;height:100%;width:100%;border-radius:999px;background:linear-gradient(90deg,#ff4d6d,#ffb347);transition:width .25s linear}
+.bk-bar i.low{background:linear-gradient(90deg,#ff2d55,#ff7a45)}
+.bk-t{margin:6px 0 16px;text-align:center;font:600 13px "Rajdhani",sans-serif;letter-spacing:.1em;color:var(--soft)}
+.bk-f{display:grid;grid-template-columns:120px 1fr;gap:10px}
+.bk-f label{display:block;font:700 9px "Orbitron",sans-serif;letter-spacing:.18em;color:var(--mute)}
+.bk-f input{display:block;width:100%;box-sizing:border-box;margin-top:5px;min-height:42px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:var(--field);color:var(--ink);font:600 16px "Rajdhani",sans-serif}
+.bk-msg{min-height:20px;margin:12px 0 0;text-align:center;font:600 14px "Rajdhani",sans-serif;color:var(--soft)}
+.bk-msg.bad{color:#ff5d7d}
+.bk-btns{display:grid;grid-template-columns:1fr auto;gap:10px;margin-top:12px}
+.bk-btns button,.bk-done button{min-height:44px;border-radius:10px;clip-path:none;font:700 12px "Orbitron",sans-serif;letter-spacing:.14em;cursor:pointer}
+.bk-ok{background:#fff;color:#0b0b10;border:0}.bk-ok:disabled{opacity:.35;cursor:not-allowed}
+.bk-new{background:transparent;color:var(--ink);border:1px solid var(--line);padding:0 16px}
+.bk-done{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.bk-done b{font:800 15px "Orbitron",sans-serif;letter-spacing:.2em;color:#5dffa0}
+.bk-done span{font:600 16px "Rajdhani",sans-serif;color:var(--soft)}
+.bk-done button{width:100%;margin-top:6px}
+.bk-tick{width:64px;height:64px;border-radius:50%;border:3px solid #5dffa0;position:relative}
+.bk-tick:after{content:"";position:absolute;left:21px;top:11px;width:14px;height:28px;border:solid #5dffa0;border-width:0 4px 4px 0;transform:rotate(45deg)}
+@media(max-width:480px){.bk-code{font-size:42px}.bk-f{grid-template-columns:1fr}}
 </style>
 
 <script>
