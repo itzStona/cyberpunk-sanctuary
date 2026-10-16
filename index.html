@@ -870,7 +870,7 @@ html[data-theme="spooktober"] .spookfx{display:block}
 <div class="rx" id="stg" hidden></div>
 <div class="wgrid" id="wgrid"></div></div></section>
 <section class="pn" id="p-act"><div class="sec"><h3>ACTIONS <small>one MOVE + one ACTION per turn · tap a card to use it</small></h3><div id="actRoot"></div></div></section>
-<section class="pn" id="p-inv"><div class="sec"><h3>INVENTORY</h3><div class="ip" style="margin:0 0 12px"><div class="ipf av"><label>EUROBUCKS</label><input data-k="eb" type="number" placeholder="0"></div><div class="ebr"><input class="fi" id="ebadd" type="number" min="0" placeholder="amount"><input class="fi" id="ebwhy" maxlength="60" placeholder="what for? (optional)" style="width:180px"><button data-ebadd="1">+ GAIN</button><button class="g" data-ebadd="-1">− SPEND</button><button id="blikbtn" type="button">PAY WITH CODE</button></div></div><details class="ebl" id="ebld"><summary>EUROBUCKS LEDGER <small id="eblc"></small></summary><div id="ebl"></div><div class="rr"><button class="mini" id="ebundo">UNDO LAST</button><button class="mini g" id="ebclr">CLEAR LEDGER</button></div></details><input type="hidden" data-k="invcount"><input type="hidden" data-k="eblog"><div class="itb"><input class="fi" id="invq" placeholder="Search items, notes, place…"><select class="fi" id="invft"></select><select class="fi" id="invfp"><option value="">All places</option><option value="on">On me</option><option value="off">Stored / elsewhere</option></select><button class="mini" data-isort="n">SORT A–Z</button><button class="mini" data-isort="t">BY TYPE</button><button class="mini" data-isort="v">BY VALUE</button></div><div class="isum" id="invsum"></div><div class="box scroll"><table id="inv"></table></div><datalist id="invwhere"></datalist><datalist id="invweap"></datalist><datalist id="vplaces"></datalist><datalist id="vtypes"><option>Car</option><option>Bike</option><option>Truck</option><option>Van</option><option>Aerodyne</option><option>AV</option><option>Boat</option><option>Drone</option><option>Mech</option><option>Other</option></datalist></div><div class="sec"><h3>VEHICLES <button class="mini" id="addv" style="margin-left:12px">+ ADD VEHICLE</button><button class="mini" data-pay="v|all" style="margin-left:6px">PAY ALL UPKEEP</button><small id="vehsum"></small></h3><input type="hidden" data-k="vcount"><div class="vh" id="vlist"></div></div><div class="sec"><h3>HOUSING <button class="mini" id="addh" style="margin-left:12px">+ ADD HOME</button><button class="mini" data-pay="h|all" style="margin-left:6px">PAY ALL RENT</button><small id="rentsum"></small></h3><input type="hidden" data-k="hcount"><div class="vh" id="hlist"></div><datalist id="hstypes"><option>Capsule</option><option>Cargo container</option><option>Apartment</option><option>House</option><option>Safehouse</option><option>Penthouse</option><option>Shared flat</option></datalist></div></section>
+<section class="pn" id="p-inv"><div class="sec"><h3>INVENTORY</h3><div class="ip" style="margin:0 0 12px"><div class="ipf av"><label>EUROBUCKS</label><input data-k="eb" type="number" placeholder="0"></div><div class="ebr"><input class="fi" id="ebadd" type="number" min="0" placeholder="amount"><input class="fi" id="ebwhy" maxlength="60" placeholder="what for? (optional)" style="width:180px"><button data-ebadd="1">+ GAIN</button><button class="g" data-ebadd="-1">− SPEND</button><button id="xferbtn" type="button">SEND TO PLAYER</button></div></div><details class="ebl" id="ebld"><summary>EUROBUCKS LEDGER <small id="eblc"></small></summary><div id="ebl"></div><div class="rr"><button class="mini" id="ebundo">UNDO LAST</button><button class="mini g" id="ebclr">CLEAR LEDGER</button></div></details><input type="hidden" data-k="invcount"><input type="hidden" data-k="eblog"><input type="hidden" data-k="ebpend"><div class="itb"><input class="fi" id="invq" placeholder="Search items, notes, place…"><select class="fi" id="invft"></select><select class="fi" id="invfp"><option value="">All places</option><option value="on">On me</option><option value="off">Stored / elsewhere</option></select><button class="mini" data-isort="n">SORT A–Z</button><button class="mini" data-isort="t">BY TYPE</button><button class="mini" data-isort="v">BY VALUE</button></div><div class="isum" id="invsum"></div><div class="box scroll"><table id="inv"></table></div><datalist id="invwhere"></datalist><datalist id="invweap"></datalist><datalist id="vplaces"></datalist><datalist id="vtypes"><option>Car</option><option>Bike</option><option>Truck</option><option>Van</option><option>Aerodyne</option><option>AV</option><option>Boat</option><option>Drone</option><option>Mech</option><option>Other</option></datalist></div><div class="sec"><h3>VEHICLES <button class="mini" id="addv" style="margin-left:12px">+ ADD VEHICLE</button><button class="mini" data-pay="v|all" style="margin-left:6px">PAY ALL UPKEEP</button><small id="vehsum"></small></h3><input type="hidden" data-k="vcount"><div class="vh" id="vlist"></div></div><div class="sec"><h3>HOUSING <button class="mini" id="addh" style="margin-left:12px">+ ADD HOME</button><button class="mini" data-pay="h|all" style="margin-left:6px">PAY ALL RENT</button><small id="rentsum"></small></h3><input type="hidden" data-k="hcount"><div class="vh" id="hlist"></div><datalist id="hstypes"><option>Capsule</option><option>Cargo container</option><option>Apartment</option><option>House</option><option>Safehouse</option><option>Penthouse</option><option>Shared flat</option></datalist></div></section>
 <section class="pn" id="p-cyber"><div class="sec"><h3>CYBERWARE </h3><input type="hidden" data-k="cwcount"><div class="ip" style="margin:0 0 12px"><div class="ipf"><label>HUMANITY</label><input id="hcur" readonly></div><div class="ipf"><label>MAX</label><input id="hmax" readonly></div><div class="ipf av"><label>LOST</label><input id="hlost" readonly></div><div class="ipf"><label>EFFECTIVE EMP</label><input id="heff" readonly></div><span class="badge" id="hbadge">STABLE</span><p class="iph">Max Humanity is EMP × 10. Every full 10 points lost costs 1 EMP, and the sheet applies that to EMP skills automatically. Press INSTALL on a location to add that foundation, then pick the location on each option and how many slots it uses. Type dice like 2d6 and press ROLL to fill in the loss.</p></div>
 <div class="ip" style="margin:0 0 12px"><h4>THERAPY &amp; EVENTS</h4>
 <div class="ipf"><label>RECOVERED</label><input data-k="hrec" type="number" min="0"></div>
@@ -1223,7 +1223,7 @@ document.addEventListener("click",e=>{const t=e.target;let el;
   else{const r=d(10),ok=r<=rk;logRoll(`${a[0]} · roll ${rk} or under`,`d10 ${r} vs rank ${rk}`,ok?"SUCCESS":"FAIL",ok?"ok":"bad")}}
  else if(t.closest("[data-ipadd]")){const n=+$("#ipadd").value||0;if(n>0){val("ip_earned").value=ipk("ip_earned")+n;$("#ipadd").value="";logRoll("Improvement Points","awarded","+"+n+" IP","ok");upd()}}
  else if(t.closest("[data-ipundo]"))undo();
- else if(t.closest("[data-ds]")||t.closest("[data-reboot]")){const rb=isRobot(),ds=+$("#ds").value;if(!ds){logRoll(rb?"Reboot":"Death Save","set BODY first","—","");return}const r=d(10),ok=r<ds;logRoll(rb?"Reboot":"Death Save",`d10 ${r} · must roll under ${ds}`,ok?(rb?"ONLINE":"SAFE"):(rb?"WRECKED":"DEAD"),ok?"ok":"fumble")}
+ else if(t.closest("[data-ds]")||t.closest("[data-reboot]")){const rb=isRobot(),ds=+$("#ds").value;if(!ds){logRoll(rb?"Reboot":"Death Save","set BODY first","—","");return}const r=d(10),ok=r<ds;logRoll(rb?"Reboot":"Death Save",`d10 ${r} · must roll under ${ds}`,ok?(rb?"ONLINE":"SAFE"):(rb?"WRECKED":"DEAD"),ok?"ok":"fumble");if(!ok&&!rb&&window.flatline)window.flatline()}
  else if(t.closest("[data-repair]")){const sk=val("rep_s").value,x=roll("Repair ("+sk+")",sb(sk));if(x.dv&&!x.win)return;const cost=+val("rep_c").value||0,eb=+val("eb").value||0;if(cost>eb){logRoll("Repair",`needs ${cost} eb of parts, you have ${eb}`,"✗","bad");return}const dd=String(val("rep_d").value||"").trim();let g=0;if(dd&&dd!="0"){g=dice("Repair SDP",dd);if(typeof g!="number")return}const mx=+$("#hpmax").value,h=+val("hp").value||0,n=mx?Math.min(mx,h+g):h+g;val("eb").value=eb-cost;if(cost)ebLog(-cost,"Repair parts");val("hp").value=n;logRoll("Repair",`restored ${n-h} SDP`+(cost?` · −${cost} eb`:""),"+"+(n-h),"ok");upd()}
  else if(el=t.closest("[data-rest]")){const rb=isRobot(),k=rb?"rest_p":"rest_s",mx=+val(k+"max").value||0,c=+val(k).value||0,q=el.dataset.rest,nv=q=="max"?mx:q=="1"?Math.min(mx||99,c+1):Math.max(0,c-1);val(k).value=nv;upd();logRoll(rb?"Power":"Sleep",q=="max"?(rb?"recharged":"fully rested"):q=="1"?"+1 day":"one day passes",nv+" / "+mx,restState().out?"bad":"")}
  else if(t.closest("[data-upk]")){const cost=+val("upk").value||0,eb=+val("eb").value||0;if(!cost)return;if(cost>eb){logRoll("Upkeep",`needs ${cost} eb, you have ${eb}`,"✗","bad");return}val("eb").value=eb-cost;ebLog(-cost,"Upkeep");logRoll("Upkeep","maintenance paid","−"+cost+" eb","");upd()}
@@ -1367,38 +1367,69 @@ function invUpd(){
  $("#invsum").innerHTML=(named?`<span class="chip"><b>${fmtN(cnt)}</b> items</span>`:`<span class="chip">No items yet</span>`)+(tv?`<span class="chip">value <b>${fmtN(tv)}</b> eb</span>`:"")+(wAll?`<span class="chip"><b>${fmtN(wOn)}</b> kg on me</span><span class="chip"><b>${fmtN(wAll)}</b> kg total</span>`:"")+(filt?`<span class="chip">showing <b>${shown}</b></span>`:"");
  setDL("invweap",wp);
  {const el=$("#ebl"),a=ebArr(),h=a.length?a.map(x=>{const d=+x.d||0;return`<div class="ebe ${d<0?"neg":"pos"}"><span>${invEsc(x.t)}</span><em>${invEsc(x.w||"")}</em><b>${d<0?"−":"+"}${fmtN(Math.abs(d))}</b><i>${fmtN(+x.b||0)}</i></div>`}).join(""):"<small>No transactions yet.</small>";if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h}$("#eblc").textContent=a.length?"("+a.length+")":""}}
-var BLIK={t:0,exp:0,code:"",used:false,el:null};
-function blikCode(){const a=new Uint32Array(1);(window.crypto||window.msCrypto).getRandomValues(a);const n=String(a[0]%1000000).padStart(6,"0");return n.slice(0,3)+" "+n.slice(3)}
-function blikOpen(){
- if(!BLIK.el){const m=document.createElement("div");m.id="blik";m.className="bk";m.setAttribute("role","dialog");m.setAttribute("aria-label","BLIK payment");m.hidden=true;
-  m.innerHTML='<div class="bk-card"><div class="bk-head"><span class="bk-logo">BLIK</span><span class="bk-sub">Pay with a one-time code</span><button class="bk-x" data-bk="x" aria-label="Close">✕</button></div>'
-  +'<div class="bk-main"><div class="bk-lbl">YOUR CODE</div><div class="bk-code" id="bkcode"></div><div class="bk-bar"><i id="bkbar"></i></div><div class="bk-t" id="bkt"></div>'
-  +'<div class="bk-f"><label>AMOUNT (eb)<input id="bkamt" type="number" min="1" inputmode="numeric"></label><label>PAYEE / REASON<input id="bkwhy" maxlength="60" placeholder="Optional"></label></div>'
-  +'<div class="bk-msg" id="bkmsg" aria-live="polite"></div>'
-  +'<div class="bk-btns"><button class="bk-ok" data-bk="ok">CONFIRM IN APP</button><button class="bk-new" data-bk="new">NEW CODE</button></div></div>'
-  +'<div class="bk-done" id="bkdone" hidden><div class="bk-tick"></div><b>PAYMENT ACCEPTED</b><span id="bkres"></span><button class="bk-ok" data-bk="x">DONE</button></div></div>';
-  document.body.appendChild(m);BLIK.el=m;
-  m.addEventListener("click",e=>{const b=e.target.closest("[data-bk]");if(e.target===m||(b&&b.dataset.bk=="x"))blikClose();else if(b&&b.dataset.bk=="new")blikNew();else if(b&&b.dataset.bk=="ok")blikPay()});
-  document.addEventListener("keydown",e=>{if(e.key=="Escape"&&!BLIK.el.hidden)blikClose()})}
- const g=id=>document.getElementById(id);
- g("bkamt").value=($("#ebadd")&&$("#ebadd").value)||"";g("bkwhy").value=($("#ebwhy")&&$("#ebwhy").value)||"";
- g("bkdone").hidden=true;BLIK.el.querySelector(".bk-main").hidden=false;BLIK.el.hidden=false;blikNew();setTimeout(()=>g("bkamt").value?g("bkwhy").focus():g("bkamt").focus(),30)}
-function blikNew(){const g=id=>document.getElementById(id);BLIK.code=blikCode();BLIK.exp=Date.now()+120000;BLIK.used=false;g("bkcode").textContent=BLIK.code;g("bkcode").classList.remove("dead");g("bkmsg").textContent="";g("bkmsg").className="bk-msg";BLIK.el.querySelector(".bk-ok").disabled=false;clearInterval(BLIK.t);BLIK.t=setInterval(blikTick,250);blikTick()}
-function blikTick(){const g=id=>document.getElementById(id),left=Math.max(0,BLIK.exp-Date.now()),s=Math.ceil(left/1000);
- g("bkbar").style.width=(left/1200)+"%";g("bkbar").classList.toggle("low",left<20000);
- if(!left){clearInterval(BLIK.t);g("bkt").textContent="Code expired";g("bkcode").classList.add("dead");BLIK.el.querySelector(".bk-ok").disabled=true;if(!BLIK.used){g("bkmsg").textContent="This code is no longer valid. Generate a new one.";g("bkmsg").className="bk-msg bad"}}
- else g("bkt").textContent="Valid for "+Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
-function blikClose(){clearInterval(BLIK.t);if(BLIK.el)BLIK.el.hidden=true}
-function blikPay(){const g=id=>document.getElementById(id),msg=(t,c)=>{g("bkmsg").textContent=t;g("bkmsg").className="bk-msg "+(c||"")};
- if(BLIK.used||Date.now()>=BLIK.exp){msg("This code is no longer valid. Generate a new one.","bad");return}
- const amt=Math.round(+g("bkamt").value||0),eb=+val("eb").value||0,why=g("bkwhy").value.trim();
- if(!(amt>0)){msg("Enter an amount to pay.","bad");g("bkamt").focus();return}
- if(amt>eb){msg("Payment declined. You have "+fmtN(eb)+" eb.","bad");return}
- BLIK.used=true;clearInterval(BLIK.t);val("eb").value=eb-amt;ebLog(-amt,"BLIK: "+(why||"payment"));
- logRoll("BLIK",why||"payment","−"+fmtN(amt)+" eb","");
- if($("#ebadd"))$("#ebadd").value="";if($("#ebwhy"))$("#ebwhy").value="";upd();
- g("bkres").textContent="−"+fmtN(amt)+" eb  ·  balance "+fmtN(eb-amt)+" eb";BLIK.el.querySelector(".bk-main").hidden=true;g("bkdone").hidden=false}
-document.addEventListener("click",e=>{if(e.target.closest("#blikbtn"))blikOpen()});
+var XF={el:null,done:{}};
+function xfPend(){let a=[];try{a=JSON.parse(val("ebpend").value||"[]")}catch(_){}return Array.isArray(a)?a:[]}
+function xfSave(a){val("ebpend").value=a.length?JSON.stringify(a):"";upd()}
+function xfOn(){return !!(window.__party&&window.__party.st==="on"&&window.__partySend&&window.__partyId)}
+function xfPeople(){const P=(window.__party&&window.__party.people)||{},cnt={},seen={},o=[];Object.keys(P).forEach(c=>{cnt[P[c].n]=(cnt[P[c].n]||0)+1;o.push({c:c,n:P[c].n})});return o.map(x=>{seen[x.n]=(seen[x.n]||0)+1;return{c:x.c,n:cnt[x.n]>1?x.n+" ("+seen[x.n]+")":x.n}}).sort((a,b)=>a.n.localeCompare(b.n))}
+function xfOpen(){
+ if(!XF.el){const m=document.createElement("div");m.id="xfer";m.className="bk";m.setAttribute("role","dialog");m.setAttribute("aria-label","Send eurobucks");m.hidden=true;
+  m.innerHTML='<div class="bk-card"><div class="bk-head"><span class="bk-logo xf">SEND</span><span class="bk-sub">Eurobucks to another player</span><button class="bk-x" data-xf="x" aria-label="Close">✕</button></div>'
+  +'<div class="bk-main"><div class="xf-bal">YOUR BALANCE <b id="xfbal"></b> eb</div>'
+  +'<div class="bk-f one"><label>TO<select id="xfto"></select></label></div>'
+  +'<div class="bk-f" style="margin-top:10px"><label>AMOUNT (eb)<input id="xfamt" type="number" min="1" inputmode="numeric"></label><label>NOTE<input id="xfwhy" maxlength="60" placeholder="Optional"></label></div>'
+  +'<div class="bk-msg" id="xfmsg" aria-live="polite"></div>'
+  +'<div class="bk-btns"><button class="bk-ok" id="xfsend" data-xf="send">SEND OFFER</button><button class="bk-new" data-xf="party">PARTY</button></div>'
+  +'<div id="xflist"></div>'
+  +'<div class="xf-note">The other player has to accept. Until they do, the eurobucks are held. If they decline or do not answer, they come back to you.</div></div></div>';
+  document.body.appendChild(m);XF.el=m;
+  m.addEventListener("click",e=>{const b=e.target.closest("[data-xf]"),k=b&&b.dataset.xf;if(e.target===m||k==="x")m.hidden=true;else if(k==="send")xfSendNow();else if(k==="party"){m.hidden=true;const t=document.getElementById("mptog");if(t)t.click()}});
+  document.addEventListener("keydown",e=>{if(e.key=="Escape"&&XF.el&&!XF.el.hidden)XF.el.hidden=true})}
+ XF.el.hidden=false;document.getElementById("xfmsg").textContent="";xfRender();setTimeout(()=>document.getElementById("xfamt").focus(),30)}
+function xfRender(){if(!XF.el||XF.el.hidden)return;const g=id=>document.getElementById(id),ppl=xfPeople(),on=xfOn();
+ g("xfbal").textContent=fmtN(+val("eb").value||0);
+ const sel=g("xfto"),h=ppl.length?ppl.map(x=>`<option value="${invEsc(x.c)}">${invEsc(x.n)}</option>`).join(""):`<option value="">${on?"No other players online":"Party not connected"}</option>`;
+ if(sel.dataset.h!==h){const cur=sel.value;sel.dataset.h=h;sel.innerHTML=h;if(cur)sel.value=cur}
+ sel.disabled=!ppl.length;g("xfsend").disabled=!ppl.length||!on;
+ const m=g("xfmsg");if(!on&&!m.textContent){m.textContent="Connect to the party (PARTY button) to send eurobucks to another player.";m.className="bk-msg"}
+ const a=xfPend(),now=Date.now();
+ g("xflist").innerHTML=a.length?'<div class="bk-lbl" style="margin:16px 0 6px">WAITING FOR REPLY</div>'+a.map(p=>{const s=Math.max(0,Math.ceil((p.x-now)/1000));return`<div class="xf-row"><span>${invEsc(p.n)}</span><b>${fmtN(p.a)} eb</b><i>${s?Math.floor(s/60)+":"+String(s%60).padStart(2,"0"):"no reply yet"}</i></div>`}).join(""):""}
+function xfSendNow(){const g=id=>document.getElementById(id),msg=(t,c)=>{g("xfmsg").textContent=t;g("xfmsg").className="bk-msg "+(c||"")};
+ if(!xfOn()){msg("Connect to the party first.","bad");return}
+ const to=g("xfto").value,pl=xfPeople().find(x=>x.c===to);if(!pl){msg("Pick a player.","bad");return}
+ const amt=Math.round(+g("xfamt").value||0),eb=+val("eb").value||0,why=g("xfwhy").value.trim().slice(0,60);
+ if(!(amt>0&&amt<=999999)){msg("Enter an amount between 1 and 999,999.","bad");g("xfamt").focus();return}
+ if(amt>eb){msg("Not enough eurobucks. You have "+fmtN(eb)+" eb.","bad");return}
+ const id=Math.random().toString(36).slice(2,10),ttl=90000,a=xfPend();a.push({id:id,to:to,n:pl.n,a:amt,w:why,x:Date.now()+ttl});
+ val("eb").value=eb-amt;ebLog(-amt,"To "+pl.n+(why?": "+why:"")+" (pending)");xfSave(a);
+ window.__partySend({k:"eb",t:"offer",id:id,to:to,amt:amt,why:why,ttl:ttl});
+ logRoll("Transfer","offer sent to "+pl.n,"—","");
+ g("xfamt").value="";g("xfwhy").value="";msg("Offer sent. "+pl.n+" has 90 seconds to accept.","");xfRender()}
+function xfToast(d){const id=String(d.id||"").replace(/[^a-z0-9]/gi,"").slice(0,16),amt=Math.round(+d.amt||0);
+ if(!id||XF.done[id]||!(amt>0&&amt<=999999)||document.querySelector('#xin [data-id="'+id+'"]'))return;
+ let box=document.getElementById("xin");if(!box){box=document.createElement("div");box.id="xin";document.body.appendChild(box);box.addEventListener("click",xfInClick)}
+ const el=document.createElement("div");el.className="xi";el.dataset.id=id;el.dataset.amt=amt;el.dataset.name=String(d.p||"Runner").slice(0,24);el.dataset.why=String(d.why||"").slice(0,60);el.dataset.exp=Date.now()+Math.min(+d.ttl||90000,90000);
+ el.innerHTML='<div class="xi-h">INCOMING TRANSFER</div><div class="xi-b"><b class="xi-n"></b> wants to send you <b class="xi-a"></b></div><div class="xi-w"></div><div class="xi-t"></div><div class="xi-btns"><button class="bk-ok" data-xi="ok">ACCEPT</button><button class="bk-new" data-xi="no">DECLINE</button></div>';
+ el.querySelector(".xi-n").textContent=el.dataset.name;el.querySelector(".xi-a").textContent=fmtN(amt)+" eb";el.querySelector(".xi-w").textContent=el.dataset.why;box.appendChild(el);xfTick()}
+function xfInClick(e){const b=e.target.closest("[data-xi]");if(!b)return;const el=b.closest(".xi"),id=el.dataset.id,amt=+el.dataset.amt,name=el.dataset.name,why=el.dataset.why,snd=window.__partySend;
+ if(XF.done[id]){el.remove();return}XF.done[id]=1;
+ if(b.dataset.xi==="ok"){if(Date.now()>+el.dataset.exp){el.remove();return}
+  val("eb").value=(+val("eb").value||0)+amt;ebLog(amt,"From "+name+(why?": "+why:""));logRoll("Transfer","received from "+name,"+"+fmtN(amt)+" eb","ok");upd();
+  const ack=()=>{if(snd)snd({k:"eb",t:"ack",id:id})};ack();setTimeout(ack,2000);setTimeout(ack,6000)}
+ else{const no=()=>{if(snd)snd({k:"eb",t:"no",id:id})};no();setTimeout(no,2000)}
+ el.remove()}
+window.addEventListener("cps:eb",e=>{const d=e.detail||{};
+ if(d.t==="offer"){const me=window.__partyId;if(!me||d.to!==me)return;xfToast(d)}
+ else if(d.t==="ack"||d.t==="no"){const a=xfPend(),i=a.findIndex(x=>x.id===d.id&&x.to===d.c);if(i<0)return;const p=a.splice(i,1)[0];
+  if(d.t==="ack")logRoll("Transfer",p.n+" accepted "+fmtN(p.a)+" eb","sent","ok");
+  else{val("eb").value=(+val("eb").value||0)+p.a;ebLog(p.a,"Refund: "+p.n+" declined");logRoll("Transfer",p.n+" declined, "+fmtN(p.a)+" eb returned","refund","")}
+  xfSave(a);xfRender()}});
+function xfTick(){const now=Date.now(),a=xfPend();
+ if(a.length){const keep=a.filter(p=>{if(now>p.x+30000){val("eb").value=(+val("eb").value||0)+p.a;ebLog(p.a,"Refund: no reply from "+p.n);logRoll("Transfer",p.n+" did not reply, "+fmtN(p.a)+" eb returned","refund","");return false}return true});if(keep.length!==a.length)xfSave(keep)}
+ document.querySelectorAll("#xin .xi").forEach(el=>{const l=Math.ceil((+el.dataset.exp-now)/1000);if(l<=0){XF.done[el.dataset.id]=1;el.remove();return}el.querySelector(".xi-t").textContent="Expires in "+Math.floor(l/60)+":"+String(l%60).padStart(2,"0")});
+ xfRender()}
+setInterval(xfTick,1000);
+document.addEventListener("click",e=>{if(e.target.closest("#xferbtn"))xfOpen()});
 function payBills(c,which){const f=c=="h"?"r":"u",label=c=="h"?"Rent":"Upkeep",n=Math.max(1,Math.min(LMAX,+cin(c).value||1)),idx=which=="all"?[...Array(n).keys()]:[+which];let tot=0;const nm=[],paid=[];
  idx.forEach(i=>{const a=+val(lk(c,i,f)).value||0;if(a>0){tot+=a;paid.push(i);nm.push(val(lk(c,i,"n")).value.trim()||(c=="h"?"Home ":"Vehicle ")+(i+1))}});
  if(!tot){logRoll(label,"nothing to pay","—","");return}
@@ -3323,9 +3354,9 @@ function send(o){if(!MP.tr)return;o.i=Math.random().toString(36).slice(2,10);o.c
 function recv(d){if(!d||typeof d!=="object"||d.c===cid||!d.c)return;if(d.i){if(seen[d.i])return;if(Object.keys(seen).length>800)seen={};seen[d.i]=1}
  var nm=dec(d.p||"Runner").slice(0,24)||"Runner",c=String(d.c).slice(0,12);
  if(d.k==="bye"){delete MP.people[c];ui();return}
- if(d.k!=="hb"&&d.k!=="hello"&&d.k!=="roll"&&d.k!=="gig"&&d.k!=="bm"&&d.k!=="ql")return;
+ if(d.k!=="hb"&&d.k!=="hello"&&d.k!=="roll"&&d.k!=="gig"&&d.k!=="bm"&&d.k!=="ql"&&d.k!=="eb")return;
  var isNew=!MP.people[c];MP.people[c]={n:nm,t:Date.now()};
- if(d.k==="hello")setTimeout(function(){send({k:"hb"})},Math.random()*1500);if(d.k==="gig")window.dispatchEvent(new CustomEvent("cps:gig",{detail:d}));if(d.k==="bm")window.dispatchEvent(new CustomEvent("cps:bm",{detail:d}));if(d.k==="ql")window.dispatchEvent(new CustomEvent("cps:ql",{detail:d}));if(d.k==="hello")window.dispatchEvent(new Event("cps:hello"));
+ if(d.k==="hello")setTimeout(function(){send({k:"hb"})},Math.random()*1500);if(d.k==="gig")window.dispatchEvent(new CustomEvent("cps:gig",{detail:d}));if(d.k==="bm")window.dispatchEvent(new CustomEvent("cps:bm",{detail:d}));if(d.k==="ql")window.dispatchEvent(new CustomEvent("cps:ql",{detail:d}));if(d.k==="eb")window.dispatchEvent(new CustomEvent("cps:eb",{detail:d}));if(d.k==="hello")window.dispatchEvent(new Event("cps:hello"));
  if(d.k==="roll"&&Math.abs(Date.now()-(+d.ts||0))<600000)showRoll(nm,d);
  if(isNew||d.k==="hello")ui()}
 function prune(){var now=Date.now(),ch=false;Object.keys(MP.people).forEach(function(k){if(now-MP.people[k].t>55000){delete MP.people[k];ch=true}});if(ch)ui()}
@@ -3351,7 +3382,7 @@ m.addEventListener("click",function(e){var a=e.target.closest("[data-mp]"),k=a&&
  var n=document.getElementById("mpn"),c=document.getElementById("mpc");if(n&&n.value.trim())MP.name=n.value.trim();if(c)MP.room=c.value.trim();
  if(k==="go")connect();else if(k==="leave")leave()});
 btn.addEventListener("click",function(){m.classList.add("on");render()});
-window.__party=MP;window.__partySend=send;
+window.__party=MP;window.__partySend=send;window.__partyId=cid;
 MP.room=store("room")||"";MP.name=store("name")||"";ui();
 if(store("on")!=="0")connect();
 })();
@@ -3622,10 +3653,6 @@ html body .cg .lv,html body .cg .bonus input{background:transparent!important;bo
 html body .cg .sp2{border-radius:0}
 html body .cg .ipu{border-radius:999px}
 @media(max-width:760px){html body .skg{grid-template-columns:minmax(0,1fr)}}
-/* ===== BLIK ===== */
-#p-inv .ebr #blikbtn{grid-column:1/-1;display:flex;align-items:center;justify-content:center;gap:10px;background:#0b0b10;border:1px solid #3a3a48;color:#fff;font-weight:700;letter-spacing:.14em}
-#p-inv .ebr #blikbtn:before{content:"BLIK";padding:2px 9px;border-radius:5px;background:#fff;color:#0b0b10;font:900 13px "Orbitron",sans-serif;letter-spacing:.08em}
-#p-inv .ebr #blikbtn:hover{border-color:#ff4d6d;filter:none;box-shadow:0 0 0 1px #ff4d6d inset}
 .bk{position:fixed;inset:0;z-index:90000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(5,3,12,.78);backdrop-filter:blur(4px)}
 .bk[hidden]{display:none}
 .bk-card{width:min(100%,420px);background:var(--deep);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6)}
@@ -3636,11 +3663,6 @@ html body .cg .ipu{border-radius:999px}
 .bk-main,.bk-done{padding:20px 20px 22px}
 .bk-main[hidden],.bk-done[hidden]{display:none}
 .bk-lbl{font:700 10px "Orbitron",sans-serif;letter-spacing:.3em;color:var(--mute);text-align:center}
-.bk-code{margin:8px 0 12px;text-align:center;font:800 54px/1 "Orbitron",monospace;letter-spacing:.12em;color:var(--ink);font-variant-numeric:tabular-nums;user-select:all}
-.bk-code.dead{color:var(--mute);text-decoration:line-through;opacity:.6}
-.bk-bar{height:8px;border-radius:999px;background:var(--field);border:1px solid var(--line);overflow:hidden}
-.bk-bar i{display:block;height:100%;width:100%;border-radius:999px;background:linear-gradient(90deg,#ff4d6d,#ffb347);transition:width .25s linear}
-.bk-bar i.low{background:linear-gradient(90deg,#ff2d55,#ff7a45)}
 .bk-t{margin:6px 0 16px;text-align:center;font:600 13px "Rajdhani",sans-serif;letter-spacing:.1em;color:var(--soft)}
 .bk-f{display:grid;grid-template-columns:120px 1fr;gap:10px}
 .bk-f label{display:block;font:700 9px "Orbitron",sans-serif;letter-spacing:.18em;color:var(--mute)}
@@ -3657,7 +3679,51 @@ html body .cg .ipu{border-radius:999px}
 .bk-done button{width:100%;margin-top:6px}
 .bk-tick{width:64px;height:64px;border-radius:50%;border:3px solid #5dffa0;position:relative}
 .bk-tick:after{content:"";position:absolute;left:21px;top:11px;width:14px;height:28px;border:solid #5dffa0;border-width:0 4px 4px 0;transform:rotate(45deg)}
-@media(max-width:480px){.bk-code{font-size:42px}.bk-f{grid-template-columns:1fr}}
+@media(max-width:480px){.bk-f{grid-template-columns:1fr}}
+/* ===== PLAYER TRANSFER ===== */
+#p-inv .ebr #xferbtn{grid-column:1/-1;background:transparent;border:1px solid var(--p2);color:var(--ink);font-weight:700;letter-spacing:.14em}
+#p-inv .ebr #xferbtn:hover{background:color-mix(in srgb,var(--p2) 22%,transparent);filter:none}
+.bk-logo.xf{background:var(--p2);color:#fff}
+.bk-f.one{grid-template-columns:1fr}
+.bk-f select{display:block;width:100%;box-sizing:border-box;margin-top:5px;min-height:42px;padding:0 10px;border-radius:8px;border:1px solid var(--line);background:var(--field);color:var(--ink);font:600 16px "Rajdhani",sans-serif}
+.xf-bal{margin:0 0 14px;text-align:center;font:700 11px "Orbitron",sans-serif;letter-spacing:.2em;color:var(--mute)}
+.xf-bal b{display:block;margin-top:4px;font-size:34px;letter-spacing:.04em;color:var(--ink)}
+.xf-bal b+*{}
+.xf-row{display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;padding:8px 12px;margin-bottom:4px;border-radius:8px;background:var(--deep3);font:600 15px "Rajdhani",sans-serif}
+.xf-row b{color:#ff9a5e}.xf-row i{font-style:normal;color:var(--mute);min-width:62px;text-align:right}
+.xf-note{margin-top:16px;font:500 13px/1.4 "Rajdhani",sans-serif;color:var(--mute)}
+#xin{position:fixed;left:16px;bottom:16px;z-index:90001;display:flex;flex-direction:column;gap:10px;width:min(calc(100vw - 32px),340px)}
+.xi{padding:14px 16px;border:1px solid var(--p2);border-radius:14px;background:var(--deep);box-shadow:0 14px 40px rgba(0,0,0,.6)}
+.xi-h{font:700 10px "Orbitron",sans-serif;letter-spacing:.25em;color:var(--p2)}
+.xi-b{margin:8px 0 2px;font:600 17px/1.3 "Rajdhani",sans-serif;color:var(--ink)}.xi-b b{color:#fff}.xi-a{color:#5dffa0!important}
+.xi-w{min-height:0;font:500 14px "Rajdhani",sans-serif;color:var(--soft)}.xi-w:empty{display:none}
+.xi-t{margin:6px 0 10px;font:600 11px "Orbitron",sans-serif;letter-spacing:.12em;color:var(--mute)}
+.xi-btns{display:grid;grid-template-columns:1fr auto;gap:8px}
+.xi-btns button{min-height:40px;border-radius:10px;clip-path:none;font:700 11px "Orbitron",sans-serif;letter-spacing:.14em;cursor:pointer}
+@media print{#xin{display:none!important}}
+
+/* ===== FLATLINED screen ===== */
+#flat{position:fixed;inset:0;z-index:100000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;text-align:center;background:radial-gradient(ellipse at center,#1a0306 0%,#050102 60%,#000 100%);color:#ff2a3c;animation:flIn .9s steps(1,end) both}
+#flat[hidden]{display:none}
+#flat:before{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px);mix-blend-mode:screen}
+#flat:after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 160px 40px #000}
+.fl-tag{font:700 12px "Orbitron",sans-serif;letter-spacing:.5em;color:#ff2a3c99}
+.fl-ecg{width:min(86vw,640px);height:90px;overflow:visible}
+.fl-ecg path{fill:none;stroke:#ff2a3c;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px #ff2a3c);stroke-dasharray:1200;stroke-dashoffset:1200;animation:flDraw 2.6s linear .5s forwards}
+.fl-t{position:relative;margin:0;font:900 clamp(40px,11vw,112px)/1 "Orbitron",sans-serif;letter-spacing:.06em;color:#ff2a3c;text-shadow:0 0 18px #ff2a3c88;animation:flJit 3.2s infinite 1.6s}
+.fl-t:before,.fl-t:after{content:attr(data-t);position:absolute;left:0;top:0;width:100%;overflow:hidden}
+.fl-t:before{color:#18f0ff;transform:translate(-3px,0);clip-path:inset(0 0 58% 0);opacity:.75;animation:flGl 2.4s infinite steps(1,end)}
+.fl-t:after{color:#fff;transform:translate(3px,0);clip-path:inset(62% 0 0 0);opacity:.35;animation:flGl 2.4s infinite steps(1,end) reverse}
+.fl-s{font:700 18px "Rajdhani",sans-serif;letter-spacing:.3em;color:#ffb3ba;text-transform:uppercase}
+.fl-s small{display:block;margin-top:6px;font:600 12px "Orbitron",sans-serif;letter-spacing:.35em;color:#ff2a3c88}
+.fl-b{position:relative;z-index:1;margin-top:10px;min-height:44px;padding:0 28px;border:1px solid #ff2a3c;border-radius:0;background:transparent;color:#ff2a3c;font:700 12px "Orbitron",sans-serif;letter-spacing:.3em;cursor:pointer;clip-path:none}
+.fl-b:hover,.fl-b:focus-visible{background:#ff2a3c;color:#000;outline:0}
+@keyframes flIn{0%{opacity:0}10%{opacity:1}14%{opacity:.1}22%{opacity:1}30%{opacity:.3}38%,100%{opacity:1}}
+@keyframes flDraw{to{stroke-dashoffset:0}}
+@keyframes flGl{0%,88%,100%{transform:translate(-3px,0)}90%{transform:translate(-9px,2px)}94%{transform:translate(6px,-2px)}}
+@keyframes flJit{0%,92%,100%{transform:none}93%{transform:translate(4px,-2px) skewX(6deg)}95%{transform:translate(-5px,1px)}97%{transform:none}}
+@media(prefers-reduced-motion:reduce){#flat,.fl-t,.fl-t:before,.fl-t:after{animation:none}.fl-ecg path{animation:none;stroke-dashoffset:0}}
+@media print{#flat{display:none!important}}
 </style>
 
 <script>
@@ -3950,7 +4016,7 @@ window.addEventListener("cps:hello",()=>{if(!isDM()){const t=INB.k.find(x=>x.o==
 document.addEventListener("click",e=>{const t=e.target.closest("[data-tab=battle],#dmtog");if(!t)return;setTimeout(()=>{const b=$('[data-tab="battle"]');if(b)b.textContent="BATTLE MAP";$("#bmW").value=BM.w;$("#bmH").value=BM.h;if(t.id==="dmtog"&&isDM())send({m:"hi"});side();draw()},60)});
 /* DM: view a player's character sheet (sent on request, in chunks the relay can carry) */
 const SHEETS={},PART={};
-const SKIPK=/^(fx|upk|holo_c|robot|sc_|bp_|fxcount|gcount|notes_json|dm_|qh_|hrec|hev|th_|wv_ok|wcount|vcount|hcount|cwcount|invcount|eblog)/;
+const SKIPK=/^(fx|upk|holo_c|robot|sc_|bp_|fxcount|gcount|notes_json|dm_|qh_|hrec|hev|th_|wv_ok|wcount|vcount|hcount|cwcount|invcount|eblog|ebpend)/;
 function sendSheet(){let raw={};try{raw=JSON.parse(localStorage.getItem("cps_sheet")||"{}")||{}}catch(e){}const out={};
  Object.keys(raw).forEach(k=>{const v=raw[k];if(!/^[A-Za-z0-9_]{1,40}$/.test(k)||SKIPK.test(k)||typeof v!=="string"||v===""||(/^[LB]_/.test(k)&&v==="0"))return;out[k]=v.slice(0,300)});
  const str=JSON.stringify(out),CH=2400,n=Math.max(1,Math.ceil(str.length/CH));if(n>14)return;for(let i=0;i<n;i++)setTimeout(()=>send({m:"sh",id:ME,ix:i,n,d:str.slice(i*CH,(i+1)*CH)}),i*350)}
@@ -5144,5 +5210,26 @@ window.cpsMinimalPrint=open;
 })();
 </script><script>
 (function(){var bolt=document.querySelector(".spookfx .bolt"),planet=document.querySelector(".sp .pl");if(!bolt||!planet)return;planet.addEventListener("click",function(){if(document.documentElement.dataset.theme!=="spooktober"||matchMedia("(prefers-reduced-motion:reduce)").matches)return;bolt.classList.remove("on");void bolt.offsetWidth;bolt.classList.add("on")})})();
+</script>
+
+<script>
+(function(){
+var el=null,au=null;
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function beep(){try{var C=window.AudioContext||window.webkitAudioContext;if(!C)return;au=au||new C();var o=au.createOscillator(),g=au.createGain(),t=au.currentTime;o.type="sine";o.frequency.value=980;g.gain.setValueAtTime(0,t+.5);g.gain.linearRampToValueAtTime(.06,t+.55);g.gain.setValueAtTime(.06,t+2.6);g.gain.linearRampToValueAtTime(0,t+3.2);o.connect(g);g.connect(au.destination);o.start(t);o.stop(t+3.3)}catch(e){}}
+function close(){if(el)el.hidden=true;document.removeEventListener("keydown",key)}
+function key(e){if(e.key=="Escape"||e.key=="Enter"){e.preventDefault();close()}}
+window.flatline=function(){
+ var h=document.querySelector('[data-k="handle"]'),name=(h&&h.value||"").trim()||"Unknown";
+ if(!el){el=document.createElement("div");el.id="flat";el.setAttribute("role","alertdialog");el.setAttribute("aria-label","Flatlined");el.hidden=true;document.body.appendChild(el);
+  el.addEventListener("click",function(e){if(e.target.closest(".fl-b"))close()})}
+ el.innerHTML='<div class="fl-tag">// VITAL SIGNS LOST</div>'
+  +'<svg class="fl-ecg" viewBox="0 0 640 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0 45 H130 L150 45 L165 12 L185 78 L205 45 H250 L265 20 L282 66 L298 45 H360 H640"/></svg>'
+  +'<h1 class="fl-t" data-t="FLATLINED">FLATLINED</h1>'
+  +'<div class="fl-s">'+esc(name)+'<small>DEATH SAVE FAILED · NO PULSE</small></div>'
+  +'<button class="fl-b" type="button">CLOSE</button>';
+ el.hidden=false;beep();document.addEventListener("keydown",key);
+ setTimeout(function(){var b=el.querySelector(".fl-b");if(b)b.focus()},950)};
+})();
 </script>
 </body></html>
