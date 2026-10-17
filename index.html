@@ -292,10 +292,11 @@ html body #himg{filter:none!important}
 </style><script>
 const THEMES={sanctuary:["Sanctuary Purple"],samurai:["Samurai Red",355,12,1],netrunner:["Netrunner Cyan",188,300,1],chrome:["Chrome Mono",215,190,.1],ocean:["Ocean Blue",218,172,1],vice:["Vice Pink",328,190,1],sunset:["Sunset Orange",18,330,1],gold:["Corpo Gold",46,205,.9],mint:["Mint Terminal",160,48,1],ultra:["Ultraviolet",268,140,1],voidred:["Void Red",0,0,.08],spooktober:["Spooktober",24,278,1,{p1:"hsl(24 90% 41%)",p1b:"hsl(18 90% 30%)",p2:"hsl(24 100% 57%)"}],custom:["Custom colours"]};
 const hueOf=x=>{const r=parseInt(x.slice(1,3),16)/255,g=parseInt(x.slice(3,5),16)/255,b=parseInt(x.slice(5,7),16)/255,M=Math.max(r,g,b),m=Math.min(r,g,b),d=M-m;if(!d)return 0;let h=M==r?((g-b)/d)%6:M==g?(b-r)/d+2:(r-g)/d+4;h=Math.round(h*60);return h<0?h+360:h};
+const saturationOf=x=>{const r=parseInt(x.slice(1,3),16)/255,g=parseInt(x.slice(3,5),16)/255,b=parseInt(x.slice(5,7),16)/255,M=Math.max(r,g,b),m=Math.min(r,g,b),l=(M+m)/2,d=M-m;return d?Math.round(d/(1-Math.abs(2*l-1))*100):0};
 const TKEYS="bg panel field line p1 p2 hot ink mute deep0 deep deep2 deep3 deep4 soft soft2 p1b st1 st2 g1 g2 h1 h2 h3 pl1 pl2 pl3 rg1 rg2 moon".split(" ");
-function applyTheme(n){document.documentElement.dataset.theme=n;const R=document.documentElement.style;TKEYS.forEach(k=>R.removeProperty("--"+k));const T=THEMES[n];if(!T)return;let H,A,f=1;
-if(n=="custom"){const g=k=>{try{return localStorage.getItem(k)}catch(e){return null}};H=hueOf(g("cps_cc1")||"#8a3fbf");A=hueOf(g("cps_cc2")||"#ff3ea5")}else if(T.length<2)return;else{H=T[1];A=T[2];f=T[3]}
-const h=(x,s,l)=>`hsl(${x} ${s}% ${l}%)`,m=(s,l)=>h(H,Math.round(s*f),l),a=(s,l)=>h(A,s,l);
+function applyTheme(n){document.documentElement.dataset.theme=n;const R=document.documentElement.style;TKEYS.forEach(k=>R.removeProperty("--"+k));const T=THEMES[n];if(!T)return;let H,A,f=1,af=1;
+if(n=="custom"){const g=k=>{try{return localStorage.getItem(k)}catch(e){return null}},c1=g("cps_cc1")||"#8a3fbf",c2=g("cps_cc2")||"#ff3ea5";H=hueOf(c1);A=hueOf(c2);f=saturationOf(c1)/100;af=saturationOf(c2)/100}else if(T.length<2)return;else{H=T[1];A=T[2];f=T[3]}
+const h=(x,s,l)=>`hsl(${x} ${s}% ${l}%)`,m=(s,l)=>h(H,Math.round(s*f),l),a=(s,l)=>h(A,Math.round(s*af),l);
 const V={bg:m(60,3),panel:m(50,7),field:m(45,12),line:m(50,29),p1:m(50,49),p2:m(100,67),hot:a(100,62),ink:m(100,95),mute:m(25,65),deep0:m(60,4),deep:m(52,10),deep2:m(55,20),deep3:m(50,15),deep4:m(58,16),soft:a(100,80),soft2:a(100,74),p1b:m(57,40),st1:m(55,18),st2:m(62,10),g1:m(70,22),g2:m(76,14),h1:m(85,10),h2:m(82,24),h3:m(85,6),pl1:a(100,85),pl2:m(75,58),pl3:m(70,12),rg1:a(100,71),rg2:a(100,91),moon:m(100,92)};
 if(T[4])Object.assign(V,T[4]);for(const k in V)R.setProperty("--"+k,V[k])}
 try{applyTheme(localStorage.getItem("cps_theme")||"sanctuary")}catch(e){}
@@ -5043,17 +5044,17 @@ var FR={
  gl:{n:"Grenade launcher",base:"Grenade launcher",k:0,t:4,c:500,kind:"launcher",g:"HEAVY ORDNANCE"},
  rl:{n:"Rocket launcher",base:"Rocket launcher",k:0,t:4,c:500,kind:"launcher",g:"HEAVY ORDNANCE"}};
 var LEG={lpist:"mpist",rifle:"ar",scatter:"shot",blade:"lmel",cleaver:"hmel"};
-var BAR={short:{d:-1,t:1,c:0,e:"\u22121d6 \u00b7 cheap, light"},std:{d:0,t:1,c:0,e:"standard"},long:{d:1,t:3,c:250,e:"+1d6 \u00b7 ROF \u22121 (or half mag) \u00b7 2H \u00b7 bulky"}};
-var ACT={salv:{t:1,c:0,e:"ROF \u22121"},basic:{t:1,c:0,e:"standard"},tuned:{t:3,c:100,e:"+1 quality step"}};
-var MAG={small:{x:.5,t:1,c:0,e:"half rounds"},std:{x:1,t:1,c:0,e:"standard"},ext:{x:1.5,t:2,c:100,e:"+50% \u00b7 bulky"},drum:{x:2,t:4,c:500,e:"double \u00b7 bulky"}};
+var BAR={short:{d:-1,t:1,c:0,e:"\u22121d6 \u00b7 cheap, light"},std:{d:0,t:1,c:0,e:"standard"},long:{d:1,t:3,c:375,e:"+1d6 \u00b7 ROF \u22121 (or half mag) \u00b7 2H \u00b7 bulky"}};
+var ACT={salv:{t:1,c:0,e:"ROF \u22121"},basic:{t:1,c:50,e:"standard"},tuned:{t:3,c:150,e:"+1 quality step"}};
+var MAG={small:{x:.5,t:1,c:0,e:"half rounds"},std:{x:1,t:1,c:50,e:"standard"},ext:{x:1.5,t:2,c:150,e:"+50% \u00b7 bulky"},drum:{x:2,t:4,c:750,e:"double \u00b7 bulky"}};
 var BN={firearm:{short:"Short barrel",std:"Standard barrel",long:"Long-run barrel"},melee:{short:"Short blade",std:"Standard blade",long:"Long blade"},archery:{short:"Short limbs",std:"Standard limbs",long:"Long limbs"},launcher:{short:"Short tube",std:"Standard tube",long:"Long tube"}};
 var AN={firearm:{salv:"Salvaged action",basic:"Basic action",tuned:"Precision-tuned action"},melee:{salv:"Taped-up grip",basic:"Plain grip",tuned:"Balanced grip"},archery:{salv:"Frayed draw",basic:"Standard draw",tuned:"Tuned draw"},launcher:{salv:"Salvaged trigger group",basic:"Standard trigger group",tuned:"Tuned trigger group"}};
 var MN={firearm:{small:"Short magazine",std:"Standard magazine",ext:"Extended magazine",drum:"Drum magazine"},archery:{small:"Sparse quiver",std:"Standard quiver",ext:"Extended quiver",drum:"Bandolier"},launcher:{small:"Short feed",std:"Standard feed",ext:"Extended feed",drum:"Drum feed"}};
 var ATT={
- firearm:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Telescopic scope",t:1,c:200,e:"+1 to Called Shots"},supp:{n:"Suppressor",t:2,c:100,e:"Outside combat, reroll a missed shot"},link:{n:"Smartlink",t:3,c:1000,e:"+1 to Aimed Shots"}},
- archery:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Scope",t:1,c:200,e:"+1 to Called Shots"},link:{n:"Smartlink",t:3,c:1000,e:"+1 to Aimed Shots"}},
- launcher:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Scope",t:1,c:200,e:"+1 to Called Shots"},link:{n:"Smartlink",t:3,c:1000,e:"+1 to Aimed Shots"}},
- melee:{none:{n:"No attachment",t:1,c:0,e:""},pommel:{n:"Weighted pommel",t:1,c:50,e:"+1 to Aimed Shots"},mono:{n:"Mono-edge",t:4,c:1000,e:"Adds electric damage"}}};
+ firearm:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Telescopic scope",t:1,c:300,e:"+1 to Called Shots"},supp:{n:"Suppressor",t:2,c:150,e:"Outside combat, reroll a missed shot"},link:{n:"Smartlink",t:3,c:1000,e:"+1 to Aimed Shots"}},
+ archery:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Scope",t:1,c:300,e:"+1 to Called Shots"},link:{n:"Smartlink",t:3,c:1000,e:"+1 to Aimed Shots"}},
+ launcher:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Scope",t:1,c:300,e:"+1 to Called Shots"},link:{n:"Smartlink",t:3,c:1000,e:"+1 to Aimed Shots"}},
+ melee:{none:{n:"No attachment",t:1,c:0,e:""},pommel:{n:"Weighted pommel",t:1,c:75,e:"+1 to Aimed Shots"},mono:{n:"Mono-edge",t:4,c:1000,e:"Adds electric damage"}}};
 var LBL={firearm:{f:"FRAME",b:"BARREL",a:"ACTION",m:"MAGAZINE",t:"ATTACHMENT"},melee:{f:"HILT",b:"BLADE",a:"GRIP",t:"ATTACHMENT"},archery:{f:"FRAME",b:"LIMBS",a:"DRAW SYSTEM",m:"QUIVER",t:"ATTACHMENT"},launcher:{f:"FRAME",b:"TUBE",a:"TRIGGER GROUP",m:"FEED",t:"ATTACHMENT"}};
 var D=null;
 function core(f){var p=PRE[f.base];return{s:p[0],d:parseInt(p[1],10)||1,r:p[2],m:p[3]||0,h:p[4]}}
