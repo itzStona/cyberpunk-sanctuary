@@ -976,7 +976,7 @@ const PRE={"Light melee weapon":["Melee Weapon","1d6",2,0,1],"Medium melee weapo
   <label>QUALITY<select class="fi" ${k("q")}>${op([["","Standard"],["-1","Poor (−1)"],["1","Excellent (+1)"]])}</select></label><label>AMMO TYPE<select class="fi" ${k("a")}>${ammoO}</select></label><label>HANDS<select class="fi" ${k("h")}>${op([["","—"],["1","1 hand"],["2","2 hands"]])}</select></label><label>CONCEALABLE<select class="fi" ${k("k")}>${op([["","No"],["1","Yes"]])}</select></label><label>EQUIPPED<select class="fi" ${k("e")}>${op([["","No"],["1","Yes"]])}</select></label></div>
   <div class="wa"><div class="amm"><label>AMMO<span class="amm"><input class="fi" type="number" ${k("c")}><b>/</b><input class="fi" type="number" ${k("m")} title="Magazine size"></span></label></div><div class="rv"><label>RESERVE<input class="fi" type="number" ${k("v")}></label></div></div>
   <div class="pips"></div>
-  <div class="wsl" hidden><div class="wsh"><b>ATTACHMENTS</b><small class="wst"></small></div><div class="wsg"></div><small class="wsn">Fitted by a Tech Maker at the workbench</small><input type="hidden" ${k("at")}></div>
+  <div class="wsl" hidden><div class="wsh"><b>UPGRADES</b><span class="wsb"></span><small class="wst"></small><span class="wsr" hidden></span></div><div class="wsg"></div><small class="wsn">Fitted by a Tech Maker at the workbench</small><input type="hidden" ${k("at")}></div>
   <div class="dvr"><button class="mini" data-wdv="${i}">DV OFF ▾</button><input type="hidden" ${k("vo")}><span class="dvb" hidden><select class="fi" ${k("dt")} title="Which range table this weapon uses">${tableO}</select><select class="fi" ${k("rg")} title="Distance to the target">${rangeO}</select><b class="dvn"></b></span></div>
   <div class="wb"><button data-wf="${i}">FIRE</button><button data-wa="${i}" hidden>AUTOFIRE</button><button class="g" data-wd="${i}">DAMAGE</button><button class="g" data-wr="${i}">RELOAD</button></div>
   <input class="fi nt" ${k("o")} placeholder="Attachments, notes…"></div>`}
@@ -1024,26 +1024,29 @@ const RXC={Tech:{t:"MAKER",h:"Fix, improve, modify, make and invent items. Each 
 Medtech:{t:"MEDICINE",h:"Spread your rank over these. Roll = d10 + TECH + points + bonus.",rows:[["Surgery","su"],["Pharmaceuticals","ph"],["Cryosystem Operation","cr"]]},
 Solo:{t:"COMBAT AWARENESS",h:"Pick where your rank goes. Exact effects are in your book.",rows:[["Damage Deflection","dd","Soaks part of incoming damage."],["Fumble Recovery","fr","Helps you recover from a fumble."],["Initiative Reaction","ir","Added to Initiative (the button does it)."],["Precision Attack","pa","Aimed-shot bonus. Tick the box below to add it to FIRE."],["Spot Weakness","sw","Bonus to finding a weak spot."],["Threat Detection","td","Spotting danger. Use the Perception roll below."]]}};
 /* Weapon attachments, per the handbook (The New Street Economy, Weapon Attachments, p.343-344): [key,name,eb,slots,flags,effect]. Flags: sa = Shoulder Arms only, nb = not bows/crossbows. Every non-exotic ranged weapon has 3 attachment slots. */
-const MKMODS=[["bayo","Bayonet",100,1,"sa","Also usable as a Light Melee Weapon. Can't be concealed under clothing while fitted."],
-["drum","Drum magazine",500,1,"nb","Magazine grows to the Drum column of the Clip Chart. Only one clip at a time. Can't be concealed under clothing."],
-["ext","Extended magazine",100,1,"nb","Magazine grows to the Extended column of the Clip Chart. Only one clip at a time. Can't be concealed under clothing."],
-["gl","Grenade launcher underbarrel",500,2,"sa","Two-handed use as a Grenade Launcher, holding 1 grenade. Can't be concealed under clothing."],
-["ir","Infrared nightvision scope",500,1,"","Firing penalties from darkness, smoke or fog drop to 0. See heat detail up to 800m/yds."],
-["sg","Shotgun underbarrel",500,2,"sa","Two-handed use as a Shotgun, holding 2 shots. Can't be concealed under clothing."],
-["link","Smartgun link",500,2,"","Takes 1 hour to fit. Needs Interface Plugs or a Subdermal Grip and a Neural Link. +1 to ranged attacks."],
-["snipe","Sniping scope",100,1,"","+1 to attacks at 51m/yds or more with single shot or Aimed Shot. Doesn't stack with TeleOptics."]];
+const MKMODS=[["bayo","Bayonet",100,1,"sa","Also usable as a Light Melee Weapon. Can't be concealed under clothing while fitted.","Doubles as a light melee weapon"],
+["drum","Drum magazine",500,1,"nb","Magazine grows to the Drum column of the Clip Chart. Only one clip at a time. Can't be concealed under clothing.","Magazine up to the Drum size"],
+["ext","Extended magazine",100,1,"nb","Magazine grows to the Extended column of the Clip Chart. Only one clip at a time. Can't be concealed under clothing.","Magazine up to the Extended size"],
+["gl","Grenade launcher underbarrel",500,2,"sa","Two-handed use as a Grenade Launcher, holding 1 grenade. Can't be concealed under clothing.","Underbarrel launcher, 1 grenade"],
+["ir","Infrared nightvision scope",500,1,"","Firing penalties from darkness, smoke or fog drop to 0. See heat detail up to 800m/yds.","Ignore darkness, smoke and fog"],
+["sg","Shotgun underbarrel",500,2,"sa","Two-handed use as a Shotgun, holding 2 shots. Can't be concealed under clothing.","Underbarrel shotgun, 2 shots"],
+["link","Smartgun link",500,2,"","Takes 1 hour to fit. Needs Interface Plugs or a Subdermal Grip and a Neural Link. +1 to ranged attacks. Can't be fitted to a Smart Weapon.","+1 to ranged attacks"],
+["snipe","Sniping scope",100,1,"","+1 to attacks at 51m/yds or more with single shot or Aimed Shot. Doesn't stack with TeleOptics.","+1 to hit at 51 m/yds or more"],
+/* Rebuilds (handbook, Attachments & Ammunition): 2 slots, 1,000 eb, one per weapon, non-exotic ranged weapons only. Flags: rb = rebuild, xl = not for launchers, xs = not with a Smartgun link */
+["rbp","Power Rebuild",1000,2,"rb","Reinforced to handle extreme strain. Critical Injuries this weapon causes get +5 Bonus Damage. You can ricochet shots off cover to hit a target you know about but can't hit directly, at -4 to the Attack Check; an Aimed Shot ignores that -4 and takes only the Aimed Shot penalty. Needs a clear path from the ricochet point to the target, and range is still measured from you to the target. A Shotgun Shell ricochet moves the spread's origin to a surface within 6 m/yds (3 squares).","Crit bonus +5 · ricochet shots"],
+["rbs","Smart Rebuild",1000,2,"rb,xs","Stripped down and rebuilt around smart targeting. You must be linked through an Interface Plug or Subdermal Grip. +1 to your Attack Checks. Loads Improved Smart Ammunition; other ammo still gets the +1 but none of the ammo's benefits. With Improved Smart Ammo you ignore darkness, smoke, fog and other visual obscurement penalties. Miss a ranged attack by 5 or less and you can retry at once: add 14 (plus LUCK) instead of STAT + Skill and other bonuses, and all penalties from the first shot carry over.","+1 to hit · retry near misses"],
+["rbt","Tech Rebuild",1000,2,"rb,xl","Reworked with electromagnetic launch modules and a scope that sees target outlines through Thin Cover. Sacrifice your Move Action to charge it; it stays charged until fired or 60 seconds (20 Rounds) pass. While charged, the next non-explosive attack is ROF 1, can fire through Thin Cover, and ignores half the target's SP (round up). Cover fired through does not lose HP. Not for Grenade or Rocket Launchers.","Charged shot · through Thin Cover"]];
 /* Clip Chart from the handbook: [standard, extended, drum] by weapon type */
 const CLIPS={"Medium pistol":[12,18,36],"Heavy pistol":[8,14,28],"Very heavy pistol":[8,14,28],"Submachinegun":[30,40,50],"Heavy SMG":[40,50,60],"Shotgun":[4,8,16],"Assault rifle":[25,35,45],"Sniper rifle":[4,8,12],"Grenade launcher":[2,4,6],"Rocket launcher":[1,2,3]};
-const MKHTML=`<div class="mkbox" id="mkbox"><h5>WORKBENCH · PARTS, WELDING, 1 HOUR BUILD</h5><input type="hidden" data-k="mk_job"><input type="hidden" data-k="mk_bp">
-<div class="rxr"><label class="wide">JOB<select class="fi" data-k="mk_t"><option value="make">Make a new weapon</option><option value="fix">Fix a weapon</option><option value="mod">Modify a weapon</option></select></label>
-<label class="wide" id="mkl-w">WEAPON<select class="fi" data-k="mk_w">${Array.from({length:12},(_,i)=>`<option value="${i}">${i+1}. (empty slot)</option>`).join("")}</select></label>
-<label class="wide" id="mkl-x">MODIFICATION<select class="fi" data-k="mk_x">${MKMODS.map(m=>`<option value="${m[0]}">${m[1]} · ${m[2]} eb${m[3]>1?" · "+m[3]+" slots":""}</option>`).join("")}</select></label>
-<label class="cst" id="mkl-c">PARTS (eb)<input class="fi" type="number" min="0" data-k="mk_c"></label></div>
-<small id="mkmn" hidden></small>
-<div class="mkst"><div class="mkbar"><i id="mkfill"></i></div><span id="mkinfo"></span></div>
-<div class="rxr"><button type="button" class="mini" id="mkgo">OPEN WORKBENCH</button><button type="button" class="mini" id="mkcol" hidden>COLLECT</button></div>
+const MKHTML=`<div class="mkbox" id="mkbox"><h5>WORKBENCH</h5><input type="hidden" data-k="mk_job"><input type="hidden" data-k="mk_bp">
+<div class="mk-seg" role="group" aria-label="Job"><select class="fi" data-k="mk_t" hidden><option value="make">Make a new weapon</option><option value="fix">Fix a weapon</option><option value="mod">Modify a weapon</option></select><button type="button" class="mk-sb" data-mkt="make" aria-pressed="false"><b>MAKE</b><small>Build a new weapon</small></button><button type="button" class="mk-sb" data-mkt="fix" aria-pressed="false"><b>FIX</b><small>Restore quality</small></button><button type="button" class="mk-sb" data-mkt="mod" aria-pressed="false"><b>UPGRADE</b><small>Attachments &amp; rebuilds</small></button></div>
+<div class="mk-step" id="mkl-w"><label class="mk-l">1 · WEAPON<select class="fi" data-k="mk_w">${Array.from({length:12},(_,i)=>`<option value="${i}">${i+1}. (empty slot)</option>`).join("")}</select></label></div>
+<div class="mk-step" id="mkl-x"><div class="mk-l">2 · UPGRADE</div><select class="fi" data-k="mk_x" hidden>${MKMODS.map(m=>`<option value="${m[0]}">${m[1]}</option>`).join("")}</select><div class="mk-pick" id="mkpick"></div><div class="mk-desc" id="mkmn" hidden></div></div>
+<div class="mk-pay"><label class="cst" id="mkl-c">PARTS (eb)<input class="fi" type="number" min="0" data-k="mk_c"></label><button type="button" class="mini mk-go" id="mkgo">OPEN WORKBENCH</button><button type="button" class="mini mk-go" id="mkcol" hidden>COLLECT</button></div>
+<p class="mk-hint" id="mkhint"></p>
+<div class="mkst" id="mkst" hidden><div class="mkbar"><i id="mkfill"></i></div><span id="mkinfo"></span></div>
 <details class="mkgm"><summary>GM</summary><button type="button" class="mini g" id="mkfin">FINISH NOW</button><button type="button" class="mini g" id="mkcan">CANCEL JOB</button></details>
-<small>Weapon mod prices, slots and magazine sizes follow the handbook (Weapon Attachments, p.343-344) and frame prices follow the core rulebook; the other part prices and stats are homebrew: change them freely in the script. Upgrades can only be fitted here: to upgrade a teammate's weapon, they GIVE it to you first and you send it back when it is done. Fabrication points unlock tiers (3+ needed for T4, the heaviest weapons). A good assembly raises quality, a poor one lowers it, and three bad welds ruin the job.</small></div>`;
+<details class="mkgm"><summary>RULES &amp; PRICES</summary><small class="mk-rules">Mod prices, slots and magazine sizes follow the handbook (Weapon Attachments, p.343-344); Rebuilds follow Attachments &amp; Ammunition. Frame prices follow the core rulebook; other part prices and stats are homebrew, so change them freely in the script. Upgrades can only be fitted here: to upgrade a teammate's weapon, they GIVE it to you first and you send it back when done. Installing a Rebuild takes 1 hour and a weapon can hold only one. Fabrication points unlock tiers (3+ for T4, the heaviest weapons). A good assembly raises quality, a poor one lowers it, and three bad welds ruin the job.</small></details></div>`;
 document.getElementById("rext").innerHTML=Object.keys(RXC).map(r=>{const c=RXC[r],P=k=>`<label>POINTS<input class="fi" type="number" min="0" data-k="rx_${r}_${k}_p"></label>`,B=k=>`<label>BONUS<input class="fi" type="number" data-k="rx_${r}_${k}_b"></label>`;
  return `<div class="rx" data-rxp="${r}" hidden><h4>${c.t} · ${r.toUpperCase()}<span data-sum></span></h4><small>${c.h}</small>`+c.rows.map(([n,k,d])=>`<div class="rxr"><b>${n}${d?`<small>${d}</small>`:""}</b>${c.sk?`<select class="fi" data-k="rx_${r}_${k}_s"><option value="">TECH only</option>${c.sk.map(s=>`<option>${s}</option>`).join("")}</select>`:""}${P(k)}${r=="Solo"?"":B(k)+(r=="Tech"?"":`<button class="mini" data-xr="${r}|${k}|${n}">ROLL</button>`)}</div>`).join("")+(r=="Solo"?`<div class="rxt"><label><input type="checkbox" id="rxprec"> Aimed shot: add Precision Attack to FIRE</label><button class="mini" data-xr="Solo|td|Threat Detection">ROLL THREAT DETECTION</button></div>`:"")+(r=="Tech"?MKHTML:"")+"</div>"}).join("")
  +`<div class="rx" data-rxp="Media" hidden><h4>CREDIBILITY · MEDIA</h4><small>Collect proofs before you publish. A story needs its proofs or it won't run.</small><div class="rxr"><b>Gather proof with<small>A success vs the DV above adds a proof. No DV set? use +1 / −1.</small></b><select class="fi" data-k="rx_Media_gs">${MSK.map(s=>`<option>${s}</option>`).join("")}</select></div>`+[0,1,2].map(j=>`<div class="rxr"><input class="fi nm2" data-k="rx_Media_${j}_n" placeholder="Story ${j+1}"><label>PROOFS<input class="fi" type="number" min="0" data-k="rx_Media_${j}_p"></label><label>NEEDED<input class="fi" type="number" min="0" data-k="rx_Media_${j}_m"></label><button class="mini" data-xm="${j}|g">GATHER</button><button class="mini g" data-xm="${j}|+">+1</button><button class="mini g" data-xm="${j}|-">−1</button><button class="mini" data-xm="${j}|p">PUBLISH</button></div>`).join("")+"</div>";
@@ -4824,7 +4827,43 @@ if(hist.join()===CODE.join()){hist=[];enter()}},true)}
 .mkbar{flex:1 1 200px;height:10px;border:1px solid var(--line);background:var(--field,#0006)}
 .mkbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--p1),var(--p2));transition:width .6s linear}
 #mkinfo{flex:1 1 100%;font-size:15px;color:var(--mute)}
-.mkgm{margin-top:6px}
+.mk-seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin:2px 0 12px}
+.mk-sb{display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:9px 10px;min-height:56px;text-align:left;background:var(--deep);border:1px solid var(--line);color:var(--soft);clip-path:none;cursor:pointer}
+.mk-sb b{font:700 13px "Orbitron",sans-serif;letter-spacing:.14em;color:var(--ink)}
+.mk-sb small{font:600 13px/1.1 "Rajdhani",sans-serif;color:var(--mute);letter-spacing:.02em}
+.mk-sb[aria-pressed="true"]{border-color:var(--p2);background:color-mix(in srgb,var(--p2) 18%,var(--deep));box-shadow:inset 3px 0 0 var(--p2)}
+.mk-sb:disabled{opacity:.55;cursor:default}
+.mk-step{margin:0 0 12px}
+.mk-l{display:block;margin-bottom:5px;font:600 10px "Orbitron",sans-serif;letter-spacing:.18em;color:var(--mute)}
+.mk-step .fi{width:100%;text-align:left;font-size:16px;font-weight:600}
+.mk-g{display:flex;align-items:center;gap:8px;margin:12px 0 6px;font:700 10px "Orbitron",sans-serif;letter-spacing:.2em;color:var(--p2)}
+.mk-g:first-child{margin-top:0}
+.mk-g:after{content:"";flex:1;height:1px;background:var(--line)}
+.mk-g small{order:2;font:600 9px "Orbitron",sans-serif;letter-spacing:.12em;color:var(--mute)}
+.mk-tg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.mk-t{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:3px;min-height:84px;padding:9px 10px 8px 12px;text-align:left;background:var(--deep);border:1px solid var(--line);border-left:3px solid var(--tc,var(--line));color:var(--soft);clip-path:none;cursor:pointer}
+.mk-t b{padding-right:30px;font:700 15px/1.1 "Rajdhani",sans-serif;letter-spacing:.03em;color:var(--ink)}
+.mk-t small{font:600 13px/1.15 "Rajdhani",sans-serif;color:var(--mute)}
+.mk-t em{margin-top:auto;font:600 10px "Orbitron",sans-serif;font-style:normal;letter-spacing:.1em;color:var(--p2)}
+.mk-t u{text-decoration:none;font:600 12px/1.1 "Rajdhani",sans-serif;color:var(--hot);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mk-t u.ok{color:var(--mute);font:700 10px "Orbitron",sans-serif;letter-spacing:.14em}
+.mk-t[aria-pressed="true"]{border-color:var(--p2);border-left-color:var(--tc,var(--p2));background:color-mix(in srgb,var(--p2) 18%,var(--deep));box-shadow:0 0 0 1px var(--p2)}
+.mk-t:disabled{opacity:.55;cursor:not-allowed}
+.mk-tp{position:absolute;top:9px;right:9px;display:flex;gap:2px}
+.mk-tp i{display:block;width:7px;height:12px;background:var(--p2)}
+.mk-t.rbp{--tc:#ff6a3d}.mk-t.rbs{--tc:#33c8ff}.mk-t.rbt{--tc:#c8ff2e}
+.mk-pick.off{opacity:.7}
+.mk-desc{margin-top:8px;padding:9px 11px;border-left:3px solid var(--p2);background:color-mix(in srgb,var(--p2) 9%,var(--deep));font:500 15px/1.4 "Rajdhani",sans-serif;color:var(--soft)}
+.mk-desc b{color:var(--ink);letter-spacing:.04em}
+.mk-desc i{display:block;margin-top:5px;font:600 9px "Orbitron",sans-serif;font-style:normal;letter-spacing:.16em;color:var(--mute)}
+.mk-pay{display:flex;gap:10px;align-items:flex-end;margin:12px 0 6px}
+.mk-pay label.cst{flex:0 0 96px;display:block;font:600 10px "Orbitron",sans-serif;letter-spacing:.14em;color:var(--mute)}
+.mk-pay label.cst .fi{width:100%;margin-top:5px;text-align:center;font-weight:700;font-size:18px}
+.mk-go{flex:1;min-height:46px;padding:8px 12px;font-size:12px;letter-spacing:.12em;background:linear-gradient(90deg,var(--p1),var(--p2));border-color:var(--p2);color:#fff}
+.mk-go:hover{background:linear-gradient(90deg,var(--p2),var(--hot))}
+.mk-hint{margin:0 0 4px;font:500 14px/1.35 "Rajdhani",sans-serif;color:var(--mute)}
+.mk-rules{display:block;margin-top:6px;font:500 14px/1.4 "Rajdhani",sans-serif;color:var(--mute)}
+.mkgm{margin-top:8px}
 .mkgm>summary{cursor:pointer;font:700 10px "Orbitron",sans-serif;letter-spacing:.22em;color:var(--mute)}
 .mkgm button{margin:6px 8px 0 0}
 
@@ -4909,6 +4948,67 @@ if(hist.join()===CODE.join()){hist=[];enter()}},true)}
 .mk-grp{flex:1 0 100%;margin:6px 0 0;font:700 9px "Orbitron",sans-serif;letter-spacing:.24em;color:var(--mute);opacity:.8}
 .mk-grp:first-child{margin-top:0}
 .mk-opt small+small{color:var(--p2)}
+
+/* ===== workbench visual upgrade: blueprint table, glowing parts, hot weld stage ===== */
+#mk-overlay:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:linear-gradient(color-mix(in srgb,var(--p2) 9%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--p2) 9%,transparent) 1px,transparent 1px),repeating-linear-gradient(0deg,#0000 0 2px,#0000002e 2px 3px);background-size:32px 32px,32px 32px,100% 3px}
+#mk-overlay:after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at center,transparent 55%,#000a 100%)}
+.mk-wrap{position:relative;z-index:1}
+.mk-head{position:relative;background:linear-gradient(90deg,color-mix(in srgb,var(--p2) 24%,var(--deep)),var(--deep) 70%);box-shadow:0 0 24px color-mix(in srgb,var(--p2) 30%,transparent),inset 0 -2px 0 var(--p2)}
+.mk-head b{text-shadow:0 0 12px var(--p2),0 0 2px #fff}
+.mk-head span{padding:3px 9px;border:1px solid var(--p2);color:var(--p2);background:#0005}
+.mk-design,.mk-stage,.mk-res{position:relative;background:linear-gradient(145deg,color-mix(in srgb,var(--p2) 8%,var(--deep)),var(--deep) 55%);box-shadow:0 0 0 1px color-mix(in srgb,var(--p2) 22%,transparent),0 18px 50px #000a}
+.mk-design:before,.mk-stage:before,.mk-res:before{content:"";position:absolute;top:-1px;right:-1px;width:22px;height:22px;border-top:2px solid var(--p2);border-right:2px solid var(--p2);pointer-events:none}
+.mk-design:after,.mk-stage:after,.mk-res:after{content:"";position:absolute;bottom:-1px;left:-1px;width:22px;height:22px;border-bottom:2px solid var(--p2);border-left:2px solid var(--p2);pointer-events:none}
+/* blueprint preview */
+.mk-pv{position:relative;overflow:hidden;padding:10px;border:1px solid color-mix(in srgb,#33c8ff 55%,var(--line));background:radial-gradient(ellipse at 50% 40%,#12304a 0,#07121f 75%);box-shadow:inset 0 0 40px #000a}
+.mk-pv:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(#33c8ff1f 1px,transparent 1px),linear-gradient(90deg,#33c8ff1f 1px,transparent 1px);background-size:20px 20px}
+.mk-pv:after{content:"";position:absolute;top:0;bottom:0;width:70px;left:-80px;pointer-events:none;background:linear-gradient(90deg,transparent,#33c8ff2e,#33c8ff66 90%,transparent);animation:mkscan 4.2s linear infinite}
+@keyframes mkscan{to{left:110%}}
+.mk-pv .mk-svg{position:relative;z-index:1}
+.mk-svg:not(.build) .pt{fill:color-mix(in srgb,var(--c,var(--p2)) 16%,#06101c);stroke:var(--c,var(--p2));stroke-width:1.6;filter:drop-shadow(0 0 3px var(--c,var(--p2)));transition:opacity .25s,filter .25s}
+.mk-svg .pt[data-s=f]{--c:#d655ff}.mk-svg .pt[data-s=b]{--c:#33c8ff}.mk-svg .pt[data-s=a]{--c:#ffd36b}.mk-svg .pt[data-s=m]{--c:#7dff9b}.mk-svg .pt[data-s=t]{--c:#ff6a3d}
+.mk-pv[data-hl]:not([data-hl=""]) .pt{opacity:.28}
+.mk-pv[data-hl=f] .pt[data-s=f],.mk-pv[data-hl=b] .pt[data-s=b],.mk-pv[data-hl=a] .pt[data-s=a],.mk-pv[data-hl=m] .pt[data-s=m],.mk-pv[data-hl=t] .pt[data-s=t]{opacity:1;filter:drop-shadow(0 0 9px var(--c))}
+.mk-svg.build .pt.on{fill:#ffffff0d}
+.mk-svg .pt.g{fill:#7dff9b22;filter:drop-shadow(0 0 5px #7dff9b)}
+.mk-svg .pt.m{fill:#ff3ea522;filter:drop-shadow(0 0 5px var(--hot))}
+.mk-svg .pt.p{fill:#ffd36b26}
+/* part pickers */
+.mk-slot{--c:var(--p2);padding:8px 10px 6px;border-left:3px solid var(--c);background:linear-gradient(90deg,color-mix(in srgb,var(--c) 9%,transparent),transparent 60%)}
+.mk-slot[data-s=f]{--c:#d655ff}.mk-slot[data-s=b]{--c:#33c8ff}.mk-slot[data-s=a]{--c:#ffd36b}.mk-slot[data-s=m]{--c:#7dff9b}.mk-slot[data-s=t]{--c:#ff6a3d}
+.mk-sl{color:var(--c);text-shadow:0 0 8px color-mix(in srgb,var(--c) 60%,transparent)}
+.mk-opt{position:relative;background:#0008;transition:transform .12s,border-color .12s,box-shadow .12s}
+.mk-opt:hover:not(:disabled){transform:translateY(-1px);border-color:var(--c)}
+.mk-opt[aria-pressed="true"]{border-color:var(--c);background:color-mix(in srgb,var(--c) 22%,#000a);box-shadow:0 0 12px color-mix(in srgb,var(--c) 55%,transparent),inset 0 0 0 1px var(--c)}
+.mk-opt[aria-pressed="true"]:after{content:"";position:absolute;top:5px;right:6px;width:7px;height:7px;background:var(--c);box-shadow:0 0 6px var(--c)}
+.mk-stats span{position:relative;background:linear-gradient(180deg,#ffffff0a,#0008);border-top:2px solid var(--p2)}
+.mk-stats b{text-shadow:0 0 10px color-mix(in srgb,var(--p2) 60%,transparent)}
+.mk-dact button{background:linear-gradient(90deg,var(--p1),var(--p2) 60%,var(--hot));border-color:var(--p2);color:#fff;letter-spacing:.16em;box-shadow:0 0 18px color-mix(in srgb,var(--p2) 55%,transparent);animation:mkpulse 2.2s ease-in-out infinite}
+.mk-dact button.poor{animation:none;box-shadow:none;filter:grayscale(.6)}
+@keyframes mkpulse{50%{box-shadow:0 0 30px color-mix(in srgb,var(--hot) 70%,transparent)}}
+/* weld stage */
+.mk-sv{border:1px solid color-mix(in srgb,#ff9a2a 45%,var(--line));background:repeating-linear-gradient(90deg,#ffffff07 0 1px,transparent 1px 4px),radial-gradient(ellipse at 50% 45%,#2a3140 0,#10141d 80%);box-shadow:inset 0 0 50px #000c,0 0 22px #ff9a2a14}
+.mk-sv:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);background-size:22px 22px}
+.mk-sv canvas{z-index:3}
+.mk-comp{text-shadow:0 0 10px color-mix(in srgb,var(--p2) 60%,transparent)}
+.mk-heat{height:14px;box-shadow:inset 0 0 6px #000}
+.mk-heat i{box-shadow:0 0 10px #ffd36b88}
+.mk-spd{transition:all .12s;background:#0006}
+.mk-spd.ok{box-shadow:0 0 12px #7dff9b66;background:#7dff9b14}
+.mk-spd.bad{box-shadow:0 0 12px #ff3ea566;background:#ff3ea514}
+.mk-chips span{background:#0007;transition:all .2s}
+.mk-chips span.c{box-shadow:0 0 12px color-mix(in srgb,var(--p2) 50%,transparent);animation:mkpulse 1.6s ease-in-out infinite}
+.mk-chips span.g,.mk-chips span.p{box-shadow:0 0 8px currentColor}
+.mk-fb{text-shadow:0 0 14px currentColor;animation:mkpop .35s ease-out}
+@keyframes mkpop{from{transform:scale(1.5);opacity:0}to{transform:none;opacity:1}}
+.mk-strikes i.x{animation:mkpop .3s ease-out}
+/* result */
+.mk-res{padding:34px 20px;background:radial-gradient(ellipse at 50% 0,color-mix(in srgb,#7dff9b 18%,transparent),transparent 65%),var(--deep)}
+.mk-res.bad{background:radial-gradient(ellipse at 50% 0,color-mix(in srgb,var(--hot) 24%,transparent),transparent 65%),var(--deep);animation:mkshake .4s}
+.mk-res h3{font-size:26px;color:#7dff9b;text-shadow:0 0 22px #7dff9b;animation:mkpop .5s ease-out}
+.mk-res.bad h3{color:var(--hot);text-shadow:0 0 22px var(--hot)}
+@keyframes mkshake{20%{transform:translateX(-8px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(3px)}}
+@media(prefers-reduced-motion:reduce){.mk-pv:after,.mk-dact button,.mk-chips span.c{animation:none}}
 </style>
 <script id="mk-js">/* Tech Maker workbench. Data (MKMODS, MKPRICE, MKHTML) is defined next to the Role panel in the main script. */
 (function(){
@@ -4922,12 +5022,12 @@ var QN={"-1":"POOR (\u22121)","0":"STANDARD","1":"EXCELLENT (+1)"};
 /* ---------- weapon parts (homebrew, edit freely) ----------
    PRICES: frame prices are the Cyberpunk RED core rulebook base weapon prices (CP:R p.340-341). Upgrades use book prices where one exists (ext mag 100, drum 500, smartgun link 500, scope 100, silencer 100); the rest are homebrew flat prices.
    Base damage, ROF, magazine, hands and skill always come from the sheet's own weapon presets (PRE).
-   Balance rules: +1d6 (long barrel) costs ROF and concealment, -1d6 (short barrel) buys concealment,
+   Balance rules: +1d6 (long barrel) costs ROF (or half the magazine on ROF 1 weapons), makes pistols and SMGs two-handed and is never concealable; -1d6 (short barrel) is just cheap and light (no concealment bonus: only the Medium pistol and Light melee frames are concealable),
    big magazines are bulky, precision tuning gives +1 quality step, damage never goes above preset +1d6.
    Tiers: T1 needs no Fabrication, T2 needs 1, T3 needs 2, T4 (the heavy hitters) needs MORE THAN 2 (3+). */
 var FR={
  lmel:{n:"Light melee weapon",base:"Light melee weapon",k:1,t:1,c:50,kind:"melee",g:"MELEE"},
- mmel:{n:"Medium melee weapon",base:"Medium melee weapon",k:1,t:1,c:50,kind:"melee",g:"MELEE"},
+ mmel:{n:"Medium melee weapon",base:"Medium melee weapon",k:0,t:1,c:50,kind:"melee",g:"MELEE"},
  hmel:{n:"Heavy melee weapon",base:"Heavy melee weapon",k:0,t:2,c:100,kind:"melee",g:"MELEE"},
  vmel:{n:"Very heavy melee weapon",base:"Very heavy melee weapon",k:0,t:3,c:500,kind:"melee",g:"MELEE"},
  mpist:{n:"Medium pistol",base:"Medium pistol",k:1,t:1,c:50,kind:"firearm",g:"PISTOLS"},
@@ -4943,17 +5043,17 @@ var FR={
  gl:{n:"Grenade launcher",base:"Grenade launcher",k:0,t:4,c:500,kind:"launcher",g:"HEAVY ORDNANCE"},
  rl:{n:"Rocket launcher",base:"Rocket launcher",k:0,t:4,c:500,kind:"launcher",g:"HEAVY ORDNANCE"}};
 var LEG={lpist:"mpist",rifle:"ar",scatter:"shot",blade:"lmel",cleaver:"hmel"};
-var BAR={short:{d:-1,t:1,c:50,e:"\u22121d6 \u00b7 compact"},std:{d:0,t:1,c:0,e:"standard"},long:{d:1,t:3,c:50,e:"+1d6 \u00b7 ROF \u22121 \u00b7 bulky"}};
+var BAR={short:{d:-1,t:1,c:0,e:"\u22121d6 \u00b7 cheap, light"},std:{d:0,t:1,c:0,e:"standard"},long:{d:1,t:3,c:250,e:"+1d6 \u00b7 ROF \u22121 (or half mag) \u00b7 2H \u00b7 bulky"}};
 var ACT={salv:{t:1,c:0,e:"ROF \u22121"},basic:{t:1,c:0,e:"standard"},tuned:{t:3,c:100,e:"+1 quality step"}};
 var MAG={small:{x:.5,t:1,c:0,e:"half rounds"},std:{x:1,t:1,c:0,e:"standard"},ext:{x:1.5,t:2,c:100,e:"+50% \u00b7 bulky"},drum:{x:2,t:4,c:500,e:"double \u00b7 bulky"}};
 var BN={firearm:{short:"Short barrel",std:"Standard barrel",long:"Long-run barrel"},melee:{short:"Short blade",std:"Standard blade",long:"Long blade"},archery:{short:"Short limbs",std:"Standard limbs",long:"Long limbs"},launcher:{short:"Short tube",std:"Standard tube",long:"Long tube"}};
 var AN={firearm:{salv:"Salvaged action",basic:"Basic action",tuned:"Precision-tuned action"},melee:{salv:"Taped-up grip",basic:"Plain grip",tuned:"Balanced grip"},archery:{salv:"Frayed draw",basic:"Standard draw",tuned:"Tuned draw"},launcher:{salv:"Salvaged trigger group",basic:"Standard trigger group",tuned:"Tuned trigger group"}};
 var MN={firearm:{small:"Short magazine",std:"Standard magazine",ext:"Extended magazine",drum:"Drum magazine"},archery:{small:"Sparse quiver",std:"Standard quiver",ext:"Extended quiver",drum:"Bandolier"},launcher:{small:"Short feed",std:"Standard feed",ext:"Extended feed",drum:"Drum feed"}};
 var ATT={
- firearm:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Telescopic scope",t:1,c:100,e:"note only"},supp:{n:"Suppressor",t:2,c:100,e:"note only"},link:{n:"Smartgun link",t:3,c:500,e:"note only"}},
- archery:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Scope",t:1,c:100,e:"note only"},link:{n:"Smart sight",t:3,c:500,e:"note only"}},
- launcher:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Scope",t:1,c:100,e:"note only"},link:{n:"Targeting link",t:3,c:500,e:"note only"}},
- melee:{none:{n:"No attachment",t:1,c:0,e:""},pommel:{n:"Weighted pommel",t:1,c:50,e:"note only"},coil:{n:"Shock coil",t:3,c:500,e:"note only"},mono:{n:"Mono-edge",t:4,c:1000,e:"note only"}}};
+ firearm:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Telescopic scope",t:1,c:200,e:"+1 to Called Shots"},supp:{n:"Suppressor",t:2,c:100,e:"Outside combat, reroll a missed shot"},link:{n:"Smartlink",t:3,c:1000,e:"+1 to Aimed Shots"}},
+ archery:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Scope",t:1,c:200,e:"+1 to Called Shots"},link:{n:"Smartlink",t:3,c:1000,e:"+1 to Aimed Shots"}},
+ launcher:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Scope",t:1,c:200,e:"+1 to Called Shots"},link:{n:"Smartlink",t:3,c:1000,e:"+1 to Aimed Shots"}},
+ melee:{none:{n:"No attachment",t:1,c:0,e:""},pommel:{n:"Weighted pommel",t:1,c:50,e:"+1 to Aimed Shots"},mono:{n:"Mono-edge",t:4,c:1000,e:"Adds electric damage"}}};
 var LBL={firearm:{f:"FRAME",b:"BARREL",a:"ACTION",m:"MAGAZINE",t:"ATTACHMENT"},melee:{f:"HILT",b:"BLADE",a:"GRIP",t:"ATTACHMENT"},archery:{f:"FRAME",b:"LIMBS",a:"DRAW SYSTEM",m:"QUIVER",t:"ATTACHMENT"},launcher:{f:"FRAME",b:"TUBE",a:"TRIGGER GROUP",m:"FEED",t:"ATTACHMENT"}};
 var D=null;
 function core(f){var p=PRE[f.base];return{s:p[0],d:parseInt(p[1],10)||1,r:p[2],m:p[3]||0,h:p[4]}}
@@ -4987,15 +5087,15 @@ function norm(p,cap){
 function statsOf(p){
  var f=FR[p.f],c=core(f),kd=f.kind,ranged=kd!=="melee",b=BAR[p.b],m=MAG[p.m],at=ATT[kd][p.t];
  var dice=Math.max(1,c.d+b.d);
- var rof=Math.max(1,Math.min(c.r,c.r+(p.b==="long"?-1:0)+(p.a==="salv"?-1:0)));
- var mag=0;if(ranged){var cap=c.m<=4?c.m+1:c.m*2;mag=Math.max(1,Math.min(cap,Math.round(c.m*m.x)))}
+ var lg=p.b==="long",rof=Math.max(1,Math.min(c.r,c.r-(lg&&c.r>1?1:0)-(p.a==="salv"?1:0)));
+ var mag=0;if(ranged){var cap=c.m<=4?c.m+1:c.m*2;mag=Math.max(1,Math.min(cap,Math.round(c.m*m.x)));if(lg&&c.r===1&&mag>1)mag=Math.max(1,Math.floor(mag/2))}
  var bulky=ranged&&(p.m==="ext"||p.m==="drum");
- var k=(f.k||(p.b==="short"&&c.h===1))&&p.b!=="long"&&!bulky?1:0;
+ var hands=lg&&ranged&&c.h===1?2:c.h,k=f.k&&!lg&&!bulky&&p.t!=="scope"&&p.t!=="supp"?1:0;
  var parts=slotsFor(p).map(function(s){return partOf(s,p[s],p).n});
  var mult=1+.25*(f.t-1);
- return{dmg:dice+"d6",r:rof,m:mag,h:c.h,k:k,s:c.s,base:f.base,kind:kd,ranged:ranged,tune:p.a==="tuned"?1:0,
+ return{dmg:dice+"d6",r:rof,m:mag,h:hands,k:k,s:c.s,base:f.base,kind:kd,ranged:ranged,tune:p.a==="tuned"?1:0,
   cost:f.c+b.c+ACT[p.a].c+(ranged?m.c:0)+at.c,
-  tier:Math.max(f.t,b.t,ACT[p.a].t,ranged?m.t:1,at.t),note:"Custom build: "+parts.join(", ")}}
+  tier:Math.max(f.t,b.t,ACT[p.a].t,ranged?m.t:1,at.t),note:"Custom build: "+parts.join(", ")+(p.t==="scope"?" (+1 to Called Shots)":p.t==="link"||p.t==="pommel"?" (+1 to Aimed Shots)":p.t==="supp"?" (outside combat, reroll a missed shot)":p.t==="mono"?" (adds electric damage)":"")}}
 function buildStages(p){
  var o=[];
  slotsFor(p).forEach(function(s){if(s==="t"&&p.t==="none")return;var pt=partOf(s,p[s],p);o.push({s:s,name:slotLbl(s,p)+" \u00b7 "+pt.n.toUpperCase(),t:pt.t})});
@@ -5006,55 +5106,95 @@ function Ci(cx,cy,r){return{k:"c",cx:cx,cy:cy,r:r}}
 function Ln(x1,y1,x2,y2,sw){return{k:"l",x1:x1,y1:y1,x2:x2,y2:y2,sw:sw||2}}
 function PL(pts){return{k:"pl",pts:pts}}
 function partsOf(p){
- var f=FR[p.f],kd=f.kind,o={};
+ var f=FR[p.f],kd=f.kind,o={f:[],b:[],a:[],m:[],t:[]},bs={short:.6,std:1,long:1.5}[p.b],id=p.f,A={basic:16,tuned:28,salv:8}[p.a];
+ function lens(x,y,w){return[R(x,y,w,9,4),R(x+6,y+9,4,4),R(x+w-10,y+9,4,4)]}
  if(kd==="firearm"){
-  var G_={mpist:[70,80,40,9,0],hpist:[70,92,44,11,0],vpist:[70,100,50,13,0],smg:[66,92,44,10,0],hsmg:[64,100,48,11,0],ar:[58,108,56,11,1],shot:[58,104,54,15,1],snip:[58,118,66,8,1]}[p.f];
-  var x0=G_[0],L=G_[1],bl=G_[2]*{short:.55,std:1,long:1.6}[p.b],bt=G_[3],y0=42,bx=x0+L;
-  o.f=[R(x0,y0,L,26,3),P([[x0+6,y0+26],[x0+30,y0+26],[x0+22,y0+62],[x0-2,y0+62]])];
-  if(G_[4])o.f.push(P([[x0,y0+2],[x0-48,y0+10],[x0-48,y0+34],[x0,y0+26]]));
-  o.b=[R(bx,y0+13-bt/2,bl,bt,2)];
-  o.a=[R(x0+L*.35,y0-8,{basic:16,tuned:26,salv:9}[p.a],8,2)];
-  var mx=x0+L*.5;
-  o.m=[p.m==="drum"?Ci(mx+12,y0+44,18):R(mx,y0+26,22,{small:16,std:28,ext:42}[p.m],2)];
-  o.t=[];
-  if(p.t==="scope")o.t=[R(x0+L*.2,y0-20,46,9,4),R(x0+L*.2+8,y0-12,4,4),R(x0+L*.2+32,y0-12,4,4)];
-  else if(p.t==="link")o.t=[R(x0+L*.15,y0+7,16,10,2),Ci(x0+L*.15+8,y0+12,2.5)];
-  else if(p.t==="supp")o.t=[R(bx+bl,y0+13-8,38,16,4)]}
+  var y0=38,mg=p.m;
+  if(id==="mpist"||id==="hpist"||id==="vpist"){
+   var s={mpist:1,hpist:1.12,vpist:1.26}[id],x0=72,L=84*s,hh=20*s,gl=36*s,bx=x0+L,bl=22*s*bs;
+   o.f=[P([[x0,y0],[bx-6,y0],[bx,y0+4],[bx,y0+hh],[x0,y0+hh]]),P([[x0+2,y0+hh],[x0+36*s,y0+hh],[x0+28*s,y0+hh+gl],[x0-5*s,y0+hh+gl]]),P([[x0+40*s,y0+hh],[x0+58*s,y0+hh],[x0+52*s,y0+hh+12],[x0+42*s,y0+hh+12]]),R(bx-16,y0-4,7,4,1),R(x0+3,y0-4,10,4,1)];
+   o.b=[R(bx,y0+4,bl,6*s,1),R(bx+bl-5,y0+2.5,5,6*s+3,1)];
+   o.a=[R(x0+L*.38,y0-4,A,4,1)];
+   o.m=[mg==="drum"?Ci(x0+14*s,y0+hh+gl+8,16*s):R(x0-5*s,y0+hh+gl-1,34*s,{small:5,std:11,ext:24}[mg]||11,2)];
+   o.t=[];
+   if(p.t==="scope")o.t=lens(x0+L*.18,y0-18,44);else if(p.t==="link")o.t=[R(x0+L*.5,y0+6,18,8,2),Ci(x0+L*.5+9,y0+10,2.2)];else if(p.t==="supp")o.t=[R(bx+bl,y0+3,46,6*s+6,4),Ln(bx+bl+12,y0+3,bx+bl+12,y0+9+6*s,1.5),Ln(bx+bl+26,y0+3,bx+bl+26,y0+9+6*s,1.5)]}
+  else if(id==="smg"||id==="hsmg"){
+   var s2=id==="smg"?1:1.15,x1=84,L2=96*s2,h2=24*s2,bx2=x1+L2;
+   o.f=[P([[x1,y0],[bx2-4,y0],[bx2,y0+4],[bx2,y0+h2],[x1,y0+h2]]),P([[x1+4,y0+h2],[x1+30,y0+h2],[x1+24,y0+h2+34],[x1-4,y0+h2+34]]),P([[x1+L2*.72,y0+h2],[x1+L2*.72+12,y0+h2],[x1+L2*.72+10,y0+h2+20],[x1+L2*.72+2,y0+h2+20]]),R(x1-36,y0+4,36,5,1),P([[x1-40,y0+1],[x1-34,y0+1],[x1-34,y0+24],[x1-40,y0+22]]),R(x1+L2*.8,y0-4,6,4,1)];
+   o.b=[R(bx2,y0+6,26*s2*bs,7,1),R(bx2+26*s2*bs-5,y0+4,5,11,1)];
+   o.a=[R(x1+L2*.3,y0-5,A,5,1)];
+   o.m=[mg==="drum"?Ci(x1+L2*.45,y0+h2+22,20):R(x1+L2*.38,y0+h2,17,{small:20,std:34,ext:50}[mg]||34,2)];
+   o.t=[];
+   if(p.t==="scope")o.t=lens(x1+L2*.2,y0-19,44);else if(p.t==="link")o.t=[R(x1+L2*.5,y0+6,18,9,2),Ci(x1+L2*.5+9,y0+10,2.2)];else if(p.t==="supp")o.t=[R(bx2+26*s2*bs,y0+4,50,12,4),Ln(bx2+26*s2*bs+14,y0+4,bx2+26*s2*bs+14,y0+16,1.5),Ln(bx2+26*s2*bs+30,y0+4,bx2+26*s2*bs+30,y0+16,1.5)]}
+  else if(id==="ar"){
+   var x2=84,L3=64,bx3=x2+L3+42;
+   o.f=[R(x2,y0,L3,22,3),P([[x2+6,y0+22],[x2+26,y0+22],[x2+20,y0+50],[x2+2,y0+50]]),P([[x2-46,y0+2],[x2,y0+3],[x2,y0+22],[x2-46,y0+32]]),R(x2+L3,y0+3,42,17,2),R(x2+8,y0-6,26,6,1),R(x2+L3+30,y0-5,5,5,1)];
+   o.b=[R(bx3,y0+8,24*bs,6,1),R(bx3+24*bs-6,y0+6,6,10,1)];
+   o.a=[R(x2+L3*.45,y0-3,A,3,1)];
+   o.m=[mg==="drum"?Ci(x2+L3*.62,y0+36,19):P([[x2+L3*.5,y0+22],[x2+L3*.5+17,y0+22],[x2+L3*.5+27,y0+22+({small:22,std:32,ext:46}[mg]||32)],[x2+L3*.5+9,y0+22+({small:22,std:32,ext:46}[mg]||32)]])];
+   o.t=[];
+   if(p.t==="scope")o.t=lens(x2+8,y0-20,50);else if(p.t==="link")o.t=[R(x2+L3+8,y0+22,18,8,2),Ci(x2+L3+17,y0+26,2.2)];else if(p.t==="supp")o.t=[R(bx3+24*bs,y0+7,52,12,4),Ln(bx3+24*bs+14,y0+7,bx3+24*bs+14,y0+19,1.5),Ln(bx3+24*bs+30,y0+7,bx3+24*bs+30,y0+19,1.5)]}
+  else if(id==="shot"){
+   var x3=70,bx4=x3+48;
+   o.f=[R(x3,y0+3,48,20,3),P([[x3-52,y0+8],[x3,y0+5],[x3,y0+24],[x3-48,y0+38],[x3-56,y0+30]]),R(x3+60,y0+16,36,11,3),P([[x3+8,y0+23],[x3+24,y0+23],[x3+20,y0+34],[x3+10,y0+34]])];
+   o.b=[R(bx4,y0+6,76*bs,7,1),R(bx4+76*bs-5,y0+4,5,11,1)];
+   o.a=[R(x3+14,y0-2,A,5,1)];
+   o.m=[R(bx4,y0+14,{small:34,std:52,ext:76,drum:76}[mg]||52,6,3),R(bx4+({small:34,std:52,ext:76,drum:76}[mg]||52),y0+13,5,8,1)];
+   o.t=[];
+   if(p.t==="scope")o.t=lens(x3+4,y0-14,44);else if(p.t==="link")o.t=[R(x3+22,y0+8,16,8,2),Ci(x3+30,y0+12,2.2)];else if(p.t==="supp")o.t=[R(bx4+76*bs,y0+5,46,10,4),Ln(bx4+76*bs+14,y0+5,bx4+76*bs+14,y0+15,1.5),Ln(bx4+76*bs+30,y0+5,bx4+76*bs+30,y0+15,1.5)]}
+  else{
+   var x4=64,bx5=x4+70;
+   o.f=[R(x4,y0+4,70,17,3),P([[x4-50,y0+2],[x4,y0+5],[x4,y0+21],[x4-50,y0+38],[x4-58,y0+22],[x4-34,y0+12]]),P([[x4+6,y0+21],[x4+24,y0+21],[x4+18,y0+46],[x4+2,y0+46]]),Ln(bx5+34*bs,y0+14,bx5+26*bs,y0+38,2),Ln(bx5+34*bs,y0+14,bx5+44*bs,y0+38,2)];
+   o.b=[R(bx5,y0+9,104*bs,6,1),R(bx5+104*bs-12,y0+6,12,12,2)];
+   o.a=[R(x4+16,y0,A,4,1)];
+   o.m=[mg==="drum"?Ci(x4+40,y0+34,16):R(x4+34,y0+21,16,{small:8,std:13,ext:24}[mg]||13,2)];
+   o.t=[];
+   if(p.t==="scope")o.t=lens(x4+12,y0-20,64);else if(p.t==="link")o.t=[R(x4+52,y0+7,16,8,2),Ci(x4+60,y0+11,2.2)];else if(p.t==="supp")o.t=[R(bx5+104*bs,y0+7,50,12,4),Ln(bx5+104*bs+14,y0+7,bx5+104*bs+14,y0+19,1.5),Ln(bx5+104*bs+30,y0+7,bx5+104*bs+30,y0+19,1.5)]}}
  else if(kd==="melee"){
-  var M={lmel:[14,30,80],mmel:[20,38,100],hmel:[28,46,115],vmel:[38,56,130]}[p.f],gx=60,cy=65,bh=M[0],gw=M[1],bl2=M[2]*{short:.65,std:1,long:1.3}[p.b];
-  o.f=[R(gx,cy-7,56,14,3),R(gx+56,cy-gw/2,8,gw,2)];
-  o.b=[P([[gx+64,cy-bh/2],[gx+64+bl2-18,cy-bh/2],[gx+64+bl2,cy],[gx+64+bl2-18,cy+bh/2],[gx+64,cy+bh/2]])];
-  var nw={basic:1,tuned:4,salv:2}[p.a];o.a=[];for(var i=0;i<nw;i++)o.a.push(R(gx+8+i*10,cy-9,5,18,1));
+  var gx=50,cy=65,ss={short:.7,std:1,long:1.3}[p.b],hand,i;
+  if(id==="lmel"){var bl2=66*ss;
+   o.f=[R(gx,cy-6,44,12,5),R(gx+44,cy-13,6,26,2)];
+   o.b=[P([[gx+50,cy-8],[gx+50+bl2-16,cy-8],[gx+50+bl2,cy+3],[gx+50,cy+8]])];hand=[gx+6,34]}
+  else if(id==="mmel"){var bl3=108*ss;
+   o.f=[R(gx,cy-6,50,12,5),P([[gx+50,cy-20],[gx+58,cy-20],[gx+58,cy+20],[gx+50,cy+20]])];
+   o.b=[P([[gx+58,cy-9],[gx+58+bl3-22,cy-9],[gx+58+bl3,cy],[gx+58+bl3-22,cy+9],[gx+58,cy+9]]),Ln(gx+62,cy,gx+58+bl3-26,cy,1)];hand=[gx+6,38]}
+  else if(id==="hmel"){var hl=120*ss,hx=gx+hl;
+   o.f=[R(gx,cy-5,hl,10,4),R(hx-10,cy-9,14,18,2)];
+   o.b=[P([[hx,cy-9],[hx+6,cy-32*ss-4],[hx+32*ss+4,cy-44*ss-4],[hx+26*ss,cy],[hx+32*ss+4,cy+44*ss+4],[hx+6,cy+32*ss+4],[hx,cy+9]])];hand=[gx+8,46]}
+  else{var bl4=150*ss;
+   o.f=[R(gx,cy-6,60,12,5),P([[gx+60,cy-24],[gx+70,cy-30],[gx+70,cy+30],[gx+60,cy+24]]),Ci(gx-3,cy,8)];
+   o.b=[P([[gx+70,cy-17],[gx+70+bl4-30,cy-17],[gx+70+bl4,cy],[gx+70+bl4-30,cy+17],[gx+70,cy+17]]),Ln(gx+80,cy,gx+70+bl4-34,cy,2)];hand=[gx+8,46]}
+  var nw={basic:1,tuned:4,salv:2}[p.a];o.a=[];for(i=0;i<nw;i++)o.a.push(R(hand[0]+i*10,cy-8,5,16,1));
+  var bx0=o.b[0].pts?o.b[0].pts[0][0]:gx+60,bx1=o.b[0].pts?o.b[0].pts[1][0]:gx+120;
   o.t=[];
-  if(p.t==="pommel")o.t=[Ci(gx-8,cy,9)];
-  else if(p.t==="coil")o.t=[PL([[gx+74,cy],[gx+88,cy-6],[gx+100,cy+6],[gx+114,cy-6],[gx+126,cy+6],[gx+140,cy]])];
-  else if(p.t==="mono")o.t=[Ln(gx+66,cy+bh/2,gx+64+bl2-18,cy+bh/2,4)]}
+  if(p.t==="pommel")o.t=[Ci(gx-9,cy,9)];
+  else if(p.t==="coil")o.t=[PL([[bx0+6,cy],[bx0+18,cy-6],[bx0+30,cy+6],[bx0+42,cy-6],[bx0+54,cy+6],[bx1-4,cy]])];
+  else if(p.t==="mono")o.t=[Ln(bx0+2,cy+(id==="hmel"?0:10),bx1,cy+(id==="hmel"?0:10),4)]}
  else if(kd==="archery"){
   var k2={short:.7,std:1,long:1.25}[p.b];
-  if(p.f==="bow"){
+  if(id==="bow"){
    var ty=44-34*k2,by=86+34*k2;
-   o.f=[R(150,44,12,42,3)];
+   o.f=[R(150,44,12,42,3),R(146,58,6,14,2)];
    o.b=[P([[150,44],[162,44],[190,ty],[182,ty]]),P([[150,86],[162,86],[190,by],[182,by]])];
    o.a=[PL([[186,ty],[166,65],[186,by]])];if(p.a==="tuned")o.a.push(Ci(186,ty,4),Ci(186,by,4));
-   o.m=[R(104,50,16,{std:40,ext:54}[p.m]||40,3)];
-   o.t=[];if(p.t==="scope")o.t=[R(146,32,18,8,3)];else if(p.t==="link")o.t=[R(132,52,10,9,2),Ci(137,56,2)]}
+   o.m=[R(104,50,16,{std:40,ext:54}[p.m]||40,3),Ln(106,50,106,44,1.5),Ln(112,50,112,43,1.5),Ln(118,50,118,44,1.5)];
+   o.t=[];if(p.t==="scope")o.t=[R(144,32,20,8,3)];else if(p.t==="link")o.t=[R(132,52,10,9,2),Ci(137,56,2)]}
   else{
    var ty2=56-30*k2,by2=70+30*k2;
-   o.f=[R(60,56,116,14,3),P([[88,70],[108,70],[102,104],[84,104]]),P([[60,56],[36,60],[36,78],[60,70]])];
+   o.f=[R(60,56,116,14,3),P([[88,70],[108,70],[102,104],[84,104]]),P([[60,56],[36,60],[36,78],[60,70]]),R(120,52,14,4,1)];
    o.b=[P([[170,56],[180,56],[196,ty2],[188,ty2]]),P([[170,70],[180,70],[196,by2],[188,by2]])];
    o.a=[PL([[192,ty2],[176,63],[192,by2]])];if(p.a==="tuned")o.a.push(Ci(192,ty2,4),Ci(192,by2,4));
    o.m=[R(100,44,{std:30,ext:46}[p.m]||30,12,2)];
-   o.t=[];if(p.t==="scope")o.t=[R(104,30,40,9,4)];else if(p.t==="link")o.t=[R(80,42,14,10,2),Ci(87,47,2.5)]}}
+   o.t=[];if(p.t==="scope")o.t=lens(104,34,40);else if(p.t==="link")o.t=[R(80,42,14,10,2),Ci(87,47,2.5)]}}
  else{
-  var gl=p.f==="gl",x1=gl?64:56,L1=gl?66:60,yt=gl?44:50,hb=gl?24:20,tl={short:gl?36:70,std:gl?56:100,long:gl?84:140}[p.b],th=gl?26:34,ty3=gl?40:36;
-  o.f=[R(x1,yt,L1,hb,3),P([[x1+8,yt+hb],[x1+30,yt+hb],[x1+22,yt+hb+36],[x1,yt+hb+36]])];
-  if(gl)o.f.push(P([[x1,yt+2],[x1-44,yt+10],[x1-44,yt+32],[x1,yt+24]]));
-  o.b=[R(x1+L1,ty3,tl,th,gl?5:6)];
-  o.a=[R(x1+L1*.3,yt-8,{basic:16,tuned:26,salv:9}[p.a],8,2)];
-  o.m=[R(x1+L1*.5,yt+hb,24,{small:12,std:20,ext:30}[p.m]||20,3)];
+  var gl=id==="gl",x5=gl?72:60,L5=gl?64:70,yt=gl?44:48,hb=gl?24:18,tl={short:gl?36:70,std:gl?56:110,long:gl?84:150}[p.b],th=gl?28:30,ty3=gl?39:42;
+  o.f=[R(x5,yt,L5,hb,3),P([[x5+8,yt+hb],[x5+30,yt+hb],[x5+22,yt+hb+36],[x5,yt+hb+36]]),P([[x5-48,yt+2],[x5,yt+4],[x5,yt+hb],[x5-48,yt+hb+20]]),R(x5+L5-20,yt+hb,10,20,2),R(x5+10,yt-7,22,7,1)];
+  o.b=[R(x5+L5,ty3,tl,th,gl?6:5),R(x5+L5+tl-6,ty3-3,6,th+6,2)];
+  if(!gl)o.b.push(P([[x5+L5+tl,ty3-3],[x5+L5+tl+12,ty3-8],[x5+L5+tl+12,ty3+th+8],[x5+L5+tl,ty3+th+3]]));
+  o.a=[R(x5+L5*.3,yt-12,A,5,2)];
+  o.m=[R(x5+L5*.5,yt+hb,24,{small:12,std:20,ext:30}[p.m]||20,3)];
   o.t=[];
-  if(p.t==="scope")o.t=[R(x1+L1*.15,yt-22,46,9,4),R(x1+L1*.15+8,yt-14,4,4),R(x1+L1*.15+32,yt-14,4,4)];
-  else if(p.t==="link")o.t=[R(x1+L1*.1,yt+4,16,10,2),Ci(x1+L1*.1+8,yt+9,2.5)]}
+  if(p.t==="scope")o.t=lens(x5+4,yt-24,46);else if(p.t==="link")o.t=[R(x5+L5*.1,yt+4,16,10,2),Ci(x5+L5*.1+8,yt+9,2.5)]}
  return o}
 function primSvg(q){
  if(q.k==="r")return'<rect x="'+q.x+'" y="'+q.y+'" width="'+q.w+'" height="'+q.h+'" rx="'+q.rx+'"/>';
@@ -5108,22 +5248,40 @@ function suggest(){
  g("mk_c").value=t==="fix"?500:(function(){for(var i=0;i<MKMODS.length;i++)if(MKMODS[i][0]===g("mk_x").value)return MKMODS[i][2];return 100})();
  upd()}
 function ruin(why){var j=job();if(!j)return;setJob(null);logRoll("Workbench \u00b7 "+desc(j),why,"RUINED","fumble")}
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function pickRender(j){
+ var host=byId("mkpick");if(!host)return;
+ var wv=g("mk_w").value,wi=wv===""?-1:+wv,cur=g("mk_x").value,nm=wi>=0?wname(wi):"",fit=wi>=0?(val("w"+wi+"_at").value||""):"";
+ var sig=[wi,nm,cur,fit,j?1:0].join("|");if(host.dataset.sig===sig)return;host.dataset.sig=sig;
+ host.classList.toggle("off",!!j);
+ var fitted=fit.split(",");
+ function tile(m){
+  var err=wi>=0&&!j?modCheck(m[0],wi,nm):"",isFit=fitted.indexOf(m[0])>=0,pips="",i;
+  for(i=0;i<m[3];i++)pips+="<i></i>";
+  var rb=m[4].indexOf("rb")>=0;
+  return'<button type="button" class="mk-t'+(rb?" rb "+m[0]:"")+'" data-mkx="'+m[0]+'" aria-pressed="'+(cur===m[0])+'"'+(err||j?" disabled":"")+(err?' title="'+esc(err)+'"':"")+'><span class="mk-tp" title="'+m[3]+" slot"+(m[3]>1?"s":"")+'">'+pips+"</span><b>"+esc(m[1])+"</b><small>"+esc(m[6]||"")+"</small><em>"+m[2].toLocaleString("en-US")+" eb</em>"+(isFit?"<u class=\"ok\">FITTED</u>":err?"<u>"+esc(err.replace(nm,"it"))+"</u>":"")+"</button>"}
+ var a="",r="";
+ MKMODS.forEach(function(m){if(m[4].indexOf("rb")>=0)r+=tile(m);else a+=tile(m)});
+ host.innerHTML='<div class="mk-g">ATTACHMENTS</div><div class="mk-tg">'+a+'</div><div class="mk-g">REBUILDS <small>ONE PER WEAPON · 2 SLOTS</small></div><div class="mk-tg">'+r+"</div>"}
 function mkRefresh(){
  var box=byId("mkbox");if(!box||!g("mk_t"))return;
  var j=job();
  if(j&&j.s==="play"&&!G){ruin("the bench was abandoned mid-job: the parts are lost");j=null}
  var tS=g("mk_t");if(!JOBS[tS.value])tS.value=j?j.t:"fix";
  if(!g("mk_x").value)g("mk_x").value="ext";
-  var t=j?j.t:tS.value,ws=g("mk_w"),n=wcount(),first=-1;
+ var t=j?j.t:tS.value,ws=g("mk_w"),n=wcount(),first=-1;
  for(var i=0;i<12;i++){var o=ws.options[i];if(!o)continue;var nm=wname(i);o.textContent=(i+1)+". "+(nm||"(empty slot)");o.disabled=!nm||i>=n;if(nm&&i<n&&first<0)first=i}
  var cur=ws.options[+ws.value];if(ws.value===""||!cur||cur.disabled)ws.value=first>=0?String(first):"";
- var mn=byId("mkmn"),md=modOf(g("mk_x").value);if(mn){mn.hidden=!(t==="mod"&&md&&!j);if(md)mn.textContent=md[1]+": "+md[5]+" Uses "+md[3]+" of the weapon's 3 attachment slots."}
+ Array.prototype.forEach.call(document.querySelectorAll("[data-mkt]"),function(b){b.setAttribute("aria-pressed",String(b.dataset.mkt===t));b.disabled=!!j});
+ var mn=byId("mkmn"),md=modOf(g("mk_x").value);
+ if(mn){mn.hidden=!(t==="mod"&&md);if(md){var sig=md[0]+"|"+md[3];if(mn.dataset.sig!==sig){mn.dataset.sig=sig;mn.innerHTML="<b>"+esc(md[1])+"</b> "+esc(md[5])+"<i>USES "+md[3]+" OF 3 SLOTS</i>"}}}
  byId("mkl-w").hidden=t==="make";byId("mkl-x").hidden=t!=="mod";byId("mkl-c").hidden=t==="make";
+ if(t==="mod")pickRender(j);
  ["mk_t","mk_w","mk_x","mk_c"].forEach(function(k){g(k).disabled=!!j});
- var go=byId("mkgo"),col=byId("mkcol"),info=byId("mkinfo"),fill=byId("mkfill"),now=Date.now();
- go.hidden=false;col.hidden=true;
- if(!j){var mk=t==="make";go.textContent=mk?"OPEN BLUEPRINT":"PAY "+(num("mk_c")||0)+" EB & OPEN WORKBENCH";fill.style.width="0";
-  info.textContent=mk?"Design the weapon part by part, pay for the parts, assemble it in the minigame, then wait 1 hour. Better parts cost more, need Fabrication Expertise points and are harder to weld. Three bad welds ruin the job and the parts are lost.":"Pay for the parts, weld the work together yourself, then wait 1 hour for it to finish. Three bad welds ruin the job and the parts are lost."}
+ var go=byId("mkgo"),col=byId("mkcol"),info=byId("mkinfo"),fill=byId("mkfill"),hint=byId("mkhint"),st=byId("mkst"),now=Date.now();
+ go.hidden=false;col.hidden=true;st.hidden=!j;hint.hidden=!!j;
+ if(!j){var mk=t==="make";go.textContent=mk?"OPEN BLUEPRINT":"PAY "+(num("mk_c")||0).toLocaleString("en-US")+" EB & OPEN WORKBENCH";fill.style.width="0";
+  hint.textContent=mk?"Design the weapon part by part and pay for the parts. Then weld it together and wait 1 hour. Three bad welds ruin the job and the parts are lost.":"Pay for the parts and weld the work yourself, then wait 1 hour. Three bad welds ruin the job and the parts are lost."}
  else if(j.s==="wait"){go.hidden=true;var left=j.end-now;
   if(left>0){fill.style.width=Math.min(100,(1-left/HOUR)*100)+"%";info.textContent=desc(j)+" \u00b7 quality "+QN[j.q]+" \u00b7 ready in "+fmt(left)}
   else{fill.style.width="100%";col.hidden=false;info.textContent=desc(j)+" \u00b7 finished, quality "+QN[j.q]+". Collect it."}}
@@ -5167,7 +5325,7 @@ function renderDesign(){
    var o=partOf(s,k,D.p),dis=o.t>cap;
    if(s==="f"&&FR[k].g!==grp){grp=FR[k].g;inner+='<span class="mk-grp">'+grp+"</span>"}
    inner+='<button type="button" class="mk-opt" data-slot="'+s+'" data-key="'+k+'" aria-pressed="'+(D.p[s]===k)+'"'+(dis?' disabled title="Needs Fabrication Expertise '+(o.t-1)+(o.t>3?"+":"")+'"':"")+"><b>"+o.n+"</b>"+(o.e?"<small>"+o.e+"</small>":"")+"<small>"+o.c.toLocaleString("en-US")+" eb \u00b7 T"+o.t+"</small></button>"});
-  h+='<div class="mk-slot"><div class="mk-sl">'+LBL[kd][s]+'</div><div class="mk-opts">'+inner+"</div></div>"});
+  h+='<div class="mk-slot" data-s="'+s+'"><div class="mk-sl">'+LBL[kd][s]+'</div><div class="mk-opts">'+inner+"</div></div>"});
  els.slots.innerHTML=h;els.pv.innerHTML=svgOf(D.p,false);
  var eb=+val("eb").value||0;
  els.stats.innerHTML=[["DAMAGE",st.dmg],["ROF",st.r],st.ranged?["MAGAZINE",st.m]:null,["HANDS",st.h],["CONCEALABLE",st.k?"YES":"NO"],["SKILL",st.s],st.tune?["QUALITY","+1 STEP"]:null,["PRICE",st.cost.toLocaleString("en-US")+" eb"],["TIER CAP","T"+cap]].filter(Boolean).map(function(x){return"<span>"+x[0]+"<b>"+x[1]+"</b></span>"}).join("");
@@ -5290,20 +5448,38 @@ function beadColor(b,age){
 function draw(){
  var cv=els.cv,c=cv.getContext("2d"),w=cv.width,h=cv.height,sc=w/330;
  c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,w,h);c.setTransform(sc,0,0,sc,0,0);c.lineCap="round";c.lineJoin="round";
- var D=G.D,i;
+ var D=G.D,i,t=G.now;
+ /* seam: soft tolerance lane, glowing guide with marching dashes, start ring and end target */
  c.beginPath();c.moveTo(D[0][0],D[0][1]);for(i=2;i<D.length;i+=2)c.lineTo(D[i][0],D[i][1]);
- c.strokeStyle="rgba(125,255,155,.10)";c.lineWidth=G.tol*2;c.stroke();
- c.setLineDash([3,3]);c.strokeStyle="rgba(125,255,155,.6)";c.lineWidth=.9;c.stroke();c.setLineDash([]);
- if(!G.locked&&G.s<3){var pu=2.5+Math.sin(G.now*6)*.8;c.beginPath();c.arc(D[0][0],D[0][1],G.tol*.5+pu,0,6.2832);c.strokeStyle="#ffd36b";c.lineWidth=1;c.stroke()}
- for(i=0;i<G.old.length;i++){var o=G.old[i];c.fillStyle=o.q===2?"#b7c0cf":o.q===1?"#8d95a3":"#5a3a30";c.beginPath();c.arc(o.x,o.y,o.q?2.2:2.8,0,6.2832);c.fill()}
- for(i=0;i<G.bead.length;i++){var b=G.bead[i];c.fillStyle=beadColor(b,G.now-b.t);c.beginPath();c.arc(b.x,b.y,b.q?2.3:3.2,0,6.2832);c.fill()}
- for(i=0;i<G.sparks.length;i++){var s=G.sparks[i];c.strokeStyle="rgba(255,217,160,"+Math.min(1,s.l*2.5)+")";c.lineWidth=.9;c.beginPath();c.moveTo(s.x,s.y);c.lineTo(s.x-s.vx*.025,s.y-s.vy*.025);c.stroke()}
+ c.strokeStyle="rgba(125,255,155,.09)";c.lineWidth=G.tol*2;c.stroke();
+ c.save();c.shadowColor="#7dff9b";c.shadowBlur=6;c.setLineDash([4,3]);c.lineDashOffset=-t*14;c.strokeStyle="rgba(125,255,155,.85)";c.lineWidth=1;c.stroke();c.restore();
+ var E=D[D.length-1];c.strokeStyle="rgba(125,255,155,.8)";c.lineWidth=1;c.beginPath();c.arc(E[0],E[1],4.5,0,6.2832);c.moveTo(E[0]-7,E[1]);c.lineTo(E[0]+7,E[1]);c.moveTo(E[0],E[1]-7);c.lineTo(E[0],E[1]+7);c.stroke();
+ if(!G.locked&&G.s<3){var pu=2.5+Math.sin(t*6)*.8,r0=G.tol*.5+pu;c.save();c.shadowColor="#ffd36b";c.shadowBlur=8;c.beginPath();c.arc(D[0][0],D[0][1],r0,0,6.2832);c.strokeStyle="#ffd36b";c.lineWidth=1.2;c.stroke();c.beginPath();c.arc(D[0][0],D[0][1],1.6,0,6.2832);c.fillStyle="#ffd36b";c.fill();c.restore()}
+ /* cooled bead: a rippled metal line, shaded by weld quality */
+ function cool(o){var good=o.q===2,ok=o.q===1;c.fillStyle=good?"#c9d3e3":ok?"#98a1b1":"#5a3a30";c.beginPath();c.arc(o.x,o.y,o.q?2.4:2.9,0,6.2832);c.fill();c.fillStyle=good?"#ffffff55":ok?"#ffffff33":"#00000040";c.beginPath();c.arc(o.x-.6,o.y-.7,1,0,6.2832);c.fill()}
+ for(i=0;i<G.old.length;i++)cool(G.old[i]);
+ for(i=0;i<G.bead.length;i++){var b=G.bead[i],age=t-b.t;
+  if(age>=2.6){cool(b);continue}
+  var col=beadColor(b,age),rr=b.q?2.5:3.4;
+  if(age<1.2){c.save();c.shadowColor=age<.35?"#fff1b0":"#ff7a1a";c.shadowBlur=age<.35?12:7;c.fillStyle=col;c.beginPath();c.arc(b.x,b.y,rr+(1.2-age)*.8,0,6.2832);c.fill();c.restore()}
+  else{c.fillStyle=col;c.beginPath();c.arc(b.x,b.y,rr,0,6.2832);c.fill()}}
+ /* sparks: bright streaks that fade through yellow to orange */
+ c.save();c.globalCompositeOperation="lighter";
+ for(i=0;i<G.sparks.length;i++){var s=G.sparks[i],a=Math.min(1,s.l*2.5);c.strokeStyle="rgba(255,"+(120+Math.min(120,s.l*260)|0)+",60,"+a+")";c.lineWidth=1.1;c.beginPath();c.moveTo(s.x,s.y);c.lineTo(s.x-s.vx*.04,s.y-s.vy*.04);c.stroke();c.fillStyle="rgba(255,240,200,"+a+")";c.fillRect(s.x-.5,s.y-.5,1,1)}
+ c.restore();
  if(G.hasT){
   if(G.down){
-   var r=11+G.heat*.09+Math.random()*2.5,gr=c.createRadialGradient(G.tx,G.ty,0,G.tx,G.ty,r),hot=G.heat>60;
-   gr.addColorStop(0,"rgba(255,255,255,.95)");gr.addColorStop(.35,hot?"rgba(255,140,60,.65)":"rgba(170,220,255,.55)");gr.addColorStop(1,"rgba(120,160,255,0)");
-   c.fillStyle=gr;c.beginPath();c.arc(G.tx,G.ty,r,0,6.2832);c.fill()}
-  else{c.strokeStyle="rgba(170,220,255,.8)";c.lineWidth=.9;c.beginPath();c.arc(G.tx,G.ty,3,0,6.2832);c.stroke()}}
+   var hot=G.heat>60,r=11+G.heat*.09+Math.random()*2.5;
+   c.save();c.globalCompositeOperation="lighter";
+   var halo=c.createRadialGradient(G.tx,G.ty,0,G.tx,G.ty,r*4.2);halo.addColorStop(0,hot?"rgba(255,120,40,.28)":"rgba(140,190,255,.22)");halo.addColorStop(1,"rgba(0,0,0,0)");
+   c.fillStyle=halo;c.beginPath();c.arc(G.tx,G.ty,r*4.2,0,6.2832);c.fill();
+   var gr=c.createRadialGradient(G.tx,G.ty,0,G.tx,G.ty,r);
+   gr.addColorStop(0,"rgba(255,255,255,1)");gr.addColorStop(.3,hot?"rgba(255,170,70,.8)":"rgba(190,230,255,.75)");gr.addColorStop(1,hot?"rgba(255,60,20,0)":"rgba(120,160,255,0)");
+   c.fillStyle=gr;c.beginPath();c.arc(G.tx,G.ty,r,0,6.2832);c.fill();
+   c.strokeStyle="rgba(255,255,255,.7)";c.lineWidth=.8;for(i=0;i<4;i++){var an=Math.random()*6.2832,ln=r*(.8+Math.random()*.9);c.beginPath();c.moveTo(G.tx,G.ty);c.lineTo(G.tx+Math.cos(an)*ln,G.ty+Math.sin(an)*ln);c.stroke()}
+   c.restore();
+   if(G.heat>80){c.save();var vg=c.createRadialGradient(165,65,60,165,65,230);vg.addColorStop(0,"rgba(255,40,20,0)");vg.addColorStop(1,"rgba(255,40,20,"+Math.min(.35,(G.heat-80)*.02)+")");c.fillStyle=vg;c.fillRect(0,0,330,130);c.restore()}}
+  else{c.save();c.strokeStyle="rgba(170,220,255,.9)";c.shadowColor="#aaddff";c.shadowBlur=6;c.lineWidth=.9;c.beginPath();c.arc(G.tx,G.ty,3,0,6.2832);c.moveTo(G.tx-6,G.ty);c.lineTo(G.tx-3.6,G.ty);c.moveTo(G.tx+3.6,G.ty);c.lineTo(G.tx+6,G.ty);c.stroke();c.restore()}}
  els.heat.style.width=Math.min(100,G.heat)+"%";
  var sp=!G.down?"HOLD TO WELD":G.v<G.vmin?"TOO SLOW":G.v>G.vmax?"TOO FAST":"STEADY";
  els.spd.textContent=sp;els.spd.className="mk-spd "+(sp==="STEADY"?"ok":sp==="HOLD TO WELD"?"":"bad")}
@@ -5374,8 +5550,12 @@ document.addEventListener("click",function(e){
  else if(b.id==="mkfin"){var j=job();if(j&&j.s==="wait"&&j.end>Date.now()){j.end=Date.now();setJob(j)}}
  else if(b.id==="mkcan"){var k=job();if(k&&window.confirm("Cancel this job? The parts are not refunded.")){setJob(null);logRoll("Workbench","job cancelled by the GM","\u2014","")}}
  mkRefresh()});
+document.addEventListener("click",function(e){
+ var t=e.target.closest&&e.target.closest("[data-mkt],[data-mkx]");if(!t||t.disabled)return;
+ var s=t.dataset.mkt?g("mk_t"):g("mk_x");s.value=t.dataset.mkt||t.dataset.mkx;s.dispatchEvent(new Event("change",{bubbles:true}));mkRefresh()});
 document.addEventListener("change",function(e){var k=e.target&&e.target.dataset&&e.target.dataset.k;if(k==="mk_t"||k==="mk_x")suggest()});
 ["input","change","click"].forEach(function(ev){document.addEventListener(ev,function(){setTimeout(mkRefresh,0)})});
+["mouseover","focusin","click"].forEach(function(ev){document.addEventListener(ev,function(e){var s=e.target.closest&&e.target.closest("#mk-slots .mk-slot"),pv=document.getElementById("mk-pv");if(pv)pv.dataset.hl=s?s.dataset.s:""})});
 setInterval(mkRefresh,1000);
 if(g("mk_c")&&!g("mk_c").value)g("mk_c").value=500;
 mkRefresh();
@@ -5844,23 +6024,39 @@ window.flatline=function(){
 </script>
 <script>(function(){var m=document.querySelector('meta[name="theme-color"]'),r=document.documentElement;function s(){var c=getComputedStyle(r).getPropertyValue("--bg").trim();if(c&&m&&m.content!==c)m.content=c}s();new MutationObserver(s).observe(r,{attributes:true,attributeFilter:["style","data-theme"]})})();</script><style id="ws-css">
 /* weapon attachment slots: a fixed 3-slot rack per ranged weapon (cyberware uses pips and a capacity per location) */
-.wsl{border-top:1px dashed var(--line);padding-top:7px;display:flex;flex-direction:column;gap:6px}
+/* weapon upgrades: a 3-slot meter on top, one clear row per fitted upgrade, Rebuilds colour-coded */
+.wsl{border-top:1px dashed var(--line);padding-top:9px;display:flex;flex-direction:column;gap:7px}
 .wsl[hidden]{display:none}
-.wsh{display:flex;align-items:center;gap:8px;font:600 9px "Orbitron",sans-serif;letter-spacing:.15em;color:var(--mute)}
-.wsh small{margin-left:auto;font:700 13px "Rajdhani",sans-serif;letter-spacing:.08em;color:var(--mute)}
+.wsh{display:flex;align-items:center;gap:10px;font:700 10px "Orbitron",sans-serif;letter-spacing:.18em;color:var(--mute)}
+.wsb{display:flex;gap:3px}
+.wsb i{display:block;width:16px;height:7px;background:var(--field);border:1px solid var(--line)}
+.wsb i.on{background:var(--p2);border-color:var(--p2)}
+.wsh small{font:700 13px "Rajdhani",sans-serif;letter-spacing:.08em;color:var(--mute)}
 .wsh.full small{color:var(--p2)}
-.wsg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
-.wsg .ce{min-height:30px;display:flex;align-items:center;justify-content:center;border:1px dashed var(--line);color:var(--mute);opacity:.7;font:600 9px "Orbitron",sans-serif;letter-spacing:.2em}
-.wsg .at{min-height:30px;min-width:0;display:flex;align-items:center;gap:6px;padding:3px 4px 3px 7px;border:1px solid var(--p2);border-left:3px solid var(--p2);background:color-mix(in srgb,var(--p2) 10%,var(--deep))}
-.wsg .at b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:700 13px "Rajdhani",sans-serif;letter-spacing:.04em}
-.wsg .at em{font:600 9px "Orbitron",sans-serif;font-style:normal;letter-spacing:.08em;color:var(--mute);white-space:nowrap}
-.wsg .at .mini{padding:1px 6px;min-height:0;white-space:nowrap}
+.wsr{margin-left:auto;padding:2px 8px;border:1px solid var(--tc,var(--p2));color:var(--tc,var(--p2));font:700 10px "Orbitron",sans-serif;letter-spacing:.14em}
+.wsr[hidden]{display:none}
+.wsr.rbp{--tc:#ff6a3d}.wsr.rbs{--tc:#33c8ff}.wsr.rbt{--tc:#c8ff2e}
+.wsg{display:flex;flex-direction:column;gap:5px}
+.wsg .ce{padding:7px 10px;border:1px dashed var(--line);color:var(--mute);font:600 10px "Orbitron",sans-serif;letter-spacing:.16em;opacity:.85}
+.wsg .at{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;gap:4px 10px;padding:7px 6px 7px 10px;border:1px solid var(--line);border-left:3px solid var(--tc,var(--p2));background:color-mix(in srgb,var(--tc,var(--p2)) 9%,var(--deep))}
+.wsg .at.rbp{--tc:#ff6a3d}.wsg .at.rbs{--tc:#33c8ff}.wsg .at.rbt{--tc:#c8ff2e}
+.wsg .sp{display:flex;gap:2px}
+.wsg .sp i{display:block;width:7px;height:16px;background:var(--tc,var(--p2))}
+.wsg .ai{display:flex;flex-direction:column;align-items:flex-start;gap:1px;min-width:0;padding:0;background:none;border:0;clip-path:none;text-align:left;color:inherit;cursor:pointer}
+.wsg .ai b{max-width:100%;font:700 16px/1.1 "Rajdhani",sans-serif;letter-spacing:.03em;color:var(--ink)}
+.wsg .ai small{max-width:100%;font:600 13px/1.15 "Rajdhani",sans-serif;color:var(--mute)}
+.wsg .ai:after{content:"RULES \25BE";margin-top:2px;font:600 8px "Orbitron",sans-serif;letter-spacing:.16em;color:var(--tc,var(--p2));opacity:.85}
+.wsg .at.open .ai:after{content:"RULES \25B4"}
+.wsg .at em{font:600 10px "Orbitron",sans-serif;font-style:normal;letter-spacing:.08em;color:var(--mute);white-space:nowrap}
+.wsg .at .mini{padding:4px 9px;min-height:0;white-space:nowrap}
 .wsg .at .mini[data-arm="1"]{border-color:var(--hot);color:var(--hot)}
+.wsg .ax{display:none;grid-column:1/-1;padding-top:6px;border-top:1px dashed var(--line);font:500 14px/1.4 "Rajdhani",sans-serif;color:var(--soft)}
+.wsg .at.open .ax{display:block}
 .wsn{font:600 9px "Orbitron",sans-serif;letter-spacing:.12em;color:var(--mute);opacity:.8}
 .wxp{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.wxp:empty{display:none}
 .wxp span{border:1px dashed var(--p2);padding:4px 9px;font:600 13px "Rajdhani",sans-serif;letter-spacing:.05em;color:var(--soft)}
 .wxp i{font-style:normal;color:var(--mute);margin-left:6px}
-@media print{html body .wsg .at .mini,html body [data-wgive],html body .wxp,html body .wsn{display:none!important}html body .wsg .ce{border:1px dashed #888!important}}
+@media print{html body .wsg .at .mini,html body [data-wgive],html body .wxp,html body .wsn{display:none!important}html body .wsg .ce,html body .wsg .ax{display:none!important}}
 </style>
 <script id="ws-js">
 /* Weapon attachment slots. Data (MKMODS, CLIPS) lives next to the Role panel in the main script.
@@ -5875,11 +6071,17 @@ function used(a){var u=0;a.forEach(function(k){u+=md(k)[3]});return u}
 function wname(i){return gv("w"+i+"_n").trim()||"this weapon"}
 function melee(i){return /^(melee weapon|brawling|martial arts)/i.test(gv("w"+i+"_s").trim())}
 function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function rbOf(a){for(var x=0;x<a.length;x++)if(md(a[x])&&md(a[x])[4].indexOf("rb")>=0)return md(a[x]);return null}
 function check(i,k,nm){
  var m=md(k);if(!m)return"";nm=nm||wname(i);
- var sk=gv("w"+i+"_s").trim().toLowerCase(),a=keys(i);
+ var sk=gv("w"+i+"_s").trim().toLowerCase(),a=keys(i),fl=m[4].split(","),rb=rbOf(a);
  if(sk&&["handgun","shoulder arms","archery","heavy weapons"].indexOf(sk)<0)return nm+" is not a ranged weapon";
  if(a.indexOf(k)>=0)return m[1]+" is already fitted to "+nm;
+ if(fl.indexOf("rb")>=0){
+  if(rb)return nm+" already has a "+rb[1]+" (one Rebuild per weapon)";
+  if(fl.indexOf("xl")>=0&&/^(grenade|rocket) launcher$/i.test(gv("w"+i+"_t").trim()))return m[1]+" can't go on a "+gv("w"+i+"_t").trim().toLowerCase();
+  if(fl.indexOf("xs")>=0&&a.indexOf("link")>=0)return m[1]+" can't go on a weapon with a Smartgun link"}
+ if(k==="link"&&rb&&rb[0]==="rbs")return"a Smart Weapon can't take a Smartgun link";
  if(m[4].indexOf("sa")>=0&&sk&&sk!=="shoulder arms")return m[1]+" only fits Shoulder Arms weapons";
  if(m[4].indexOf("nb")>=0){
   if(sk==="archery")return"bows and crossbows can't take a "+m[1].toLowerCase();
@@ -5903,13 +6105,20 @@ window.wsRender=function(i,c){
  var mel=melee(i);box.hidden=mel;if(mel)return;
  var a=keys(i),sig=a.join(",");
  if(box.dataset.sig===sig)return;box.dataset.sig=sig;
- var u=used(a),h="",n=0;
- a.forEach(function(k){var m=md(k);n+=m[3];
-  h+='<div class="at" style="grid-column:span '+Math.min(m[3],CAP)+'" title="'+esc(m[5])+'"><b>'+esc(m[1])+'</b><em>'+m[2]+' EB</em><button type="button" class="mini" data-wsr="'+i+'|'+k+'" title="Strip this upgrade off (it is lost)" aria-label="Remove '+esc(m[1])+'">\u2715</button></div>'});
- for(;n<CAP;n++)h+='<div class="ce">EMPTY</div>';
+ var u=used(a),h="",rb=rbOf(a),k;
+ a.forEach(function(k){var m=md(k),pips="",x,r=m[4].indexOf("rb")>=0;
+  for(x=0;x<m[3];x++)pips+="<i></i>";
+  h+='<div class="at'+(r?" rb "+k:"")+'"><span class="sp" title="'+m[3]+' slot'+(m[3]>1?"s":"")+'">'+pips+'</span><button type="button" class="ai" aria-expanded="false" title="Show or hide the full rules"><b>'+esc(m[1])+'</b><small>'+esc(m[6]||"")+'</small></button><em>'+m[2].toLocaleString("en-US")+' EB</em><button type="button" class="mini" data-wsr="'+i+'|'+k+'" title="Strip this upgrade off (it is lost)" aria-label="Remove '+esc(m[1])+'">\u2715</button><div class="ax">'+esc(m[5])+'</div></div>'});
+ if(u<CAP)h+='<div class="ce">'+(a.length?"":"NO UPGRADES · ")+(CAP-u)+" FREE SLOT"+(CAP-u>1?"S":"")+"</div>";
  box.querySelector(".wsg").innerHTML=h;
+ var segs="";for(k=0;k<CAP;k++)segs+='<i class="'+(k<u?"on":"")+'"></i>';
+ box.querySelector(".wsb").innerHTML=segs;
  box.querySelector(".wsh").classList.toggle("full",u>=CAP);
- box.querySelector(".wst").textContent=u+" / "+CAP+" slots"};
+ box.querySelector(".wst").textContent=u+" / "+CAP;
+ var tg=box.querySelector(".wsr");tg.hidden=!rb;tg.className="wsr"+(rb?" "+rb[0]:"");tg.textContent=rb?rb[1].replace(" Rebuild"," weapon").toUpperCase():""};
+document.addEventListener("click",function(e){
+ var ai=e.target.closest&&e.target.closest(".wsg .ai");if(!ai)return;
+ var row=ai.parentNode,on=!row.classList.contains("open");row.classList.toggle("open",on);ai.setAttribute("aria-expanded",String(on))});
 document.addEventListener("click",function(e){
  var r=e.target.closest&&e.target.closest("[data-wsr]");if(!r)return;
  if(r.dataset.arm!=="1"){r.dataset.arm="1";r.textContent="REMOVE?";clearTimeout(r._t);r._t=setTimeout(function(){r.dataset.arm="";r.textContent="\u2715"},3000);return}
