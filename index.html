@@ -1024,15 +1024,21 @@ const TSK="Basic Tech,Weaponstech,Cybertech,Electronics/Security Tech,Air Vehicl
 const RXC={Tech:{t:"MAKER",h:"Fix, improve, modify, make and invent items. Each time your Maker rank goes up by 1 you gain 1 rank in two different specialties of your choice, so you have 2 points per rank and a specialty can hold at most your Maker rank. The skill and specialty rank you set here decide how wide and forgiving your welds are. Pay for parts, weld it together yourself, then wait 1 hour for it to finish.",sk:TSK,rows:[["Field Expertise","ff"],["Upgrade Expertise","up"],["Fabrication Expertise","fb"],["Invention Expertise","iv"]]},
 Medtech:{t:"MEDICINE",h:"Spread your rank over these. Roll = d10 + TECH + points + bonus.",rows:[["Surgery","su"],["Pharmaceuticals","ph"],["Cryosystem Operation","cr"]]},
 Solo:{t:"COMBAT AWARENESS",h:"Pick where your rank goes. Exact effects are in your book.",rows:[["Damage Deflection","dd","Soaks part of incoming damage."],["Fumble Recovery","fr","Helps you recover from a fumble."],["Initiative Reaction","ir","Added to Initiative (the button does it)."],["Precision Attack","pa","Aimed-shot bonus. Tick the box below to add it to FIRE."],["Spot Weakness","sw","Bonus to finding a weak spot."],["Threat Detection","td","Spotting danger. Use the Perception roll below."]]}};
-/* Weapon attachments, per the handbook (The New Street Economy, Weapon Attachments, p.343-344): [key,name,eb,slots,flags,effect]. Flags: sa = Shoulder Arms only, nb = not bows/crossbows. Every non-exotic ranged weapon has 3 attachment slots. */
+/* Weapon attachments, per the handbook (The New Street Economy, Weapon Attachments, p.343-344): [key,name,eb,slots,flags,effect]. Flags: sa = Shoulder Arms only, nb = not bows/crossbows, ml = blades only (Melee Weapon skill). Every non-exotic ranged weapon and every blade has 3 attachment slots. */
 const MKMODS=[["bayo","Bayonet",100,1,"sa","Also usable as a Light Melee Weapon. Can't be concealed under clothing while fitted.","Doubles as a light melee weapon"],
 ["drum","Drum magazine",500,1,"nb","Magazine grows to the Drum column of the Clip Chart. Only one clip at a time. Can't be concealed under clothing.","Magazine up to the Drum size"],
 ["ext","Extended magazine",100,1,"nb","Magazine grows to the Extended column of the Clip Chart. Only one clip at a time. Can't be concealed under clothing.","Magazine up to the Extended size"],
 ["gl","Grenade launcher underbarrel",500,2,"sa","Two-handed use as a Grenade Launcher, holding 1 grenade. Can't be concealed under clothing.","Underbarrel launcher, 1 grenade"],
 ["ir","Infrared nightvision scope",500,1,"","Firing penalties from darkness, smoke or fog drop to 0. See heat detail up to 800m/yds.","Ignore darkness, smoke and fog"],
 ["sg","Shotgun underbarrel",500,2,"sa","Two-handed use as a Shotgun, holding 2 shots. Can't be concealed under clothing.","Underbarrel shotgun, 2 shots"],
-["link","Smartgun link",500,2,"","Takes 1 hour to fit. Needs Interface Plugs or a Subdermal Grip and a Neural Link. +1 to ranged attacks. Can't be fitted to a Smart Weapon.","+1 to ranged attacks"],
+["link","Smartgun link",1000,1,"","Takes 1 hour to fit. Needs Interface Plugs or a Subdermal Grip and a Neural Link. +1 to ranged attacks. Can't be fitted to a Smart Weapon.","+1 to ranged attacks"],
 ["snipe","Sniping scope",100,1,"","+1 to attacks at 51m/yds or more with single shot or Aimed Shot. Doesn't stack with TeleOptics.","+1 to hit at 51 m/yds or more"],
+/* Blade upgrades (homebrew): flag ml, fitted to Melee Weapon skill weapons only, same 3 slots */
+["pommel","Weighted pommel",75,1,"ml","Counterweighted hilt. +1 to Aimed Shots with this weapon.","+1 to Aimed Shots"],
+["serr","Serrated edge",100,1,"ml","Saw-toothed edge. Critical Injuries this weapon causes get +2 Bonus Damage.","Crit bonus +2"],
+["sheath","Hidden sheath",50,1,"ml","A forearm or boot sheath. The blade can be concealed under clothing and drawn without spending an Action. Light and Medium blades only.","Concealable · free draw"],
+["venom","Venom channel",150,1,"ml","A hollow groove with a dose reservoir. Holds one dose of a toxin or drug, delivered on the next hit that damages the target. Refilling takes a minute.","Delivers a poison or drug dose"],
+["mono","Mono-edge",1000,2,"ml","A charged edge. A hit that damages the target also deals +1d6 electric damage.","+1d6 electric damage"],
 /* Rebuilds (handbook, Attachments & Ammunition): 2 slots, 1,000 eb, one per weapon, non-exotic ranged weapons only. Flags: rb = rebuild, xl = not for launchers, xs = not with a Smartgun link */
 ["rbp","Power Rebuild",1000,2,"rb","Reinforced to handle extreme strain. Critical Injuries this weapon causes get +5 Bonus Damage. You can ricochet shots off cover to hit a target you know about but can't hit directly, at -4 to the Attack Check; an Aimed Shot ignores that -4 and takes only the Aimed Shot penalty. Needs a clear path from the ricochet point to the target, and range is still measured from you to the target. A Shotgun Shell ricochet moves the spread's origin to a surface within 6 m/yds (3 squares).","Crit bonus +5 · ricochet shots"],
 ["rbs","Smart Rebuild",1000,2,"rb,xs","Stripped down and rebuilt around smart targeting. You must be linked through an Interface Plug or Subdermal Grip. +1 to your Attack Checks. Loads Improved Smart Ammunition; other ammo still gets the +1 but none of the ammo's benefits. With Improved Smart Ammo you ignore darkness, smoke, fog and other visual obscurement penalties. Miss a ranged attack by 5 or less and you can retry at once: add 14 (plus LUCK) instead of STAT + Skill and other bonuses, and all penalties from the first shot carry over.","+1 to hit · retry near misses"],
@@ -1047,7 +1053,7 @@ const MKHTML=`<div class="mkbox" id="mkbox"><h5>WORKBENCH</h5><input type="hidde
 <p class="mk-hint" id="mkhint"></p>
 <div class="mkst" id="mkst" hidden><div class="mkbar"><i id="mkfill"></i></div><span id="mkinfo"></span></div>
 <details class="mkgm"><summary>GM</summary><button type="button" class="mini g" id="mkfin">FINISH NOW</button><button type="button" class="mini g" id="mkcan">CANCEL JOB</button></details>
-<details class="mkgm"><summary>RULES &amp; PRICES</summary><small class="mk-rules">Mod prices, slots and magazine sizes follow the handbook (Weapon Attachments, p.343-344); Rebuilds follow Attachments &amp; Ammunition. Frame prices follow the core rulebook; other part prices and stats are homebrew, so change them freely in the script. Upgrades can only be fitted here: to upgrade a teammate's weapon, they GIVE it to you first and you send it back when done. Installing a Rebuild takes 1 hour and a weapon can hold only one. Fabrication points unlock tiers (3+ for T4, the heaviest weapons). A good assembly raises quality, a poor one lowers it, and three bad welds ruin the job.</small></details></div>`;
+<details class="mkgm"><summary>RULES &amp; PRICES</summary><small class="mk-rules">Mod prices, slots and magazine sizes follow the handbook (Weapon Attachments, p.343-344); Rebuilds follow Attachments &amp; Ammunition. Frame prices follow the core rulebook; other part prices and stats are homebrew, so change them freely in the script. Blades (Melee Weapon skill) take their own upgrades on the same 3 slots. Upgrades can only be fitted here: to upgrade a teammate's weapon, they GIVE it to you first and you send it back when done. Installing a Rebuild takes 1 hour and a weapon can hold only one. Fabrication points unlock tiers (3+ for T4, the heaviest weapons). A good assembly raises quality, a poor one lowers it, and three bad welds ruin the job.</small></details></div>`;
 document.getElementById("rext").innerHTML=Object.keys(RXC).map(r=>{const c=RXC[r],P=k=>`<label>POINTS<input class="fi" type="number" min="0" data-k="rx_${r}_${k}_p"></label>`,B=k=>`<label>BONUS<input class="fi" type="number" data-k="rx_${r}_${k}_b"></label>`;
  return `<div class="rx" data-rxp="${r}" hidden><h4>${c.t} · ${r.toUpperCase()}<span data-sum></span></h4><small>${c.h}</small>`+c.rows.map(([n,k,d])=>`<div class="rxr"><b>${n}${d?`<small>${d}</small>`:""}</b>${c.sk?`<select class="fi" data-k="rx_${r}_${k}_s"><option value="">TECH only</option>${c.sk.map(s=>`<option>${s}</option>`).join("")}</select>`:""}${P(k)}${r=="Solo"?"":B(k)+(r=="Tech"?"":`<button class="mini" data-xr="${r}|${k}|${n}">ROLL</button>`)}</div>`).join("")+(r=="Solo"?`<div class="rxt"><label><input type="checkbox" id="rxprec"> Aimed shot: add Precision Attack to FIRE</label><button class="mini" data-xr="Solo|td|Threat Detection">ROLL THREAT DETECTION</button></div>`:"")+(r=="Tech"?MKHTML:"")+"</div>"}).join("")
  +`<div class="rx" data-rxp="Media" hidden><h4>CREDIBILITY · MEDIA</h4><small>Collect proofs before you publish. A story needs its proofs or it won't run.</small><div class="rxr"><b>Gather proof with<small>A success vs the DV above adds a proof. No DV set? use +1 / −1.</small></b><select class="fi" data-k="rx_Media_gs">${MSK.map(s=>`<option>${s}</option>`).join("")}</select></div>`+[0,1,2].map(j=>`<div class="rxr"><input class="fi nm2" data-k="rx_Media_${j}_n" placeholder="Story ${j+1}"><label>PROOFS<input class="fi" type="number" min="0" data-k="rx_Media_${j}_p"></label><label>NEEDED<input class="fi" type="number" min="0" data-k="rx_Media_${j}_m"></label><button class="mini" data-xm="${j}|g">GATHER</button><button class="mini g" data-xm="${j}|+">+1</button><button class="mini g" data-xm="${j}|-">−1</button><button class="mini" data-xm="${j}|p">PUBLISH</button></div>`).join("")+"</div>";
@@ -3757,6 +3763,14 @@ html body .cg .ipu{border-radius:999px}
 .fl-s small{display:block;margin-top:8px;font:600 12px "Orbitron",sans-serif;letter-spacing:.35em;color:#ff2a3c99}
 #flat .fl-b{margin-top:8px;min-height:46px;padding:0 36px;border:0;border-radius:0;background:var(--fy);color:#000;font:900 12px "Orbitron",sans-serif;letter-spacing:.34em;cursor:pointer;clip-path:polygon(11px 0,100% 0,100% calc(100% - 11px),calc(100% - 11px) 100%,0 100%,0 11px)}
 #flat .fl-b:hover,#flat .fl-b:focus-visible{background:#fff;color:#000;outline:0;box-shadow:0 0 18px var(--fy)}
+.fl-sk{display:block;width:auto;height:clamp(64px,15vh,128px);overflow:visible;filter:drop-shadow(0 0 10px #ff2a3caa)}
+.fl-sk .g0{color:var(--fr)}.fl-sk .g1{color:var(--fc);opacity:.7;mix-blend-mode:screen;animation:flSk1 2.8s infinite steps(1,end)}.fl-sk .g2{color:var(--fy);opacity:.55;mix-blend-mode:screen;animation:flSk2 3.4s infinite steps(1,end)}
+.fl-sk .eye{fill:var(--fr);animation:flEye 2.4s infinite steps(1,end)}.fl-sk .cy{fill:none;stroke:var(--fc);stroke-width:1.4;filter:drop-shadow(0 0 4px var(--fc))}.fl-sk .sc{stroke:var(--fc);stroke-width:1;animation:flScan 1.8s linear infinite}
+@keyframes flSk1{0%,100%{transform:translate(-2px,0)}40%{transform:translate(-2px,0)}41%{transform:translate(-8px,2px)}44%{transform:translate(5px,-1px)}47%{transform:translate(-2px,0)}}
+@keyframes flSk2{0%,100%{transform:translate(2px,0)}60%{transform:translate(2px,0)}61%{transform:translate(9px,-2px)}64%{transform:translate(-6px,1px)}67%{transform:translate(2px,0)}}
+@keyframes flEye{0%,70%,100%{opacity:1}72%{opacity:.15}76%{opacity:1}90%{opacity:.4}93%{opacity:1}}
+@keyframes flScan{0%{transform:translateY(-6px)}100%{transform:translateY(6px)}}
+@media(max-height:760px){#flat{gap:10px;padding:44px 20px}.fl-ecg{height:64px}.fl-t{font-size:clamp(36px,9vw,80px)}}
 @keyframes flIn{0%{opacity:0}10%{opacity:1}14%{opacity:.1}22%{opacity:1}30%{opacity:.3}38%,100%{opacity:1}}
 @keyframes flFlash{0%{opacity:.9}100%{opacity:0}}
 @keyframes flDraw{to{stroke-dashoffset:0}}
@@ -3768,7 +3782,7 @@ html body .cg .ipu{border-radius:999px}
 @keyframes flS2{0%,70%,100%{clip-path:inset(100% 0 0 0);transform:translate(3px,0)}71%{clip-path:inset(66% 0 8% 0);transform:translate(9px,0)}75%{clip-path:inset(8% 0 76% 0);transform:translate(-8px,0)}80%{clip-path:inset(42% 0 36% 0);transform:translate(5px,0)}84%{clip-path:inset(100% 0 0 0)}}
 @keyframes flJit{0%,92%,100%{transform:none}93%{transform:translate(4px,-2px) skewX(6deg)}95%{transform:translate(-5px,1px)}97%{transform:none}}
 @media(max-width:520px){.fl-rd{flex-direction:column;align-items:center;gap:4px}.fl-hud{font-size:9px;letter-spacing:.18em}.fl-s{letter-spacing:.2em}}
-@media(prefers-reduced-motion:reduce){#flat,.fl-t,.fl-t:before,.fl-t:after,.fl-tag,.fl-hud i,.fl-rd b.x{animation:none}.fl-t:before,.fl-t:after{display:none}.fl-noise,.fl-tear,.fl-flash{display:none}.fl-ecg path{animation:none;stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){#flat,.fl-t,.fl-t:before,.fl-t:after,.fl-tag,.fl-hud i,.fl-rd b.x,.fl-sk .g1,.fl-sk .g2,.fl-sk .eye,.fl-sk .sc{animation:none}.fl-t:before,.fl-t:after{display:none}.fl-noise,.fl-tear,.fl-flash{display:none}.fl-ecg path{animation:none;stroke-dashoffset:0}}
 @media print{#flat{display:none!important}}
 /* ===== themed scrollbars (replaces the browser's default white ones) ===== */
 html,html *{scrollbar-width:thin;scrollbar-color:var(--p1) var(--deep0)}
@@ -5041,7 +5055,7 @@ var JOBS={
  make:{n:"Make a new weapon",sp:"fb",st:["FORGE THE FRAME","CUT & MACHINE","ASSEMBLE","FIT & BALANCE","FINAL CALIBRATION"]}};
 var QN={"-1":"POOR (\u22121)","0":"STANDARD","1":"EXCELLENT (+1)"};
 /* ---------- weapon parts (homebrew, edit freely) ----------
-   PRICES: frame prices are the Cyberpunk RED core rulebook base weapon prices (CP:R p.340-341). Upgrades use book prices where one exists (ext mag 100, drum 500, smartgun link 500, scope 100, silencer 100); the rest are homebrew flat prices.
+   PRICES: frame prices are the Cyberpunk RED core rulebook base weapon prices (CP:R p.340-341). Upgrades use book prices where one exists (ext mag 100, drum 500, smartgun link 1000, scope 100, silencer 100); the rest are homebrew flat prices.
    Base damage, ROF, magazine, hands and skill always come from the sheet's own weapon presets (PRE).
    Balance rules: +1d6 (long barrel) costs ROF (or half the magazine on ROF 1 weapons), makes pistols and SMGs two-handed and is never concealable; -1d6 (short barrel) is just cheap and light (no concealment bonus: only the Medium pistol and Light melee frames are concealable),
    big magazines are bulky, precision tuning gives +1 quality step, damage never goes above preset +1d6.
@@ -5273,7 +5287,8 @@ function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;
 function pickRender(j){
  var host=byId("mkpick");if(!host)return;
  var wv=g("mk_w").value,wi=wv===""?-1:+wv,cur=g("mk_x").value,nm=wi>=0?wname(wi):"",fit=wi>=0?(val("w"+wi+"_at").value||""):"";
- var sig=[wi,nm,cur,fit,j?1:0].join("|");if(host.dataset.sig===sig)return;host.dataset.sig=sig;
+ var fam=wi>=0&&window.wsFam?window.wsFam(wi):"";
+ var sig=[wi,nm,cur,fit,j?1:0,fam].join("|");if(host.dataset.sig===sig)return;host.dataset.sig=sig;
  host.classList.toggle("off",!!j);
  var fitted=fit.split(",");
  function tile(m){
@@ -5281,9 +5296,9 @@ function pickRender(j){
   for(i=0;i<m[3];i++)pips+="<i></i>";
   var rb=m[4].indexOf("rb")>=0;
   return'<button type="button" class="mk-t'+(rb?" rb "+m[0]:"")+'" data-mkx="'+m[0]+'" aria-pressed="'+(cur===m[0])+'"'+(err||j?" disabled":"")+(err?' title="'+esc(err)+'"':"")+'><span class="mk-tp" title="'+m[3]+" slot"+(m[3]>1?"s":"")+'">'+pips+"</span><b>"+esc(m[1])+"</b><small>"+esc(m[6]||"")+"</small><em>"+m[2].toLocaleString("en-US")+" eb</em>"+(isFit?"<u class=\"ok\">FITTED</u>":err?"<u>"+esc(err.replace(nm,"it"))+"</u>":"")+"</button>"}
- var a="",r="";
- MKMODS.forEach(function(m){if(m[4].indexOf("rb")>=0)r+=tile(m);else a+=tile(m)});
- host.innerHTML='<div class="mk-g">ATTACHMENTS</div><div class="mk-tg">'+a+'</div><div class="mk-g">REBUILDS <small>ONE PER WEAPON · 2 SLOTS</small></div><div class="mk-tg">'+r+"</div>"}
+ var a="",r="",bl="";
+ MKMODS.forEach(function(m){var ml=m[4].indexOf("ml")>=0;if(fam==="blade"&&!ml||fam==="ranged"&&ml)return;if(ml)bl+=tile(m);else if(m[4].indexOf("rb")>=0)r+=tile(m);else a+=tile(m)});
+ host.innerHTML=(bl?'<div class="mk-g">BLADE UPGRADES <small>3 SLOTS</small></div><div class="mk-tg">'+bl+"</div>":"")+(a?'<div class="mk-g">ATTACHMENTS</div><div class="mk-tg">'+a+"</div>":"")+(r?'<div class="mk-g">REBUILDS <small>ONE PER WEAPON · 2 SLOTS</small></div><div class="mk-tg">'+r+"</div>":"")}
 function mkRefresh(){
  var box=byId("mkbox");if(!box||!g("mk_t"))return;
  var j=job();
@@ -5293,6 +5308,8 @@ function mkRefresh(){
  var t=j?j.t:tS.value,ws=g("mk_w"),n=wcount(),first=-1;
  for(var i=0;i<12;i++){var o=ws.options[i];if(!o)continue;var nm=wname(i);o.textContent=(i+1)+". "+(nm||"(empty slot)");o.disabled=!nm||i>=n;if(nm&&i<n&&first<0)first=i}
  var cur=ws.options[+ws.value];if(ws.value===""||!cur||cur.disabled)ws.value=first>=0?String(first):"";
+ var wf=ws.value===""||!window.wsFam?"":window.wsFam(+ws.value);
+ if(!j&&wf){var xm=modOf(g("mk_x").value),wb=wf==="blade";if(!xm||(xm[4].indexOf("ml")>=0)!==wb||xm[4].indexOf("rb")>=0&&wb){for(var q=0;q<MKMODS.length;q++)if((MKMODS[q][4].indexOf("ml")>=0)===wb){g("mk_x").value=MKMODS[q][0];suggest();break}}}
  Array.prototype.forEach.call(document.querySelectorAll("[data-mkt]"),function(b){b.setAttribute("aria-pressed",String(b.dataset.mkt===t));b.disabled=!!j});
  var mn=byId("mkmn"),md=modOf(g("mk_x").value);
  if(mn){mn.hidden=!(t==="mod"&&md);if(md){var sig=md[0]+"|"+md[3];if(mn.dataset.sig!==sig){mn.dataset.sig=sig;mn.innerHTML="<b>"+esc(md[1])+"</b> "+esc(md[5])+"<i>USES "+md[3]+" OF 3 SLOTS</i>"}}}
@@ -6037,6 +6054,7 @@ window.flatline=function(){
  el.innerHTML='<div class="fl-noise"></div><div class="fl-tear"></div><div class="fl-flash"></div>'
   +'<div class="fl-hud t"><span>BIOMON // LINK</span><span>SIGNAL LOST<i></i></span></div>'
   +'<div class="fl-tag">// VITAL SIGNS LOST</div>'
+  +'<svg class="fl-sk" viewBox="0 0 100 104" aria-hidden="true"><defs><g id="fl-skg" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"><path d="M50 5C24 5 10 23 10 45C10 59 16 69 24 75L24 89C24 93 27 96 31 96L69 96C73 96 76 93 76 89L76 75C84 69 90 59 90 45C90 23 76 5 50 5Z"/><path d="M22 44C22 36 30 32 38 34C44 36 46 44 44 52C42 58 32 60 26 56C22 53 22 48 22 44Z" fill="currentColor" fill-opacity=".85"/><path d="M78 44C78 36 70 32 62 34C56 36 54 44 56 52C58 58 68 60 74 56C78 53 78 48 78 44Z" fill="currentColor" fill-opacity=".85"/><path d="M50 58L44 72L48 70L50 72L52 70L56 72Z" fill="currentColor" fill-opacity=".6"/><path d="M31 80H69M38 80V92M46 80V93M54 80V93M62 80V92"/><path d="M58 7L54 17L60 23L55 31" stroke-width="1.6"/><path d="M72 19H82V30M14 52H20" stroke-width="1.4"/></g></defs><use href="#fl-skg" class="g1"/><use href="#fl-skg" class="g2"/><use href="#fl-skg" class="g0"/><circle class="eye" cx="33" cy="46" r="4.2"/><circle class="eye" cx="67" cy="46" r="4.2"/><circle class="cy" cx="67" cy="46" r="8"/><path class="sc" d="M57 46H77"/></svg>'
   +'<div class="fl-mon"><svg class="fl-ecg" viewBox="0 0 640 90" preserveAspectRatio="none" aria-hidden="true"><path d="M0 45 H70 L78 40 L86 45 H110 L118 52 L126 6 L138 84 L146 45 H180 L190 38 L200 45 H235 L242 50 L249 16 L258 72 L264 45 H310 L318 41 L326 45 H350 L355 49 L360 33 L366 57 L371 45 H400 L406 39 L411 51 L416 41 L421 49 L426 45 H640"/></svg>'
   +'<div class="fl-rd"><span>BPM<b>000</b></span><span>BRAIN ACT<b>0%</b></span><span>NEURAL LINK<b class="x">LOST</b></span></div></div>'
   +'<h1 class="fl-t" data-t="FLATLINED">FLATLINED</h1>'
@@ -6094,13 +6112,18 @@ function md(k){for(var i=0;i<MKMODS.length;i++)if(MKMODS[i][0]===k)return MKMODS
 function keys(i){return gv("w"+i+"_at").split(",").filter(function(k){return k&&md(k)})}
 function used(a){var u=0;a.forEach(function(k){u+=md(k)[3]});return u}
 function wname(i){return gv("w"+i+"_n").trim()||"this weapon"}
-function melee(i){return /^(melee weapon|brawling|martial arts)/i.test(gv("w"+i+"_s").trim())}
+function melee(i){return /^(brawling|martial arts)/i.test(gv("w"+i+"_s").trim())}
+function blade(i){return /^melee weapon/i.test(gv("w"+i+"_s").trim())}
+function fam(i){var sk=gv("w"+i+"_s").trim().toLowerCase();return blade(i)?"blade":["handgun","shoulder arms","archery","heavy weapons"].indexOf(sk)>=0?"ranged":""}
 function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function rbOf(a){for(var x=0;x<a.length;x++)if(md(a[x])&&md(a[x])[4].indexOf("rb")>=0)return md(a[x]);return null}
 function check(i,k,nm){
  var m=md(k);if(!m)return"";nm=nm||wname(i);
  var sk=gv("w"+i+"_s").trim().toLowerCase(),a=keys(i),fl=m[4].split(","),rb=rbOf(a);
- if(sk&&["handgun","shoulder arms","archery","heavy weapons"].indexOf(sk)<0)return nm+" is not a ranged weapon";
+ if(fl.indexOf("ml")>=0){
+  if(sk&&sk.indexOf("melee weapon")!==0)return nm+" is not a blade";
+  if(k==="sheath"&&/^(heavy|very heavy) melee/i.test(gv("w"+i+"_t").trim()))return"only Light and Medium blades fit a Hidden sheath"}
+ else if(sk&&["handgun","shoulder arms","archery","heavy weapons"].indexOf(sk)<0)return nm+" is not a ranged weapon";
  if(a.indexOf(k)>=0)return m[1]+" is already fitted to "+nm;
  if(fl.indexOf("rb")>=0){
   if(rb)return nm+" already has a "+rb[1]+" (one Rebuild per weapon)";
@@ -6123,7 +6146,7 @@ function setMag(i,k,on){
 function fit(i,k){var a=keys(i);a.push(k);g("w"+i+"_at").value=a.join(",");return(k==="ext"||k==="drum")?setMag(i,k,true):""}
 function take(i,k){var a=keys(i),x=a.indexOf(k);if(x<0)return;a.splice(x,1);g("w"+i+"_at").value=a.join(",");
  var mg=(k==="ext"||k==="drum")?setMag(i,k,false):"";logRoll("Weapons",wname(i)+": "+md(k)[1]+" removed"+mg,"REMOVED","");upd()}
-window.wsCheck=check;window.wsFit=fit;
+window.wsCheck=check;window.wsFit=fit;window.wsFam=fam;
 window.wsNames=function(csv){return String(csv||"").split(",").filter(md).map(function(k){return md(k)[1]}).join(", ")};
 window.wsRender=function(i,c){
  var box=c.querySelector(".wsl");if(!box)return;
