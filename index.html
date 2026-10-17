@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="color-scheme" content="dark"><meta name="theme-color" content="#07040c">
 <title>Cyberpunk Sanctuary</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"><style>:root{--p1:#8a3fbf;--p2:#d655ff;--hot:#ff3ea5;--ink:#f4e8ff;--mute:#a58bc2;--bg:#07040c;--panel:#120a1d;--field:#1b1030;--line:#4a2275;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--deep0:#0c0616;--deep:#160c26;--deep2:#2c1650;--deep3:#1f1238;--deep4:#24103d;--soft:#ff9bd2;--soft2:#ff7aa8;--p1b:#6a2a9a;--st1:#2a1346;--st2:#170b29;--g1:#3a1160;--g2:#26083e;--h1:#150630;--h2:#34106a;--h3:#10041f;--pl1:#ffb3ec;--pl2:#b447e6;--pl3:#1c0a36;--rg1:#ff6ad5;--rg2:#ffd3f5;--moon:#f4d4ff;--hc:#5ee7ff}
 *{box-sizing:border-box}
 html{background:var(--bg)}
-body{margin:0;color:var(--ink);font-family:"Rajdhani","Bahnschrift","Segoe UI",Arial,sans-serif;font-size:16px;background:radial-gradient(900px 500px at 85% -5%,color-mix(in srgb,var(--g1) 67%,transparent),transparent),radial-gradient(700px 500px at 0 100%,color-mix(in srgb,var(--g2) 60%,transparent),transparent),var(--bg);min-height:100vh;padding:18px 10px}
+body{margin:0;color:var(--ink);font-family:"Rajdhani","Bahnschrift","Segoe UI",Arial,sans-serif;font-size:16px;background:var(--bg);background:radial-gradient(900px 500px at 85% -5%,color-mix(in srgb,var(--g1) 67%,transparent),transparent),radial-gradient(700px 500px at 0 100%,color-mix(in srgb,var(--g2) 60%,transparent),transparent),var(--bg);min-height:100vh;padding:18px 10px}
 .sheet{max-width:1040px;margin:0 auto;background:var(--panel);border:1px solid var(--line);box-shadow:0 0 0 1px #000,0 0 40px color-mix(in srgb,var(--p1) 25%,transparent);clip-path:polygon(0 0,calc(100% - 34px) 0,100% 34px,100% 100%,34px 100%,0 calc(100% - 34px));padding-bottom:18px}
 header{height:112px;background:radial-gradient(ellipse 55% 130% at 18% 130%,color-mix(in srgb,var(--hot) 69%,transparent),transparent 62%),radial-gradient(ellipse 45% 110% at 78% -25%,color-mix(in srgb,var(--p2) 75%,transparent),transparent 62%),linear-gradient(100deg,var(--h1),var(--h2) 50%,var(--h3));display:flex;align-items:center;padding:0 26px;position:relative;overflow:hidden}
 
@@ -237,7 +237,7 @@ html.printing .pn{display:block}
 @media print{
 html,html body{background:#fff!important;min-height:0!important;padding:0!important;margin:0!important}
 html body{font-size:10pt!important}
-html body *{background:transparent!important;color:#000!important;box-shadow:none!important;text-shadow:none!important;animation:none!important;transition:none!important;clip-path:none!important;backdrop-filter:none!important;filter:none!important}
+html body *{background:transparent!important;color:#000!important;box-shadow:none!important;text-shadow:none!important;animation:none!important;transition:none!important;clip-path:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;filter:none!important}
 html body .sheet{max-width:none!important;width:100%!important;border:0!important;padding:0!important;margin:0!important}
 html body header{height:auto!important;padding:0 0 6px!important;border-bottom:2px solid #000!important;overflow:visible!important;display:flex}
 html body header:before,html body header:after,html body .sp{display:none!important}
@@ -360,7 +360,7 @@ button,.tab,select{touch-action:manipulation}
 .sheet{clip-path:none;border-left:0;border-right:0;max-width:100%}
 header{height:70px;padding:0 14px}
 .dmbanner{padding:8px 12px;letter-spacing:.15em;font-size:10px}
-.vit{display:flex;position:sticky;top:0;z-index:40;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:8px 12px;background:color-mix(in srgb,var(--deep0) 96%,transparent);border-bottom:1px solid var(--p2);box-shadow:0 4px 14px #0009;backdrop-filter:blur(6px)}
+.vit{display:flex;position:sticky;top:0;z-index:40;flex-wrap:wrap;align-items:center;gap:6px 8px;padding:8px 12px;background:color-mix(in srgb,var(--deep0) 96%,transparent);border-bottom:1px solid var(--p2);box-shadow:0 4px 14px #0009;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
 .vit .vn{flex:1 1 40%;min-width:0;font:700 17px "Rajdhani",sans-serif;color:var(--soft);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vit .vs{font:700 9px "Orbitron",sans-serif;letter-spacing:.12em;color:#7dff9b}.vit .vs.sw{color:#ffb86b}.vit .vs.mw{color:var(--soft2)}
 .vit .vg{display:flex;align-items:center;gap:4px}.vit .vg em{font:600 9px "Orbitron",sans-serif;letter-spacing:.12em;color:var(--mute);font-style:normal}.vit .vg b{font:700 19px "Rajdhani",sans-serif;min-width:44px;text-align:center}.vit .vn{flex:1 1 30%}.vit .mini{min-height:34px;padding:6px 5px}
@@ -948,7 +948,7 @@ const ROLES={
 "Nomad":{a:"Moto",d:"Your family's vehicles and their strength. Access a motorpool, get vehicle upgrades and call in family favors.",k:"Drive Land Vehicle, Pilot Air Vehicle, Land Vehicle Tech, Wilderness Survival"}};
 Object.assign(ROLES.Rockerboy,{r:[["Charismatic Impact","COOL"]]});
 Object.assign(ROLES.Solo,{p:"Spread your rank over the combat perks below. Initiative Reaction is added to the Initiative button for you."});
-Object.assign(ROLES.Tech,{p:"Set your Maker points and roll each ability in the panel below."});
+Object.assign(ROLES.Tech,{p:"Set your Maker points, then use the Workbench in the panel below to fix, modify or make weapons."});
 Object.assign(ROLES.Medtech,{p:"Set your Medicine points and roll each ability in the panel below."});
 Object.assign(ROLES.Media,{p:"Gather proofs for a story below, then publish it."});
 Object.assign(ROLES.Lawman,{r:[["Backup",null]]});
@@ -1019,11 +1019,21 @@ const lk=(c,i,f)=>(i?LST[c].pre+i:LST[c].pre)+"_"+f;
   x+=`<div class="rc" data-lc="g" data-li="${i}" hidden><div class="rh"><b data-ln></b><span class="badge" data-rel style="padding:3px 8px;font-size:10px">NEUTRAL</span><button class="mini" data-ldel="g|${i}" title="Remove">✕</button></div><label>GANG<input class="fi" ${k("n")} list="gnames" placeholder="Which gang?"></label><div class="g2"><label>TURF<input class="fi" ${k("s")} placeholder="District or block they hold"></label><label>STANDING<select class="fi" ${k("r")}>${T.map(([v,l])=>`<option value="${v}"${v?"":" selected"}>${l}</option>`).join("")}</select></label></div><label>CONTACT / HOW TO REACH THEM<input class="fi" ${k("l")} placeholder="Who you talk to, where you meet"></label><label>HISTORY, DEBTS &amp; NOTES<textarea class="fi" ${k("o")} placeholder="Jobs done, who you hit, what they owe you, rank or tattoos…"></textarea></label></div>`}
  document.getElementById("glist").innerHTML=x+`<datalist id="gnames">${GL.map(n=>`<option>${n}</option>`).join("")}</datalist>`}
 const TSK="Basic Tech,Weaponstech,Cybertech,Electronics/Security Tech,Air Vehicle Tech,Land Vehicle Tech,Sea Vehicle Tech,Paint/Draw/Sculpt,Forgery,Demolitions".split(","),MSK="Library Search,Human Perception,Streetwise,Conversation,Interrogation,Persuasion,Perception,Photography/Film,Deduction,Criminology".split(",");
-const RXC={Tech:{t:"MAKER",h:"Fix, improve, modify, make and invent items. Each time your Maker rank goes up by 1 you gain 1 rank in two different specialties of your choice, so you have 2 points per rank and a specialty can hold at most your Maker rank. Roll = d10 + the skill picked for the job + that specialty's rank + bonus.",sk:TSK,rows:[["Field Expertise","ff"],["Upgrade Expertise","up"],["Fabrication Expertise","fb"],["Invention Expertise","iv"]]},
+const RXC={Tech:{t:"MAKER",h:"Fix, improve, modify, make and invent items. Each time your Maker rank goes up by 1 you gain 1 rank in two different specialties of your choice, so you have 2 points per rank and a specialty can hold at most your Maker rank. The skill and specialty rank you set here decide how wide and forgiving your welds are. Pay for parts, weld it together yourself, then wait 1 hour for it to finish.",sk:TSK,rows:[["Field Expertise","ff"],["Upgrade Expertise","up"],["Fabrication Expertise","fb"],["Invention Expertise","iv"]]},
 Medtech:{t:"MEDICINE",h:"Spread your rank over these. Roll = d10 + TECH + points + bonus.",rows:[["Surgery","su"],["Pharmaceuticals","ph"],["Cryosystem Operation","cr"]]},
 Solo:{t:"COMBAT AWARENESS",h:"Pick where your rank goes. Exact effects are in your book.",rows:[["Damage Deflection","dd","Soaks part of incoming damage."],["Fumble Recovery","fr","Helps you recover from a fumble."],["Initiative Reaction","ir","Added to Initiative (the button does it)."],["Precision Attack","pa","Aimed-shot bonus. Tick the box below to add it to FIRE."],["Spot Weakness","sw","Bonus to finding a weak spot."],["Threat Detection","td","Spotting danger. Use the Perception roll below."]]}};
+const MKMODS=[["ext","Extended magazine",1200],["scope","Telescopic scope",600],["link","Smartgun link",2000],["supp","Suppressor",900]];
+const MKHTML=`<div class="mkbox" id="mkbox"><h5>WORKBENCH · PARTS, WELDING, 1 HOUR BUILD</h5><input type="hidden" data-k="mk_job"><input type="hidden" data-k="mk_bp">
+<div class="rxr"><label class="wide">JOB<select class="fi" data-k="mk_t"><option value="make">Make a new weapon</option><option value="fix">Fix a weapon</option><option value="mod">Modify a weapon</option></select></label>
+<label class="wide" id="mkl-w">WEAPON<select class="fi" data-k="mk_w">${Array.from({length:12},(_,i)=>`<option value="${i}">${i+1}. (empty slot)</option>`).join("")}</select></label>
+<label class="wide" id="mkl-x">MODIFICATION<select class="fi" data-k="mk_x">${MKMODS.map(m=>`<option value="${m[0]}">${m[1]}</option>`).join("")}</select></label>
+<label class="cst" id="mkl-c">PARTS (eb)<input class="fi" type="number" min="0" data-k="mk_c"></label></div>
+<div class="mkst"><div class="mkbar"><i id="mkfill"></i></div><span id="mkinfo"></span></div>
+<div class="rxr"><button type="button" class="mini" id="mkgo">OPEN WORKBENCH</button><button type="button" class="mini" id="mkcol" hidden>COLLECT</button></div>
+<details class="mkgm"><summary>GM</summary><button type="button" class="mini g" id="mkfin">FINISH NOW</button><button type="button" class="mini g" id="mkcan">CANCEL JOB</button></details>
+<small>Part prices and stats are homebrew: change them freely in the script. Fabrication points unlock tiers (3+ needed for T4, the heaviest weapons). A good assembly raises quality, a poor one lowers it, and three bad welds ruin the job.</small></div>`;
 document.getElementById("rext").innerHTML=Object.keys(RXC).map(r=>{const c=RXC[r],P=k=>`<label>POINTS<input class="fi" type="number" min="0" data-k="rx_${r}_${k}_p"></label>`,B=k=>`<label>BONUS<input class="fi" type="number" data-k="rx_${r}_${k}_b"></label>`;
- return `<div class="rx" data-rxp="${r}" hidden><h4>${c.t} · ${r.toUpperCase()}<span data-sum></span></h4><small>${c.h}</small>`+c.rows.map(([n,k,d])=>`<div class="rxr"><b>${n}${d?`<small>${d}</small>`:""}</b>${c.sk?`<select class="fi" data-k="rx_${r}_${k}_s"><option value="">TECH only</option>${c.sk.map(s=>`<option>${s}</option>`).join("")}</select>`:""}${P(k)}${r=="Solo"?"":B(k)+`<button class="mini" data-xr="${r}|${k}|${n}">ROLL</button>`}</div>`).join("")+(r=="Solo"?`<div class="rxt"><label><input type="checkbox" id="rxprec"> Aimed shot: add Precision Attack to FIRE</label><button class="mini" data-xr="Solo|td|Threat Detection">ROLL THREAT DETECTION</button></div>`:"")+"</div>"}).join("")
+ return `<div class="rx" data-rxp="${r}" hidden><h4>${c.t} · ${r.toUpperCase()}<span data-sum></span></h4><small>${c.h}</small>`+c.rows.map(([n,k,d])=>`<div class="rxr"><b>${n}${d?`<small>${d}</small>`:""}</b>${c.sk?`<select class="fi" data-k="rx_${r}_${k}_s"><option value="">TECH only</option>${c.sk.map(s=>`<option>${s}</option>`).join("")}</select>`:""}${P(k)}${r=="Solo"?"":B(k)+(r=="Tech"?"":`<button class="mini" data-xr="${r}|${k}|${n}">ROLL</button>`)}</div>`).join("")+(r=="Solo"?`<div class="rxt"><label><input type="checkbox" id="rxprec"> Aimed shot: add Precision Attack to FIRE</label><button class="mini" data-xr="Solo|td|Threat Detection">ROLL THREAT DETECTION</button></div>`:"")+(r=="Tech"?MKHTML:"")+"</div>"}).join("")
  +`<div class="rx" data-rxp="Media" hidden><h4>CREDIBILITY · MEDIA</h4><small>Collect proofs before you publish. A story needs its proofs or it won't run.</small><div class="rxr"><b>Gather proof with<small>A success vs the DV above adds a proof. No DV set? use +1 / −1.</small></b><select class="fi" data-k="rx_Media_gs">${MSK.map(s=>`<option>${s}</option>`).join("")}</select></div>`+[0,1,2].map(j=>`<div class="rxr"><input class="fi nm2" data-k="rx_Media_${j}_n" placeholder="Story ${j+1}"><label>PROOFS<input class="fi" type="number" min="0" data-k="rx_Media_${j}_p"></label><label>NEEDED<input class="fi" type="number" min="0" data-k="rx_Media_${j}_m"></label><button class="mini" data-xm="${j}|g">GATHER</button><button class="mini g" data-xm="${j}|+">+1</button><button class="mini g" data-xm="${j}|-">−1</button><button class="mini" data-xm="${j}|p">PUBLISH</button></div>`).join("")+"</div>";
 const QH=[
 ["Impair Movement",6,"MOVE −1 for 60 seconds (20 rounds)."],
@@ -1131,7 +1141,7 @@ document.addEventListener("focusout",e=>{if(isNt(e))ntip.hidden=true});
 document.addEventListener("input",e=>{if(isNt(e))ntShow(e.target)});
 addEventListener("scroll",()=>{ntip.hidden=true},true);
 const inputs=[...document.querySelectorAll("[data-k]")];
-function def(){const d={};d.th_c="500";d.th_d="2d6";d.wcount="2";d.wv_ok="1";d.holo_c="#5ee7ff";d.fxcount="1";d.gcount="1";QH.forEach((h,i)=>{if(h[1])d["qh_dv_"+i]=String(h[1])});d.rep_d="2d6";d.upk="200";d.rest_s="7";d.rest_smax="7";d.rest_p="3";d.rest_pmax="3";d.rep_c="100";d.invcount="28";d.vcount="1";d.hcount="1";d.cwcount="16";["Athletics1","Brawling1","Concentration1","Conversation1","Education1","Evasion1","FirstAid1","HumanPerception1","Language1","Language2","LocalExpert1","Perception1","Persuasion1","Stealth1"].forEach(i=>d["L_"+i]="2");d.S_Language1="Streetslang";d.S_Language2="Native";d.S_LocalExpert1="Home";d.ip_sk="20";d.ip_rl="60";return d}
+function def(){const d={};d.th_c="500";["ff","up","fb","iv"].forEach(k=>d["rx_Tech_"+k+"_s"]="Weaponstech");d.mk_c="500";d.th_d="2d6";d.wcount="2";d.wv_ok="1";d.holo_c="#5ee7ff";d.fxcount="1";d.gcount="1";QH.forEach((h,i)=>{if(h[1])d["qh_dv_"+i]=String(h[1])});d.rep_d="2d6";d.upk="200";d.rest_s="7";d.rest_smax="7";d.rest_p="3";d.rest_pmax="3";d.rep_c="100";d.invcount="28";d.vcount="1";d.hcount="1";d.cwcount="16";["Athletics1","Brawling1","Concentration1","Conversation1","Education1","Evasion1","FirstAid1","HumanPerception1","Language1","Language2","LocalExpert1","Perception1","Persuasion1","Stealth1"].forEach(i=>d["L_"+i]="2");d.S_Language1="Streetslang";d.S_Language2="Native";d.S_LocalExpert1="Home";d.ip_sk="20";d.ip_rl="60";return d}
 const CHARACTERS_KEY="cps_characters",ACTIVE_CHARACTER_KEY="cps_active_character";
 let characters=[],activeCharacterId="";
 function newCharacterId(){let id;do{id="char-"+Math.random().toString(36).slice(2,10)}while(characters.some(c=>c.id===id));return id}
@@ -3653,7 +3663,7 @@ html body .cg .lv,html body .cg .bonus input{background:transparent!important;bo
 html body .cg .sp2{border-radius:0}
 html body .cg .ipu{border-radius:999px}
 @media(max-width:760px){html body .skg{grid-template-columns:minmax(0,1fr)}}
-.bk{position:fixed;inset:0;z-index:90000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(5,3,12,.78);backdrop-filter:blur(4px)}
+.bk{position:fixed;inset:0;z-index:90000;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(5,3,12,.78);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 .bk[hidden]{display:none}
 .bk-card{width:min(100%,420px);background:var(--deep);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.6)}
 .bk-head{display:flex;align-items:center;gap:12px;padding:14px 18px;background:#0b0b10;border-bottom:1px solid var(--line)}
@@ -3724,6 +3734,24 @@ html body .cg .ipu{border-radius:999px}
 @keyframes flJit{0%,92%,100%{transform:none}93%{transform:translate(4px,-2px) skewX(6deg)}95%{transform:translate(-5px,1px)}97%{transform:none}}
 @media(prefers-reduced-motion:reduce){#flat,.fl-t,.fl-t:before,.fl-t:after{animation:none}.fl-ecg path{animation:none;stroke-dashoffset:0}}
 @media print{#flat{display:none!important}}
+/* ===== themed scrollbars (replaces the browser's default white ones) ===== */
+html,html *{scrollbar-width:thin;scrollbar-color:var(--p1) var(--deep0)}
+@supports not (scrollbar-color:auto){
+ ::-webkit-scrollbar{width:10px;height:10px}
+ ::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background:var(--deep0)}
+ ::-webkit-scrollbar-thumb{background:var(--p1);border-radius:8px;border:2px solid var(--deep0)}
+ ::-webkit-scrollbar-thumb:hover{background:var(--p2)}
+}
+/* ===== Safari: no white anywhere ===== */
+:root{color-scheme:dark}
+html,body{background-color:var(--bg)}
+html body{-webkit-tap-highlight-color:transparent}
+*{-webkit-tap-highlight-color:transparent}
+input,select,textarea{background-color:var(--field);color:var(--ink)}
+input[type=search]{-webkit-appearance:none;appearance:none}
+input[type=color]{background:var(--field);border:1px solid var(--line);padding:2px}
+input:-webkit-autofill,input:-webkit-autofill:hover,input:-webkit-autofill:focus,textarea:-webkit-autofill,select:-webkit-autofill{-webkit-box-shadow:0 0 0 1000px var(--field) inset;box-shadow:0 0 0 1000px var(--field) inset;-webkit-text-fill-color:var(--ink);caret-color:var(--ink);transition:background-color 9999s}
+option,optgroup{background-color:var(--deep);color:var(--ink)}
 </style>
 
 <script>
@@ -4771,6 +4799,572 @@ hist.push(nm);if(hist.length>CODE.length)hist.shift();
 if(hist.join()===CODE.join()){hist=[];enter()}},true)}
 })();
 </script>
+<style id="mk-css">/* ===== TECH WORKBENCH: parts, calibration minigame, 1 hour build ===== */
+.mkbox{margin-top:10px;padding:10px 0 0;border-top:2px solid var(--line)}
+.mkbox [hidden]{display:none!important}
+.mkbox h5{margin:0 0 6px;font:700 12px "Orbitron",sans-serif;letter-spacing:.2em;color:var(--p2)}
+.mkbox .rxr label.wide{flex:1 1 180px}
+.mkbox .rxr label .fi{width:100%;text-align:left;font-size:16px;font-weight:600}
+.mkbox .rxr label.cst{flex:0 0 100px}
+.mkbox .rxr label.cst .fi{text-align:center;font-weight:700;font-size:18px}
+.mkbox .rxr label .fi:disabled{opacity:.55}
+.mkst{display:flex;align-items:center;gap:6px 12px;flex-wrap:wrap;padding:6px 0}
+.mkbar{flex:1 1 200px;height:10px;border:1px solid var(--line);background:var(--field,#0006)}
+.mkbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--p1),var(--p2));transition:width .6s linear}
+#mkinfo{flex:1 1 100%;font-size:15px;color:var(--mute)}
+.mkgm{margin-top:6px}
+.mkgm>summary{cursor:pointer;font:700 10px "Orbitron",sans-serif;letter-spacing:.22em;color:var(--mute)}
+.mkgm button{margin:6px 8px 0 0}
+
+#mk-overlay{position:fixed;inset:0;z-index:99999;overflow:auto;overflow-x:hidden;overscroll-behavior:contain;padding:18px 10px calc(18px + env(safe-area-inset-bottom));color:var(--ink);font:500 16px/1.35 "Rajdhani","Bahnschrift","Segoe UI",Arial,sans-serif;background:radial-gradient(900px 500px at 85% -5%,color-mix(in srgb,var(--g1) 67%,transparent),transparent),radial-gradient(700px 500px at 0 100%,color-mix(in srgb,var(--g2) 60%,transparent),transparent),var(--bg)}
+#mk-overlay[hidden]{display:none}
+#mk-overlay [hidden]{display:none!important}
+.mk-wrap{max-width:760px;margin:0 auto}
+.mk-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:12px 16px;border:1px solid var(--p2);background:color-mix(in srgb,var(--deep0,var(--deep)) 96%,transparent)}
+.mk-head b{font:700 18px "Orbitron",sans-serif;letter-spacing:.3em;color:#fff}
+.mk-head span{font:600 10px "Orbitron",sans-serif;letter-spacing:.26em;color:var(--mute)}
+.mk-head button{margin-left:auto}
+.mk-info{margin:14px 2px 10px;color:var(--mute);font-size:15px}
+.mk-info b{color:var(--ink)}
+.mk-chips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.mk-chips span{padding:4px 9px;border:1px solid var(--line);background:var(--deep);font:700 10px "Orbitron",sans-serif;letter-spacing:.12em;color:var(--mute)}
+.mk-chips span.c{border-color:var(--p2);color:var(--ink)}
+.mk-chips span.p{border-color:#ffd36b;color:#ffd36b}
+.mk-chips span.g{border-color:#7dff9b;color:#7dff9b}
+.mk-chips span.m{border-color:var(--hot);color:var(--hot)}
+.mk-stage{border:1px solid var(--line);border-left:3px solid var(--p2);background:var(--deep);padding:16px}
+.mk-comp{font:700 13px "Orbitron",sans-serif;letter-spacing:.2em;color:var(--p2);margin-bottom:14px}
+.mk-bar{position:relative;height:60px;border:1px solid var(--line);background:var(--field,#0008);overflow:hidden;touch-action:manipulation}
+.mk-bar .mk-ok{position:absolute;top:0;bottom:0;background:color-mix(in srgb,#7dff9b 34%,transparent);border-left:2px solid #7dff9b;border-right:2px solid #7dff9b}
+.mk-bar .mk-gold{position:absolute;top:0;bottom:0;background:color-mix(in srgb,#ffd36b 55%,transparent);border-left:2px solid #ffd36b;border-right:2px solid #ffd36b}
+.mk-bar .mk-nd{position:absolute;top:0;bottom:0;left:0;width:4px;margin-left:-2px;background:#fff;box-shadow:0 0 10px var(--p2),0 0 3px #fff}
+.mk-fb{min-height:1.6em;margin:10px 0 0;text-align:center;font:700 18px "Orbitron",sans-serif;letter-spacing:.3em}
+.mk-fb.p{color:#ffd36b}.mk-fb.g{color:#7dff9b}.mk-fb.m{color:var(--hot)}
+.mk-act{display:flex;justify-content:center;margin-top:8px}
+.mk-act button{padding:14px 40px;font-size:13px}
+.mk-strikes{display:flex;justify-content:center;gap:8px;margin-top:12px;font:600 10px "Orbitron",sans-serif;letter-spacing:.2em;color:var(--mute);align-items:center}
+.mk-strikes i{width:14px;height:14px;border:1px solid var(--line);background:transparent}
+.mk-strikes i.x{background:var(--hot);border-color:var(--hot);box-shadow:0 0 6px var(--hot)}
+.mk-res{border:1px solid var(--line);border-left:3px solid var(--p2);background:var(--deep);padding:20px;text-align:center}
+.mk-res h3{margin:0 0 8px;font:700 18px "Orbitron",sans-serif;letter-spacing:.24em;color:var(--soft)}
+.mk-res.bad h3{color:var(--hot)}
+.mk-res p{margin:0 0 16px;color:var(--mute);font-size:16px}
+@media(max-width:600px){.mk-bar{height:72px}.mk-head b{font-size:15px}}
+@media print{#mk-overlay,.mkbox{display:none!important}}
+
+/* blueprint / builder */
+.mk-design{border:1px solid var(--line);border-left:3px solid var(--p2);background:var(--deep);padding:16px;margin-bottom:12px}
+.mk-nm{display:block;font:700 9px "Orbitron",sans-serif;letter-spacing:.2em;color:var(--mute)}
+.mk-nm .fi{display:block;width:100%;margin-top:4px;font-size:17px;font-weight:600}
+.mk-pv{margin:12px 0;padding:8px;border:1px solid var(--line);background:var(--field,#0006)}
+.mk-svg{display:block;width:100%;max-height:150px}
+.mk-svg .pt{fill:var(--deep);stroke:var(--p2);stroke-width:2;stroke-linejoin:round;transition:opacity .3s}
+.mk-svg.build .pt{opacity:.14}
+.mk-svg .pt.on{opacity:1}
+.mk-svg .pt.p{stroke:#ffd36b;filter:drop-shadow(0 0 5px #ffd36b)}
+.mk-svg .pt.g{stroke:#7dff9b}
+.mk-svg .pt.m{stroke:var(--hot)}
+.mk-slot{margin-bottom:10px}
+.mk-sl{font:700 10px "Orbitron",sans-serif;letter-spacing:.22em;color:var(--p2);margin-bottom:5px}
+.mk-opts{display:flex;flex-wrap:wrap;gap:6px}
+.mk-opt{display:flex;flex-direction:column;align-items:flex-start;gap:2px;padding:7px 11px;border:1px solid var(--line);background:var(--field,#0006);color:var(--ink);font:600 15px "Rajdhani",sans-serif;cursor:pointer;text-align:left}
+.mk-opt small{font:600 9px "Orbitron",sans-serif;letter-spacing:.12em;color:var(--mute)}
+.mk-opt[aria-pressed="true"]{border-color:var(--p2);background:color-mix(in srgb,var(--p2) 22%,transparent);box-shadow:0 0 8px color-mix(in srgb,var(--p2) 50%,transparent)}
+.mk-opt:disabled{opacity:.4;cursor:not-allowed}
+.mk-stats{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+.mk-stats span{flex:1 1 90px;padding:6px 10px;border:1px solid var(--line);background:var(--field,#0006);font:700 9px "Orbitron",sans-serif;letter-spacing:.16em;color:var(--mute)}
+.mk-stats b{display:block;margin-top:2px;font:700 18px "Rajdhani",sans-serif;letter-spacing:.04em;color:var(--ink)}
+.mk-dact{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.mk-dact button{padding:12px 26px;font-size:12px}
+.mk-dact button.poor{opacity:.6}
+.mk-dact span{color:var(--mute);font-size:15px}
+.mk-dmsg{min-height:1.4em;margin:8px 0 0;color:var(--hot);font-size:15px}
+.mk-stage .mk-pv{margin-top:0}
+
+/* welding stage */
+.mk-sv{position:relative;width:100%;aspect-ratio:330/130;border:1px solid var(--line);background:var(--field,#0008);overflow:hidden;touch-action:none;user-select:none}
+.mk-sv #mk-svg{position:absolute;inset:0}
+.mk-sv .mk-svg{width:100%;height:100%;max-height:none}
+.mk-sv canvas{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair;touch-action:none}
+.mk-gauges{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px}
+.mk-gauges label{display:flex;align-items:center;gap:8px;flex:1 1 220px;font:700 9px "Orbitron",sans-serif;letter-spacing:.2em;color:var(--mute)}
+.mk-heat{flex:1;height:12px;border:1px solid var(--line);background:var(--field,#0006);overflow:hidden}
+.mk-heat i{display:block;height:100%;width:0;background:linear-gradient(90deg,#7dff9b,#ffd36b 55%,var(--hot))}
+.mk-spd{min-width:130px;text-align:center;padding:5px 10px;border:1px solid var(--line);font:700 11px "Orbitron",sans-serif;letter-spacing:.2em;color:var(--mute)}
+.mk-spd.ok{border-color:#7dff9b;color:#7dff9b}
+.mk-spd.bad{border-color:var(--hot);color:var(--hot)}
+
+.mk-grp{flex:1 0 100%;margin:6px 0 0;font:700 9px "Orbitron",sans-serif;letter-spacing:.24em;color:var(--mute);opacity:.8}
+.mk-grp:first-child{margin-top:0}
+.mk-opt small+small{color:var(--p2)}
+</style>
+<script id="mk-js">/* Tech Maker workbench. Data (MKMODS, MKPRICE, MKHTML) is defined next to the Role panel in the main script. */
+(function(){
+"use strict";
+var HOUR=3600000,G=null,ov=null,els={},opener=null,notified=0;
+var JOBS={
+ fix:{n:"Fix a weapon",sp:"ff",st:["TACK THE BREAK","WELD THE CRACK","SEAL & GRIND"]},
+ mod:{n:"Modify a weapon",sp:"up",st:["CUT THE MOUNT","WELD THE BRACKET","REINFORCE THE JOINT","FINAL BEAD"]},
+ make:{n:"Make a new weapon",sp:"fb",st:["FORGE THE FRAME","CUT & MACHINE","ASSEMBLE","FIT & BALANCE","FINAL CALIBRATION"]}};
+var QN={"-1":"POOR (\u22121)","0":"STANDARD","1":"EXCELLENT (+1)"};
+/* ---------- weapon parts (homebrew, edit freely) ----------
+   Base damage, ROF, magazine, hands and skill always come from the sheet's own weapon presets (PRE).
+   Balance rules: +1d6 (long barrel) costs ROF and concealment, -1d6 (short barrel) buys concealment,
+   big magazines are bulky, precision tuning gives +1 quality step, damage never goes above preset +1d6.
+   Tiers: T1 needs no Fabrication, T2 needs 1, T3 needs 2, T4 (the heavy hitters) needs MORE THAN 2 (3+). */
+var FR={
+ lmel:{n:"Light melee weapon",base:"Light melee weapon",k:1,t:1,c:500,kind:"melee",g:"MELEE"},
+ mmel:{n:"Medium melee weapon",base:"Medium melee weapon",k:1,t:1,c:600,kind:"melee",g:"MELEE"},
+ hmel:{n:"Heavy melee weapon",base:"Heavy melee weapon",k:0,t:2,c:1200,kind:"melee",g:"MELEE"},
+ vmel:{n:"Very heavy melee weapon",base:"Very heavy melee weapon",k:0,t:3,c:1500,kind:"melee",g:"MELEE"},
+ mpist:{n:"Medium pistol",base:"Medium pistol",k:1,t:1,c:600,kind:"firearm",g:"PISTOLS"},
+ hpist:{n:"Heavy pistol",base:"Heavy pistol",k:0,t:2,c:1200,kind:"firearm",g:"PISTOLS"},
+ vpist:{n:"Very heavy pistol",base:"Very heavy pistol",k:0,t:3,c:1600,kind:"firearm",g:"PISTOLS"},
+ smg:{n:"Submachinegun",base:"Submachinegun",k:0,t:2,c:1500,kind:"firearm",g:"AUTOMATICS"},
+ hsmg:{n:"Heavy SMG",base:"Heavy SMG",k:0,t:3,c:2200,kind:"firearm",g:"AUTOMATICS"},
+ ar:{n:"Assault rifle",base:"Assault rifle",k:0,t:4,c:5500,kind:"firearm",g:"AUTOMATICS"},
+ shot:{n:"Shotgun",base:"Shotgun",k:0,t:3,c:4500,kind:"firearm",g:"LONGARMS"},
+ snip:{n:"Sniper rifle",base:"Sniper rifle",k:0,t:4,c:6500,kind:"firearm",g:"LONGARMS"},
+ bow:{n:"Bow",base:"Bow",k:0,t:2,c:1400,kind:"archery",g:"ARCHERY"},
+ xbow:{n:"Crossbow",base:"Crossbow",k:0,t:3,c:2200,kind:"archery",g:"ARCHERY"},
+ gl:{n:"Grenade launcher",base:"Grenade launcher",k:0,t:4,c:7000,kind:"launcher",g:"HEAVY ORDNANCE"},
+ rl:{n:"Rocket launcher",base:"Rocket launcher",k:0,t:4,c:9000,kind:"launcher",g:"HEAVY ORDNANCE"}};
+var LEG={lpist:"mpist",rifle:"ar",scatter:"shot",blade:"lmel",cleaver:"hmel"};
+var BAR={short:{d:-1,t:1,c:100,e:"\u22121d6 \u00b7 compact"},std:{d:0,t:1,c:200,e:"standard"},long:{d:1,t:3,c:800,e:"+1d6 \u00b7 ROF \u22121 \u00b7 bulky"}};
+var ACT={salv:{t:1,c:80,e:"ROF \u22121"},basic:{t:1,c:200,e:"standard"},tuned:{t:3,c:1200,e:"+1 quality step"}};
+var MAG={small:{x:.5,t:1,c:60,e:"half rounds"},std:{x:1,t:1,c:150,e:"standard"},ext:{x:1.5,t:2,c:500,e:"+50% \u00b7 bulky"},drum:{x:2,t:4,c:1200,e:"double \u00b7 bulky"}};
+var BN={firearm:{short:"Short barrel",std:"Standard barrel",long:"Long-run barrel"},melee:{short:"Short blade",std:"Standard blade",long:"Long blade"},archery:{short:"Short limbs",std:"Standard limbs",long:"Long limbs"},launcher:{short:"Short tube",std:"Standard tube",long:"Long tube"}};
+var AN={firearm:{salv:"Salvaged action",basic:"Basic action",tuned:"Precision-tuned action"},melee:{salv:"Taped-up grip",basic:"Plain grip",tuned:"Balanced grip"},archery:{salv:"Frayed draw",basic:"Standard draw",tuned:"Tuned draw"},launcher:{salv:"Salvaged trigger group",basic:"Standard trigger group",tuned:"Tuned trigger group"}};
+var MN={firearm:{small:"Short magazine",std:"Standard magazine",ext:"Extended magazine",drum:"Drum magazine"},archery:{small:"Sparse quiver",std:"Standard quiver",ext:"Extended quiver",drum:"Bandolier"},launcher:{small:"Short feed",std:"Standard feed",ext:"Extended feed",drum:"Drum feed"}};
+var ATT={
+ firearm:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Telescopic scope",t:1,c:400,e:"note only"},supp:{n:"Suppressor",t:2,c:600,e:"note only"},link:{n:"Smartgun link",t:3,c:1500,e:"note only"}},
+ archery:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Scope",t:1,c:400,e:"note only"},link:{n:"Smart sight",t:3,c:1500,e:"note only"}},
+ launcher:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Scope",t:1,c:400,e:"note only"},link:{n:"Targeting link",t:3,c:1500,e:"note only"}},
+ melee:{none:{n:"No attachment",t:1,c:0,e:""},pommel:{n:"Weighted pommel",t:1,c:300,e:"note only"},coil:{n:"Shock coil",t:3,c:1500,e:"note only"},mono:{n:"Mono-edge",t:4,c:3000,e:"note only"}}};
+var LBL={firearm:{f:"FRAME",b:"BARREL",a:"ACTION",m:"MAGAZINE",t:"ATTACHMENT"},melee:{f:"HILT",b:"BLADE",a:"GRIP",t:"ATTACHMENT"},archery:{f:"FRAME",b:"LIMBS",a:"DRAW SYSTEM",m:"QUIVER",t:"ATTACHMENT"},launcher:{f:"FRAME",b:"TUBE",a:"TRIGGER GROUP",m:"FEED",t:"ATTACHMENT"}};
+var D=null;
+function core(f){var p=PRE[f.base];return{s:p[0],d:parseInt(p[1],10)||1,r:p[2],m:p[3]||0,h:p[4]}}
+function kindOf(p){return FR[p.f].kind}
+function slotsFor(p){return kindOf(p)==="melee"?["f","b","a","t"]:["f","b","a","m","t"]}
+function slotLbl(s,p){return LBL[kindOf(p)][s]}
+function frameFx(f){var c=core(f);return c.d+"d6 \u00b7 ROF "+c.r+(c.m?" \u00b7 "+c.m+" rds":"")+(c.h===2?" \u00b7 2H":"")}
+function partOf(s,k,p){
+ var f=FR[p.f],kd=f.kind,mult=1+.25*(f.t-1),o;
+ if(s==="f"){var q=FR[k];return{n:q.n,t:q.t,c:q.c,e:frameFx(q)}}
+ if(s==="b")o=BAR[k],o={n:BN[kd][k],t:o.t,c:o.c,e:o.e};
+ else if(s==="a")o=ACT[k],o={n:AN[kd][k],t:o.t,c:o.c,e:o.e};
+ else if(s==="m")o=MAG[k],o={n:MN[kd][k],t:o.t,c:o.c,e:o.e};
+ else o=ATT[kd][k];
+ return{n:o.n,t:o.t,c:Math.round(o.c*mult),e:o.e}}
+function optKeys(s,p){
+ if(s==="f")return Object.keys(FR);
+ if(s==="b")return["short","std","long"];
+ if(s==="a")return["salv","basic","tuned"];
+ if(s==="m"){var m=core(FR[p.f]).m;return m<=2?["std","ext"]:m<=4?["small","std","ext"]:["small","std","ext","drum"]}
+ return Object.keys(ATT[kindOf(p)])}
+function tierCap(){return 1+Math.min(3,num("rx_Tech_fb_p"))}
+function norm(p,cap){
+ if(LEG[p.f])p.f=LEG[p.f];
+ if(!FR[p.f]||FR[p.f].t>cap)p.f="mpist";
+ var def={b:"std",a:"basic",m:"std",t:"none"};
+ ["b","a","m","t"].forEach(function(s){
+  if(s==="m"&&kindOf(p)==="melee"){p.m="std";return}
+  if(optKeys(s,p).indexOf(p[s])<0||partOf(s,p[s],p).t>cap)p[s]=def[s]});
+ return p}
+function statsOf(p){
+ var f=FR[p.f],c=core(f),kd=f.kind,ranged=kd!=="melee",b=BAR[p.b],m=MAG[p.m],at=ATT[kd][p.t];
+ var dice=Math.max(1,c.d+b.d);
+ var rof=Math.max(1,Math.min(c.r,c.r+(p.b==="long"?-1:0)+(p.a==="salv"?-1:0)));
+ var mag=0;if(ranged){var cap=c.m<=4?c.m+1:c.m*2;mag=Math.max(1,Math.min(cap,Math.round(c.m*m.x)))}
+ var bulky=ranged&&(p.m==="ext"||p.m==="drum");
+ var k=(f.k||(p.b==="short"&&c.h===1))&&p.b!=="long"&&!bulky?1:0;
+ var parts=slotsFor(p).map(function(s){return partOf(s,p[s],p).n});
+ var mult=1+.25*(f.t-1);
+ return{dmg:dice+"d6",r:rof,m:mag,h:c.h,k:k,s:c.s,base:f.base,kind:kd,ranged:ranged,tune:p.a==="tuned"?1:0,
+  cost:f.c+Math.round((b.c+ACT[p.a].c+(ranged?m.c:0)+at.c)*mult),
+  tier:Math.max(f.t,b.t,ACT[p.a].t,ranged?m.t:1,at.t),note:"Custom build: "+parts.join(", ")}}
+function buildStages(p){
+ var o=[];
+ slotsFor(p).forEach(function(s){if(s==="t"&&p.t==="none")return;var pt=partOf(s,p[s],p);o.push({s:s,name:slotLbl(s,p)+" \u00b7 "+pt.n.toUpperCase(),t:pt.t})});
+ return o}
+function R(x,y,w,h,rx){return{k:"r",x:x,y:y,w:w,h:h,rx:rx||0}}
+function P(pts){return{k:"p",pts:pts}}
+function Ci(cx,cy,r){return{k:"c",cx:cx,cy:cy,r:r}}
+function Ln(x1,y1,x2,y2,sw){return{k:"l",x1:x1,y1:y1,x2:x2,y2:y2,sw:sw||2}}
+function PL(pts){return{k:"pl",pts:pts}}
+function partsOf(p){
+ var f=FR[p.f],kd=f.kind,o={};
+ if(kd==="firearm"){
+  var G_={mpist:[70,80,40,9,0],hpist:[70,92,44,11,0],vpist:[70,100,50,13,0],smg:[66,92,44,10,0],hsmg:[64,100,48,11,0],ar:[58,108,56,11,1],shot:[58,104,54,15,1],snip:[58,118,66,8,1]}[p.f];
+  var x0=G_[0],L=G_[1],bl=G_[2]*{short:.55,std:1,long:1.6}[p.b],bt=G_[3],y0=42,bx=x0+L;
+  o.f=[R(x0,y0,L,26,3),P([[x0+6,y0+26],[x0+30,y0+26],[x0+22,y0+62],[x0-2,y0+62]])];
+  if(G_[4])o.f.push(P([[x0,y0+2],[x0-48,y0+10],[x0-48,y0+34],[x0,y0+26]]));
+  o.b=[R(bx,y0+13-bt/2,bl,bt,2)];
+  o.a=[R(x0+L*.35,y0-8,{basic:16,tuned:26,salv:9}[p.a],8,2)];
+  var mx=x0+L*.5;
+  o.m=[p.m==="drum"?Ci(mx+12,y0+44,18):R(mx,y0+26,22,{small:16,std:28,ext:42}[p.m],2)];
+  o.t=[];
+  if(p.t==="scope")o.t=[R(x0+L*.2,y0-20,46,9,4),R(x0+L*.2+8,y0-12,4,4),R(x0+L*.2+32,y0-12,4,4)];
+  else if(p.t==="link")o.t=[R(x0+L*.15,y0+7,16,10,2),Ci(x0+L*.15+8,y0+12,2.5)];
+  else if(p.t==="supp")o.t=[R(bx+bl,y0+13-8,38,16,4)]}
+ else if(kd==="melee"){
+  var M={lmel:[14,30,80],mmel:[20,38,100],hmel:[28,46,115],vmel:[38,56,130]}[p.f],gx=60,cy=65,bh=M[0],gw=M[1],bl2=M[2]*{short:.65,std:1,long:1.3}[p.b];
+  o.f=[R(gx,cy-7,56,14,3),R(gx+56,cy-gw/2,8,gw,2)];
+  o.b=[P([[gx+64,cy-bh/2],[gx+64+bl2-18,cy-bh/2],[gx+64+bl2,cy],[gx+64+bl2-18,cy+bh/2],[gx+64,cy+bh/2]])];
+  var nw={basic:1,tuned:4,salv:2}[p.a];o.a=[];for(var i=0;i<nw;i++)o.a.push(R(gx+8+i*10,cy-9,5,18,1));
+  o.t=[];
+  if(p.t==="pommel")o.t=[Ci(gx-8,cy,9)];
+  else if(p.t==="coil")o.t=[PL([[gx+74,cy],[gx+88,cy-6],[gx+100,cy+6],[gx+114,cy-6],[gx+126,cy+6],[gx+140,cy]])];
+  else if(p.t==="mono")o.t=[Ln(gx+66,cy+bh/2,gx+64+bl2-18,cy+bh/2,4)]}
+ else if(kd==="archery"){
+  var k2={short:.7,std:1,long:1.25}[p.b];
+  if(p.f==="bow"){
+   var ty=44-34*k2,by=86+34*k2;
+   o.f=[R(150,44,12,42,3)];
+   o.b=[P([[150,44],[162,44],[190,ty],[182,ty]]),P([[150,86],[162,86],[190,by],[182,by]])];
+   o.a=[PL([[186,ty],[166,65],[186,by]])];if(p.a==="tuned")o.a.push(Ci(186,ty,4),Ci(186,by,4));
+   o.m=[R(104,50,16,{std:40,ext:54}[p.m]||40,3)];
+   o.t=[];if(p.t==="scope")o.t=[R(146,32,18,8,3)];else if(p.t==="link")o.t=[R(132,52,10,9,2),Ci(137,56,2)]}
+  else{
+   var ty2=56-30*k2,by2=70+30*k2;
+   o.f=[R(60,56,116,14,3),P([[88,70],[108,70],[102,104],[84,104]]),P([[60,56],[36,60],[36,78],[60,70]])];
+   o.b=[P([[170,56],[180,56],[196,ty2],[188,ty2]]),P([[170,70],[180,70],[196,by2],[188,by2]])];
+   o.a=[PL([[192,ty2],[176,63],[192,by2]])];if(p.a==="tuned")o.a.push(Ci(192,ty2,4),Ci(192,by2,4));
+   o.m=[R(100,44,{std:30,ext:46}[p.m]||30,12,2)];
+   o.t=[];if(p.t==="scope")o.t=[R(104,30,40,9,4)];else if(p.t==="link")o.t=[R(80,42,14,10,2),Ci(87,47,2.5)]}}
+ else{
+  var gl=p.f==="gl",x1=gl?64:56,L1=gl?66:60,yt=gl?44:50,hb=gl?24:20,tl={short:gl?36:70,std:gl?56:100,long:gl?84:140}[p.b],th=gl?26:34,ty3=gl?40:36;
+  o.f=[R(x1,yt,L1,hb,3),P([[x1+8,yt+hb],[x1+30,yt+hb],[x1+22,yt+hb+36],[x1,yt+hb+36]])];
+  if(gl)o.f.push(P([[x1,yt+2],[x1-44,yt+10],[x1-44,yt+32],[x1,yt+24]]));
+  o.b=[R(x1+L1,ty3,tl,th,gl?5:6)];
+  o.a=[R(x1+L1*.3,yt-8,{basic:16,tuned:26,salv:9}[p.a],8,2)];
+  o.m=[R(x1+L1*.5,yt+hb,24,{small:12,std:20,ext:30}[p.m]||20,3)];
+  o.t=[];
+  if(p.t==="scope")o.t=[R(x1+L1*.15,yt-22,46,9,4),R(x1+L1*.15+8,yt-14,4,4),R(x1+L1*.15+32,yt-14,4,4)];
+  else if(p.t==="link")o.t=[R(x1+L1*.1,yt+4,16,10,2),Ci(x1+L1*.1+8,yt+9,2.5)]}
+ return o}
+function primSvg(q){
+ if(q.k==="r")return'<rect x="'+q.x+'" y="'+q.y+'" width="'+q.w+'" height="'+q.h+'" rx="'+q.rx+'"/>';
+ if(q.k==="p")return'<polygon points="'+q.pts.map(function(a){return a.join(",")}).join(" ")+'"/>';
+ if(q.k==="c")return'<circle cx="'+q.cx+'" cy="'+q.cy+'" r="'+q.r+'"/>';
+ if(q.k==="l")return'<line x1="'+q.x1+'" y1="'+q.y1+'" x2="'+q.x2+'" y2="'+q.y2+'" stroke-width="'+q.sw+'"/>';
+ return'<polyline fill="none" points="'+q.pts.map(function(a){return a.join(",")}).join(" ")+'"/>'}
+function svgOf(p,build){
+ var o=partsOf(p),h='<svg class="mk-svg'+(build?" build":"")+'" viewBox="0 0 330 130" role="img" aria-label="Weapon preview">';
+ ["f","b","a","m","t"].forEach(function(s){if(!o[s])return;h+='<g class="pt'+(build?"":" on")+'" data-s="'+s+'">'+o[s].map(primSvg).join("")+"</g>"});
+ return h+"</svg>"}
+function plateSvg(){return'<svg class="mk-svg" viewBox="0 0 330 130" role="img" aria-label="Metal plates to weld"><g class="pt on"><rect x="50" y="30" width="230" height="32" rx="3"/><rect x="50" y="68" width="230" height="32" rx="3"/></g></svg>'}
+/* weld seams: dense polyline, one point per unit of length, in the 330x130 drawing space */
+function outline(q){
+ if(q.k==="r")return[[q.x,q.y],[q.x+q.w,q.y],[q.x+q.w,q.y+q.h],[q.x,q.y+q.h],[q.x,q.y]];
+ if(q.k==="p")return q.pts.concat([q.pts[0]]);
+ if(q.k==="c"){var a=[];for(var i=0;i<=20;i++)a.push([q.cx+q.r*Math.cos(i/20*6.2832),q.cy+q.r*Math.sin(i/20*6.2832)]);return a}
+ if(q.k==="l")return[[q.x1,q.y1],[q.x2,q.y2]];
+ return q.pts}
+function dense(pts,min,max){
+ var out=[],i,k;
+ function run(){for(i=0;i<pts.length-1;i++){var ax=pts[i][0],ay=pts[i][1],bx=pts[i+1][0],by=pts[i+1][1],len=Math.sqrt((bx-ax)*(bx-ax)+(by-ay)*(by-ay)),n=Math.max(1,Math.round(len));for(k=0;k<n;k++)out.push([ax+(bx-ax)*k/n,ay+(by-ay)*k/n])}}
+ run();while(out.length<min)run();
+ return out.slice(0,max)}
+function seamOf(p,slot){var o=partsOf(p)[slot],q=slot==="f"?o[Math.min(1,o.length-1)]:o[0],t=partOf(slot,p[slot],p).t;return dense(outline(q),70+15*(t-1),190)}
+function plateSeam(i){
+ var amp=[0,7,11,15][i%4],w=1+.5*i,pts=[];
+ for(var x=70;x<=260;x+=4)pts.push([x,65+amp*Math.sin((x-70)/190*6.2832*w)]);
+ return dense(pts,70,200)}
+
+function g(k){return document.querySelector('[data-k="'+k+'"]')}
+function byId(i){return document.getElementById(i)}
+function num(k){var e=g(k);return e?(+e.value||0):0}
+function job(){var e=g("mk_job");if(!e)return null;try{var j=JSON.parse(e.value||"null");if(j&&j.p&&LEG[j.p.f])j.p.f=LEG[j.p.f];return j&&typeof j==="object"&&JOBS[j.t]&&(j.t!=="make"||(j.p&&FR[j.p.f]))?j:null}catch(x){return null}}
+function setJob(j){g("mk_job").value=j?JSON.stringify(j):"";upd()}
+function wcount(){return Math.max(1,Math.min(12,+val("wcount").value||2))}
+function wname(i){var e=val("w"+i+"_n");return e?e.value.trim():""}
+function findW(name){var n=wcount(),k=String(name||"").toLowerCase();for(var i=0;i<n;i++)if(k&&wname(i).toLowerCase()===k)return i;return -1}
+function modName(k){for(var i=0;i<MKMODS.length;i++)if(MKMODS[i][0]===k)return MKMODS[i][1];return k}
+function desc(j){var w=j.wn||"weapon";return j.t==="fix"?"Repair "+w:j.t==="mod"?modName(j.x)+" on "+w:"Build "+(j.n||FR[j.p.f].n)}
+function fmt(ms){var s=Math.max(0,Math.ceil(ms/1000)),h=Math.floor(s/3600),m=Math.floor(s%3600/60);s%=60;return h+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
+function qOf(v){return v==="1"?1:v==="-1"?-1:0}
+function qVal(n){return n>0?"1":n<0?"-1":""}
+
+/* ---------- workbench panel on the Role tab ---------- */
+function suggest(){
+ var t=g("mk_t").value;if(t==="make")return;
+ g("mk_c").value=t==="fix"?500:(function(){for(var i=0;i<MKMODS.length;i++)if(MKMODS[i][0]===g("mk_x").value)return MKMODS[i][2];return 100})();
+ upd()}
+function ruin(why){var j=job();if(!j)return;setJob(null);logRoll("Workbench \u00b7 "+desc(j),why,"RUINED","fumble")}
+function mkRefresh(){
+ var box=byId("mkbox");if(!box||!g("mk_t"))return;
+ var j=job();
+ if(j&&j.s==="play"&&!G){ruin("the bench was abandoned mid-job: the parts are lost");j=null}
+ var tS=g("mk_t");if(!JOBS[tS.value])tS.value=j?j.t:"fix";
+ if(!g("mk_x").value)g("mk_x").value="ext";
+  var t=j?j.t:tS.value,ws=g("mk_w"),n=wcount(),first=-1;
+ for(var i=0;i<12;i++){var o=ws.options[i];if(!o)continue;var nm=wname(i);o.textContent=(i+1)+". "+(nm||"(empty slot)");o.disabled=!nm||i>=n;if(nm&&i<n&&first<0)first=i}
+ var cur=ws.options[+ws.value];if(ws.value===""||!cur||cur.disabled)ws.value=first>=0?String(first):"";
+ byId("mkl-w").hidden=t==="make";byId("mkl-x").hidden=t!=="mod";byId("mkl-c").hidden=t==="make";
+ ["mk_t","mk_w","mk_x","mk_c"].forEach(function(k){g(k).disabled=!!j});
+ var go=byId("mkgo"),col=byId("mkcol"),info=byId("mkinfo"),fill=byId("mkfill"),now=Date.now();
+ go.hidden=false;col.hidden=true;
+ if(!j){var mk=t==="make";go.textContent=mk?"OPEN BLUEPRINT":"PAY "+(num("mk_c")||0)+" EB & OPEN WORKBENCH";fill.style.width="0";
+  info.textContent=mk?"Design the weapon part by part, pay for the parts, assemble it in the minigame, then wait 1 hour. Better parts cost more, need Fabrication Expertise points and are harder to weld. Three bad welds ruin the job and the parts are lost.":"Pay for the parts, weld the work together yourself, then wait 1 hour for it to finish. Three bad welds ruin the job and the parts are lost."}
+ else if(j.s==="wait"){go.hidden=true;var left=j.end-now;
+  if(left>0){fill.style.width=Math.min(100,(1-left/HOUR)*100)+"%";info.textContent=desc(j)+" \u00b7 quality "+QN[j.q]+" \u00b7 ready in "+fmt(left)}
+  else{fill.style.width="100%";col.hidden=false;info.textContent=desc(j)+" \u00b7 finished, quality "+QN[j.q]+". Collect it."}}
+ else{go.hidden=true;info.textContent="Job in progress at the bench."}
+ byId("mkfin").disabled=!(j&&j.s==="wait"&&j.end>now);byId("mkcan").disabled=!j;
+ if(j&&j.s==="wait"&&j.end<=now&&notified!==j.end){notified=j.end;logRoll("Workbench",desc(j)+" is finished. Collect it on the Role tab.","READY","ok")}
+}
+
+function start(){
+ if(job())return;
+ var rs=restState();if(rs.out){logRoll("Workbench",isRobot()?"powered off: recharge first":"0 sleep left: rest first","\u2717","bad");return}
+ var t=g("mk_t").value;
+ if(t==="make"){openDesign();return}
+ var j={s:"play",t:t},cost=num("mk_c"),w=+g("mk_w").value,nm=g("mk_w").value===""?"":wname(w);
+ if(!nm||w>=wcount()){logRoll("Workbench","add or pick a weapon on the Weapons tab first","\u2717","bad");return}
+ j.w=w;j.wn=nm;
+ if(t==="mod"){j.x=g("mk_x").value;if(j.x==="ext"&&!(+val("w"+w+"_m").value>0)){logRoll("Workbench",nm+" has no magazine to extend","\u2717","bad");return}}
+ var eb=+val("eb").value||0;
+ if(cost>eb){logRoll("Workbench","needs "+cost+" eb of parts, you have "+eb,"\u2717","bad");return}
+ j.c=cost;
+ if(cost){val("eb").value=eb-cost;ebLog(-cost,"Maker parts: "+desc(j))}
+ logRoll("Workbench \u00b7 "+desc(j),cost?"parts bought":"no parts cost",cost?"\u2212"+cost+" eb":"\u2014","");
+ openGame(j)}
+
+/* ---------- blueprint: design the weapon part by part ---------- */
+function bpLoad(){var d={p:{f:"lpist",b:"std",a:"basic",m:"std",t:"none"},n:""};try{var s=JSON.parse(g("mk_bp").value||"null");if(s&&s.p){d.p=s.p;d.n=String(s.n||"")}}catch(e){}return d}
+function bpSave(){g("mk_bp").value=JSON.stringify({p:D.p,n:D.n});upd()}
+function openDesign(){
+ if(!ov)build();
+ D=bpLoad();opener=opener||document.activeElement;
+ els.stage.hidden=true;els.res.hidden=true;els.design.hidden=false;els.chips.innerHTML="";
+ els.sub.textContent="BLUEPRINT";els.name.value=D.n;els.dmsg.textContent="";
+ els.info.textContent="Pick a part for each slot and watch the weapon take shape. Fabrication Expertise points unlock tiers: 1 = T2, 2 = T3, and you need MORE THAN 2 (3+) for T4, which is what it takes to build everything. Higher tiers cost more and are harder to weld. Parts are paid when you start welding.";
+ ov.hidden=false;document.body.style.overflow="hidden";ov.scrollTop=0;renderDesign()}
+function renderDesign(){
+ var cap=tierCap();norm(D.p,cap);
+ var st=statsOf(D.p),kd=st.kind,h="";
+ slotsFor(D.p).forEach(function(s){
+  var grp="",inner="";
+  optKeys(s,D.p).forEach(function(k){
+   var o=partOf(s,k,D.p),dis=o.t>cap;
+   if(s==="f"&&FR[k].g!==grp){grp=FR[k].g;inner+='<span class="mk-grp">'+grp+"</span>"}
+   inner+='<button type="button" class="mk-opt" data-slot="'+s+'" data-key="'+k+'" aria-pressed="'+(D.p[s]===k)+'"'+(dis?' disabled title="Needs Fabrication Expertise '+(o.t-1)+(o.t>3?"+":"")+'"':"")+"><b>"+o.n+"</b>"+(o.e?"<small>"+o.e+"</small>":"")+"<small>"+o.c.toLocaleString("en-US")+" eb \u00b7 T"+o.t+"</small></button>"});
+  h+='<div class="mk-slot"><div class="mk-sl">'+LBL[kd][s]+'</div><div class="mk-opts">'+inner+"</div></div>"});
+ els.slots.innerHTML=h;els.pv.innerHTML=svgOf(D.p,false);
+ var eb=+val("eb").value||0;
+ els.stats.innerHTML=[["DAMAGE",st.dmg],["ROF",st.r],st.ranged?["MAGAZINE",st.m]:null,["HANDS",st.h],["CONCEALABLE",st.k?"YES":"NO"],["SKILL",st.s],st.tune?["QUALITY","+1 STEP"]:null,["PARTS",st.cost.toLocaleString("en-US")+" eb"],["TIER CAP","T"+cap]].filter(Boolean).map(function(x){return"<span>"+x[0]+"<b>"+x[1]+"</b></span>"}).join("");
+ els.pay.textContent="PAY "+st.cost.toLocaleString("en-US")+" EB & START WELDING";els.pay.classList.toggle("poor",st.cost>eb);
+ els.funds.textContent="You have "+eb.toLocaleString("en-US")+" eb."}
+function payBuild(){
+ var rs=restState();if(rs.out){els.dmsg.textContent=isRobot()?"Powered off: recharge first.":"0 sleep left: rest first.";return}
+ norm(D.p,tierCap());var st=statsOf(D.p),eb=+val("eb").value||0;
+ if(st.cost>eb){els.dmsg.textContent="Not enough eurobucks: the parts cost "+st.cost+" eb and you have "+eb+".";return}
+ D.n=els.name.value.trim().slice(0,40);bpSave();
+ var j={s:"play",t:"make",p:JSON.parse(JSON.stringify(D.p)),n:D.n,c:st.cost,st:st};
+ val("eb").value=eb-st.cost;if(st.cost)ebLog(-st.cost,"Maker parts: "+desc(j));
+ logRoll("Workbench \u00b7 "+desc(j),"parts bought: "+st.dmg+" \u00b7 ROF "+st.r+(st.m?" \u00b7 mag "+st.m:""),"\u2212"+st.cost+" eb","");
+ els.design.hidden=true;openGame(j)}
+
+/* ---------- the calibration minigame ---------- */
+function build(){
+ ov=document.createElement("div");ov.id="mk-overlay";ov.hidden=true;ov.setAttribute("role","dialog");ov.setAttribute("aria-modal","true");ov.setAttribute("aria-labelledby","mk-title");
+ ov.innerHTML='<div class="mk-wrap"><div class="mk-head"><b id="mk-title">WEAPON WORKBENCH</b><span id="mk-sub"></span><button type="button" class="mini" id="mk-x">\u2715 LEAVE BENCH</button></div>'
+ +'<p class="mk-info" id="mk-info"></p>'
+ +'<div class="mk-design" id="mk-design" hidden><label class="mk-nm">NAME (OPTIONAL)<input class="fi" id="mk-name" maxlength="40" placeholder="Name your weapon"></label><div class="mk-pv" id="mk-pv"></div><div class="mk-slots" id="mk-slots"></div><div class="mk-stats" id="mk-stats"></div><div class="mk-dact"><button type="button" id="mk-pay">START WELDING</button><span id="mk-funds"></span></div><p class="mk-dmsg" id="mk-dmsg" aria-live="polite"></p></div>'
+ +'<div class="mk-chips" id="mk-chips"></div>'
+ +'<div class="mk-stage" id="mk-stage"><div class="mk-comp" id="mk-comp"></div><div class="mk-sv" id="mk-sv"><div id="mk-svg"></div><canvas id="mk-cv" aria-label="Welding area: hold the pointer down and trace the seam"></canvas></div>'
+ +'<div class="mk-gauges"><label>HEAT<span class="mk-heat"><i id="mk-heat"></i></span></label><span class="mk-spd" id="mk-spd">HOLD TO WELD</span></div>'
+ +'<div class="mk-fb" id="mk-fb" aria-live="polite"></div><div class="mk-strikes" id="mk-strikes"></div></div>'
+ +'<div class="mk-res" id="mk-res" hidden><h3 id="mk-rt"></h3><p id="mk-rd"></p><button type="button" id="mk-done">BACK TO SHEET</button></div></div>';
+ document.body.appendChild(ov);
+ ["sub","info","chips","stage","comp","fb","strikes","res","rt","rd","done","x","design","name","pv","slots","stats","pay","funds","dmsg","svg","cv","heat","spd"].forEach(function(k){els[k]=byId("mk-"+k)});
+ els.done.addEventListener("click",closeBench);els.x.addEventListener("click",closeBench);
+ els.pay.addEventListener("click",payBuild);
+ els.name.addEventListener("input",function(){D.n=els.name.value.trim().slice(0,40);bpSave()});
+ els.slots.addEventListener("click",function(e){var b=e.target.closest(".mk-opt");if(!b||b.disabled)return;D.p[b.dataset.slot]=b.dataset.key;norm(D.p,tierCap());bpSave();renderDesign()});
+ var cv=els.cv;
+ function mv(e){if(!G)return;var r=cv.getBoundingClientRect();G.tx=(e.clientX-r.left)/r.width*330;G.ty=(e.clientY-r.top)/r.height*130;if(!G.hasT){G.px=G.tx;G.py=G.ty}G.hasT=true}
+ function up(){if(G)G.down=false}
+ cv.addEventListener("pointerdown",function(e){if(!G||G.locked||G.ended)return;e.preventDefault();try{cv.setPointerCapture(e.pointerId)}catch(x){}mv(e);G.px=G.tx;G.py=G.ty;G.down=true;G.pressT=0});
+ cv.addEventListener("pointermove",mv);cv.addEventListener("pointerup",up);cv.addEventListener("pointercancel",up);cv.addEventListener("lostpointercapture",up);
+ cv.addEventListener("contextmenu",function(e){e.preventDefault()});
+ window.addEventListener("resize",fit);
+ document.addEventListener("keydown",function(e){if(ov&&!ov.hidden&&e.key==="Escape"){e.preventDefault();closeBench()}})}
+function fit(){
+ if(!els.cv||!ov||ov.hidden)return;
+ var r=els.cv.getBoundingClientRect(),dpr=Math.min(2,window.devicePixelRatio||1);
+ if(r.width<10)return;els.cv.width=Math.round(r.width*dpr);els.cv.height=Math.round(r.width*dpr*130/330)}
+
+function openGame(j){
+ if(!ov)build();
+ var sp=JOBS[j.t].sp,skill=(g("rx_Tech_"+sp+"_s")||{}).value||"",pts=num("rx_Tech_"+sp+"_p"),bn=num("rx_Tech_"+sp+"_b");
+ var sk=skill?sb(skill):sv("TECH"),rs=restState(),lk=takeLuck(),md=+$("#md").value||0;
+ var base=sk+pts+bn+pen()+(rs.pen||0)+md+lk;
+ var stg=j.t==="make"?buildStages(j.p):JOBS[j.t].st.map(function(n){return{s:"",name:n,t:1}});
+ G={j:j,base:base,st:stg.map(function(x){return x.name}),keys:stg.map(function(x){return x.s}),tier:stg.map(function(x){return x.t}),
+  seams:stg.map(function(x,i){return j.t==="make"?seamOf(j.p,x.s):plateSeam(i)}),
+  i:0,pts:0,strikes:0,res:[],old:[],locked:true,ended:false,last:performance.now(),raf:0,timer:0,
+  down:false,hasT:false,tx:0,ty:0,px:0,py:0,v:0,pressT:0,s:0,heat:0,bead:[],cnt:[0,0,0],strayT:0,on:false,sparks:[],now:0,D:[],N:0};
+ j.live=1;setJob(j);
+ opener=opener||document.activeElement;
+ els.design.hidden=true;els.stage.hidden=false;els.res.hidden=true;els.res.classList.remove("bad");
+ els.svg.innerHTML=j.t==="make"?svgOf(j.p,true):plateSvg();
+ els.sub.textContent=JOBS[j.t].n.toUpperCase();
+ els.info.innerHTML="<b></b> \u00b7 skill "+(skill?"":"TECH ")+"<span></span> "+sk+" + specialty "+pts+(bn?" + bonus "+bn:"")+(pen()+(rs.pen||0)+md?" \u00b7 penalties "+(pen()+(rs.pen||0)+md):"")+(lk?" + "+lk+" luck":"")+". <b>Hold the mouse button (or your finger) down to light the torch and trace the glowing seam.</b> Stay on the line at a steady pace: too slow builds heat and burns through, too fast leaves a cold weld. Better skill gives a wider seam and a wider safe speed. Three bad welds ruin the job.";
+ els.info.querySelector("b").textContent=desc(j);els.info.querySelector("span").textContent=skill;
+ ov.hidden=false;document.body.style.overflow="hidden";ov.scrollTop=0;
+ fit();stage();G.last=performance.now();G.raf=requestAnimationFrame(loop)}
+
+function chips(){
+ els.chips.innerHTML=G.st.map(function(s,i){var r=G.res[i],c=r===2?"p":r===1?"g":r===0?"m":i===G.i?"c":"";return'<span class="'+c+'">'+(i+1)+" \u00b7 "+s+"</span>"}).join("");
+ els.strikes.innerHTML="STRIKES "+[0,1,2].map(function(i){return'<i class="'+(i<G.strikes?"x":"")+'"></i>'}).join("")}
+
+function stage(){
+ var i=G.i,b=G.base;
+ G.D=G.seams[i];G.N=G.D.length;G.s=0;G.heat=0;G.bead=[];G.cnt=[0,0,0];G.strayT=0;G.pressT=0;G.on=false;G.sparks=[];G.v=0;G.down=false;
+ G.tol=Math.max(5,Math.min(11,4.5+.35*b))*(1-.1*(G.tier[i]-1));
+ G.vmin=Math.max(10,22-.6*b);G.vmax=52+.8*b;
+ els.comp.textContent="SEAM "+(i+1)+" / "+G.st.length+" \u00b7 "+G.st[i]+(G.tier[i]>1?" \u00b7 T"+G.tier[i]:"");
+ els.fb.textContent="";els.fb.className="mk-fb";chips();fit();
+ G.locked=false;G.last=performance.now()}
+
+function lay(u,d){
+ var v=G.v,q=0,pt=G.D[Math.min(G.N-1,Math.round(u))];
+ if(d<=G.tol*.5&&v>=G.vmin&&v<=G.vmax)q=2;else if(d<=G.tol&&v>=G.vmin*.7&&v<=G.vmax*1.3)q=1;
+ if(u<6)q=Math.max(q,1);
+ G.bead.push({x:pt[0],y:pt[1],q:q,t:G.now});G.cnt[q]++}
+
+function update(dt){
+ var act=G.down&&G.hasT,dx=G.tx-G.px,dy=G.ty-G.py,inst=Math.sqrt(dx*dx+dy*dy)/Math.max(dt,.001);
+ G.px=G.tx;G.py=G.ty;G.v+=(inst-G.v)*Math.min(1,dt*9);
+ if(!act){G.on=false;G.heat=Math.max(0,G.heat-25*dt);return}
+ G.pressT+=dt;
+ var k0=Math.max(0,Math.floor(G.s-3)),k1=Math.min(G.N-1,Math.floor(G.s+22)),best=-1,bd=1e9,k;
+ for(k=k0;k<=k1;k++){var ex=G.D[k][0]-G.tx,ey=G.D[k][1]-G.ty,dd=ex*ex+ey*ey;if(dd<bd){bd=dd;best=k}}
+ var d=Math.sqrt(bd);
+ if(best>=0&&d<=G.tol){
+  G.on=true;G.strayT=0;
+  if(best>G.s){for(var u=Math.floor(G.s/1.5)*1.5+1.5;u<=best;u+=1.5)lay(u,d);G.s=best}}
+ else{G.on=false;G.strayT+=dt;while(G.strayT>=.25){G.strayT-=.25;G.cnt[0]++}}
+ if(G.v<G.vmin&&(G.s>2||G.pressT>.5))G.heat+=55*dt*(1-G.v/G.vmin);else G.heat=Math.max(0,G.heat-14*dt);
+ if(G.on&&G.v>3)for(var n=0;n<3;n++){var a=-3.14159*(.15+Math.random()*.7),sp=50+Math.random()*80;G.sparks.push({x:G.tx,y:G.ty,vx:Math.cos(a)*sp,vy:Math.sin(a)*sp,l:.3+Math.random()*.35})}
+ if(G.heat>=100)return endStage(true);
+ if(G.s>=G.N-2)endStage(false)}
+
+function endStage(forced){
+ G.locked=true;G.down=false;
+ var tot=G.cnt[0]+G.cnt[1]+G.cnt[2],ratio=tot?(G.cnt[2]+.6*G.cnt[1])/tot:0,r=forced?0:ratio>=.82?2:ratio>=.55?1:0;
+ G.res.push(r);G.pts+=r;if(!r)G.strikes++;
+ els.fb.textContent=forced?"BURN-THROUGH":(r===2?"PERFECT WELD":r===1?"GOOD WELD":"WEAK WELD")+" \u00b7 "+Math.round(ratio*100)+"%";
+ els.fb.className="mk-fb "+(r===2?"p":r===1?"g":"m");
+ var pt=G.keys[G.i]&&els.svg.querySelector('[data-s="'+G.keys[G.i]+'"]');if(pt)pt.setAttribute("class","pt on "+(r===2?"p":r===1?"g":"m"));
+ if(G.j.t==="make")G.old=G.old.concat(G.bead);
+ chips();
+ G.timer=setTimeout(function(){
+  if(!G||G.ended)return;
+  if(G.strikes>=3)return finish(false);
+  G.i++;if(G.i>=G.st.length)return finish(true);
+  stage()},1000)}
+
+function beadColor(b,age){
+ if(age<.35)return"#fff4c8";if(age<1.2)return"#ff9a2a";if(age<2.6)return"#c4552a";
+ return b.q===2?"#b7c0cf":b.q===1?"#8d95a3":"#5a3a30"}
+function draw(){
+ var cv=els.cv,c=cv.getContext("2d"),w=cv.width,h=cv.height,sc=w/330;
+ c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,w,h);c.setTransform(sc,0,0,sc,0,0);c.lineCap="round";c.lineJoin="round";
+ var D=G.D,i;
+ c.beginPath();c.moveTo(D[0][0],D[0][1]);for(i=2;i<D.length;i+=2)c.lineTo(D[i][0],D[i][1]);
+ c.strokeStyle="rgba(125,255,155,.10)";c.lineWidth=G.tol*2;c.stroke();
+ c.setLineDash([3,3]);c.strokeStyle="rgba(125,255,155,.6)";c.lineWidth=.9;c.stroke();c.setLineDash([]);
+ if(!G.locked&&G.s<3){var pu=2.5+Math.sin(G.now*6)*.8;c.beginPath();c.arc(D[0][0],D[0][1],G.tol*.5+pu,0,6.2832);c.strokeStyle="#ffd36b";c.lineWidth=1;c.stroke()}
+ for(i=0;i<G.old.length;i++){var o=G.old[i];c.fillStyle=o.q===2?"#b7c0cf":o.q===1?"#8d95a3":"#5a3a30";c.beginPath();c.arc(o.x,o.y,o.q?2.2:2.8,0,6.2832);c.fill()}
+ for(i=0;i<G.bead.length;i++){var b=G.bead[i];c.fillStyle=beadColor(b,G.now-b.t);c.beginPath();c.arc(b.x,b.y,b.q?2.3:3.2,0,6.2832);c.fill()}
+ for(i=0;i<G.sparks.length;i++){var s=G.sparks[i];c.strokeStyle="rgba(255,217,160,"+Math.min(1,s.l*2.5)+")";c.lineWidth=.9;c.beginPath();c.moveTo(s.x,s.y);c.lineTo(s.x-s.vx*.025,s.y-s.vy*.025);c.stroke()}
+ if(G.hasT){
+  if(G.down){
+   var r=11+G.heat*.09+Math.random()*2.5,gr=c.createRadialGradient(G.tx,G.ty,0,G.tx,G.ty,r),hot=G.heat>60;
+   gr.addColorStop(0,"rgba(255,255,255,.95)");gr.addColorStop(.35,hot?"rgba(255,140,60,.65)":"rgba(170,220,255,.55)");gr.addColorStop(1,"rgba(120,160,255,0)");
+   c.fillStyle=gr;c.beginPath();c.arc(G.tx,G.ty,r,0,6.2832);c.fill()}
+  else{c.strokeStyle="rgba(170,220,255,.8)";c.lineWidth=.9;c.beginPath();c.arc(G.tx,G.ty,3,0,6.2832);c.stroke()}}
+ els.heat.style.width=Math.min(100,G.heat)+"%";
+ var sp=!G.down?"HOLD TO WELD":G.v<G.vmin?"TOO SLOW":G.v>G.vmax?"TOO FAST":"STEADY";
+ els.spd.textContent=sp;els.spd.className="mk-spd "+(sp==="STEADY"?"ok":sp==="HOLD TO WELD"?"":"bad")}
+
+function loop(ts){
+ if(!G||G.ended)return;
+ var dt=Math.min(.05,(ts-G.last)/1000);G.last=ts;G.now=ts/1000;
+ if(!G.locked)update(dt);
+ for(var i=G.sparks.length-1;i>=0;i--){var s=G.sparks[i];s.vy+=220*dt;s.x+=s.vx*dt;s.y+=s.vy*dt;s.l-=dt;if(s.l<=0)G.sparks.splice(i,1)}
+ draw();G.raf=requestAnimationFrame(loop)}
+
+function finish(ok){
+ G.ended=true;cancelAnimationFrame(G.raf);clearTimeout(G.timer);
+ var j=G.j,ratio=G.pts/(2*G.st.length),q=ratio>=.85?1:ratio>=.5?0:-1,sum=G.res.map(function(r){return r===2?"P":r===1?"G":"X"}).join(" ");
+ delete j.live;els.stage.hidden=true;els.res.hidden=false;
+ if(!ok){
+  setJob(null);els.res.classList.add("bad");
+  els.rt.textContent="JOB RUINED";els.rd.textContent="Three bad welds. The parts are gone and nothing was built.";
+  logRoll("Workbench \u00b7 "+desc(j),"stages "+sum+": three misses, the job is ruined and the parts are lost","RUINED","fumble")}
+ else{
+  var now=Date.now();j.s="wait";j.q=q;j.start=now;j.end=now+HOUR;setJob(j);
+  els.rt.textContent="BUILD STARTED";els.rd.textContent="Quality "+QN[q]+". It needs 1 hour to finish. Come back to the Role tab and press COLLECT when it is done.";
+  logRoll("Workbench \u00b7 "+desc(j),"stages "+sum+" \u00b7 quality "+QN[q]+" \u00b7 ready in 1 hour","1 H","ok")}
+ els.done.focus()}
+
+function closeBench(){
+ if(!ov||ov.hidden)return;
+ if(G&&!G.ended){
+  if(!window.confirm("Leave the bench now? The job is ruined and the parts are lost."))return;
+  var j=G.j;G.ended=true;cancelAnimationFrame(G.raf);clearTimeout(G.timer);delete j.live;
+  setJob(null);logRoll("Workbench \u00b7 "+desc(j),"walked away from the bench: the parts are lost","RUINED","fumble")}
+ ov.hidden=true;document.body.style.overflow="";G=null;
+ if(opener&&document.contains(opener))try{opener.focus()}catch(e){}
+ opener=null;mkRefresh()}
+
+/* ---------- collecting the finished job ---------- */
+function collect(){
+ var j=job();if(!j||j.s!=="wait"||Date.now()<j.end)return;
+ var q=j.q|0,msg="";
+ if(j.t==="make"){
+  var n=wcount(),slot=-1,s=j.st,fr=FR[j.p.f];
+  for(var i=0;i<n;i++)if(!wname(i)){slot=i;break}
+  if(slot<0&&n<12){slot=n;val("wcount").value=n+1}
+  if(slot<0){logRoll("Workbench","no free weapon slot: remove a weapon on the Weapons tab, then collect again","\u2717","bad");return}
+  var sel=val("w"+slot+"_t");sel.value=s.base;sel.dispatchEvent(new Event("change",{bubbles:true}));
+  var nm=j.n||fr.n.replace(/ frame$/,"");
+  val("w"+slot+"_n").value=nm;val("w"+slot+"_s").value=s.s;val("w"+slot+"_d").value=s.dmg;val("w"+slot+"_r").value=s.r;
+  val("w"+slot+"_m").value=s.m||"";val("w"+slot+"_c").value=s.m||"";val("w"+slot+"_h").value=String(s.h);val("w"+slot+"_k").value=s.k?"1":"";
+  var q2=Math.min(1,q+(s.tune?1:0));val("w"+slot+"_q").value=qVal(q2);val("w"+slot+"_o").value=s.note;
+  msg=nm+" added to the Weapons tab: "+s.dmg+", ROF "+s.r+(s.m?", magazine "+s.m:"")+", quality "+QN[q2]} else{
+  var w=findW(j.wn);
+  if(w<0){logRoll("Workbench","can't find \""+j.wn+"\" on the Weapons tab: put it back, then collect again","\u2717","bad");return}
+  var cq=qOf(val("w"+w+"_q").value);
+  if(j.t==="fix"){var nq=Math.max(cq,q);val("w"+w+"_q").value=qVal(nq);msg=j.wn+" repaired: quality "+QN[cq]+" \u2192 "+QN[nq]}
+  else{
+   var nq2=Math.max(-1,Math.min(1,cq+q)),mn=modName(j.x),note=val("w"+w+"_o");
+   if(j.x==="ext"){var m=+val("w"+w+"_m").value||0;if(m)val("w"+w+"_m").value=m+Math.ceil(m/2)}
+   note.value=(note.value?note.value+" \u00b7 ":"")+mn;
+   val("w"+w+"_q").value=qVal(nq2);
+   msg=mn+" fitted to "+j.wn+(j.x==="ext"?" (magazine +50%)":"")+(nq2!==cq?", quality "+QN[cq]+" \u2192 "+QN[nq2]:"")}}
+ setJob(null);logRoll("Workbench \u00b7 collected",msg,"DONE","ok")}
+
+/* ---------- wiring ---------- */
+document.addEventListener("click",function(e){
+ var b=e.target.closest&&e.target.closest("#mkgo,#mkcol,#mkfin,#mkcan");if(!b)return;
+ opener=b;
+ if(b.id==="mkgo")start();
+ else if(b.id==="mkcol")collect();
+ else if(b.id==="mkfin"){var j=job();if(j&&j.s==="wait"&&j.end>Date.now()){j.end=Date.now();setJob(j)}}
+ else if(b.id==="mkcan"){var k=job();if(k&&window.confirm("Cancel this job? The parts are not refunded.")){setJob(null);logRoll("Workbench","job cancelled by the GM","\u2014","")}}
+ mkRefresh()});
+document.addEventListener("change",function(e){var k=e.target&&e.target.dataset&&e.target.dataset.k;if(k==="mk_t"||k==="mk_x")suggest()});
+["input","change","click"].forEach(function(ev){document.addEventListener(ev,function(){setTimeout(mkRefresh,0)})});
+setInterval(mkRefresh,1000);
+if(g("mk_c")&&!g("mk_c").value)g("mk_c").value=500;
+mkRefresh();
+})();
+</script>
 <script id="act-js">(function(){
 "use strict";
 var ST={move:false,act:false,grap:false,hold:false,cat:"ALL",q:"",pick:{},rep:null,stab:"13"};
@@ -5232,4 +5826,4 @@ window.flatline=function(){
  setTimeout(function(){var b=el.querySelector(".fl-b");if(b)b.focus()},950)};
 })();
 </script>
-</body></html>
+<script>(function(){var m=document.querySelector('meta[name="theme-color"]'),r=document.documentElement;function s(){var c=getComputedStyle(r).getPropertyValue("--bg").trim();if(c&&m&&m.content!==c)m.content=c}s();new MutationObserver(s).observe(r,{attributes:true,attributeFilter:["style","data-theme"]})})();</script></body></html>
