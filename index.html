@@ -838,8 +838,8 @@ html[data-theme="spooktober"] .spookfx{display:block}
 <p class="iph">Clanker mode turns HP into SDP, healing into repair and the death save into a reboot. Picking a chassis fills in armor and the SDP bonus (these are homebrew presets, change them freely). REPAIR rolls the chosen skill (against the DV box if set), then restores the dice in SDP and spends the parts cost from your Eurobucks. Set DICE to 0 or the parts to 0 to skip either. REBOOT is the BODY roll at 0 SDP. Humanity shows as Integrity while this mode is on.</p></div>
 <div class="top">
  <div class="armor">
-  <div class="ag"><h4>HEAD ARMOR</h4><div class="f" style="grid-column:1/-1;min-height:0"><label>Worn</label><input data-k="hname" placeholder="—"></div><div class="f"><label>SP</label><input data-k="hsp" type="number"></div><div class="f"><label>Max SP</label><input data-k="hmax" type="number"></div></div>
-  <div class="ag"><h4>BODY ARMOR</h4><div class="f" style="grid-column:1/-1;min-height:0"><label>Worn</label><input data-k="bname" placeholder="—"></div><div class="f"><label>SP</label><input data-k="bsp" type="number"></div><div class="f"><label>Max SP</label><input data-k="bmax" type="number"></div></div>
+  <div class="ag"><h4>HEAD ARMOR</h4><div class="f"><label>SP</label><input data-k="hsp" type="number"></div><div class="f"><label>Max SP</label><input data-k="hmax" type="number"></div></div>
+  <div class="ag"><h4>BODY ARMOR</h4><div class="f"><label>SP</label><input data-k="bsp" type="number"></div><div class="f"><label>Max SP</label><input data-k="bmax" type="number"></div></div>
  </div>
 </div>
 <div class="sec"><h3>SKILLS <small>set LVL, then click a BASE number to roll</small></h3><div class="skg" id="skg"></div></div>
@@ -870,7 +870,7 @@ html[data-theme="spooktober"] .spookfx{display:block}
 <div class="rx" id="stg" hidden></div>
 <div class="wgrid" id="wgrid"></div></div></section>
 <section class="pn" id="p-act"><div class="sec"><h3>ACTIONS <small>one MOVE + one ACTION per turn · tap a card to use it</small></h3><div id="actRoot"></div></div></section>
-<section class="pn" id="p-inv"><div class="sec"><h3>INVENTORY</h3><div class="ip" style="margin:0 0 12px"><div class="ipf av"><label>EUROBUCKS</label><input data-k="eb" type="number" placeholder="0"></div><div class="ebr"><input class="fi" id="ebadd" type="number" min="0" placeholder="amount"><input class="fi" id="ebwhy" maxlength="60" placeholder="what for? (optional)" style="width:180px"><button data-ebadd="1">+ GAIN</button><button class="g" data-ebadd="-1">− SPEND</button><button id="xferbtn" type="button">SEND TO PLAYER</button></div></div><details class="ebl" id="ebld"><summary>EUROBUCKS LEDGER <small id="eblc"></small></summary><div id="ebl"></div><div class="rr"><button class="mini" id="ebundo">UNDO LAST</button><button class="mini g" id="ebclr">CLEAR LEDGER</button></div></details><input type="hidden" data-k="invcount"><input type="hidden" data-k="eblog"><input type="hidden" data-k="ebpend"><div class="itb"><input class="fi" id="invq" placeholder="Search items, notes, place…"><select class="fi" id="invft"></select><select class="fi" id="invfp"><option value="">All places</option><option value="on">On me</option><option value="off">Stored / elsewhere</option></select><button class="mini" data-isort="n">SORT A–Z</button><button class="mini" data-isort="t">BY TYPE</button><button class="mini" data-isort="v">BY VALUE</button></div><div class="isum" id="invsum"></div><div class="box scroll"><table id="inv"></table></div><datalist id="invwhere"></datalist><datalist id="invweap"></datalist><datalist id="vplaces"></datalist><datalist id="vtypes"><option>Car</option><option>Bike</option><option>Truck</option><option>Van</option><option>Aerodyne</option><option>AV</option><option>Boat</option><option>Drone</option><option>Mech</option><option>Other</option></datalist></div><div class="sec"><h3>VEHICLES <button class="mini" id="addv" style="margin-left:12px">+ ADD VEHICLE</button><button class="mini" data-pay="v|all" style="margin-left:6px">PAY ALL UPKEEP</button><small id="vehsum"></small></h3><input type="hidden" data-k="vcount"><div class="vh" id="vlist"></div></div><div class="sec"><h3>HOUSING <button class="mini" id="addh" style="margin-left:12px">+ ADD HOME</button><button class="mini" data-pay="h|all" style="margin-left:6px">PAY ALL RENT</button><small id="rentsum"></small></h3><input type="hidden" data-k="hcount"><div class="vh" id="hlist"></div><datalist id="hstypes"><option>Capsule</option><option>Cargo container</option><option>Apartment</option><option>House</option><option>Safehouse</option><option>Penthouse</option><option>Shared flat</option></datalist></div></section>
+<section class="pn" id="p-inv"><div class="sec"><h3>INVENTORY</h3><div class="ip" style="margin:0 0 12px"><div class="ipf av"><label>EUROBUCKS</label><input data-k="eb" type="number" placeholder="0"></div><div class="ebr"><input class="fi" id="ebadd" type="number" min="0" placeholder="amount"><input class="fi" id="ebwhy" maxlength="60" placeholder="what for? (optional)" style="width:180px"><button data-ebadd="1">+ GAIN</button><button class="g" data-ebadd="-1">− SPEND</button><button id="xferbtn" type="button">SEND TO PLAYER</button></div></div><details class="ebl" id="ebld"><summary>EUROBUCKS LEDGER <small id="eblc"></small></summary><div id="ebl"></div><div class="rr"><button class="mini" id="ebundo">UNDO LAST</button><button class="mini g" id="ebclr">CLEAR LEDGER</button></div></details><input type="hidden" data-k="invcount"><input type="hidden" data-k="eblog"><input type="hidden" data-k="ebpend"><input type="hidden" data-k="wpend"><div class="itb"><input class="fi" id="invq" placeholder="Search items, notes, place…"><select class="fi" id="invft"></select><select class="fi" id="invfp"><option value="">All places</option><option value="on">On me</option><option value="off">Stored / elsewhere</option></select><button class="mini" data-isort="n">SORT A–Z</button><button class="mini" data-isort="t">BY TYPE</button><button class="mini" data-isort="v">BY VALUE</button></div><div class="isum" id="invsum"></div><div class="box scroll"><table id="inv"></table></div><datalist id="invwhere"></datalist><datalist id="invweap"></datalist><datalist id="vplaces"></datalist><datalist id="vtypes"><option>Car</option><option>Bike</option><option>Truck</option><option>Van</option><option>Aerodyne</option><option>AV</option><option>Boat</option><option>Drone</option><option>Mech</option><option>Other</option></datalist></div><div class="sec"><h3>VEHICLES <button class="mini" id="addv" style="margin-left:12px">+ ADD VEHICLE</button><button class="mini" data-pay="v|all" style="margin-left:6px">PAY ALL UPKEEP</button><small id="vehsum"></small></h3><input type="hidden" data-k="vcount"><div class="vh" id="vlist"></div></div><div class="sec"><h3>HOUSING <button class="mini" id="addh" style="margin-left:12px">+ ADD HOME</button><button class="mini" data-pay="h|all" style="margin-left:6px">PAY ALL RENT</button><small id="rentsum"></small></h3><input type="hidden" data-k="hcount"><div class="vh" id="hlist"></div><datalist id="hstypes"><option>Capsule</option><option>Cargo container</option><option>Apartment</option><option>House</option><option>Safehouse</option><option>Penthouse</option><option>Shared flat</option></datalist></div></section>
 <section class="pn" id="p-cyber"><div class="sec"><h3>CYBERWARE </h3><input type="hidden" data-k="cwcount"><div class="ip" style="margin:0 0 12px"><div class="ipf"><label>HUMANITY</label><input id="hcur" readonly></div><div class="ipf"><label>MAX</label><input id="hmax" readonly></div><div class="ipf av"><label>LOST</label><input id="hlost" readonly></div><div class="ipf"><label>EFFECTIVE EMP</label><input id="heff" readonly></div><span class="badge" id="hbadge">STABLE</span><p class="iph">Max Humanity is EMP × 10. Every full 10 points lost costs 1 EMP, and the sheet applies that to EMP skills automatically. Press INSTALL on a location to add that foundation, then pick the location on each option and how many slots it uses. Type dice like 2d6 and press ROLL to fill in the loss.</p></div>
 <div class="ip" style="margin:0 0 12px"><h4>THERAPY &amp; EVENTS</h4>
 <div class="ipf"><label>RECOVERED</label><input data-k="hrec" type="number" min="0"></div>
@@ -971,11 +971,12 @@ const PRE={"Light melee weapon":["Melee Weapon","1d6",2,0,1],"Medium melee weapo
  const tableO='<option value="">Table…</option>'+Object.keys(DVT).map(k=>`<option>${k}</option>`).join("");
  const rangeO='<option value="">Range…</option>'+RANGES.map((r,j)=>`<option value="${j}">${r}</option>`).join("");
  let h="";for(let i=0;i<12;i++){const k=x=>`data-k="w${i}_${x}"`;
-  h+=`<div class="wc" id="wc${i}" hidden><div class="wh"><input class="wn" list="invweap" ${k("n")} placeholder="Weapon name"><select class="fi" ${k("t")}>${typeO}</select><button class="mini" data-wdel="${i}" title="Remove weapon">✕</button></div>
+  h+=`<div class="wc" id="wc${i}" hidden><div class="wh"><input class="wn" list="invweap" ${k("n")} placeholder="Weapon name"><select class="fi" ${k("t")}>${typeO}</select><button class="mini" data-wgive="${i}" title="Give this weapon to another player">GIVE</button><button class="mini" data-wdel="${i}" title="Remove weapon">✕</button></div>
   <div class="wm"><label>SKILL<input class="fi" list="skills" ${k("s")}></label><label>DAMAGE<input class="fi" ${k("d")} placeholder="3d6"></label><label>ROF<input class="fi" type="number" ${k("r")}></label>
   <label>QUALITY<select class="fi" ${k("q")}>${op([["","Standard"],["-1","Poor (−1)"],["1","Excellent (+1)"]])}</select></label><label>AMMO TYPE<select class="fi" ${k("a")}>${ammoO}</select></label><label>HANDS<select class="fi" ${k("h")}>${op([["","—"],["1","1 hand"],["2","2 hands"]])}</select></label><label>CONCEALABLE<select class="fi" ${k("k")}>${op([["","No"],["1","Yes"]])}</select></label><label>EQUIPPED<select class="fi" ${k("e")}>${op([["","No"],["1","Yes"]])}</select></label></div>
   <div class="wa"><div class="amm"><label>AMMO<span class="amm"><input class="fi" type="number" ${k("c")}><b>/</b><input class="fi" type="number" ${k("m")} title="Magazine size"></span></label></div><div class="rv"><label>RESERVE<input class="fi" type="number" ${k("v")}></label></div></div>
   <div class="pips"></div>
+  <div class="wsl" hidden><div class="wsh"><b>ATTACHMENTS</b><small class="wst"></small></div><div class="wsg"></div><small class="wsn">Fitted by a Tech Maker at the workbench</small><input type="hidden" ${k("at")}></div>
   <div class="dvr"><button class="mini" data-wdv="${i}">DV OFF ▾</button><input type="hidden" ${k("vo")}><span class="dvb" hidden><select class="fi" ${k("dt")} title="Which range table this weapon uses">${tableO}</select><select class="fi" ${k("rg")} title="Distance to the target">${rangeO}</select><b class="dvn"></b></span></div>
   <div class="wb"><button data-wf="${i}">FIRE</button><button data-wa="${i}" hidden>AUTOFIRE</button><button class="g" data-wd="${i}">DAMAGE</button><button class="g" data-wr="${i}">RELOAD</button></div>
   <input class="fi nt" ${k("o")} placeholder="Attachments, notes…"></div>`}
@@ -1022,16 +1023,27 @@ const TSK="Basic Tech,Weaponstech,Cybertech,Electronics/Security Tech,Air Vehicl
 const RXC={Tech:{t:"MAKER",h:"Fix, improve, modify, make and invent items. Each time your Maker rank goes up by 1 you gain 1 rank in two different specialties of your choice, so you have 2 points per rank and a specialty can hold at most your Maker rank. The skill and specialty rank you set here decide how wide and forgiving your welds are. Pay for parts, weld it together yourself, then wait 1 hour for it to finish.",sk:TSK,rows:[["Field Expertise","ff"],["Upgrade Expertise","up"],["Fabrication Expertise","fb"],["Invention Expertise","iv"]]},
 Medtech:{t:"MEDICINE",h:"Spread your rank over these. Roll = d10 + TECH + points + bonus.",rows:[["Surgery","su"],["Pharmaceuticals","ph"],["Cryosystem Operation","cr"]]},
 Solo:{t:"COMBAT AWARENESS",h:"Pick where your rank goes. Exact effects are in your book.",rows:[["Damage Deflection","dd","Soaks part of incoming damage."],["Fumble Recovery","fr","Helps you recover from a fumble."],["Initiative Reaction","ir","Added to Initiative (the button does it)."],["Precision Attack","pa","Aimed-shot bonus. Tick the box below to add it to FIRE."],["Spot Weakness","sw","Bonus to finding a weak spot."],["Threat Detection","td","Spotting danger. Use the Perception roll below."]]}};
-const MKMODS=[["ext","Extended magazine",1200],["scope","Telescopic scope",600],["link","Smartgun link",2000],["supp","Suppressor",900]];
+/* Weapon attachments, per the handbook (The New Street Economy, Weapon Attachments, p.343-344): [key,name,eb,slots,flags,effect]. Flags: sa = Shoulder Arms only, nb = not bows/crossbows. Every non-exotic ranged weapon has 3 attachment slots. */
+const MKMODS=[["bayo","Bayonet",100,1,"sa","Also usable as a Light Melee Weapon. Can't be concealed under clothing while fitted."],
+["drum","Drum magazine",500,1,"nb","Magazine grows to the Drum column of the Clip Chart. Only one clip at a time. Can't be concealed under clothing."],
+["ext","Extended magazine",100,1,"nb","Magazine grows to the Extended column of the Clip Chart. Only one clip at a time. Can't be concealed under clothing."],
+["gl","Grenade launcher underbarrel",500,2,"sa","Two-handed use as a Grenade Launcher, holding 1 grenade. Can't be concealed under clothing."],
+["ir","Infrared nightvision scope",500,1,"","Firing penalties from darkness, smoke or fog drop to 0. See heat detail up to 800m/yds."],
+["sg","Shotgun underbarrel",500,2,"sa","Two-handed use as a Shotgun, holding 2 shots. Can't be concealed under clothing."],
+["link","Smartgun link",500,2,"","Takes 1 hour to fit. Needs Interface Plugs or a Subdermal Grip and a Neural Link. +1 to ranged attacks."],
+["snipe","Sniping scope",100,1,"","+1 to attacks at 51m/yds or more with single shot or Aimed Shot. Doesn't stack with TeleOptics."]];
+/* Clip Chart from the handbook: [standard, extended, drum] by weapon type */
+const CLIPS={"Medium pistol":[12,18,36],"Heavy pistol":[8,14,28],"Very heavy pistol":[8,14,28],"Submachinegun":[30,40,50],"Heavy SMG":[40,50,60],"Shotgun":[4,8,16],"Assault rifle":[25,35,45],"Sniper rifle":[4,8,12],"Grenade launcher":[2,4,6],"Rocket launcher":[1,2,3]};
 const MKHTML=`<div class="mkbox" id="mkbox"><h5>WORKBENCH · PARTS, WELDING, 1 HOUR BUILD</h5><input type="hidden" data-k="mk_job"><input type="hidden" data-k="mk_bp">
 <div class="rxr"><label class="wide">JOB<select class="fi" data-k="mk_t"><option value="make">Make a new weapon</option><option value="fix">Fix a weapon</option><option value="mod">Modify a weapon</option></select></label>
 <label class="wide" id="mkl-w">WEAPON<select class="fi" data-k="mk_w">${Array.from({length:12},(_,i)=>`<option value="${i}">${i+1}. (empty slot)</option>`).join("")}</select></label>
-<label class="wide" id="mkl-x">MODIFICATION<select class="fi" data-k="mk_x">${MKMODS.map(m=>`<option value="${m[0]}">${m[1]}</option>`).join("")}</select></label>
+<label class="wide" id="mkl-x">MODIFICATION<select class="fi" data-k="mk_x">${MKMODS.map(m=>`<option value="${m[0]}">${m[1]} · ${m[2]} eb${m[3]>1?" · "+m[3]+" slots":""}</option>`).join("")}</select></label>
 <label class="cst" id="mkl-c">PARTS (eb)<input class="fi" type="number" min="0" data-k="mk_c"></label></div>
+<small id="mkmn" hidden></small>
 <div class="mkst"><div class="mkbar"><i id="mkfill"></i></div><span id="mkinfo"></span></div>
 <div class="rxr"><button type="button" class="mini" id="mkgo">OPEN WORKBENCH</button><button type="button" class="mini" id="mkcol" hidden>COLLECT</button></div>
 <details class="mkgm"><summary>GM</summary><button type="button" class="mini g" id="mkfin">FINISH NOW</button><button type="button" class="mini g" id="mkcan">CANCEL JOB</button></details>
-<small>Part prices and stats are homebrew: change them freely in the script. Fabrication points unlock tiers (3+ needed for T4, the heaviest weapons). A good assembly raises quality, a poor one lowers it, and three bad welds ruin the job.</small></div>`;
+<small>Weapon mod prices, slots and magazine sizes follow the handbook (Weapon Attachments, p.343-344) and frame prices follow the core rulebook; the other part prices and stats are homebrew: change them freely in the script. Upgrades can only be fitted here: to upgrade a teammate's weapon, they GIVE it to you first and you send it back when it is done. Fabrication points unlock tiers (3+ needed for T4, the heaviest weapons). A good assembly raises quality, a poor one lowers it, and three bad welds ruin the job.</small></div>`;
 document.getElementById("rext").innerHTML=Object.keys(RXC).map(r=>{const c=RXC[r],P=k=>`<label>POINTS<input class="fi" type="number" min="0" data-k="rx_${r}_${k}_p"></label>`,B=k=>`<label>BONUS<input class="fi" type="number" data-k="rx_${r}_${k}_b"></label>`;
  return `<div class="rx" data-rxp="${r}" hidden><h4>${c.t} · ${r.toUpperCase()}<span data-sum></span></h4><small>${c.h}</small>`+c.rows.map(([n,k,d])=>`<div class="rxr"><b>${n}${d?`<small>${d}</small>`:""}</b>${c.sk?`<select class="fi" data-k="rx_${r}_${k}_s"><option value="">TECH only</option>${c.sk.map(s=>`<option>${s}</option>`).join("")}</select>`:""}${P(k)}${r=="Solo"?"":B(k)+(r=="Tech"?"":`<button class="mini" data-xr="${r}|${k}|${n}">ROLL</button>`)}</div>`).join("")+(r=="Solo"?`<div class="rxt"><label><input type="checkbox" id="rxprec"> Aimed shot: add Precision Attack to FIRE</label><button class="mini" data-xr="Solo|td|Threat Detection">ROLL THREAT DETECTION</button></div>`:"")+(r=="Tech"?MKHTML:"")+"</div>"}).join("")
  +`<div class="rx" data-rxp="Media" hidden><h4>CREDIBILITY · MEDIA</h4><small>Collect proofs before you publish. A story needs its proofs or it won't run.</small><div class="rxr"><b>Gather proof with<small>A success vs the DV above adds a proof. No DV set? use +1 / −1.</small></b><select class="fi" data-k="rx_Media_gs">${MSK.map(s=>`<option>${s}</option>`).join("")}</select></div>`+[0,1,2].map(j=>`<div class="rxr"><input class="fi nm2" data-k="rx_Media_${j}_n" placeholder="Story ${j+1}"><label>PROOFS<input class="fi" type="number" min="0" data-k="rx_Media_${j}_p"></label><label>NEEDED<input class="fi" type="number" min="0" data-k="rx_Media_${j}_m"></label><button class="mini" data-xm="${j}|g">GATHER</button><button class="mini g" data-xm="${j}|+">+1</button><button class="mini g" data-xm="${j}|-">−1</button><button class="mini" data-xm="${j}|p">PUBLISH</button></div>`).join("")+"</div>";
@@ -1287,7 +1299,7 @@ const wv=(i,x)=>val(`w${i}_${x}`);
 function weapUpd(){const n=Math.max(1,Math.min(12,+val("wcount").value||2));for(let i=0;i<12;i++){const c=document.getElementById("wc"+i);c.hidden=i>=n;if(c.hidden)continue;
  const mag=+wv(i,"m").value||0,am=+wv(i,"c").value||0,p=PRE[wv(i,"t").value];
  c.querySelector(".pips").innerHTML=mag&&mag<=40?Array.from({length:mag},(_,j)=>`<i class="${j<am?"fp":""}"></i>`).join(""):"";
- c.querySelector("[data-wa]").hidden=!(p&&p[5]);c.querySelector("[data-wr]").hidden=!mag;
+ c.querySelector("[data-wa]").hidden=!(p&&p[5]);if(window.wsRender)wsRender(i,c);c.querySelector("[data-wr]").hidden=!mag;
  {const tb=dvTable(i),on=wv(i,"vo").value=="1",melee=/^(melee weapon|brawling|martial arts)/i.test(wv(i,"s").value.trim()),sel=wv(i,"rg");
   c.querySelector(".dvr").hidden=melee&&!tb;c.querySelector("[data-wdv]").textContent="DV "+(on?"ON ▴":"OFF ▾");c.querySelector(".dvb").hidden=!on;
   [...sel.options].forEach(o=>{if(o.value==="")return;const v=(DVT[tb]||[])[+o.value];o.textContent=RANGES[+o.value]+(tb?" · "+(v?"DV "+v:"N/A"):"")});
@@ -1463,7 +1475,7 @@ document.addEventListener("click",e=>{const t=e.target;let el;
   if(slot<0){logRoll("Weapons","no free weapon slot","✗","bad");return}
   val("w"+slot+"_n").value=nm;logRoll("Weapons",nm+" added to the Weapons tab","→ WEAPONS","ok");upd()}
  else if(el=t.closest("[data-iar]")){const r=el.dataset.iar,p=el.dataset.slot,nm=val("inv"+r+"_n").value.trim();if(!nm)return;
-  val(p+"name").value=nm;const m=(nm+" "+val("inv"+r+"_o").value).match(/SP\s*(\d+)/i);if(m){val(p+"sp").value=m[1];val(p+"max").value=m[1]}
+  const m=(nm+" "+val("inv"+r+"_o").value).match(/SP\s*(\d+)/i);if(m){val(p+"sp").value=m[1];val(p+"max").value=m[1]}
   logRoll("Armor",nm+(p=="h"?" worn on head":" worn on body"),m?"SP "+m[1]:"worn","ok");upd()}
  else if(el=t.closest("[data-vdmg]")){const i=+el.dataset.vdmg,card=el.closest(".rc"),inp=card.querySelector(".vdi"),amt=+inp.value||0,mx=+val(lk("v",i,"x")).value||0,h=val(lk("v",i,"h")),nm=val(lk("v",i,"n")).value.trim()||"Vehicle "+(i+1);
   if(!amt)return;if(!mx&&h.value===""){logRoll(nm,"set SDP MAX first","—","");return}
@@ -4908,39 +4920,40 @@ var JOBS={
  make:{n:"Make a new weapon",sp:"fb",st:["FORGE THE FRAME","CUT & MACHINE","ASSEMBLE","FIT & BALANCE","FINAL CALIBRATION"]}};
 var QN={"-1":"POOR (\u22121)","0":"STANDARD","1":"EXCELLENT (+1)"};
 /* ---------- weapon parts (homebrew, edit freely) ----------
+   PRICES: frame prices are the Cyberpunk RED core rulebook base weapon prices (CP:R p.340-341). Upgrades use book prices where one exists (ext mag 100, drum 500, smartgun link 500, scope 100, silencer 100); the rest are homebrew flat prices.
    Base damage, ROF, magazine, hands and skill always come from the sheet's own weapon presets (PRE).
    Balance rules: +1d6 (long barrel) costs ROF and concealment, -1d6 (short barrel) buys concealment,
    big magazines are bulky, precision tuning gives +1 quality step, damage never goes above preset +1d6.
    Tiers: T1 needs no Fabrication, T2 needs 1, T3 needs 2, T4 (the heavy hitters) needs MORE THAN 2 (3+). */
 var FR={
- lmel:{n:"Light melee weapon",base:"Light melee weapon",k:1,t:1,c:500,kind:"melee",g:"MELEE"},
- mmel:{n:"Medium melee weapon",base:"Medium melee weapon",k:1,t:1,c:600,kind:"melee",g:"MELEE"},
- hmel:{n:"Heavy melee weapon",base:"Heavy melee weapon",k:0,t:2,c:1200,kind:"melee",g:"MELEE"},
- vmel:{n:"Very heavy melee weapon",base:"Very heavy melee weapon",k:0,t:3,c:1500,kind:"melee",g:"MELEE"},
- mpist:{n:"Medium pistol",base:"Medium pistol",k:1,t:1,c:600,kind:"firearm",g:"PISTOLS"},
- hpist:{n:"Heavy pistol",base:"Heavy pistol",k:0,t:2,c:1200,kind:"firearm",g:"PISTOLS"},
- vpist:{n:"Very heavy pistol",base:"Very heavy pistol",k:0,t:3,c:1600,kind:"firearm",g:"PISTOLS"},
- smg:{n:"Submachinegun",base:"Submachinegun",k:0,t:2,c:1500,kind:"firearm",g:"AUTOMATICS"},
- hsmg:{n:"Heavy SMG",base:"Heavy SMG",k:0,t:3,c:2200,kind:"firearm",g:"AUTOMATICS"},
- ar:{n:"Assault rifle",base:"Assault rifle",k:0,t:4,c:5500,kind:"firearm",g:"AUTOMATICS"},
- shot:{n:"Shotgun",base:"Shotgun",k:0,t:3,c:4500,kind:"firearm",g:"LONGARMS"},
- snip:{n:"Sniper rifle",base:"Sniper rifle",k:0,t:4,c:6500,kind:"firearm",g:"LONGARMS"},
- bow:{n:"Bow",base:"Bow",k:0,t:2,c:1400,kind:"archery",g:"ARCHERY"},
- xbow:{n:"Crossbow",base:"Crossbow",k:0,t:3,c:2200,kind:"archery",g:"ARCHERY"},
- gl:{n:"Grenade launcher",base:"Grenade launcher",k:0,t:4,c:7000,kind:"launcher",g:"HEAVY ORDNANCE"},
- rl:{n:"Rocket launcher",base:"Rocket launcher",k:0,t:4,c:9000,kind:"launcher",g:"HEAVY ORDNANCE"}};
+ lmel:{n:"Light melee weapon",base:"Light melee weapon",k:1,t:1,c:50,kind:"melee",g:"MELEE"},
+ mmel:{n:"Medium melee weapon",base:"Medium melee weapon",k:1,t:1,c:50,kind:"melee",g:"MELEE"},
+ hmel:{n:"Heavy melee weapon",base:"Heavy melee weapon",k:0,t:2,c:100,kind:"melee",g:"MELEE"},
+ vmel:{n:"Very heavy melee weapon",base:"Very heavy melee weapon",k:0,t:3,c:500,kind:"melee",g:"MELEE"},
+ mpist:{n:"Medium pistol",base:"Medium pistol",k:1,t:1,c:50,kind:"firearm",g:"PISTOLS"},
+ hpist:{n:"Heavy pistol",base:"Heavy pistol",k:0,t:2,c:100,kind:"firearm",g:"PISTOLS"},
+ vpist:{n:"Very heavy pistol",base:"Very heavy pistol",k:0,t:3,c:100,kind:"firearm",g:"PISTOLS"},
+ smg:{n:"Submachinegun",base:"Submachinegun",k:0,t:2,c:100,kind:"firearm",g:"AUTOMATICS"},
+ hsmg:{n:"Heavy SMG",base:"Heavy SMG",k:0,t:3,c:100,kind:"firearm",g:"AUTOMATICS"},
+ ar:{n:"Assault rifle",base:"Assault rifle",k:0,t:4,c:500,kind:"firearm",g:"AUTOMATICS"},
+ shot:{n:"Shotgun",base:"Shotgun",k:0,t:3,c:500,kind:"firearm",g:"LONGARMS"},
+ snip:{n:"Sniper rifle",base:"Sniper rifle",k:0,t:4,c:500,kind:"firearm",g:"LONGARMS"},
+ bow:{n:"Bow",base:"Bow",k:0,t:2,c:100,kind:"archery",g:"ARCHERY"},
+ xbow:{n:"Crossbow",base:"Crossbow",k:0,t:3,c:100,kind:"archery",g:"ARCHERY"},
+ gl:{n:"Grenade launcher",base:"Grenade launcher",k:0,t:4,c:500,kind:"launcher",g:"HEAVY ORDNANCE"},
+ rl:{n:"Rocket launcher",base:"Rocket launcher",k:0,t:4,c:500,kind:"launcher",g:"HEAVY ORDNANCE"}};
 var LEG={lpist:"mpist",rifle:"ar",scatter:"shot",blade:"lmel",cleaver:"hmel"};
-var BAR={short:{d:-1,t:1,c:100,e:"\u22121d6 \u00b7 compact"},std:{d:0,t:1,c:200,e:"standard"},long:{d:1,t:3,c:800,e:"+1d6 \u00b7 ROF \u22121 \u00b7 bulky"}};
-var ACT={salv:{t:1,c:80,e:"ROF \u22121"},basic:{t:1,c:200,e:"standard"},tuned:{t:3,c:1200,e:"+1 quality step"}};
-var MAG={small:{x:.5,t:1,c:60,e:"half rounds"},std:{x:1,t:1,c:150,e:"standard"},ext:{x:1.5,t:2,c:500,e:"+50% \u00b7 bulky"},drum:{x:2,t:4,c:1200,e:"double \u00b7 bulky"}};
+var BAR={short:{d:-1,t:1,c:50,e:"\u22121d6 \u00b7 compact"},std:{d:0,t:1,c:0,e:"standard"},long:{d:1,t:3,c:50,e:"+1d6 \u00b7 ROF \u22121 \u00b7 bulky"}};
+var ACT={salv:{t:1,c:0,e:"ROF \u22121"},basic:{t:1,c:0,e:"standard"},tuned:{t:3,c:100,e:"+1 quality step"}};
+var MAG={small:{x:.5,t:1,c:0,e:"half rounds"},std:{x:1,t:1,c:0,e:"standard"},ext:{x:1.5,t:2,c:100,e:"+50% \u00b7 bulky"},drum:{x:2,t:4,c:500,e:"double \u00b7 bulky"}};
 var BN={firearm:{short:"Short barrel",std:"Standard barrel",long:"Long-run barrel"},melee:{short:"Short blade",std:"Standard blade",long:"Long blade"},archery:{short:"Short limbs",std:"Standard limbs",long:"Long limbs"},launcher:{short:"Short tube",std:"Standard tube",long:"Long tube"}};
 var AN={firearm:{salv:"Salvaged action",basic:"Basic action",tuned:"Precision-tuned action"},melee:{salv:"Taped-up grip",basic:"Plain grip",tuned:"Balanced grip"},archery:{salv:"Frayed draw",basic:"Standard draw",tuned:"Tuned draw"},launcher:{salv:"Salvaged trigger group",basic:"Standard trigger group",tuned:"Tuned trigger group"}};
 var MN={firearm:{small:"Short magazine",std:"Standard magazine",ext:"Extended magazine",drum:"Drum magazine"},archery:{small:"Sparse quiver",std:"Standard quiver",ext:"Extended quiver",drum:"Bandolier"},launcher:{small:"Short feed",std:"Standard feed",ext:"Extended feed",drum:"Drum feed"}};
 var ATT={
- firearm:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Telescopic scope",t:1,c:400,e:"note only"},supp:{n:"Suppressor",t:2,c:600,e:"note only"},link:{n:"Smartgun link",t:3,c:1500,e:"note only"}},
- archery:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Scope",t:1,c:400,e:"note only"},link:{n:"Smart sight",t:3,c:1500,e:"note only"}},
- launcher:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Scope",t:1,c:400,e:"note only"},link:{n:"Targeting link",t:3,c:1500,e:"note only"}},
- melee:{none:{n:"No attachment",t:1,c:0,e:""},pommel:{n:"Weighted pommel",t:1,c:300,e:"note only"},coil:{n:"Shock coil",t:3,c:1500,e:"note only"},mono:{n:"Mono-edge",t:4,c:3000,e:"note only"}}};
+ firearm:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Telescopic scope",t:1,c:100,e:"note only"},supp:{n:"Suppressor",t:2,c:100,e:"note only"},link:{n:"Smartgun link",t:3,c:500,e:"note only"}},
+ archery:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Scope",t:1,c:100,e:"note only"},link:{n:"Smart sight",t:3,c:500,e:"note only"}},
+ launcher:{none:{n:"No attachment",t:1,c:0,e:""},scope:{n:"Scope",t:1,c:100,e:"note only"},link:{n:"Targeting link",t:3,c:500,e:"note only"}},
+ melee:{none:{n:"No attachment",t:1,c:0,e:""},pommel:{n:"Weighted pommel",t:1,c:50,e:"note only"},coil:{n:"Shock coil",t:3,c:500,e:"note only"},mono:{n:"Mono-edge",t:4,c:1000,e:"note only"}}};
 var LBL={firearm:{f:"FRAME",b:"BARREL",a:"ACTION",m:"MAGAZINE",t:"ATTACHMENT"},melee:{f:"HILT",b:"BLADE",a:"GRIP",t:"ATTACHMENT"},archery:{f:"FRAME",b:"LIMBS",a:"DRAW SYSTEM",m:"QUIVER",t:"ATTACHMENT"},launcher:{f:"FRAME",b:"TUBE",a:"TRIGGER GROUP",m:"FEED",t:"ATTACHMENT"}};
 var D=null;
 function core(f){var p=PRE[f.base];return{s:p[0],d:parseInt(p[1],10)||1,r:p[2],m:p[3]||0,h:p[4]}}
@@ -4955,7 +4968,7 @@ function partOf(s,k,p){
  else if(s==="a")o=ACT[k],o={n:AN[kd][k],t:o.t,c:o.c,e:o.e};
  else if(s==="m")o=MAG[k],o={n:MN[kd][k],t:o.t,c:o.c,e:o.e};
  else o=ATT[kd][k];
- return{n:o.n,t:o.t,c:Math.round(o.c*mult),e:o.e}}
+ return{n:o.n,t:o.t,c:o.c,e:o.e}}
 function optKeys(s,p){
  if(s==="f")return Object.keys(FR);
  if(s==="b")return["short","std","long"];
@@ -4981,7 +4994,7 @@ function statsOf(p){
  var parts=slotsFor(p).map(function(s){return partOf(s,p[s],p).n});
  var mult=1+.25*(f.t-1);
  return{dmg:dice+"d6",r:rof,m:mag,h:c.h,k:k,s:c.s,base:f.base,kind:kd,ranged:ranged,tune:p.a==="tuned"?1:0,
-  cost:f.c+Math.round((b.c+ACT[p.a].c+(ranged?m.c:0)+at.c)*mult),
+  cost:f.c+b.c+ACT[p.a].c+(ranged?m.c:0)+at.c,
   tier:Math.max(f.t,b.t,ACT[p.a].t,ranged?m.t:1,at.t),note:"Custom build: "+parts.join(", ")}}
 function buildStages(p){
  var o=[];
@@ -5080,7 +5093,10 @@ function setJob(j){g("mk_job").value=j?JSON.stringify(j):"";upd()}
 function wcount(){return Math.max(1,Math.min(12,+val("wcount").value||2))}
 function wname(i){var e=val("w"+i+"_n");return e?e.value.trim():""}
 function findW(name){var n=wcount(),k=String(name||"").toLowerCase();for(var i=0;i<n;i++)if(k&&wname(i).toLowerCase()===k)return i;return -1}
-function modName(k){for(var i=0;i<MKMODS.length;i++)if(MKMODS[i][0]===k)return MKMODS[i][1];return k}
+var LEGM={scope:"Telescopic scope",supp:"Suppressor"};
+function modName(k){for(var i=0;i<MKMODS.length;i++)if(MKMODS[i][0]===k)return MKMODS[i][1];return LEGM[k]||k}
+function modOf(k){for(var i=0;i<MKMODS.length;i++)if(MKMODS[i][0]===k)return MKMODS[i];return null}
+function modCheck(k,w,nm){return window.wsCheck?window.wsCheck(w,k,nm):""}
 function desc(j){var w=j.wn||"weapon";return j.t==="fix"?"Repair "+w:j.t==="mod"?modName(j.x)+" on "+w:"Build "+(j.n||FR[j.p.f].n)}
 function fmt(ms){var s=Math.max(0,Math.ceil(ms/1000)),h=Math.floor(s/3600),m=Math.floor(s%3600/60);s%=60;return h+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
 function qOf(v){return v==="1"?1:v==="-1"?-1:0}
@@ -5101,6 +5117,7 @@ function mkRefresh(){
   var t=j?j.t:tS.value,ws=g("mk_w"),n=wcount(),first=-1;
  for(var i=0;i<12;i++){var o=ws.options[i];if(!o)continue;var nm=wname(i);o.textContent=(i+1)+". "+(nm||"(empty slot)");o.disabled=!nm||i>=n;if(nm&&i<n&&first<0)first=i}
  var cur=ws.options[+ws.value];if(ws.value===""||!cur||cur.disabled)ws.value=first>=0?String(first):"";
+ var mn=byId("mkmn"),md=modOf(g("mk_x").value);if(mn){mn.hidden=!(t==="mod"&&md&&!j);if(md)mn.textContent=md[1]+": "+md[5]+" Uses "+md[3]+" of the weapon's 3 attachment slots."}
  byId("mkl-w").hidden=t==="make";byId("mkl-x").hidden=t!=="mod";byId("mkl-c").hidden=t==="make";
  ["mk_t","mk_w","mk_x","mk_c"].forEach(function(k){g(k).disabled=!!j});
  var go=byId("mkgo"),col=byId("mkcol"),info=byId("mkinfo"),fill=byId("mkfill"),now=Date.now();
@@ -5123,7 +5140,7 @@ function start(){
  var j={s:"play",t:t},cost=num("mk_c"),w=+g("mk_w").value,nm=g("mk_w").value===""?"":wname(w);
  if(!nm||w>=wcount()){logRoll("Workbench","add or pick a weapon on the Weapons tab first","\u2717","bad");return}
  j.w=w;j.wn=nm;
- if(t==="mod"){j.x=g("mk_x").value;if(j.x==="ext"&&!(+val("w"+w+"_m").value>0)){logRoll("Workbench",nm+" has no magazine to extend","\u2717","bad");return}}
+ if(t==="mod"){j.x=g("mk_x").value;var er=modCheck(j.x,w,nm);if(er){logRoll("Workbench",er,"\u2717","bad");return}}
  var eb=+val("eb").value||0;
  if(cost>eb){logRoll("Workbench","needs "+cost+" eb of parts, you have "+eb,"\u2717","bad");return}
  j.c=cost;
@@ -5153,7 +5170,7 @@ function renderDesign(){
   h+='<div class="mk-slot"><div class="mk-sl">'+LBL[kd][s]+'</div><div class="mk-opts">'+inner+"</div></div>"});
  els.slots.innerHTML=h;els.pv.innerHTML=svgOf(D.p,false);
  var eb=+val("eb").value||0;
- els.stats.innerHTML=[["DAMAGE",st.dmg],["ROF",st.r],st.ranged?["MAGAZINE",st.m]:null,["HANDS",st.h],["CONCEALABLE",st.k?"YES":"NO"],["SKILL",st.s],st.tune?["QUALITY","+1 STEP"]:null,["PARTS",st.cost.toLocaleString("en-US")+" eb"],["TIER CAP","T"+cap]].filter(Boolean).map(function(x){return"<span>"+x[0]+"<b>"+x[1]+"</b></span>"}).join("");
+ els.stats.innerHTML=[["DAMAGE",st.dmg],["ROF",st.r],st.ranged?["MAGAZINE",st.m]:null,["HANDS",st.h],["CONCEALABLE",st.k?"YES":"NO"],["SKILL",st.s],st.tune?["QUALITY","+1 STEP"]:null,["PRICE",st.cost.toLocaleString("en-US")+" eb"],["TIER CAP","T"+cap]].filter(Boolean).map(function(x){return"<span>"+x[0]+"<b>"+x[1]+"</b></span>"}).join("");
  els.pay.textContent="PAY "+st.cost.toLocaleString("en-US")+" EB & START WELDING";els.pay.classList.toggle("poor",st.cost>eb);
  els.funds.textContent="You have "+eb.toLocaleString("en-US")+" eb."}
 function payBuild(){
@@ -5343,10 +5360,9 @@ function collect(){
   if(j.t==="fix"){var nq=Math.max(cq,q);val("w"+w+"_q").value=qVal(nq);msg=j.wn+" repaired: quality "+QN[cq]+" \u2192 "+QN[nq]}
   else{
    var nq2=Math.max(-1,Math.min(1,cq+q)),mn=modName(j.x),note=val("w"+w+"_o");
-   if(j.x==="ext"){var m=+val("w"+w+"_m").value||0;if(m)val("w"+w+"_m").value=m+Math.ceil(m/2)}
-   note.value=(note.value?note.value+" \u00b7 ":"")+mn;
+   var mgn=window.wsFit?window.wsFit(w,j.x):"";
    val("w"+w+"_q").value=qVal(nq2);
-   msg=mn+" fitted to "+j.wn+(j.x==="ext"?" (magazine +50%)":"")+(nq2!==cq?", quality "+QN[cq]+" \u2192 "+QN[nq2]:"")}}
+   msg=mn+" fitted to "+j.wn+mgn+(nq2!==cq?", quality "+QN[cq]+" \u2192 "+QN[nq2]:"")}}
  setJob(null);logRoll("Workbench \u00b7 collected",msg,"DONE","ok")}
 
 /* ---------- wiring ---------- */
@@ -5752,7 +5768,7 @@ function collect(){
  const skills=[];document.querySelectorAll("tr[data-sk]").forEach(tr=>{const lv=+tr.querySelector(".lv").value||0,bn=+(tr.querySelector(".bonus input")||{}).value||0;if(!lv&&!bn)return;
   const sp=tr.querySelector(".sp2"),nm=tr.dataset.sk+(sp&&sp.value.trim()?": "+sp.value.trim():"");skills.push({n:nm,st:tr.dataset.st,lv,base:(tr.querySelector("[data-b]")||{}).textContent||"",raw:tr.dataset.sk})});
  const bse=n=>{const s=skills.find(x=>x.raw===n)||null;if(s)return s.base;const tr=[...document.querySelectorAll("tr[data-sk]")].find(t=>t.dataset.sk===n);return tr?((tr.querySelector("[data-b]")||{}).textContent||""):""};
- const weapons=[];for(let i=0;i<12;i++){const n=v("w"+i+"_n");if(!n)continue;const sk=v("w"+i+"_s"),q=+v("w"+i+"_q")||0,b=bse(sk);weapons.push({n,t:v("w"+i+"_t"),sk,atk:b===""?"":(+b+q),d:v("w"+i+"_d"),r:v("w"+i+"_r"),c:v("w"+i+"_c"),m:v("w"+i+"_m"),o:v("w"+i+"_o"),eq:v("w"+i+"_e")==="1"})}
+ const weapons=[];for(let i=0;i<12;i++){const n=v("w"+i+"_n");if(!n)continue;const sk=v("w"+i+"_s"),q=+v("w"+i+"_q")||0,b=bse(sk);weapons.push({n,t:v("w"+i+"_t"),sk,atk:b===""?"":(+b+q),d:v("w"+i+"_d"),r:v("w"+i+"_r"),c:v("w"+i+"_c"),m:v("w"+i+"_m"),o:[v("w"+i+"_o"),window.wsNames?wsNames(v("w"+i+"_at")):""].filter(Boolean).join(" \u00b7 "),eq:v("w"+i+"_e")==="1"})}
  const cyber=[];for(let i=0;i<48;i++){const n=v("cw"+i+"_n");if(n)cyber.push((n)+(v("cw"+i+"_t")?" ("+v("cw"+i+"_t")+")":"")+(v("cw"+i+"_o")?" — "+v("cw"+i+"_o"):""))}
  const gear=[];for(let i=0;i<80;i++){const n=v("inv"+i+"_n");if(n)gear.push((v("inv"+i+"_q")&&v("inv"+i+"_q")!=="1"?v("inv"+i+"_q")+"× ":"")+n+(v("inv"+i+"_o")?" — "+v("inv"+i+"_o"):""))}
  return{handle,full,roles,st:ST.map(s=>[s,v("st_"+s)||"0"]),hp:v("hp"),hpm:g("hpmax"),sw:g("sw"),ds:g("ds"),luck:v("luck"),luckm:v("luckmax"),hum:g("hcur"),humm:g("hmax"),eb:v("eb"),hsp:v("hsp"),hmx:v("hmax"),bsp:v("bsp"),bmx:v("bmax"),skills,weapons,cyber,gear,ab:v("ability")}}
@@ -5826,4 +5842,195 @@ window.flatline=function(){
  setTimeout(function(){var b=el.querySelector(".fl-b");if(b)b.focus()},950)};
 })();
 </script>
-<script>(function(){var m=document.querySelector('meta[name="theme-color"]'),r=document.documentElement;function s(){var c=getComputedStyle(r).getPropertyValue("--bg").trim();if(c&&m&&m.content!==c)m.content=c}s();new MutationObserver(s).observe(r,{attributes:true,attributeFilter:["style","data-theme"]})})();</script></body></html>
+<script>(function(){var m=document.querySelector('meta[name="theme-color"]'),r=document.documentElement;function s(){var c=getComputedStyle(r).getPropertyValue("--bg").trim();if(c&&m&&m.content!==c)m.content=c}s();new MutationObserver(s).observe(r,{attributes:true,attributeFilter:["style","data-theme"]})})();</script><style id="ws-css">
+/* weapon attachment slots: a fixed 3-slot rack per ranged weapon (cyberware uses pips and a capacity per location) */
+.wsl{border-top:1px dashed var(--line);padding-top:7px;display:flex;flex-direction:column;gap:6px}
+.wsl[hidden]{display:none}
+.wsh{display:flex;align-items:center;gap:8px;font:600 9px "Orbitron",sans-serif;letter-spacing:.15em;color:var(--mute)}
+.wsh small{margin-left:auto;font:700 13px "Rajdhani",sans-serif;letter-spacing:.08em;color:var(--mute)}
+.wsh.full small{color:var(--p2)}
+.wsg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+.wsg .ce{min-height:30px;display:flex;align-items:center;justify-content:center;border:1px dashed var(--line);color:var(--mute);opacity:.7;font:600 9px "Orbitron",sans-serif;letter-spacing:.2em}
+.wsg .at{min-height:30px;min-width:0;display:flex;align-items:center;gap:6px;padding:3px 4px 3px 7px;border:1px solid var(--p2);border-left:3px solid var(--p2);background:color-mix(in srgb,var(--p2) 10%,var(--deep))}
+.wsg .at b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:700 13px "Rajdhani",sans-serif;letter-spacing:.04em}
+.wsg .at em{font:600 9px "Orbitron",sans-serif;font-style:normal;letter-spacing:.08em;color:var(--mute);white-space:nowrap}
+.wsg .at .mini{padding:1px 6px;min-height:0;white-space:nowrap}
+.wsg .at .mini[data-arm="1"]{border-color:var(--hot);color:var(--hot)}
+.wsn{font:600 9px "Orbitron",sans-serif;letter-spacing:.12em;color:var(--mute);opacity:.8}
+.wxp{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.wxp:empty{display:none}
+.wxp span{border:1px dashed var(--p2);padding:4px 9px;font:600 13px "Rajdhani",sans-serif;letter-spacing:.05em;color:var(--soft)}
+.wxp i{font-style:normal;color:var(--mute);margin-left:6px}
+@media print{html body .wsg .at .mini,html body [data-wgive],html body .wxp,html body .wsn{display:none!important}html body .wsg .ce{border:1px dashed #888!important}}
+</style>
+<script id="ws-js">
+/* Weapon attachment slots. Data (MKMODS, CLIPS) lives next to the Role panel in the main script.
+   Upgrades are only ever fitted by the Tech workbench (wsFit); the card just shows them and lets you strip one off. */
+(function(){
+var CAP=3;
+function g(k){return document.querySelector('[data-k="'+k+'"]')}
+function gv(k){var e=g(k);return e?String(e.value||""):""}
+function md(k){for(var i=0;i<MKMODS.length;i++)if(MKMODS[i][0]===k)return MKMODS[i];return null}
+function keys(i){return gv("w"+i+"_at").split(",").filter(function(k){return k&&md(k)})}
+function used(a){var u=0;a.forEach(function(k){u+=md(k)[3]});return u}
+function wname(i){return gv("w"+i+"_n").trim()||"this weapon"}
+function melee(i){return /^(melee weapon|brawling|martial arts)/i.test(gv("w"+i+"_s").trim())}
+function esc(t){return String(t).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function check(i,k,nm){
+ var m=md(k);if(!m)return"";nm=nm||wname(i);
+ var sk=gv("w"+i+"_s").trim().toLowerCase(),a=keys(i);
+ if(sk&&["handgun","shoulder arms","archery","heavy weapons"].indexOf(sk)<0)return nm+" is not a ranged weapon";
+ if(a.indexOf(k)>=0)return m[1]+" is already fitted to "+nm;
+ if(m[4].indexOf("sa")>=0&&sk&&sk!=="shoulder arms")return m[1]+" only fits Shoulder Arms weapons";
+ if(m[4].indexOf("nb")>=0){
+  if(sk==="archery")return"bows and crossbows can't take a "+m[1].toLowerCase();
+  if(!(+gv("w"+i+"_m")>0))return nm+" has no magazine to "+(k==="ext"?"extend":"swap");
+  if(a.indexOf(k==="ext"?"drum":"ext")>=0)return nm+" can only carry one clip upgrade"}
+ var u=used(a);
+ if(u+m[3]>CAP)return m[1]+" needs "+m[3]+" slot"+(m[3]>1?"s":"")+" but "+nm+" has "+(CAP-u)+" of "+CAP+" free";
+ return""}
+function setMag(i,k,on){
+ var me=g("w"+i+"_m"),ce=g("w"+i+"_c"),m=+me.value||0;if(!m)return"";
+ var cl=CLIPS[gv("w"+i+"_t")],n=on?(cl?cl[k==="ext"?1:2]:(k==="ext"?m+Math.ceil(m/2):m*2)):(cl?cl[0]:(k==="ext"?Math.floor(m/1.5):Math.floor(m/2)));
+ me.value=n;if((+ce.value||0)>n)ce.value=n;
+ return" (magazine "+m+" \u2192 "+n+")"}
+function fit(i,k){var a=keys(i);a.push(k);g("w"+i+"_at").value=a.join(",");return(k==="ext"||k==="drum")?setMag(i,k,true):""}
+function take(i,k){var a=keys(i),x=a.indexOf(k);if(x<0)return;a.splice(x,1);g("w"+i+"_at").value=a.join(",");
+ var mg=(k==="ext"||k==="drum")?setMag(i,k,false):"";logRoll("Weapons",wname(i)+": "+md(k)[1]+" removed"+mg,"REMOVED","");upd()}
+window.wsCheck=check;window.wsFit=fit;
+window.wsNames=function(csv){return String(csv||"").split(",").filter(md).map(function(k){return md(k)[1]}).join(", ")};
+window.wsRender=function(i,c){
+ var box=c.querySelector(".wsl");if(!box)return;
+ var mel=melee(i);box.hidden=mel;if(mel)return;
+ var a=keys(i),sig=a.join(",");
+ if(box.dataset.sig===sig)return;box.dataset.sig=sig;
+ var u=used(a),h="",n=0;
+ a.forEach(function(k){var m=md(k);n+=m[3];
+  h+='<div class="at" style="grid-column:span '+Math.min(m[3],CAP)+'" title="'+esc(m[5])+'"><b>'+esc(m[1])+'</b><em>'+m[2]+' EB</em><button type="button" class="mini" data-wsr="'+i+'|'+k+'" title="Strip this upgrade off (it is lost)" aria-label="Remove '+esc(m[1])+'">\u2715</button></div>'});
+ for(;n<CAP;n++)h+='<div class="ce">EMPTY</div>';
+ box.querySelector(".wsg").innerHTML=h;
+ box.querySelector(".wsh").classList.toggle("full",u>=CAP);
+ box.querySelector(".wst").textContent=u+" / "+CAP+" slots"};
+document.addEventListener("click",function(e){
+ var r=e.target.closest&&e.target.closest("[data-wsr]");if(!r)return;
+ if(r.dataset.arm!=="1"){r.dataset.arm="1";r.textContent="REMOVE?";clearTimeout(r._t);r._t=setTimeout(function(){r.dataset.arm="";r.textContent="\u2715"},3000);return}
+ var p=r.dataset.wsr.split("|");take(+p[0],p[1])});
+try{weapUpd()}catch(x){}
+})();
+</script>
+<script id="wx-js">
+/* Weapon transfer between players. Rides on the party "eb" channel: t = wof (offer), wak (accepted), wno (declined).
+   The weapon leaves the sender's sheet when the offer goes out and comes back if it is declined or nobody answers. */
+(function(){
+var F=["n","t","s","d","r","q","a","h","k","m","c","v","o","at"],done={},m=null,cur=null;
+function g(k){return document.querySelector('[data-k="'+k+'"]')}
+function gv(k){var e=g(k);return e?String(e.value||""):""}
+function md(k){for(var i=0;i<MKMODS.length;i++)if(MKMODS[i][0]===k)return MKMODS[i];return null}
+function pend(){var a=[];try{a=JSON.parse(gv("wpend")||"[]")}catch(_){}return Array.isArray(a)?a:[]}
+function save(a){g("wpend").value=a.length?JSON.stringify(a):"";upd()}
+function wcount(){return Math.max(1,Math.min(12,+gv("wcount")||2))}
+function read(i){var o={};F.forEach(function(f){o[f]=gv("w"+i+"_"+f)});return o}
+function wipe(i){document.getElementById("wc"+i).querySelectorAll("[data-k]").forEach(function(x){x.value=""})}
+function clear(i){var n=wcount();wipe(i);if(i===n-1&&n>1)g("wcount").value=n-1}
+function free(){var c=wcount();for(var i=0;i<c;i++)if(!gv("w"+i+"_n").trim())return i;if(c<12){g("wcount").value=c+1;return c}return -1}
+function place(i,w){wipe(i);F.forEach(function(f){var e=g("w"+i+"_"+f);if(e)e.value=w[f]||""})}
+function clean(w){
+ if(!w||typeof w!=="object")return null;
+ function S(k,n){return String(w[k]==null?"":w[k]).replace(/[\u0000-\u001f]/g," ").slice(0,n)}
+ function N(k,mx){var v=w[k];return v===""||v==null?"":String(Math.max(0,Math.min(mx,Math.round(+v||0))))}
+ var o={},ammo=Array.prototype.map.call((g("w0_a")||{options:[]}).options,function(x){return x.value});
+ o.n=S("n",60).trim();if(!o.n)return null;
+ o.t=(typeof PRE!=="undefined"&&PRE[w.t])?String(w.t):"";
+ o.s=S("s",40);o.d=S("d",16);o.o=S("o",200);o.r=N("r",9);o.m=N("m",999);o.c=N("c",999);o.v=N("v",9999);
+ o.q=["","-1","1"].indexOf(String(w.q))>=0?String(w.q):"";o.h=["","1","2"].indexOf(String(w.h))>=0?String(w.h):"";
+ o.k=String(w.k)==="1"?"1":"";o.a=ammo.indexOf(String(w.a||""))>=0?String(w.a||""):"";
+ var seen={},u=0,at=[];String(w.at||"").split(",").forEach(function(k){var x=md(k);if(x&&!seen[k]&&u+x[3]<=3){seen[k]=1;u+=x[3];at.push(k)}});o.at=at.join(",");
+ return o}
+function summary(w){var bits=[];if(w.t)bits.push(w.t);if(w.d)bits.push(w.d);if(w.at)bits.push(String(w.at).split(",").map(function(k){return md(k)[1]}).join(", "));return bits.join(" \u00b7 ")}
+function mmss(ms){var s=Math.max(0,Math.ceil(ms/1000));return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
+function restore(p){var s=free();if(s<0)return false;place(s,p.w);return true}
+
+/* ---- sender ---- */
+function open(i){
+ if(!gv("w"+i+"_n").trim()){logRoll("Weapons","name the weapon before giving it away","\u2717","bad");return}
+ cur=i;
+ if(!m){m=document.createElement("div");m.id="wxgive";m.className="bk";m.setAttribute("role","dialog");m.setAttribute("aria-label","Give weapon");m.hidden=true;
+  m.innerHTML='<div class="bk-card"><div class="bk-head"><span class="bk-logo xf">GIVE</span><span class="bk-sub">A weapon to another player</span><button class="bk-x" data-wx="x" aria-label="Close">\u2715</button></div>'
+  +'<div class="bk-main"><div class="xf-bal">WEAPON <b id="wxname"></b></div>'
+  +'<div class="bk-f one"><label>TO<select id="wxto"></select></label></div>'
+  +'<div class="bk-msg" id="wxmsg" aria-live="polite"></div>'
+  +'<div class="bk-btns"><button class="bk-ok" id="wxsend" data-wx="send">SEND OFFER</button><button class="bk-new" data-wx="party">PARTY</button></div>'
+  +'<div class="xf-note">The weapon, its magazine and its fitted upgrades go together. The other player has to accept. Until they do it is held; if they decline or do not answer it comes back to you.</div></div></div>';
+  document.body.appendChild(m);
+  m.addEventListener("click",function(e){var b=e.target.closest("[data-wx]"),k=b&&b.dataset.wx;
+   if(e.target===m||k==="x")m.hidden=true;else if(k==="send")sendNow();else if(k==="party"){m.hidden=true;var t=document.getElementById("mptog");if(t)t.click()}});
+  document.addEventListener("keydown",function(e){if(e.key==="Escape"&&m&&!m.hidden)m.hidden=true})}
+ m.hidden=false;document.getElementById("wxmsg").textContent="";document.getElementById("wxname").textContent=gv("w"+i+"_n").trim();dlg()}
+function dlg(){if(!m||m.hidden)return;var on=xfOn(),ppl=xfPeople(),sel=document.getElementById("wxto"),
+ h=ppl.length?ppl.map(function(x){return'<option value="'+invEsc(x.c)+'">'+invEsc(x.n)+'</option>'}).join(""):'<option value="">'+(on?"No other players online":"Party not connected")+'</option>';
+ if(sel.dataset.h!==h){var c=sel.value;sel.dataset.h=h;sel.innerHTML=h;if(c)sel.value=c}
+ sel.disabled=!ppl.length;document.getElementById("wxsend").disabled=!ppl.length||!on;
+ var mg=document.getElementById("wxmsg");if(!on&&!mg.textContent){mg.textContent="Connect to the party (PARTY button) to give a weapon to another player.";mg.className="bk-msg"}}
+function sendNow(){
+ var mg=document.getElementById("wxmsg"),say=function(t,c){mg.textContent=t;mg.className="bk-msg "+(c||"")};
+ if(!xfOn()){say("Connect to the party first.","bad");return}
+ var to=document.getElementById("wxto").value,pl=xfPeople().filter(function(x){return x.c===to})[0];if(!pl){say("Pick a player.","bad");return}
+ var i=cur;if(i==null||!gv("w"+i+"_n").trim()){say("That weapon is gone.","bad");return}
+ var w=read(i),id=Math.random().toString(36).slice(2,10),ttl=90000,a=pend();
+ a.push({id:id,to:to,n:pl.n,w:w,x:Date.now()+ttl});
+ clear(i);save(a);
+ window.__partySend({k:"eb",t:"wof",id:id,to:to,w:w,ttl:ttl});
+ logRoll("Transfer",w.n+" offered to "+pl.n,"\u2014","");
+ cur=null;m.hidden=true;list()}
+
+/* ---- pending offers shown above the weapon cards ---- */
+function list(){
+ var box=document.getElementById("wxpend");
+ if(!box){var gr=document.getElementById("wgrid");if(!gr)return;box=document.createElement("div");box.id="wxpend";box.className="wxp";gr.parentNode.insertBefore(box,gr)}
+ var a=pend(),now=Date.now(),h=a.map(function(p){var l=p.x-now;
+  return'<span>\u2197 '+invEsc(p.w.n)+' \u2192 '+invEsc(p.n)+'<i>'+(p.r?"waiting for a free slot":l>0?mmss(l):"no reply yet")+'</i></span>'}).join("");
+ if(box.dataset.h!==h){box.dataset.h=h;box.innerHTML=h}}
+function tick(){
+ var a=pend(),now=Date.now(),keep=[],ch=false;
+ a.forEach(function(p){
+  if(p.r||now>p.x+30000){
+   if(restore(p)){logRoll("Transfer",(p.r?"":p.n+" did not reply, ")+p.w.n+" returned","refund","");ch=true;return}
+   if(!p.r){p.r=1;ch=true;logRoll("Transfer","no free weapon slot to take "+p.w.n+" back: free one up","\u2717","bad")}}
+  keep.push(p)});
+ if(ch)save(keep);list();dlg()}
+setInterval(tick,1000);
+
+/* ---- receiver ---- */
+function toast(d){
+ var id=String(d.id||"").replace(/[^a-z0-9]/gi,"").slice(0,16),w=clean(d.w);
+ if(!id||done[id]||!w||document.querySelector('#xin [data-wid="'+id+'"]'))return;
+ var box=document.getElementById("xin");
+ if(!box){box=document.createElement("div");box.id="xin";document.body.appendChild(box);if(typeof xfInClick==="function")box.addEventListener("click",xfInClick)}
+ var el=document.createElement("div");el.className="xi";el.dataset.wid=id;el.dataset.exp=Date.now()+Math.min(+d.ttl||90000,90000);el.dataset.name=String(d.p||"Runner").slice(0,24);el._w=w;
+ el.innerHTML='<div class="xi-h">INCOMING WEAPON</div><div class="xi-b"><b class="xi-n"></b> wants to give you <b class="xi-a"></b></div><div class="xi-w"></div><div class="xi-t"></div><div class="xi-btns"><button class="bk-ok" data-wi="ok">ACCEPT</button><button class="bk-new" data-wi="no">DECLINE</button></div>';
+ el.querySelector(".xi-n").textContent=el.dataset.name;el.querySelector(".xi-a").textContent=w.n;el.querySelector(".xi-w").textContent=summary(w);
+ box.appendChild(el)}
+document.addEventListener("click",function(e){
+ var gv2=e.target.closest&&e.target.closest("[data-wgive]");if(gv2){open(+gv2.dataset.wgive);return}
+ var b=e.target.closest&&e.target.closest("[data-wi]");if(!b)return;
+ var el=b.closest(".xi"),id=el.dataset.wid,snd=window.__partySend;
+ if(done[id]){el.remove();return}
+ if(b.dataset.wi==="ok"){
+  if(Date.now()>+el.dataset.exp){el.remove();return}
+  var s=free();if(s<0){el.querySelector(".xi-w").textContent="No free weapon slot. Free one up first.";return}
+  done[id]=1;place(s,el._w);logRoll("Transfer","received "+el._w.n+" from "+el.dataset.name,"+WEAPON","ok");upd();
+  var ack=function(){if(snd)snd({k:"eb",t:"wak",id:id})};ack();setTimeout(ack,2000);setTimeout(ack,6000)}
+ else{done[id]=1;var no=function(){if(snd)snd({k:"eb",t:"wno",id:id})};no();setTimeout(no,2000)}
+ el.remove()});
+window.addEventListener("cps:eb",function(e){var d=e.detail||{};
+ if(d.t==="wof"){var me=window.__partyId;if(!me||d.to!==me)return;toast(d)}
+ else if(d.t==="wak"||d.t==="wno"){
+  var a=pend(),i=-1;a.forEach(function(x,j){if(i<0&&x.id===d.id&&x.to===d.c)i=j});if(i<0)return;
+  var p=a.splice(i,1)[0];
+  if(d.t==="wak")logRoll("Transfer",p.n+" accepted "+p.w.n,"sent","ok");
+  else if(restore(p))logRoll("Transfer",p.n+" declined, "+p.w.n+" returned","refund","");
+  else{p.r=1;a.push(p)}
+  save(a);list()}});
+list();
+})();
+</script>
+</body></html>
