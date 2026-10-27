@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>snactuary</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  :root {
+    --purple: #b060ff;
+    --purple-dim: #4a1f7a;
+    --purple-bright: #d090ff;
+    --bg: #07000e;
+    --red: #ff3355;
+  }
+
+  html, body {
+    width: 100%; height: 100%;
+    background: var(--bg);
+    color: var(--purple);
+    font-family: 'Share Tech Mono', monospace;
+    overflow: hidden;
+  }
+
+  #gate {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    z-index: 10;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  #gate.hide {
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.04);
+  }
+
+  .gate-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 300;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    letter-spacing: 0.35em;
+    color: var(--purple-bright);
+    text-transform: lowercase;
+    margin-bottom: 0.15em;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.2s forwards;
+  }
+
+  .gate-sub {
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    color: var(--purple-dim);
+    text-transform: uppercase;
+    margin-bottom: 3.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+
+  .input-wrap {
+    position: relative;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.8s forwards;
+  }
+
+  .input-wrap::before {
+    content: '> ';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--purple-dim);
+    font-size: 0.9rem;
+    pointer-events: none;
+  }
+
+  #pw-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--purple-dim);
+    outline: none;
+    color: var(--purple-bright);
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    padding: 0.4rem 0.4rem 0.4rem 1.4rem;
+    width: 260px;
+    transition: border-color 0.3s;
+    caret-color: var(--purple-bright);
+  }
+
+  #pw-input:focus { border-color: var(--purple); }
+  #pw-input.wrong { border-color: var(--red); animation: shake 0.4s ease; }
+
+  .hint {
+    margin-top: 1rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: transparent;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    text-align: center;
+  }
+  .hint.show { color: var(--red); }
+
+  #gate::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.08) 2px,
+      rgba(0,0,0,0.08) 4px
+    );
+    pointer-events: none;
+  }
+
+  .gate-title::after {
+    content: '_';
+    animation: blink 1s step-end infinite;
+    color: var(--purple-dim);
+  }
+
+  #stage {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease 0.4s;
+  }
+  #stage.show { opacity: 1; pointer-events: auto; }
+
+  #cv {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  #stage-label {
+    position: absolute;
+    top: 1.6rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 300;
+    font-size: clamp(1rem, 2.5vw, 1.6rem);
+    letter-spacing: 0.4em;
+    color: var(--purple-dim);
+    text-transform: lowercase;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 1s ease 1.2s;
+  }
+  #stage.show #stage-label { opacity: 1; }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(16px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  @keyframes blink { 50% { opacity:0; } }
+
+  @keyframes shake {
+    0%,100% { transform:translateX(0); }
+    20%     { transform:translateX(-8px); }
+    40%     { transform:translateX(8px); }
+    60%     { transform:translateX(-5px); }
+    80%     { transform:translateX(5px); }
+  }
+</style>
+</head>
+<body>
+  <div id="gate">
+    <div class="gate-title">snactuary</div>
+    <div class="gate-sub">restricted access</div>
+    <div class="input-wrap">
+      <input id="pw-input" type="password" placeholder="enter password" autocomplete="off" spellcheck="false" />
+    </div>
+    <div class="hint" id="hint">access denied</div>
+  </div>
+
+  <div id="stage">
+    <div id="stage-label">snactuary</div>
+    <canvas id="cv"></canvas>
+  </div>
+
+<script>
+  const pwInput = document.getElementById('pw-input');
+  const hint = document.getElementById('hint');
+  const gate = document.getElementById('gate');
+  const stage = document.getElementById('stage');
+
+  pwInput.addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return;
+    const val = pwInput.value.trim();
+    if (val === 'Firewall') {
+      gate.classList.add('hide');
+      stage.classList.add('show');
+      initAnimation();
+    } else {
+      pwInput.classList.add('wrong');
+      hint.classList.add('show');
+      setTimeout(() => { pwInput.classList.remove('wrong'); }, 400);
+      pwInput.value = '';
+    }
+  });
+
+  pwInput.focus();
+
+  let animStarted = false;
+
+  function initAnimation() {
+    if (animStarted) return;
+    animStarted = true;
+
+    const cv = document.getElementById('cv');
+    const ctx = cv.getContext('2d');
+
+    function resize() {
+      cv.width = window.innerWidth;
+      cv.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const FW = 9, FH = 22;
+    const HEART_ROWS = [
+      [[8,21],[38,51]],[[5,24],[35,54]],[[2,27],[32,57]],[[1,28],[31,58]],
+      [[0,29],[30,59]],[[0,59]],[[0,59]],[[0,59]],
+      [[1,58]],[[2,57]],[[4,55]],[[6,53]],
+      [[9,50]],[[12,47]],[[15,44]],
+      [[18,41]],[[21,38]],[[24,35]],
+      [[26,33]],[[28,31]],[[29,30]]
+    ];
+
+    function buildCells() {
+      const W = cv.width, H = cv.height;
+      const heartPixW = 60 * FW;
+      const heartPixH = HEART_ROWS.length * FH;
+      const offX = Math.floor((W - heartPixW) / 2);
+      const offY = Math.floor((H - heartPixH) / 2) - 10;
+
+      const heartGrid = new Set();
+      const heartCells = [];
+      for (let r = 0; r < HEART_ROWS.length; r++) {
+        for (const [s, e] of HEART_ROWS[r]) {
+          for (let c = s; c <= e; c++) {
+            heartGrid.add(`${c},${r}`);
+            heartCells.push({ px: offX + c * FW, py: offY + r * FH });
+          }
+        }
+      }
+
+      const RCX = offX + heartPixW / 2;
+      const RCY = offY + heartPixH / 2 + FH * 0.5;
+      const RRX = heartPixW * 0.62;
+      const RRY = heartPixH * 0.20;
+      const STEPS = 3000;
+
+      const ringBackCells = [], ringFrontCells = [];
+      const seen = new Set();
+      for (let thick = -1; thick <= 1; thick++) {
+        const sc = 1 + thick * 0.08;
+        for (let i = 0; i < STEPS; i++) {
+          const angle = (i / STEPS) * Math.PI * 2;
+          const px = RCX + Math.cos(angle) * RRX * sc;
+          const py = RCY + Math.sin(angle) * RRY * sc;
+          const gc = Math.round((px - offX) / FW);
+          const gr = Math.round((py - offY) / FH);
+          const key = `${gc},${gr}`;
+          if (seen.has(key)) continue;
+          seen.add(key);
+          const onHeart = heartGrid.has(key);
+          const isFront = py < RCY;
+          const cell = { px: offX + gc * FW, py: offY + gr * FH };
+          if (isFront) ringFrontCells.push(cell);
+          else if (!onHeart) ringBackCells.push(cell);
+        }
+      }
+
+      return { heartCells, ringBackCells, ringFrontCells };
+    }
+
+    let cells = buildCells();
+    window.addEventListener('resize', () => { cells = buildCells(); frame = 0; });
+
+    function prep(arr) {
+      const W = cv.width, H = cv.height;
+      arr.forEach(c => { c.order = Math.random(); c.sx = Math.random()*W; c.sy = Math.random()*H; });
+    }
+
+    function prepAll() {
+      prep(cells.heartCells); prep(cells.ringBackCells); prep(cells.ringFrontCells);
+    }
+    prepAll();
+
+    const SCATTER=70, FORM_DUR=240, SETTLE=380;
+    let frame = 0;
+
+    function hash(px,py,t){ const s=Math.sin(px*0.3+py*0.7+t*43.1)*43758.5453; return s-Math.floor(s); }
+    function easeInOut(t){ return t<0.5?2*t*t:-1+(4-2*t)*t; }
+
+    function drawCells(arr, t, settled, isRing) {
+      ctx.font = `bold ${FW}px "Share Tech Mono", monospace`;
+      ctx.textBaseline = 'top';
+      for (let i = 0; i < arr.length; i++) {
+        const {px,py,sx,sy,order} = arr[i];
+        const startF = SCATTER + order * FORM_DUR * 0.6;
+        const endF = startF + 90;
+        const localT = Math.max(0, Math.min(1, (frame-startF)/(endF-startF)));
+        if (localT === 0) continue;
+        const ease = easeInOut(localT);
+        const drawX = sx + (px-sx)*ease;
+        const drawY = sy + (py-sy)*ease;
+        const bit = hash(px,py,Math.floor(frame*0.1)) > 0.5 ? '1' : '0';
+        const alpha = Math.min(1, ease*1.5);
+        let R,G,B;
+        if (settled) {
+          const pulse = (Math.sin(t*1.8+px*0.008+py*0.01)+1)/2;
+          if (isRing) { R=Math.round(210+pulse*45); G=Math.round(100+pulse*40); B=255; }
+          else { R=Math.round(148+pulse*82); G=Math.round(18+pulse*12); B=Math.round(238+pulse*17); }
+        } else {
+          const flare = localT > 0.88 ? 1.3 : 1.0;
+          R=Math.min(255,Math.round(170*flare)); G=20; B=255;
+        }
+        ctx.fillStyle = `rgba(${R},${G},${B},${alpha})`;
+        ctx.fillText(bit, drawX, drawY);
+      }
+    }
+
+    function drawScatter() {
+      const W = cv.width, H = cv.height;
+      ctx.font = `bold ${FW}px "Share Tech Mono", monospace`;
+      ctx.textBaseline = 'top';
+      const count = Math.floor(700*(frame/SCATTER));
+      for (let i = 0; i < count; i++) {
+        ctx.fillStyle = `rgba(155,20,255,${Math.random()*0.4+0.1})`;
+        ctx.fillText(Math.random()>0.5?'1':'0', Math.random()*W, Math.random()*H);
+      }
+    }
+
+    function draw() {
+      const W = cv.width, H = cv.height;
+      ctx.fillStyle = '#07000e';
+      ctx.fillRect(0,0,W,H);
+      const t = frame*0.04;
+      const settled = frame > SETTLE;
+      if (frame < SCATTER+25) drawScatter();
+      drawCells(cells.ringBackCells, t, settled, true);
+      drawCells(cells.heartCells, t, settled, false);
+      drawCells(cells.ringFrontCells, t, settled, true);
+      frame++;
+      requestAnimationFrame(draw);
+    }
+
+    draw();
+  }
+</script>
+</body>
+</html>
