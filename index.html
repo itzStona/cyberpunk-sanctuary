@@ -59,6 +59,7 @@ td.c input,td.c{text-align:center}
 .sk .stat{color:var(--mute);text-align:center;font:600 11px "Orbitron",sans-serif;letter-spacing:.08em;width:64px}
 .sk .base{text-align:center;font-weight:700;font-size:20px;color:var(--soft);text-shadow:0 0 10px color-mix(in srgb,var(--hot) 53%,transparent);width:56px}
 .bar{display:flex;gap:10px;justify-content:flex-start;padding:18px 22px 0}
+.bar .danger{margin-left:auto;border-color:var(--soft2);color:var(--soft2)}
 button{background:linear-gradient(90deg,var(--p1),var(--p2));color:#fff;border:0;padding:10px 20px;font:700 11px "Orbitron",sans-serif;letter-spacing:.2em;cursor:pointer;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
 button:hover{filter:brightness(1.15)}
 button.g{background:var(--st1);color:var(--mute)}
@@ -338,6 +339,15 @@ try{applyTheme(localStorage.getItem("cps_theme")||"sanctuary")}catch(e){}
 html.dm .dmbanner{display:flex}.dmbanner i{width:8px;height:8px;border-radius:50%;background:var(--hot);box-shadow:0 0 8px var(--hot);animation:pulse 1.4s infinite}
 #dmtab{color:var(--soft)}#dmtab[hidden]{display:none}
 #dmtog[aria-pressed="true"]{background:linear-gradient(90deg,var(--hot),var(--p1));color:#fff}
+#dmgate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(7,4,12,.86)}#dmgate[hidden]{display:none}
+#dmgate .dgb{width:min(100%,380px);background:var(--panel);border:1px solid var(--hot);box-shadow:0 0 24px color-mix(in srgb,var(--hot) 35%,transparent);padding:18px}
+#dmgate h2{font:700 14px "Orbitron",sans-serif;letter-spacing:.2em;color:var(--soft);margin:0 0 12px}
+#dmgate label{display:block;font:600 12px "Orbitron",sans-serif;letter-spacing:.12em;color:var(--mute);margin-bottom:6px}
+#dmgate .fi{padding:10px;min-height:44px}#dmgate .fi[aria-invalid="true"]{border-color:var(--soft2)}
+#dmgate .fi:focus-visible,#dmgate button:focus-visible{outline:2px solid var(--p2);outline-offset:2px}
+#dmgate .dmshow{display:flex;align-items:center;gap:8px;margin-top:8px;min-height:32px}#dmgate .dmshow input{width:auto;min-width:0}
+#dmerr{min-height:1.4em;margin:8px 0;color:var(--soft2);font-size:14px}
+#dmgate .ctl{justify-content:flex-end;gap:8px}#dmgate button{min-height:44px;min-width:44px}
 .dmgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:12px}
 .dmc{border:1px solid var(--line);border-left:3px solid var(--p2);background:var(--deep);padding:10px 12px;display:flex;flex-direction:column;gap:8px}
 .dmc.act{border-left-color:var(--hot);box-shadow:0 0 16px color-mix(in srgb,var(--hot) 25%,transparent)}
@@ -909,6 +919,9 @@ html body.mach #cyt td:nth-child(7):before{content:"DRIFT"}
 </div></section>
 <section class="pn" id="p-dm">
 <input type="hidden" data-k="dm_pc">
+<div class="sec"><h3>OVERDRIVE <small>plays the Sanctuary animation on every connected screen</small></h3>
+<div class="ctl"><button id="odBtn" type="button">OVERDRIVE</button></div>
+<p class="iph" id="odMsg" style="color:var(--mute);font-size:14px;margin:6px 0 0">Press to start the animation for the whole party. When it settles, you get the option to boot Sanctuary on your screen.</p></div>
 <div class="sec"><h3>DM · PARTY ROSTER <small>player sheets you have imported</small></h3>
 <div class="ip" style="margin:0 0 12px"><h4>IMPORT A PLAYER</h4>
 <div class="dmio" style="flex:1 1 100%"><div><textarea class="fi" id="dmImp" placeholder="Paste the code a player got from their sheet's Export button…"></textarea><div class="ctl"><button id="dmImpGo">IMPORT PLAYER</button><label class="mini" style="cursor:pointer;display:inline-flex;align-items:center">LOAD FILE<input id="dmFile" type="file" accept=".json,.txt,text/plain,application/json" hidden></label></div></div>
@@ -920,7 +933,8 @@ html body.mach #cyt td:nth-child(7):before{content:"DRIFT"}
 <div class="sec"><h3>DM NOTES · <span id="dmAct">ACTIVE SHEET</span></h3><div class="box"><textarea data-k="dm_notes" placeholder="DM-only notes for the character that is open right now: secrets, hooks, plans. These are never included when you export to the player."></textarea></div>
 <p class="iph" style="color:var(--mute);font-size:14px;margin:6px 0 0">To edit a player's full sheet or their session notes, press OPEN SHEET on their card. The sheet then works exactly as it does for the player.</p></div>
 </section>
-<div class="bar"><button id="cpsPrint" type="button">Print / PDF</button><button class="g" id="adtog" aria-pressed="true">ADS: ON</button><button class="g" id="bexp">Export</button><button class="g" id="bimp">Import</button><button class="g" id="mptog">PARTY: OFF</button><button class="g" id="dmtog" aria-pressed="false">DM MODE: OFF</button><button class="g" onclick="resetAll(this)">Reset</button></div>
+<div class="bar"><button id="cpsPrint" type="button">Print / PDF</button><button class="g" id="adtog" aria-pressed="true">ADS: ON</button><button class="g" id="bexp">Export</button><button class="g" id="bimp">Import</button><button class="g" id="mptog">PARTY: OFF</button><button class="g" id="dmtog" aria-pressed="false">DM MODE: OFF</button><button class="g danger" type="button" onclick="resetAll(this)">Reset</button></div>
+<div id="dmgate" role="dialog" aria-modal="true" aria-labelledby="dmgt" hidden><div class="dgb"><h2 id="dmgt">DM MODE · LOCKED</h2><form id="dmform" autocomplete="off"><label for="dmpw">PASSWORD</label><input class="fi" id="dmpw" type="password" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-describedby="dmerr" required><label class="dmshow"><input type="checkbox" id="dmshow"> SHOW PASSWORD</label><p id="dmerr" role="alert" aria-live="assertive"></p><div class="ctl"><button class="g" id="dmcancel" type="button">CANCEL</button><button id="dmgo" type="submit">UNLOCK</button></div></form></div></div>
 <div class="sec" id="ex" hidden><div class="box"><textarea id="exta" placeholder="Paste a sheet code here, then press Import"></textarea></div></div>
 </div>
 <aside class="log" id="log"><div class="lh" onclick="this.parentNode.classList.toggle('min')"><span>ROLL LOG</span><i>▾</i></div><div class="lb"><div class="dr"><input id="dx" placeholder="2d6+3" aria-label="Dice"><button class="mini" id="dgo">ROLL</button></div><div id="logl"><div class="empty">No rolls yet</div></div></div></aside>
@@ -3275,7 +3289,9 @@ function vit(){const mx=Q("#hpmax").value,h=val("hp").value,st=Q("#status");
  Q("#vitN").textContent=val("handle").value.trim()||"UNNAMED";Q("#vitH").textContent=(h===""?"–":h)+" / "+(mx||"–");
  Q("#vitL").textContent=(val("luck").value||0)+"/"+(val("luckmax").value||0);const s=Q("#vitS");s.textContent=st?st.textContent:"";s.className="vs"+(st&&st.classList.contains("mw")?" mw":st&&st.classList.contains("sw")?" sw":"")}
 /* ---------- DM MODE ---------- */
-let dm=false;try{dm=sessionStorage.getItem("cps_dm")=="1"}catch(e){}
+const DM_HASH="d47c40bea34483aafa4af5bd36af4f6adff17bda66d1cedbaf9c93e9bb9cf387";
+function sha256(str){const K=[0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2];const b=new TextEncoder().encode(str),l=b.length,n=((l+9+63)>>6)<<6,m=new Uint8Array(n);m.set(b);m[l]=128;const dv=new DataView(m.buffer);dv.setUint32(n-4,(l*8)>>>0);dv.setUint32(n-8,Math.floor(l*8/4294967296));let h=[0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];const w=new Array(64);for(let o=0;o<n;o+=64){for(let i=0;i<16;i++)w[i]=dv.getUint32(o+i*4);for(let i=16;i<64;i++){const x=w[i-15],y=w[i-2],s0=((x>>>7)|(x<<25))^((x>>>18)|(x<<14))^(x>>>3),s1=((y>>>17)|(y<<15))^((y>>>19)|(y<<13))^(y>>>10);w[i]=(w[i-16]+s0+w[i-7]+s1)|0}let [a,q,c,d,e,f,g,z]=h;for(let i=0;i<64;i++){const S1=((e>>>6)|(e<<26))^((e>>>11)|(e<<21))^((e>>>25)|(e<<7)),ch=(e&f)^(~e&g),t1=(z+S1+ch+K[i]+w[i])|0,S0=((a>>>2)|(a<<30))^((a>>>13)|(a<<19))^((a>>>22)|(a<<10)),mj=(a&q)^(a&c)^(q&c),t2=(S0+mj)|0;z=g;g=f;f=e;e=(d+t1)|0;d=c;c=q;q=a;a=(t1+t2)|0}h=[h[0]+a,h[1]+q,h[2]+c,h[3]+d,h[4]+e,h[5]+f,h[6]+g,h[7]+z].map(v=>v|0)}return h.map(v=>(v>>>0).toString(16).padStart(8,"0")).join("")}
+let dm=false;try{dm=sessionStorage.getItem("cps_dm")=="1"&&sessionStorage.getItem("cps_dma")==DM_HASH}catch(e){}
 const _cn=window.characterName;window.characterName=function(c,i){const n=_cn(c,i);return(dm&&c.data&&c.data.dm_pc=="1")?"★ "+n:n};
 const isPC=c=>c.data.dm_pc=="1",nameOf=c=>String(c.data.handle||"").trim()||"UNNAMED";
 const hpMax=d=>{const b=+d.st_BODY||0,w=+d.st_WILL||0;return b&&w?10+5*Math.ceil((b+w)/2)+(d.robot=="1"?(+d.sdpb||0):0):0};
@@ -3322,7 +3338,24 @@ Q("#dmRoster").addEventListener("click",e=>{const b=e.target.closest("[data-dm]"
  else if(a=="remove")dmRemove(c)});
 function applyDm(){document.documentElement.classList.toggle("dm",dm);const b=Q("#dmtog");b.textContent="DM MODE: "+(dm?"ON":"OFF");b.setAttribute("aria-pressed",dm?"true":"false");Q("#dmtab").hidden=!dm;
  if(!dm&&Q("#p-dm").classList.contains("on"))setTab("char");ensureOwnSheet();renderCharacters();if(dm)dmRender()}
-Q("#dmtog").addEventListener("click",()=>{dm=!dm;try{sessionStorage.setItem("cps_dm",dm?"1":"0")}catch(e){}applyDm();if(dm)setTab("dm")});
+(function(){const g=Q("#dmgate"),pw=Q("#dmpw"),er=Q("#dmerr"),tog=Q("#dmtog");
+ let ok=false;const authed=()=>{if(ok)return true;try{return sessionStorage.getItem("cps_dma")==DM_HASH}catch(e){return false}};
+ const open=()=>{pw.value="";er.textContent="";pw.removeAttribute("aria-invalid");g.hidden=false;pw.focus()};
+ const close=()=>{g.hidden=true;pw.type="password";Q("#dmshow").checked=false;tog.focus()};
+ tog.addEventListener("click",()=>{
+  if(dm){dm=false;try{sessionStorage.setItem("cps_dm","0")}catch(e){}applyDm();return}
+  if(!authed()){open();return}
+  dm=true;try{sessionStorage.setItem("cps_dm","1")}catch(e){}applyDm();setTab("dm")});
+ Q("#dmform").addEventListener("submit",e=>{e.preventDefault();
+  if(sha256(pw.value.normalize("NFKC").trim().toLowerCase())!==DM_HASH){er.textContent="Wrong password. Try again.";pw.setAttribute("aria-invalid","true");pw.select();return}
+  ok=true;try{sessionStorage.setItem("cps_dma",DM_HASH)}catch(x){}
+  close();tog.click()});
+ Q("#dmcancel").addEventListener("click",close);Q("#dmshow").addEventListener("change",e=>{pw.type=e.target.checked?"text":"password"});
+ g.addEventListener("mousedown",e=>{if(e.target===g)close()});
+ g.addEventListener("keydown",e=>{
+  if(e.key==="Escape"){e.preventDefault();close();return}
+  if(e.key==="Tab"){const f=[...g.querySelectorAll("input,button")].filter(x=>!x.disabled),a=f[0],z=f[f.length-1];
+   if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}})})();
 /* ---------- keep everything in sync whenever the sheet recalculates ---------- */
 const _calc=window.calc;window.calc=function(){const r=_calc.apply(this,arguments);try{if(hid.value!==raw){parse();render()}vit();if(dm&&Q("#p-dm").classList.contains("on")&&!(document.activeElement&&document.activeElement.closest&&document.activeElement.closest("#dmRoster")))dmRender()}catch(e){console.error(e)}return r};
 document.addEventListener("click",e=>{if(e.target.closest("[data-tab=dm]")&&dm)dmRender()});
@@ -3381,9 +3414,9 @@ function send(o){if(!MP.tr)return;o.i=Math.random().toString(36).slice(2,10);o.c
 function recv(d){if(!d||typeof d!=="object"||d.c===cid||!d.c)return;if(d.i){if(seen[d.i])return;if(Object.keys(seen).length>800)seen={};seen[d.i]=1}
  var nm=dec(d.p||"Runner").slice(0,24)||"Runner",c=String(d.c).slice(0,12);
  if(d.k==="bye"){delete MP.people[c];ui();return}
- if(d.k!=="hb"&&d.k!=="hello"&&d.k!=="roll"&&d.k!=="gig"&&d.k!=="bm"&&d.k!=="ql"&&d.k!=="eb")return;
+ if(d.k!=="hb"&&d.k!=="hello"&&d.k!=="roll"&&d.k!=="gig"&&d.k!=="bm"&&d.k!=="ql"&&d.k!=="eb"&&d.k!=="od")return;
  var isNew=!MP.people[c];MP.people[c]={n:nm,t:Date.now()};
- if(d.k==="hello")setTimeout(function(){send({k:"hb"})},Math.random()*1500);if(d.k==="gig")window.dispatchEvent(new CustomEvent("cps:gig",{detail:d}));if(d.k==="bm")window.dispatchEvent(new CustomEvent("cps:bm",{detail:d}));if(d.k==="ql")window.dispatchEvent(new CustomEvent("cps:ql",{detail:d}));if(d.k==="eb")window.dispatchEvent(new CustomEvent("cps:eb",{detail:d}));if(d.k==="hello")window.dispatchEvent(new Event("cps:hello"));
+ if(d.k==="hello")setTimeout(function(){send({k:"hb"})},Math.random()*1500);if(d.k==="gig")window.dispatchEvent(new CustomEvent("cps:gig",{detail:d}));if(d.k==="bm")window.dispatchEvent(new CustomEvent("cps:bm",{detail:d}));if(d.k==="ql")window.dispatchEvent(new CustomEvent("cps:ql",{detail:d}));if(d.k==="eb")window.dispatchEvent(new CustomEvent("cps:eb",{detail:d}));if(d.k==="od"&&Math.abs(Date.now()-(+d.ts||0))<120000)window.dispatchEvent(new CustomEvent("cps:od",{detail:d}));if(d.k==="hello")window.dispatchEvent(new Event("cps:hello"));
  if(d.k==="roll"&&Math.abs(Date.now()-(+d.ts||0))<600000)showRoll(nm,d);
  if(isNew||d.k==="hello")ui()}
 function prune(){var now=Date.now(),ch=false;Object.keys(MP.people).forEach(function(k){if(now-MP.people[k].t>55000){delete MP.people[k];ch=true}});if(ch)ui()}
@@ -4827,22 +4860,6 @@ window.SATURN={audio:aInit,open:open,close:close,get st(){return ST},start:start
  frame:function(){ST.t+=.016;stepDyn(ST.t,.016);render(ST.t);return cv.toDataURL('image/png')},get counts(){return {lines:B.s.ln,pts:B.s.pn+SB.pn+HB.pn,tris:B.s.tn,occ:B.o.tn,cols:COL.length,floors:FLR.length}}};
 })();
 
-/* secret entrances into Sanctuary:
-   1) tap the BREACH PROTOCOL title 5 times fast
-   2) switch on the sequence chips in this exact order: Cloak, Slide, Backdoor, Zap */
-(function(){var ov=document.getElementById('breach-overlay'),t=document.getElementById('bp-title'),chips=document.getElementById('bp-chips');
-function enter(){var ex=document.getElementById('breach-exit');
-if(ov){ov.style.transition='filter .35s';ov.style.filter='invert(1) hue-rotate(160deg) contrast(1.4)'}
-setTimeout(function(){if(ex)ex.click();if(ov)ov.style.filter='';if(window.SATURN&&window.SATURN.open)window.SATURN.open()},380)}
-if(t){var n=0,last=0;t.style.cursor='default';t.style.userSelect='none';t.style.webkitUserSelect='none';
-t.addEventListener('click',function(){var now=Date.now();n=(now-last<1200)?n+1:1;last=now;if(n>=5){n=0;enter()}})}
-if(chips){var CODE=['cloak','slide','backdoor','zap'],hist=[];
-chips.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('.chip');if(!b)return;
-if(b.getAttribute('aria-pressed')==='true')return;
-var nm=(b.firstElementChild?b.firstElementChild.textContent:b.textContent).trim().toLowerCase();
-hist.push(nm);if(hist.length>CODE.length)hist.shift();
-if(hist.join()===CODE.join()){hist=[];enter()}},true)}
-})();
 </script>
 <style id="mk-css">/* ===== TECH WORKBENCH: parts, calibration minigame, 1 hour build ===== */
 .mkbox{margin-top:10px;padding:10px 0 0;border-top:2px solid var(--line)}
@@ -6309,4 +6326,212 @@ window.machUpd=function(){
 document.addEventListener("change",function(e){if(e.target.dataset&&(e.target.dataset.k=="origin"||e.target.dataset.k=="robot"))machUpd()});
 machUpd();
 })();
-</script></body></html>
+</script>
+<style id="od-css">
+#od-ov{position:fixed;inset:0;z-index:100002;background:rgba(45,0,14,.34);opacity:0;transition:opacity .8s ease;color:#ff3355;overflow:hidden}
+#od-ov[hidden]{display:none!important}
+#od-ov.on{opacity:1}
+#od-cv{width:100%;height:100%;display:block}
+#od-ov::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,40,70,.035) 3px,rgba(255,40,70,.035) 4px)}
+#od-label{position:absolute;top:1.6rem;left:50%;transform:translateX(-50%);font:300 clamp(1rem,2.5vw,1.6rem) "Rajdhani",sans-serif;letter-spacing:.4em;color:#ff5a78;text-shadow:0 0 12px rgba(255,51,85,.6);text-transform:lowercase;white-space:nowrap;pointer-events:none;transition:color .4s}
+#od-label.hot{color:#ff3355;text-shadow:0 0 18px #ff3355}
+#od-ctl{position:absolute;left:0;right:0;z-index:2;bottom:calc(2.2rem + env(safe-area-inset-bottom));display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding:0 16px;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .8s ease,transform .8s ease}
+#od-ctl.on{opacity:1;pointer-events:auto;transform:none}
+#od-term{position:absolute;z-index:3;left:max(14px,3vw);bottom:calc(3vh + env(safe-area-inset-bottom));width:min(560px,calc(100% - 28px));padding:10px 14px;background:rgba(60,0,16,.42);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-left:2px solid #ff3355;box-shadow:0 0 24px rgba(255,51,85,.3);font:13px/1.55 "Share Tech Mono",ui-monospace,Consolas,monospace;letter-spacing:.04em;pointer-events:none}
+#od-term[hidden]{display:none}
+#od-term div{white-space:pre-wrap;word-break:break-word;color:#ffc2cc;text-shadow:0 0 8px rgba(255,120,140,.55)}
+#od-term div.r{color:#ff3355;text-shadow:0 0 8px rgba(255,51,85,.8)}
+#od-term div.g{color:#fff1f3;text-shadow:0 0 10px rgba(255,255,255,.7)}
+#od-bar{height:6px;margin-top:8px;border:1px solid #ff3355;background:rgba(40,0,10,.5);opacity:0}
+#od-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff3355,#ffc2cc);box-shadow:0 0 10px #ff3355}
+#od-flash{position:absolute;inset:0;z-index:4;background:#ffe9ec;opacity:0;pointer-events:none}
+@media print{#od-ov{display:none!important}}
+</style>
+<div id="od-ov" role="dialog" aria-modal="true" aria-label="Overdrive" hidden>
+<div id="od-label">sanctuary</div>
+<canvas id="od-cv"></canvas>
+<div id="od-term" hidden></div>
+<div id="od-ctl"><button type="button" id="od-boot">BOOT SANCTUARY</button><button type="button" class="g" id="od-skip">DISMISS</button></div>
+<div id="od-flash"></div>
+</div>
+<script id="od-js">
+(function(){
+var $=function(i){return document.getElementById(i)};
+var ov=$("od-ov"),cv=$("od-cv"),ctx=cv.getContext("2d"),ctl=$("od-ctl"),boot=$("od-boot"),skip=$("od-skip"),msg=$("odMsg"),
+ lab=$("od-label"),term=$("od-term"),flash=$("od-flash"),bar,barf;
+var running=false,raf=0,t0=0,frame=0,cells=null,rain=null,FW=9,FH=20,isDM=false,ending=false,tmr=0;
+var SCATTER=70,FORM_DUR=240,SETTLE=380,AUTO_END=800;
+var FONT='"Share Tech Mono",ui-monospace,Consolas,monospace';
+var CH="0123456789ABCDEF<>/|=+*";
+var hack={on:false,t0:0,i:0,hp:0,gl:0,wall:0,gap:0,opened:false};
+
+/* ---- boot sequence ---- */
+var LINES=[
+ [0,"> OVERDRIVE // UPLINK ACCEPTED","",880],
+ [450,"> HANDSHAKE ........ OK","",760],
+ [950,"> BYPASSING PERIMETER AUTH ........ OK","",760],
+ [1450,"> TRACING OLD NET BOUNDARY ...","",660],
+ [1950,"!! BLACKWALL DETECTED","r",180],
+ [2450,"> INJECTING BREACH PAYLOAD ... 7 VECTORS","",760],
+ [2950,"> ICE 3/7 ... 5/7 ... 7/7 BROKEN","",660],
+ [3500,"!! BLACKWALL INTEGRITY 61% ... 23% ... 04%","r",160],
+ [4300,"> BREACH CONFIRMED","g",990],
+ [4900,"> ACCESS GRANTED // CONNECTION 143","g",1180]];
+var AC=null;
+function beep(f,d,ty,v){try{if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type=ty||"square";o.frequency.value=f;g.gain.setValueAtTime(v||.025,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d)}catch(e){}}
+function boom(){try{if(!AC)return;var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type="sawtooth";o.frequency.setValueAtTime(160,t);o.frequency.exponentialRampToValueAtTime(28,t+.9);g.gain.setValueAtTime(.07,t);g.gain.exponentialRampToValueAtTime(.0001,t+1);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+1)}catch(e){}}
+function addLine(l){var d=document.createElement("div");d.textContent=l[1];if(l[2])d.className=l[2];
+ term.insertBefore(d,bar);while(term.querySelectorAll("div:not(#od-bar)").length>9)term.querySelector("div:not(#od-bar)").remove();
+ beep(l[3]||700,.07,l[2]==="r"?"sawtooth":"square",l[2]==="r"?.04:.02)}
+
+function size(){cv.width=window.innerWidth;cv.height=window.innerHeight}
+function hash(a,b,t){var s=Math.sin(a*.3+b*.7+t*43.1)*43758.5453;return s-Math.floor(s)}
+function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t}
+function clamp(v,a,b){return v<a?a:v>b?b:v}
+
+/* ---- red matrix rain ---- */
+function buildRain(){
+ var W=cv.width,H=cv.height,cs=Math.max(11,Math.round(FW*1.9)),cols=Math.ceil(W/cs),rows=Math.ceil(H/cs),cl=[];
+ for(var c=0;c<cols;c++)cl.push({sp:.55+Math.random()*1.1,off:Math.random()*(rows+30),len:9+Math.floor(Math.random()*22),on:Math.random()<.84});
+ return{cs:cs,cols:cols,rows:rows,cl:cl}}
+function drawRain(sec,k,boost){
+ var r=rain,cs=r.cs,tick=Math.floor(sec*9),slow=Math.floor(sec*1.5);
+ ctx.font="bold "+cs+"px "+FONT;ctx.textBaseline="top";
+ for(var c=0;c<r.cols;c++){var col=r.cl[c];if(!col.on)continue;
+  var head=Math.floor((sec*11*col.sp*boost+col.off)%(r.rows+col.len));
+  for(var j=0;j<col.len;j++){var row=head-j;if(row<0||row>=r.rows)continue;
+   var f=1-j/col.len,a=f*f*k,ch=CH.charAt(Math.floor(hash(c,row,j===0?tick:slow)*CH.length)%CH.length);
+   ctx.fillStyle=j===0?"rgba(255,228,232,"+Math.min(1,a+.2*k)+")":"rgba(255,45,75,"+(a*.85)+")";
+   ctx.fillText(ch,c*r.cs,row*cs)}}}
+
+/* ---- Saturn ---- */
+function build(){
+ var W=cv.width,H=cv.height,R=Math.min(W*.19,H*.29);
+ FW=Math.max(3.5,Math.min(9,R/24));FH=FW*1.9;
+ var cx=W/2,cy=H/2+4,tilt=-.24,ct=Math.cos(tilt),st=Math.sin(tilt),ry=.2;
+ var planet=[],back=[],front=[],seen={},pm={};
+ for(var gr=Math.floor((cy-R)/FH)-1;gr<=Math.ceil((cy+R)/FH)+1;gr++)for(var gc=Math.floor((cx-R)/FW)-1;gc<=Math.ceil((cx+R)/FW)+1;gc++){
+  var qx=gc*FW+FW/2,qy=gr*FH+FH/2,dx=qx-cx,dy=qy-cy;
+  if(dx*dx+dy*dy>R*R)continue;
+  var sh=Math.max(0,Math.min(1,.5+(-dx*.55-dy*.75)/R*.62));
+  var pc={px:gc*FW,py:gr*FH,sh:sh,bd:dy/R};planet.push(pc);pm[gc+","+gr]=pc}
+ for(var r=1.46;r<=2.15;r+=.011){
+  if(r>1.74&&r<1.83)continue;
+  var n=Math.ceil(Math.PI*2*r*R/(FW*.45));
+  for(var i=0;i<n;i++){
+   var an=i/n*Math.PI*2,ex=Math.cos(an)*r*R,ey=Math.sin(an)*r*R*ry,
+    x=cx+ex*ct-ey*st,y=cy+ex*st+ey*ct,isFront=Math.sin(an)>0;
+   var gc2=Math.round(x/FW-.5),gr2=Math.round(y/FH-.5),pk=gc2+","+gr2,key=(isFront?"f":"b")+pk;
+   if(!isFront){var ddx=x-cx,ddy=y-cy;if(ddx*ddx+ddy*ddy<R*R||pm[pk])continue}
+   if(seen[key])continue;seen[key]=1;
+   if(isFront&&pm[pk])pm[pk].dead=true;
+   (isFront?front:back).push({px:gc2*FW,py:gr2*FH,rr:r})}}
+ planet=planet.filter(function(c){return !c.dead});
+ [planet,back,front].forEach(function(a){a.forEach(function(c){c.order=Math.random();c.sx=Math.random()*W;c.sy=Math.random()*H})});
+ return{planet:planet,back:back,front:front}}
+function drawCells(arr,t,settled,kind){
+ ctx.font="bold "+FW+"px "+FONT;ctx.textBaseline="top";
+ var tick=Math.floor(performance.now()/70),gl=hack.on?hack.gl:0,hp=hack.on?hack.hp:0;
+ for(var i=0;i<arr.length;i++){var c=arr[i],startF=SCATTER+c.order*FORM_DUR*.6,endF=startF+90,
+  lt=clamp((frame-startF)/(endF-startF),0,1);
+  if(lt===0)continue;
+  var e=ease(lt),x=c.sx+(c.px-c.sx)*e,y=c.sy+(c.py-c.sy)*e,bit=hash(c.px,c.py,Math.floor(frame*.1))>.5?"1":"0",al=Math.min(1,e*1.5),R,G,B;
+  if(settled){var pu=(Math.sin(t*1.8+c.px*.008+c.py*.01)+1)/2;
+   if(kind===0){var L=(.45+.55*c.sh)*(.78+.22*Math.sin(c.bd*22));R=Math.round(95+(160+pu*20)*L);G=Math.round(8+L*36);B=Math.round(26+L*52);al*=.88+.12*L}
+   else{var br=.55+.45*Math.sin(c.rr*38);if(c.rr<1.5)br*=.6;var k=.6+.4*br;R=255;G=Math.round(Math.min(255,(150+pu*50)*k));B=Math.round(Math.min(255,(165+pu*50)*k));al*=(.62+.38*br)*(kind===1?.85:1)}
+  }else{var fl=lt>.88?1.3:1;R=Math.min(255,Math.round(235*fl));G=Math.round(40*fl);B=70}
+  if(hp>0){G=Math.round(G+(110-G)*hp*.6);B=Math.round(B+(130-B)*hp*.6)}
+  if(gl>0){var gr=Math.round(c.py/FH),g=Math.sin(gr*12.9898+tick*78.233)*43758.5453;g-=Math.floor(g);
+   if(g>1-.07*gl)x+=((g*57)%1-.5)*70*gl;
+   if(gl>.5&&i%3===0){ctx.fillStyle="rgba(94,231,255,"+(al*.4)+")";ctx.fillText(bit,x-3,y)}}
+  ctx.fillStyle="rgba("+R+","+G+","+B+","+al+")";ctx.fillText(bit,x,y)}}
+
+/* ---- the Blackwall: red code wall, torn open down the middle ---- */
+function wall(ht){
+ var W=cv.width,H=cv.height,a=hack.wall,gapW=hack.gap*W*1.06,cx=W/2,cs=Math.max(12,FW*2),
+  tick=Math.floor(ht/90),half=gapW/2,gx0=cx-half,gx1=cx+half;
+ ctx.fillStyle="rgba(70,0,18,"+(a*.3)+")";
+ if(gapW<=0)ctx.fillRect(0,0,W,H);else{ctx.fillRect(0,0,Math.max(0,gx0),H);ctx.fillRect(gx1,0,W-gx1,H)}
+ ctx.font="bold "+cs+"px "+FONT;ctx.textBaseline="top";
+ var cols=Math.ceil(W/cs),rows=Math.ceil(H/cs);
+ for(var c=0;c<cols;c++){var x=c*cs;if(x+cs>gx0&&x<gx1)continue;
+  for(var r=0;r<rows;r++){var h=hash(c,r,tick);if(h<.5)continue;
+   ctx.fillStyle=h>.93?"rgba(255,200,212,"+(a*.95)+")":"rgba(255,51,85,"+(a*(.28+(h-.5)*.7))+")";
+   ctx.fillText(h>.8?"1":h>.68?"0":"\u2592",x,r*cs)}}
+ if(hack.gap>0){ctx.fillStyle="rgba(143,233,255,.95)";ctx.fillRect(gx0-2,0,3,H);ctx.fillRect(gx1-1,0,3,H)}
+ var ta=a*Math.max(0,1-hack.gap*7);
+ if(ta>0){var fs=Math.min(W*.11,H*.2);ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";
+  ctx.shadowColor="#ff3355";ctx.shadowBlur=30;ctx.font="700 "+fs+'px "Rajdhani",sans-serif';ctx.fillStyle="rgba(255,60,90,"+ta+")";
+  ctx.fillText("BLACKWALL",cx+(Math.random()-.5)*8*hack.gl,H/2);
+  ctx.shadowBlur=0;ctx.font="600 "+Math.max(11,fs*.14)+'px "Share Tech Mono",monospace';ctx.fillStyle="rgba(255,228,232,"+ta+")";
+  ctx.fillText("ICE ACTIVE // ACCESS RESTRICTED",cx,H/2+fs*.62);ctx.restore()}}
+
+function hackStep(){
+ var ht=performance.now()-hack.t0;
+ while(hack.i<LINES.length&&LINES[hack.i][0]<=ht){addLine(LINES[hack.i]);hack.i++}
+ hack.hp=clamp((ht-600)/3200,0,1);
+ hack.gl=clamp(.2+ht/3300,0,1);
+ hack.wall=clamp((ht-2000)/1100,0,1);
+ var prev=hack.gap;hack.gap=ht>4100?ease(clamp((ht-4100)/1300,0,1)):0;
+ if(prev===0&&hack.gap>0){boom()}
+ var p=clamp((ht-1400)/3400,0,1);bar.style.opacity=ht>=1400?1:0;barf.style.width=(p*100)+"%";
+ cv.style.transform="translate("+((Math.random()-.5)*hack.gl*7)+"px,"+((Math.random()-.5)*hack.gl*5)+"px)";
+ if(ht>5300)flash.style.opacity=clamp((ht-5300)/350,0,1);
+ if(ht>=5700&&!hack.opened){hack.opened=true;
+  if(window.SATURN&&window.SATURN.open)window.SATURN.open();
+  finish()}
+ return ht}
+
+function draw(){
+ ctx.clearRect(0,0,cv.width,cv.height);
+ var sec=(performance.now()-t0)/1000,t=frame*.04,settled=frame>SETTLE,ht=0;
+ if(hack.on)ht=hackStep();
+ var k=hack.on?1:(settled?.3:clamp(frame/70,0,1)*.9),boost=hack.on?1+hack.gl*1.2:1;
+ drawRain(sec,k,boost);
+ drawCells(cells.back,t,settled,1);drawCells(cells.planet,t,settled,0);drawCells(cells.front,t,settled,2);
+ if(hack.on&&hack.wall>0)wall(ht)}
+function loop(){
+ if(!running)return;
+ frame=Math.floor((performance.now()-t0)/16.667);
+ draw();
+ if(isDM&&!hack.on&&!ending&&frame>SETTLE+40&&!ctl.classList.contains("on")){ctl.classList.add("on");try{boot.focus({preventScroll:true})}catch(e){}}
+ if(!isDM&&frame>AUTO_END&&!ending)finish();
+ raf=requestAnimationFrame(loop)}
+function onResize(){size();cells=build();rain=buildRain()}
+function onKey(e){if(e.key==="Escape"){e.preventDefault();finish()}}
+function onClick(e){if(!isDM&&(e.target===ov||e.target===cv))finish()}
+function resetHack(){hack.on=false;hack.i=0;hack.hp=hack.gl=hack.wall=hack.gap=0;hack.opened=false;
+ term.hidden=true;term.innerHTML='<div id="od-bar"><i id="od-barf"></i></div>';bar=$("od-bar");barf=$("od-barf");
+ flash.style.opacity=0;cv.style.transform="";lab.textContent="sanctuary";lab.classList.remove("hot")}
+function start(dmView){
+ if(running)return false;
+ running=true;ending=false;isDM=!!dmView;frame=0;resetHack();ctl.classList.remove("on");ctl.style.display=isDM?"":"none";
+ ov.hidden=false;size();cells=build();rain=buildRain();t0=performance.now();
+ void ov.offsetWidth;ov.classList.add("on");
+ window.addEventListener("resize",onResize);document.addEventListener("keydown",onKey);ov.addEventListener("click",onClick);
+ raf=requestAnimationFrame(loop);return true}
+function stop(){
+ running=false;cancelAnimationFrame(raf);ov.hidden=true;ov.classList.remove("on");ctl.classList.remove("on");resetHack();
+ window.removeEventListener("resize",onResize);document.removeEventListener("keydown",onKey);ov.removeEventListener("click",onClick)}
+function finish(){
+ if(!running||ending)return;ending=true;ctl.classList.remove("on");ov.classList.remove("on");
+ clearTimeout(tmr);tmr=setTimeout(stop,850)}
+function isDm(){return document.documentElement.classList.contains("dm")}
+document.addEventListener("click",function(e){
+ if(!e.target.closest||!e.target.closest("#odBtn"))return;
+ if(!isDm())return;
+ if(running){if(msg)msg.textContent="Overdrive is already running.";return}
+ var live=window.__party&&window.__party.st==="on";
+ try{if(window.__partySend)window.__partySend({k:"od"})}catch(x){}
+ if(msg)msg.textContent=live?"Overdrive sent to everyone in the party.":"Not connected to a party, so only your screen plays it. Press PARTY at the top to connect, then try again.";
+ start(true)});
+window.addEventListener("cps:od",function(){start(isDm())});
+boot.addEventListener("click",function(){
+ if(hack.on||ending)return;
+ ctl.classList.remove("on");term.hidden=false;lab.textContent="blackwall breach";lab.classList.add("hot");
+ hack.t0=performance.now();hack.i=0;hack.on=true});
+skip.addEventListener("click",finish);
+resetHack();
+})();
+</script>
+</body></html>
