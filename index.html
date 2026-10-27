@@ -4739,11 +4739,11 @@ function render(t){
  gl.depthMask(true);
 }
 /* ====== other runners: presence, purple sprites, and the DM as a scanned point-cloud construct ====== */
-var AV={},avBuf=null,avArr=new Float32Array(9*6000),avN=0,avLast=0,avSendT=0,avWas=false,avSnap={x:0,z:0,y:0,w:0},avHud=null,avCss=false;
+var AVB=0,AV={},avBuf=null,avArr=new Float32Array(9*6000),avN=0,avLast=0,avSendT=0,avWas=false,avSnap={x:0,z:0,y:0,w:0},avHud=null,avCss=false;
 var cV1=[.40,.15,.78,1],cV2=[.69,.38,1,1],cV3=[.86,.68,1,1],cMG=[.96,.42,.98,1],cWH=[.94,.9,1,1],cPK=[1,.55,.9,1],cGR=[.52,.42,.72,1];
 function avH(a,b){var q=Math.sin(a*127.1+b*311.7)*43758.5453;return q-Math.floor(q)}
 function avMix(a,b,t){return[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t,a[2]+(b[2]-a[2])*t,1]}
-function avP(o,x,y,f,c,s,k){o.push([x,y,f,c[0],c[1],c[2],(c[3]==null?1:c[3])*(k==null?1:k),s,Math.random()])}
+function avP(o,x,y,f,c,s,k){o.push([x,y,f,c[0],c[1],c[2],(c[3]==null?1:c[3])*(k==null?1:k),s,Math.random(),AVB])}
 function avCol(c,t){return typeof c==='function'?c(t):c}
 function avTube(o,a,b,r0,r1,n,col,s,keep){var d=nrm([b[0]-a[0],b[1]-a[1],b[2]-a[2]]),h=Math.abs(d[1])<.9?[0,1,0]:[1,0,0],u=nrm(crs(d,h)),v=crs(d,u);
  for(var i=0;i<n;i++){var t=Math.random(),r=r0+(r1-r0)*t,an=Math.random()*TAU,cs=Math.cos(an)*r,sn=Math.sin(an)*r,
@@ -4758,11 +4758,45 @@ function avRingXY(o,cx,cy,f,r,n,col,s){for(var i=0;i<n;i++){var an=i/n*TAU;avP(o
 function avSeg(o,a,b,n,col,s,j){j=j||0;for(var i=0;i<n;i++){var t=n>1?i/(n-1):0;avP(o,a[0]+(b[0]-a[0])*t+(Math.random()-.5)*j,a[1]+(b[1]-a[1])*t+(Math.random()-.5)*j,a[2]+(b[2]-a[2])*t+(Math.random()-.5)*j,col,s)}}
 /* the DM: tall, popped collar, long hair, round shades, cropped jacket with a shoulder plate, one chrome arm, flared trousers */
 var DMF=null,SPR=null;
+/* DM walk rig. bones: 0 body, 1-2 thigh, 3-4 shin, 5-6 foot, 7-8 upper arm, 9-10 forearm, 11 hair (odd = character's left, -x).
+   Gait phase advances with distance walked, so the legs never skate. Two-bone legs with knee flex and foot roll,
+   pelvis drop keeps the lowest sole on the floor, shoulders counter-twist, arms swing against the legs, hair and jacket lag behind. */
+var DR=[0,0,0],RY=0,RF=0,DL1=.45,DL2=.43;
+function dmC(v,a,b){return v<a?a:v>b?b:v}
+function dmR(a,d,t){var c=Math.cos(t),s=Math.sin(t);RY=a*c+d*s;RF=d*c-a*s}
+function dmRig(a,t,dt){
+ var P=a.rig||(a.rig={th:[0,0],ts:[0,0],pf:[0,0],ua:[0,0],ea:[0,0],gp:0,sp:0,px:a.x,pz:a.z,pd:0,x0:0,tw:0,tl:0,br:0,w:0,r:0,g:0,t:0});
+ var sp=dt>0?Math.hypot(a.x-P.px,a.z-P.pz)/dt:0;P.px=a.x;P.pz=a.z;P.sp+=(Math.min(sp,9)-P.sp)*(1-Math.exp(-dt*7));
+ var s=P.sp,w=dmC((s-.3)/2.7,0,1),r=dmC((s-4.6)/2.8,0,1);P.gp=(P.gp+s*dt/(1+1.4*w+1.1*r)*TAU)%TAU;
+ var g=P.gp,Ah=(.5+.3*r)*w,Aa=(.5+.4*r)*w,K=(.8+.4*r)*w,hl=[0,0];
+ for(var q=0;q<2;q++){var ph=g+(q?Math.PI:0),sn=Math.sin(ph),th=Ah*sn,
+   kb=K*Math.pow(Math.max(0,Math.cos(ph+.35)),2)+.1*w*Math.max(0,Math.cos(ph-2.8)),ts=th-kb,
+   pf=w*(.3*Math.max(0,sn)-.42*Math.max(0,-sn)),ua=Aa*Math.sin(g+(q?0:Math.PI));
+  P.th[q]=th;P.ts[q]=ts;P.pf[q]=pf;P.ua[q]=ua;P.ea[q]=w*(.2+.55*r)+.55*Math.max(0,ua)*(1+r)+(1-w)*.04;
+  hl[q]=1-DL1*Math.cos(th)-DL2*Math.cos(ts)-.12*Math.cos(pf)+(pf>0?-.09*Math.sin(pf):.22*Math.sin(pf))}
+ P.pd=-Math.min(hl[0],hl[1]);P.x0=.018*Math.cos(g)*w;P.tw=-.13*w*Math.sin(g);P.tl=.04*w+.13*r;
+ P.br=Math.sin(t*1.7)*.004*(1-w);P.w=w;P.r=r;P.g=g;P.t=t;return P}
+function dmPt(p,P){var x=p[0],y=p[1],f=p[2],b=p[9]|0,rn=p[8],q=b&1?0:1,w=P.w,r=P.r,g=P.g,u=0,c,s,y0=y;
+ if(b===0){u=dmC((y-1)/.4,0,1);
+  var hem=y>1.05&&y<1.3?(1.3-y)/.25:0,col=y>1.56?dmC((y-1.56)/.14,0,1):0;
+  f-=hem*(w*.015+r*.03)+col*(.01*w+.025*r);x+=hem*.012*w*Math.sin(g+rn*3);y+=col*.006*w*Math.sin(2*g+rn*5)}
+ else if(b<7){var k=(b-1)>>1,th=P.th[q],ts=P.ts[q],pf=P.pf[q];
+  if(k===0){dmR(y-1,f,th);y=1+RY;f=RF}
+  else if(k===1){var cl=dmC((.5-y0)/.35,0,1);dmR(y-.55,f,ts);y=1-DL1*Math.cos(th)+RY;f=DL1*Math.sin(th)+RF;x+=(x>0?1:-1)*cl*.012*w*Math.sin(2*g+rn*2);f-=cl*.012*w}
+  else{dmR(y-.12,f,pf);y=1-DL1*Math.cos(th)-DL2*Math.cos(ts)+RY;f=DL1*Math.sin(th)+DL2*Math.sin(ts)+RF}}
+ else if(b<11){var ua=P.ua[q],ea=P.ea[q];u=1;
+  if(b<9){dmR(y-1.46,f+.01,ua);y=1.46+RY;f=RF-.01}
+  else{dmR(-.29,.03,ua);var Ey=RY,Ef=RF;dmR(y-1.17,f-.02,ua+ea);y=1.46+Ey+RY;f=-.01+Ef+RF}}
+ else{var sw=dmC((1.86-y)/.5,0,1);sw*=sw;u=1;
+  f-=sw*(.035*w+.06*r)+sw*.01*w*Math.sin(2*g+rn*2)-sw*.004*Math.sin(P.t*.9+rn*3+1);y+=sw*.012*w*Math.sin(2*g+1.2);x+=sw*(.016*w*Math.sin(g+rn*2)+.006*Math.sin(P.t*.9+rn*3))}
+ if(u>0){c=Math.cos(P.tw*u);s=Math.sin(P.tw*u);var nx=x*c+f*s;f=f*c-x*s;x=nx;dmR(y-1,f,-P.tl*u);y=1+RY;f=RF;x+=P.x0*u;y+=P.br*u}
+ DR[1]=y+P.pd;DR[2]=f;return x}
+
 function mkDM(){var o=[],i,sx;
- [-1,1].forEach(function(sx){avEll(o,sx*.10,.07,.07,.065,.075,.16,70,cV1,.03);avEll(o,sx*.10,.03,.14,.05,.02,.08,16,cMG,.032);
-  avTube(o,[sx*.1,1.0,0],[sx*.11,.55,0],.115,.125,150,function(t){return avMix(cV1,[.5,.25,.9,1],t*.4)},.03);
-  avTube(o,[sx*.11,.55,0],[sx*.12,.12,0],.125,.17,180,function(t){return avMix([.5,.25,.9,1],cV2,t)},.03)});
- avRingXZ(o,0,1.02,0,.19,.125,70,cMG,.028);avRingXZ(o,0,.99,0,.19,.125,40,cV3,.024);
+ [-1,1].forEach(function(sx){AVB=sx<0?5:6;avEll(o,sx*.10,.07,.07,.065,.075,.16,70,cV1,.03);avEll(o,sx*.10,.03,.14,.05,.02,.08,16,cMG,.032);
+  AVB=sx<0?1:2;avTube(o,[sx*.1,1.0,0],[sx*.11,.55,0],.115,.125,150,function(t){return avMix(cV1,[.5,.25,.9,1],t*.4)},.03);
+  AVB=sx<0?3:4;avTube(o,[sx*.11,.55,0],[sx*.12,.12,0],.125,.17,180,sx<0?function(t){return avMix([.5,.25,.9,1],cV2,t)}:function(t){return avMix([.34,.27,.52,1],[.42,.3,.7,1],t)},.03)});
+ AVB=0;avRingXZ(o,0,1.02,0,.19,.125,70,cMG,.028);avRingXZ(o,0,.99,0,.19,.125,40,cV3,.024);
  avEll(o,.215,.95,.02,.035,.06,.05,38,cWH,.026);
  avSect(o,1.0,1.5,.17,.22,.10,.11,230,function(t){return avMix(cGR,cV3,t*.6)},.028);
  var open=function(x,y,f){return !(f>0&&Math.abs(x)<.07)};
@@ -4783,20 +4817,30 @@ function mkDM(){var o=[],i,sx;
  [-1,1].forEach(function(sx){avRingXY(o,sx*.042,1.755,.105,.034,22,cPK,.032);avSeg(o,[sx*.076,1.755,.1],[sx*.092,1.755,.01],8,cPK,.026)});
  avSeg(o,[-.008,1.76,.108],[.008,1.76,.108],4,cPK,.03);
  // long hair: strands from the scalp, falling past the collar; pink toward the tips, one pale streak
- for(i=0;i<56;i++){var ph=Math.random()*TAU,el=.2+Math.random()*.95,fr=Math.random(),phi=(Math.random()*2-1)*Math.PI*.9;
+ AVB=11;for(i=0;i<56;i++){var ph=Math.random()*TAU,el=.2+Math.random()*.95,fr=Math.random(),phi=(Math.random()*2-1)*Math.PI*.9;
   if(Math.abs(phi)<.5&&el<.9)phi+=(phi<0?-1:1)*.6;
   var x0=.095*Math.cos(el)*Math.sin(phi),y0=1.74+.12*Math.sin(el),f0=.01+.11*Math.cos(el)*Math.cos(phi),front=Math.abs(phi)<1.15,sg=phi<0?-1:1,
    x1=front?sg*(.13+Math.random()*.08):x0*1.5,y1=1.36+Math.random()*.12,f1=front?.05+Math.random()*.08:f0*1.05-.03,streak=(i<4),n=26;
   for(var j=0;j<n;j++){var t=j/(n-1),e=t*t*(3-2*t),x=x0+(x1-x0)*e+Math.sin(t*5+ph)*.012*t+sg*Math.sin(Math.PI*t)*.03,y=y0+(y1-y0)*t,f=f0+(f1-f0)*e;
    avP(o,x,y,f,streak?cV3:avMix([.66,.42,1,1],[.95,.45,.95,1],Math.pow(t,1.4)),streak?.03:.024,streak?.8:.5)}}
  // arms: right = bare forearm + fingerless glove; left = chrome cyber arm
- avTube(o,[.27,1.46,-.01],[.33,1.17,.02],.07,.062,90,cV1,.03);avTube(o,[.325,1.2,.02],[.33,1.15,.02],.07,.07,26,cMG,.03);
- avTube(o,[.33,1.15,.02],[.36,.9,.08],.05,.04,70,[.8,.62,.95,1],.026);avEll(o,.37,.84,.1,.045,.06,.04,50,cV1,.028);avEll(o,.375,.78,.115,.04,.025,.03,12,cMG,.026);
- avTube(o,[-.27,1.46,-.01],[-.33,1.17,.02],.07,.062,90,cV1,.03);avTube(o,[-.325,1.2,.02],[-.33,1.15,.02],.07,.07,26,cMG,.03);
- avTube(o,[-.33,1.15,.02],[-.36,.9,.08],.055,.045,120,cWH,.026);
+ AVB=8;avTube(o,[.27,1.46,-.01],[.33,1.17,.02],.07,.062,90,cV1,.03);avTube(o,[.325,1.2,.02],[.33,1.15,.02],.07,.07,26,cMG,.03);
+ AVB=10;avTube(o,[.33,1.15,.02],[.36,.9,.08],.05,.04,70,[.8,.62,.95,1],.026);avEll(o,.37,.84,.1,.045,.06,.04,50,cV1,.028);avEll(o,.375,.78,.115,.04,.025,.03,12,cMG,.026);
+ AVB=7;avTube(o,[-.27,1.46,-.01],[-.33,1.17,.02],.07,.062,90,cV1,.03);avTube(o,[-.325,1.2,.02],[-.33,1.15,.02],.07,.07,26,cMG,.03);
+ AVB=9;avTube(o,[-.33,1.15,.02],[-.36,.9,.08],.055,.045,120,cWH,.026);
  [.3,.6,.9].forEach(function(t){var cx=-.33-.03*t,cy=1.15-.25*t,r=.055-.01*t;for(var q=0;q<18;q++){var an=q/18*TAU;avP(o,cx+Math.cos(an)*r,cy,.02+.06*t+Math.sin(an)*r,cMG,.026)}});
  avSeg(o,[-.335,1.14,.075],[-.365,.9,.12],22,cPK,.022,.003);
  avEll(o,-.37,.84,.1,.05,.06,.045,70,cWH,.026);for(i=0;i<3;i++)avSeg(o,[-.4+.01*i,.83,.13],[-.4+.01*i,.78,.13],4,cMG,.022);
+ // reference details: saturn emblem on the back of the jacket, bow buckle, hip scanner, strap pouches, boot stripes
+ AVB=0;avEll(o,0,1.3,-.14,.07,.07,.014,90,function(t){return avMix(cV2,cPK,t)},.03);
+ for(i=0;i<70;i++){var an2=i/70*TAU,rx2=Math.cos(an2)*.14,ry2=Math.sin(an2)*.035+rx2*.28;if(Math.sin(an2)<0&&Math.abs(rx2)<.07)continue;avP(o,rx2,1.3+ry2,-.145,i%9?cMG:cWH,.026)}
+ avEll(o,0,1.3,-.15,.11,.11,.01,36,[.8,.45,1,.3],.055);
+ avEll(o,-.035,1.015,.135,.022,.014,.012,10,cWH,.032);avEll(o,.005,1.015,.135,.022,.014,.012,10,cWH,.032);avEll(o,-.015,1.015,.14,.01,.01,.01,5,cMG,.04);
+ for(i=0;i<46;i++)avP(o,.17+Math.random()*.055,.88+Math.random()*.11,.02+Math.random()*.07,i<12?cV3:cGR,.03);
+ avSeg(o,[.185,.95,.092],[.21,.95,.092],5,cWH,.026);avSeg(o,[-.2,1.0,.09],[.02,.95,.128],20,cGR,.022,.004);
+ [0,1,2,3].forEach(function(k){avEll(o,-.07-.034*k,.935,.125,.014,.03,.012,9,k%2?cMG:cV2,.03)});
+ [-1,1].forEach(function(sx){AVB=sx<0?5:6;avSeg(o,[sx*.15,.085,.04],[sx*.15,.085,.1],6,cMG,.026);avSeg(o,[sx*.15,.06,.04],[sx*.15,.06,.1],6,cMG,.026)});
+ AVB=0;
  return o}
 /* everyone else: a purple sprite, always facing you */
 function mkSprite(){var o=[],i;
@@ -4840,16 +4884,16 @@ function avDraw(t,VP,cam,scale,fog,RV,PU){
  for(var q=0;q<ids.length;q++){var id=ids[q],a=AV[id];
   if(now-a.ls>7000){avKill(id);continue}
   a.x+=(a.tx-a.x)*k;a.z+=(a.tz-a.z)*k;a.y+=(a.ty-a.y)*k;var dw=((a.tw-a.w+Math.PI)%TAU+TAU)%TAU-Math.PI;a.w+=dw*k;
-  var dm=!!a.m,geo=dm?DMF:SPR;avNeed(avN+geo.length+160);
+  var dm=!!a.m,geo=dm?DMF:SPR,RG=dm?dmRig(a,t,dt):null;avNeed(avN+geo.length+160);
   var mat=Math.max(0,Math.min(1,(t-a.t0)/1.5));mat=mat*mat*(3-2*mat);var m1=1-mat,
    yw=dm?a.w:ST.yaw,rx=Math.cos(yw),rz=Math.sin(yw),fx=dm?Math.sin(yw):0,fz=dm?-Math.cos(yw):0,
    bur=((t+a.ph)%4.3)<.22||((t*.77+a.ph)%6.7)<.12?1:0,H0=dm?1.95:1.75,scanY=((t*(dm?.55:.4)+a.ph)%(H0+.7))-.25,seed=a.seed;
   for(i=0;i<geo.length;i++){var g=geo[i],lx=g[0],ly=g[1],lf=g[2],rn=g[8],band=Math.floor(ly*13),hv=avH(band+seed,Math.floor(t*16));
    if(bur&&rn>.72&&hv>.45)continue;
    var dx=hv>.86?(avH(band+7,Math.floor(t*16)+seed)-.5)*(.04+.4*bur):0,sc=Math.exp(-Math.pow((ly-scanY)/.065,2)),
-    ox=m1>0?(rn-.5)*2.2*m1:0,oy=m1>0?(avH(rn*91,3)-.5)*2.6*m1:0,oz=m1>0?(avH(rn*57,9)-.5)*2.2*m1:0,X=lx+dx+ox,F=lf+oz,
+    ox=m1>0?(rn-.5)*2.2*m1:0,oy=m1>0?(avH(rn*91,3)-.5)*2.6*m1:0,oz=m1>0?(avH(rn*57,9)-.5)*2.2*m1:0,X=(RG?dmPt(g,RG):lx)+dx+ox,F=(RG?DR[2]:lf)+oz,
     sh=Math.sin(t*23+rn*80)*.003,bob=dm?0:Math.sin(t*2+a.ph)*.015;
-   avPush(a.x+X*rx+F*fx+sh,a.y+ly+oy+bob,a.z+X*rz+F*fz+sh,(g[3]+(.82-g[3])*sc*.55)*.8,(g[4]+(.6-g[4])*sc*.55)*.8,(g[5]+(1-g[5])*sc*.3)*.9,g[6]*(.5+.5*mat)*(dm?.62:.8),g[7]*(dm?.85:1)*(1+sc*.9),rn)}
+   avPush(a.x+X*rx+F*fx+sh,a.y+(RG?DR[1]:ly)+oy+bob,a.z+X*rz+F*fz+sh,(g[3]+(.82-g[3])*sc*.55)*.8,(g[4]+(.6-g[4])*sc*.55)*.8,(g[5]+(1-g[5])*sc*.3)*.9,g[6]*(.5+.5*mat)*(dm?.62:.8),g[7]*(dm?.85:1)*(1+sc*.9),rn)}
   // feet ring and rising motes
   var rr=.42+.04*Math.sin(t*2+a.ph);for(j=0;j<44;j++){var an=j/44*TAU+t*.3;avPush(a.x+Math.cos(an)*rr,a.y+.02,a.z+Math.sin(an)*rr,.69,.38,1,.75*mat,.032,j/44)}
   var mn=dm?46:16;for(j=0;j<mn;j++){var ph=j*1.618+a.ph,yy=((t*.35+ph)%1)*(dm?2.2:1.9),ag=ph*7+t*.8,rd=.28+.08*Math.sin(ph*3);
