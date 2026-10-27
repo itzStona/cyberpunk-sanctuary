@@ -3414,9 +3414,9 @@ function send(o){if(!MP.tr)return;o.i=Math.random().toString(36).slice(2,10);o.c
 function recv(d){if(!d||typeof d!=="object"||d.c===cid||!d.c)return;if(d.i){if(seen[d.i])return;if(Object.keys(seen).length>800)seen={};seen[d.i]=1}
  var nm=dec(d.p||"Runner").slice(0,24)||"Runner",c=String(d.c).slice(0,12);
  if(d.k==="bye"){delete MP.people[c];ui();return}
- if(d.k!=="hb"&&d.k!=="hello"&&d.k!=="roll"&&d.k!=="gig"&&d.k!=="bm"&&d.k!=="ql"&&d.k!=="eb"&&d.k!=="od")return;
+ if(d.k!=="hb"&&d.k!=="hello"&&d.k!=="roll"&&d.k!=="gig"&&d.k!=="bm"&&d.k!=="ql"&&d.k!=="eb"&&d.k!=="od"&&d.k!=="ob"&&d.k!=="oe")return;
  var isNew=!MP.people[c];MP.people[c]={n:nm,t:Date.now()};
- if(d.k==="hello")setTimeout(function(){send({k:"hb"})},Math.random()*1500);if(d.k==="gig")window.dispatchEvent(new CustomEvent("cps:gig",{detail:d}));if(d.k==="bm")window.dispatchEvent(new CustomEvent("cps:bm",{detail:d}));if(d.k==="ql")window.dispatchEvent(new CustomEvent("cps:ql",{detail:d}));if(d.k==="eb")window.dispatchEvent(new CustomEvent("cps:eb",{detail:d}));if(d.k==="od"&&Math.abs(Date.now()-(+d.ts||0))<120000)window.dispatchEvent(new CustomEvent("cps:od",{detail:d}));if(d.k==="hello")window.dispatchEvent(new Event("cps:hello"));
+ if(d.k==="hello")setTimeout(function(){send({k:"hb"})},Math.random()*1500);if(d.k==="gig")window.dispatchEvent(new CustomEvent("cps:gig",{detail:d}));if(d.k==="bm")window.dispatchEvent(new CustomEvent("cps:bm",{detail:d}));if(d.k==="ql")window.dispatchEvent(new CustomEvent("cps:ql",{detail:d}));if(d.k==="eb")window.dispatchEvent(new CustomEvent("cps:eb",{detail:d}));if((d.k==="od"||d.k==="ob"||d.k==="oe")&&Math.abs(Date.now()-(+d.ts||0))<120000)window.dispatchEvent(new CustomEvent("cps:"+d.k,{detail:d}));if(d.k==="hello")window.dispatchEvent(new Event("cps:hello"));
  if(d.k==="roll"&&Math.abs(Date.now()-(+d.ts||0))<600000)showRoll(nm,d);
  if(isNew||d.k==="hello")ui()}
 function prune(){var now=Date.now(),ch=false;Object.keys(MP.people).forEach(function(k){if(now-MP.people[k].t>55000){delete MP.people[k];ch=true}});if(ch)ui()}
@@ -6328,21 +6328,24 @@ machUpd();
 })();
 </script>
 <style id="od-css">
-#od-ov{position:fixed;inset:0;z-index:100002;background:rgba(45,0,14,.34);opacity:0;transition:opacity .8s ease;color:#ff3355;overflow:hidden}
+#od-ov{position:fixed;inset:0;z-index:100002;background:rgba(28,0,44,.32);opacity:0;transition:opacity .8s ease;color:#ff3355;overflow:hidden}
 #od-ov[hidden]{display:none!important}
 #od-ov.on{opacity:1}
 #od-cv{width:100%;height:100%;display:block}
 #od-ov::after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(255,40,70,.035) 3px,rgba(255,40,70,.035) 4px)}
-#od-label{position:absolute;top:1.6rem;left:50%;transform:translateX(-50%);font:300 clamp(1rem,2.5vw,1.6rem) "Rajdhani",sans-serif;letter-spacing:.4em;color:#ff5a78;text-shadow:0 0 12px rgba(255,51,85,.6);text-transform:lowercase;white-space:nowrap;pointer-events:none;transition:color .4s}
+#od-label{position:absolute;top:1.6rem;left:50%;transform:translateX(-50%);font:300 clamp(1rem,2.5vw,1.6rem) "Rajdhani",sans-serif;letter-spacing:.4em;color:#d090ff;text-shadow:0 0 12px rgba(176,96,255,.6);text-transform:lowercase;white-space:nowrap;pointer-events:none;transition:color .4s,opacity .28s,text-shadow .4s}
 #od-label.hot{color:#ff3355;text-shadow:0 0 18px #ff3355}
 #od-ctl{position:absolute;left:0;right:0;z-index:2;bottom:calc(2.2rem + env(safe-area-inset-bottom));display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding:0 16px;opacity:0;pointer-events:none;transform:translateY(12px);transition:opacity .8s ease,transform .8s ease}
 #od-ctl.on{opacity:1;pointer-events:auto;transform:none}
-#od-term{position:absolute;z-index:3;left:max(14px,3vw);bottom:calc(3vh + env(safe-area-inset-bottom));width:min(560px,calc(100% - 28px));padding:10px 14px;background:rgba(60,0,16,.42);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-left:2px solid #ff3355;box-shadow:0 0 24px rgba(255,51,85,.3);font:13px/1.55 "Share Tech Mono",ui-monospace,Consolas,monospace;letter-spacing:.04em;pointer-events:none}
+#od-wait{position:absolute;left:0;right:0;z-index:2;bottom:calc(2.4rem + env(safe-area-inset-bottom));text-align:center;font:12px "Share Tech Mono",ui-monospace,Consolas,monospace;letter-spacing:.32em;text-transform:uppercase;color:#d090ff;text-shadow:0 0 10px rgba(176,96,255,.7);opacity:0;transition:opacity 1s ease;pointer-events:none;animation:odpulse 2.4s ease-in-out infinite}
+#od-wait.on{opacity:1}
+@keyframes odpulse{50%{filter:brightness(.55)}}
+#od-term{position:absolute;z-index:3;left:max(14px,3vw);bottom:calc(3vh + env(safe-area-inset-bottom));width:min(560px,calc(100% - 28px));padding:10px 14px;background:rgba(60,0,16,.42);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border-left:2px solid #ff3355;box-shadow:0 0 24px rgba(255,51,85,.3);font:13px/1.55 "Share Tech Mono",ui-monospace,Consolas,monospace;letter-spacing:.04em;pointer-events:none;transition:opacity .6s ease}
 #od-term[hidden]{display:none}
 #od-term div{white-space:pre-wrap;word-break:break-word;color:#ffc2cc;text-shadow:0 0 8px rgba(255,120,140,.55)}
 #od-term div.r{color:#ff3355;text-shadow:0 0 8px rgba(255,51,85,.8)}
 #od-term div.g{color:#fff1f3;text-shadow:0 0 10px rgba(255,255,255,.7)}
-#od-bar{height:6px;margin-top:8px;border:1px solid #ff3355;background:rgba(40,0,10,.5);opacity:0}
+#od-bar{height:6px;margin-top:8px;border:1px solid #ff3355;background:rgba(40,0,10,.5);opacity:0;transition:opacity .4s}
 #od-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff3355,#ffc2cc);box-shadow:0 0 10px #ff3355}
 #od-flash{position:absolute;inset:0;z-index:4;background:#ffe9ec;opacity:0;pointer-events:none}
 @media print{#od-ov{display:none!important}}
@@ -6351,6 +6354,7 @@ machUpd();
 <div id="od-label">sanctuary</div>
 <canvas id="od-cv"></canvas>
 <div id="od-term" hidden></div>
+<div id="od-wait">link established // waiting for host</div>
 <div id="od-ctl"><button type="button" id="od-boot">BOOT SANCTUARY</button><button type="button" class="g" id="od-skip">DISMISS</button></div>
 <div id="od-flash"></div>
 </div>
@@ -6358,25 +6362,24 @@ machUpd();
 (function(){
 var $=function(i){return document.getElementById(i)};
 var ov=$("od-ov"),cv=$("od-cv"),ctx=cv.getContext("2d"),ctl=$("od-ctl"),boot=$("od-boot"),skip=$("od-skip"),msg=$("odMsg"),
- lab=$("od-label"),term=$("od-term"),flash=$("od-flash"),bar,barf;
-var running=false,raf=0,t0=0,frame=0,cells=null,rain=null,FW=9,FH=20,isDM=false,ending=false,tmr=0;
-var SCATTER=70,FORM_DUR=240,SETTLE=380,AUTO_END=800;
+ lab=$("od-label"),term=$("od-term"),flash=$("od-flash"),wait=$("od-wait"),bar,barf;
+var running=false,raf=0,t0=0,frame=0,cells=null,rain=null,FW=9,FH=20,isDM=false,ending=false,tmr=0,idle=0,labT=0,rainT=0,lastDraw=0;
+var SCATTER=70,FORM_DUR=240,SETTLE=380,IDLE_MS=15*60*1000;
 var FONT='"Share Tech Mono",ui-monospace,Consolas,monospace';
 var CH="0123456789ABCDEF<>/|=+*";
-var hack={on:false,t0:0,i:0,hp:0,gl:0,wall:0,gap:0,opened:false};
+var hack={on:false,t0:0,i:0,hi:0,gl:0,wall:0,gap:0,opened:false,fin:false};
 
-/* ---- boot sequence ---- */
 var LINES=[
  [0,"> OVERDRIVE // UPLINK ACCEPTED","",880],
  [450,"> HANDSHAKE ........ OK","",760],
  [950,"> BYPASSING PERIMETER AUTH ........ OK","",760],
  [1450,"> TRACING OLD NET BOUNDARY ...","",660],
- [1950,"!! BLACKWALL DETECTED","r",180],
- [2450,"> INJECTING BREACH PAYLOAD ... 7 VECTORS","",760],
- [2950,"> ICE 3/7 ... 5/7 ... 7/7 BROKEN","",660],
+ [2000,"!! BLACKWALL DETECTED","r",180],
+ [2500,"> INJECTING BREACH PAYLOAD ... 7 VECTORS","",760],
+ [3000,"> ICE 3/7 ... 5/7 ... 7/7 BROKEN","",660],
  [3500,"!! BLACKWALL INTEGRITY 61% ... 23% ... 04%","r",160],
- [4300,"> BREACH CONFIRMED","g",990],
- [4900,"> ACCESS GRANTED // CONNECTION 143","g",1180]];
+ [4200,"> BREACH CONFIRMED","g",990],
+ [4800,"> ACCESS GRANTED // CONNECTION 143","g",1180]];
 var AC=null;
 function beep(f,d,ty,v){try{if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type=ty||"square";o.frequency.value=f;g.gain.setValueAtTime(v||.025,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d)}catch(e){}}
 function boom(){try{if(!AC)return;var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type="sawtooth";o.frequency.setValueAtTime(160,t);o.frequency.exponentialRampToValueAtTime(28,t+.9);g.gain.setValueAtTime(.07,t);g.gain.exponentialRampToValueAtTime(.0001,t+1);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+1)}catch(e){}}
@@ -6389,22 +6392,22 @@ function hash(a,b,t){var s=Math.sin(a*.3+b*.7+t*43.1)*43758.5453;return s-Math.f
 function ease(t){return t<.5?2*t*t:-1+(4-2*t)*t}
 function clamp(v,a,b){return v<a?a:v>b?b:v}
 
-/* ---- red matrix rain ---- */
+/* ---- red matrix rain (phase is integrated, so speeding it up never jumps) ---- */
 function buildRain(){
  var W=cv.width,H=cv.height,cs=Math.max(11,Math.round(FW*1.9)),cols=Math.ceil(W/cs),rows=Math.ceil(H/cs),cl=[];
  for(var c=0;c<cols;c++)cl.push({sp:.55+Math.random()*1.1,off:Math.random()*(rows+30),len:9+Math.floor(Math.random()*22),on:Math.random()<.84});
  return{cs:cs,cols:cols,rows:rows,cl:cl}}
-function drawRain(sec,k,boost){
- var r=rain,cs=r.cs,tick=Math.floor(sec*9),slow=Math.floor(sec*1.5);
+function drawRain(rt,k){
+ var r=rain,cs=r.cs,tick=Math.floor(rt*9),slow=Math.floor(rt*1.5);
  ctx.font="bold "+cs+"px "+FONT;ctx.textBaseline="top";
  for(var c=0;c<r.cols;c++){var col=r.cl[c];if(!col.on)continue;
-  var head=Math.floor((sec*11*col.sp*boost+col.off)%(r.rows+col.len));
+  var head=Math.floor((rt*11*col.sp+col.off)%(r.rows+col.len));
   for(var j=0;j<col.len;j++){var row=head-j;if(row<0||row>=r.rows)continue;
    var f=1-j/col.len,a=f*f*k,ch=CH.charAt(Math.floor(hash(c,row,j===0?tick:slow)*CH.length)%CH.length);
    ctx.fillStyle=j===0?"rgba(255,228,232,"+Math.min(1,a+.2*k)+")":"rgba(255,45,75,"+(a*.85)+")";
-   ctx.fillText(ch,c*r.cs,row*cs)}}}
+   ctx.fillText(ch,c*cs,row*cs)}}}
 
-/* ---- Saturn ---- */
+/* ---- Saturn (purple) ---- */
 function build(){
  var W=cv.width,H=cv.height,R=Math.min(W*.19,H*.29);
  FW=Math.max(3.5,Math.min(9,R/24));FH=FW*1.9;
@@ -6431,35 +6434,40 @@ function build(){
  return{planet:planet,back:back,front:front}}
 function drawCells(arr,t,settled,kind){
  ctx.font="bold "+FW+"px "+FONT;ctx.textBaseline="top";
- var tick=Math.floor(performance.now()/70),gl=hack.on?hack.gl:0,hp=hack.on?hack.hp:0;
+ var tick=Math.floor(performance.now()/70),gl=hack.on?hack.gl:0;
  for(var i=0;i<arr.length;i++){var c=arr[i],startF=SCATTER+c.order*FORM_DUR*.6,endF=startF+90,
   lt=clamp((frame-startF)/(endF-startF),0,1);
   if(lt===0)continue;
   var e=ease(lt),x=c.sx+(c.px-c.sx)*e,y=c.sy+(c.py-c.sy)*e,bit=hash(c.px,c.py,Math.floor(frame*.1))>.5?"1":"0",al=Math.min(1,e*1.5),R,G,B;
   if(settled){var pu=(Math.sin(t*1.8+c.px*.008+c.py*.01)+1)/2;
-   if(kind===0){var L=(.45+.55*c.sh)*(.78+.22*Math.sin(c.bd*22));R=Math.round(95+(160+pu*20)*L);G=Math.round(8+L*36);B=Math.round(26+L*52);al*=.88+.12*L}
-   else{var br=.55+.45*Math.sin(c.rr*38);if(c.rr<1.5)br*=.6;var k=.6+.4*br;R=255;G=Math.round(Math.min(255,(150+pu*50)*k));B=Math.round(Math.min(255,(165+pu*50)*k));al*=(.62+.38*br)*(kind===1?.85:1)}
-  }else{var fl=lt>.88?1.3:1;R=Math.min(255,Math.round(235*fl));G=Math.round(40*fl);B=70}
-  if(hp>0){G=Math.round(G+(110-G)*hp*.6);B=Math.round(B+(130-B)*hp*.6)}
+   if(kind===0){var L=(.45+.55*c.sh)*(.78+.22*Math.sin(c.bd*22));R=Math.round(70+(170+pu*30)*L);G=Math.round(14+L*40);B=Math.round(110+140*L);al*=.88+.12*L}
+   else{var br=.55+.45*Math.sin(c.rr*38);if(c.rr<1.5)br*=.6;var k=.6+.4*br;R=Math.round(Math.min(255,(215+pu*40)*k));G=Math.round(Math.min(255,(185+pu*40)*k));B=Math.round(Math.min(255,255*k+10));al*=(.62+.38*br)*(kind===1?.85:1)}
+  }else{var fl=lt>.88?1.3:1;R=Math.min(255,Math.round(170*fl));G=20;B=255}
   if(gl>0){var gr=Math.round(c.py/FH),g=Math.sin(gr*12.9898+tick*78.233)*43758.5453;g-=Math.floor(g);
    if(g>1-.07*gl)x+=((g*57)%1-.5)*70*gl;
    if(gl>.5&&i%3===0){ctx.fillStyle="rgba(94,231,255,"+(al*.4)+")";ctx.fillText(bit,x-3,y)}}
   ctx.fillStyle="rgba("+R+","+G+","+B+","+al+")";ctx.fillText(bit,x,y)}}
 
-/* ---- the Blackwall: red code wall, torn open down the middle ---- */
+/* ---- the Blackwall: a scan line sweeps down and builds it; then it tears open ---- */
 function wall(ht){
- var W=cv.width,H=cv.height,a=hack.wall,gapW=hack.gap*W*1.06,cx=W/2,cs=Math.max(12,FW*2),
+ var W=cv.width,H=cv.height,wp=hack.wall,ry=wp*H,gapW=hack.gap*W*1.06,cx=W/2,cs=Math.max(12,FW*2),
   tick=Math.floor(ht/90),half=gapW/2,gx0=cx-half,gx1=cx+half;
- ctx.fillStyle="rgba(70,0,18,"+(a*.3)+")";
- if(gapW<=0)ctx.fillRect(0,0,W,H);else{ctx.fillRect(0,0,Math.max(0,gx0),H);ctx.fillRect(gx1,0,W-gx1,H)}
+ ctx.fillStyle="rgba(70,0,18,.3)";
+ if(gapW<=0)ctx.fillRect(0,0,W,ry);else{ctx.fillRect(0,0,Math.max(0,gx0),ry);ctx.fillRect(gx1,0,W-gx1,ry)}
  ctx.font="bold "+cs+"px "+FONT;ctx.textBaseline="top";
- var cols=Math.ceil(W/cs),rows=Math.ceil(H/cs);
+ var cols=Math.ceil(W/cs),rowsRev=Math.min(Math.ceil(H/cs),Math.ceil(ry/cs));
  for(var c=0;c<cols;c++){var x=c*cs;if(x+cs>gx0&&x<gx1)continue;
-  for(var r=0;r<rows;r++){var h=hash(c,r,tick);if(h<.5)continue;
-   ctx.fillStyle=h>.93?"rgba(255,200,212,"+(a*.95)+")":"rgba(255,51,85,"+(a*(.28+(h-.5)*.7))+")";
+  for(var r=0;r<rowsRev;r++){var h=hash(c,r,tick);if(h<.5)continue;
+   var lead=clamp(1-(ry-r*cs)/(cs*7),0,1);
+   ctx.fillStyle=h>.93?"rgba(255,200,212,"+Math.min(1,.95)+")":"rgba(255,51,85,"+Math.min(1,.28+(h-.5)*.7+lead*.45)+")";
    ctx.fillText(h>.8?"1":h>.68?"0":"\u2592",x,r*cs)}}
- if(hack.gap>0){ctx.fillStyle="rgba(143,233,255,.95)";ctx.fillRect(gx0-2,0,3,H);ctx.fillRect(gx1-1,0,3,H)}
- var ta=a*Math.max(0,1-hack.gap*7);
+ if(wp>0&&wp<1){var sg=ctx.createLinearGradient(0,ry-80,0,ry);sg.addColorStop(0,"rgba(255,51,85,0)");sg.addColorStop(1,"rgba(255,51,85,.4)");
+  ctx.fillStyle=sg;ctx.fillRect(0,ry-80,W,80);ctx.fillStyle="rgba(255,215,222,.95)";ctx.fillRect(0,ry-1.5,W,3)}
+ if(hack.gap>0){
+  var ga=.5*Math.sin(Math.PI*clamp(hack.gap,0,1));
+  if(ga>0){var gg=ctx.createLinearGradient(gx0,0,gx1,0);gg.addColorStop(0,"rgba(255,225,230,"+(ga*.4)+")");gg.addColorStop(.5,"rgba(255,246,247,"+ga+")");gg.addColorStop(1,"rgba(255,225,230,"+(ga*.4)+")");ctx.fillStyle=gg;ctx.fillRect(gx0,0,gapW,H)}
+  ctx.fillStyle="rgba(143,233,255,.95)";ctx.fillRect(gx0-2,0,3,H);ctx.fillRect(gx1-1,0,3,H)}
+ var ta=clamp((ry-H*.5)/(H*.12),0,1)*Math.max(0,1-hack.gap*7);
  if(ta>0){var fs=Math.min(W*.11,H*.2);ctx.save();ctx.textAlign="center";ctx.textBaseline="middle";
   ctx.shadowColor="#ff3355";ctx.shadowBlur=30;ctx.font="700 "+fs+'px "Rajdhani",sans-serif';ctx.fillStyle="rgba(255,60,90,"+ta+")";
   ctx.fillText("BLACKWALL",cx+(Math.random()-.5)*8*hack.gl,H/2);
@@ -6469,68 +6477,88 @@ function wall(ht){
 function hackStep(){
  var ht=performance.now()-hack.t0;
  while(hack.i<LINES.length&&LINES[hack.i][0]<=ht){addLine(LINES[hack.i]);hack.i++}
- hack.hp=clamp((ht-600)/3200,0,1);
- hack.gl=clamp(.2+ht/3300,0,1);
- hack.wall=clamp((ht-2000)/1100,0,1);
+ hack.hi=clamp(ht/1200,0,1);
+ hack.gl=clamp(ht/3200,0,1);
+ hack.wall=ease(clamp((ht-1800)/1500,0,1));
  var prev=hack.gap;hack.gap=ht>4100?ease(clamp((ht-4100)/1300,0,1)):0;
- if(prev===0&&hack.gap>0){boom()}
+ if(prev===0&&hack.gap>0)boom();
  var p=clamp((ht-1400)/3400,0,1);bar.style.opacity=ht>=1400?1:0;barf.style.width=(p*100)+"%";
  cv.style.transform="translate("+((Math.random()-.5)*hack.gl*7)+"px,"+((Math.random()-.5)*hack.gl*5)+"px)";
- if(ht>5300)flash.style.opacity=clamp((ht-5300)/350,0,1);
- if(ht>=5700&&!hack.opened){hack.opened=true;
-  if(window.SATURN&&window.SATURN.open)window.SATURN.open();
-  finish()}
+ if(ht>5200)flash.style.opacity=.6*clamp((ht-5200)/450,0,1);
+ // Sanctuary starts loading underneath, so the tear shows it
+ if(ht>=4150&&!hack.opened){hack.opened=true;try{if(window.SATURN&&window.SATURN.open)window.SATURN.open()}catch(e){}}
+ if(ht>=5700&&!hack.fin){hack.fin=true;finish()}
  return ht}
 
 function draw(){
  ctx.clearRect(0,0,cv.width,cv.height);
- var sec=(performance.now()-t0)/1000,t=frame*.04,settled=frame>SETTLE,ht=0;
+ var now=performance.now(),t=frame*.04,settled=frame>SETTLE,ht=0;
  if(hack.on)ht=hackStep();
- var k=hack.on?1:(settled?.3:clamp(frame/70,0,1)*.9),boost=hack.on?1+hack.gl*1.2:1;
- drawRain(sec,k,boost);
+ var boost=hack.on?1+hack.gl*1.2:1,dt=Math.min(.1,Math.max(0,(now-lastDraw)/1000));lastDraw=now;rainT+=dt*boost;
+ var base=settled?.3:clamp(frame/70,0,1)*.9,k=hack.on?base+(1-base)*hack.hi:base;
+ drawRain(rainT,k);
+ ctx.globalAlpha=hack.on?1-hack.wall*.88:1;
  drawCells(cells.back,t,settled,1);drawCells(cells.planet,t,settled,0);drawCells(cells.front,t,settled,2);
+ ctx.globalAlpha=1;
  if(hack.on&&hack.wall>0)wall(ht)}
 function loop(){
  if(!running)return;
  frame=Math.floor((performance.now()-t0)/16.667);
  draw();
- if(isDM&&!hack.on&&!ending&&frame>SETTLE+40&&!ctl.classList.contains("on")){ctl.classList.add("on");try{boot.focus({preventScroll:true})}catch(e){}}
- if(!isDM&&frame>AUTO_END&&!ending)finish();
+ if(!hack.on&&!ending&&frame>SETTLE+40){
+  if(isDM){if(!ctl.classList.contains("on")){ctl.classList.add("on");try{boot.focus({preventScroll:true})}catch(e){}}}
+  else wait.classList.add("on")}
  raf=requestAnimationFrame(loop)}
 function onResize(){size();cells=build();rain=buildRain()}
-function onKey(e){if(e.key==="Escape"){e.preventDefault();finish()}}
-function onClick(e){if(!isDM&&(e.target===ov||e.target===cv))finish()}
-function resetHack(){hack.on=false;hack.i=0;hack.hp=hack.gl=hack.wall=hack.gap=0;hack.opened=false;
- term.hidden=true;term.innerHTML='<div id="od-bar"><i id="od-barf"></i></div>';bar=$("od-bar");barf=$("od-barf");
- flash.style.opacity=0;cv.style.transform="";lab.textContent="sanctuary";lab.classList.remove("hot")}
-function start(dmView){
+function onKey(e){if(e.key!=="Escape")return;e.preventDefault();
+ if(isDM){if(!hack.on)dmEnd()}else finish()}
+function resetHack(){hack.on=false;hack.i=0;hack.hi=hack.gl=hack.wall=hack.gap=0;hack.opened=false;hack.fin=false;
+ clearTimeout(labT);term.hidden=true;term.style.opacity="";term.innerHTML='<div id="od-bar"><i id="od-barf"></i></div>';bar=$("od-bar");barf=$("od-barf");
+ flash.style.opacity=0;cv.style.transform="";lab.textContent="sanctuary";lab.classList.remove("hot");lab.style.opacity="";wait.classList.remove("on")}
+function start(dmView,skipIntro){
  if(running)return false;
- running=true;ending=false;isDM=!!dmView;frame=0;resetHack();ctl.classList.remove("on");ctl.style.display=isDM?"":"none";
- ov.hidden=false;size();cells=build();rain=buildRain();t0=performance.now();
+ running=true;ending=false;isDM=!!dmView;frame=0;rainT=0;resetHack();ctl.classList.remove("on");ctl.style.display=isDM?"":"none";wait.style.display=isDM?"none":"";
+ ov.hidden=false;size();cells=build();rain=buildRain();t0=performance.now()-(skipIntro?(SETTLE+60)*16.667:0);lastDraw=performance.now();
  void ov.offsetWidth;ov.classList.add("on");
- window.addEventListener("resize",onResize);document.addEventListener("keydown",onKey);ov.addEventListener("click",onClick);
+ window.addEventListener("resize",onResize);document.addEventListener("keydown",onKey);
+ clearTimeout(idle);if(!isDM)idle=setTimeout(finish,IDLE_MS);
  raf=requestAnimationFrame(loop);return true}
 function stop(){
- running=false;cancelAnimationFrame(raf);ov.hidden=true;ov.classList.remove("on");ctl.classList.remove("on");resetHack();
- window.removeEventListener("resize",onResize);document.removeEventListener("keydown",onKey);ov.removeEventListener("click",onClick)}
+ running=false;cancelAnimationFrame(raf);clearTimeout(idle);ov.hidden=true;ov.classList.remove("on");ctl.classList.remove("on");resetHack();
+ window.removeEventListener("resize",onResize);document.removeEventListener("keydown",onKey)}
 function finish(){
- if(!running||ending)return;ending=true;ctl.classList.remove("on");ov.classList.remove("on");
+ if(!running||ending)return;ending=true;ctl.classList.remove("on");wait.classList.remove("on");ov.classList.remove("on");
  clearTimeout(tmr);tmr=setTimeout(stop,850)}
 function isDm(){return document.documentElement.classList.contains("dm")}
+function bcast(k){try{if(window.__partySend)window.__partySend({k:k})}catch(e){}}
+
+// Continuous escalation: the same rain speeds up, Saturn starts to glitch, the terminal and title fade in
+function beginHack(){
+ if(!running||hack.on||ending)return;
+ if(frame<SETTLE)t0=performance.now()-(SETTLE+1)*16.667;
+ ctl.classList.remove("on");wait.classList.remove("on");
+ term.hidden=false;term.style.opacity=0;void term.offsetWidth;term.style.opacity=1;
+ lab.style.opacity=0;clearTimeout(labT);labT=setTimeout(function(){if(!running)return;lab.textContent="blackwall breach";lab.classList.add("hot");lab.style.opacity=1},300);
+ hack.t0=performance.now();hack.i=0;hack.on=true}
+function dmEnd(){bcast("oe");finish()}
+
+// DM: OVERDRIVE button -> everyone sees the animation
 document.addEventListener("click",function(e){
  if(!e.target.closest||!e.target.closest("#odBtn"))return;
  if(!isDm())return;
  if(running){if(msg)msg.textContent="Overdrive is already running.";return}
  var live=window.__party&&window.__party.st==="on";
- try{if(window.__partySend)window.__partySend({k:"od"})}catch(x){}
- if(msg)msg.textContent=live?"Overdrive sent to everyone in the party.":"Not connected to a party, so only your screen plays it. Press PARTY at the top to connect, then try again.";
+ bcast("od");
+ if(msg)msg.textContent=live?"Overdrive sent to everyone in the party. It stays up on their screens until you boot Sanctuary or dismiss it.":"Not connected to a party, so only your screen plays it. Press PARTY at the top to connect, then try again.";
  start(true)});
+// players: start (stays until the host acts)
 window.addEventListener("cps:od",function(){start(isDm())});
-boot.addEventListener("click",function(){
- if(hack.on||ending)return;
- ctl.classList.remove("on");term.hidden=false;lab.textContent="blackwall breach";lab.classList.add("hot");
- hack.t0=performance.now();hack.i=0;hack.on=true});
-skip.addEventListener("click",finish);
+// host boots Sanctuary -> every screen runs the breach and opens Sanctuary
+window.addEventListener("cps:ob",function(){if(!running)start(isDm(),true);beginHack()});
+// host dismisses -> every screen closes
+window.addEventListener("cps:oe",function(){finish()});
+boot.addEventListener("click",function(){if(hack.on||ending)return;bcast("ob");beginHack()});
+skip.addEventListener("click",function(){if(!hack.on)dmEnd()});
 resetHack();
 })();
 </script>
