@@ -6593,15 +6593,36 @@ var LINES=[
  [450,"> HANDSHAKE ........ OK","",760],
  [950,"> BYPASSING PERIMETER AUTH ........ OK","",760],
  [1450,"> TRACING OLD NET BOUNDARY ...","",660],
- [2000,"!! BLACKWALL DETECTED","r",180],
- [2500,"> INJECTING BREACH PAYLOAD ... 7 VECTORS","",760],
- [3000,"> ICE 3/7 ... 5/7 ... 7/7 BROKEN","",660],
- [3500,"!! BLACKWALL INTEGRITY 61% ... 23% ... 04%","r",160],
- [4200,"> BREACH CONFIRMED","g",990],
- [4800,"> ACCESS GRANTED // CONNECTION 143","g",1180]];
-var AC=null;
-function beep(f,d,ty,v){try{if(!AC)AC=new(window.AudioContext||window.webkitAudioContext)();var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type=ty||"square";o.frequency.value=f;g.gain.setValueAtTime(v||.025,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+d)}catch(e){}}
-function boom(){try{if(!AC)return;var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type="sawtooth";o.frequency.setValueAtTime(160,t);o.frequency.exponentialRampToValueAtTime(28,t+.9);g.gain.setValueAtTime(.07,t);g.gain.exponentialRampToValueAtTime(.0001,t+1);o.connect(g);g.connect(AC.destination);o.start(t);o.stop(t+1)}catch(e){}}
+ [2300,"!! BLACKWALL DETECTED","r",150],
+ [3100,"!! BOUNDARY SPAN EXCEEDS SENSOR RANGE","r",130],
+ [3900,"> INJECTING BREACH PAYLOAD ... 7 VECTORS","",700],
+ [4600,"> ICE 3/7 ... 5/7 ... 7/7 BROKEN","",620],
+ [5300,"!! HOSTILE DAEMON ACTIVITY BEYOND BARRIER","r",120],
+ [6000,"!! BLACKWALL INTEGRITY 61% ... 23% ... 04%","r",110],
+ [6700,"> BREACH CONFIRMED","g",990],
+ [7300,"> ACCESS GRANTED // CONNECTION 143","g",1180]];
+var AC=null,hintEl=null;
+/* Browsers keep audio locked until the page gets a tap/click/key. The host always has one (the button), but players only
+   receive the sequence over the party link, so every client unlocks audio on its first interaction and is prompted if it is still locked. */
+function sndHint(on){
+ if(on){if(hintEl||(AC&&AC.state==="running"))return;hintEl=document.createElement("div");hintEl.textContent="// tap anywhere to enable sound";
+  hintEl.style.cssText="position:absolute;left:0;right:0;bottom:22px;text-align:center;font:12px ui-monospace,Consolas,monospace;letter-spacing:.2em;color:#ff5e7e;opacity:.85;pointer-events:none;z-index:5";ov.appendChild(hintEl)}
+ else if(hintEl){hintEl.remove();hintEl=null}}
+function audioInit(){try{
+ if(!AC){var Ctor=window.AudioContext||window.webkitAudioContext;if(!Ctor)return;AC=new Ctor();AC.onstatechange=function(){if(AC.state==="running")sndHint(false)}}
+ if(AC.state!=="running"){var pr=AC.resume();if(pr&&pr.catch)pr.catch(function(){})}
+ if(!AC.__u){AC.__u=1;var b=AC.createBuffer(1,1,22050),n=AC.createBufferSource();n.buffer=b;n.connect(AC.destination);n.start(0)}
+ if(AC.state==="running")sndHint(false)}catch(e){}}
+function OUT(){if(!AC.__o){var c=AC.createDynamicsCompressor(),m=AC.createGain();m.gain.value=1.7;m.connect(c);c.connect(AC.destination);AC.__o=m}return AC.__o}
+["pointerdown","touchend","keydown","click"].forEach(function(ev){document.addEventListener(ev,audioInit,true)});
+function beep(f,d,ty,v){try{audioInit();var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type=ty||"square";o.frequency.value=f;g.gain.setValueAtTime(v||.025,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g);g.connect(OUT());o.start(t);o.stop(t+d)}catch(e){}}
+function boom(){try{audioInit();if(!AC)return;var o=AC.createOscillator(),g=AC.createGain(),t=AC.currentTime;o.type="sawtooth";o.frequency.setValueAtTime(160,t);o.frequency.exponentialRampToValueAtTime(24,t+1.3);g.gain.setValueAtTime(.15,t);g.gain.exponentialRampToValueAtTime(.0001,t+1.6);o.connect(g);g.connect(OUT());o.start(t);o.stop(t+1.6)}catch(e){}}
+var DRN=null;
+function droneOn(){try{audioInit();if(!AC||DRN)return;var t=AC.currentTime,lp=AC.createBiquadFilter(),g=AC.createGain(),a=AC.createOscillator(),b=AC.createOscillator();
+ lp.type="lowpass";lp.frequency.setValueAtTime(90,t);lp.frequency.linearRampToValueAtTime(420,t+5);a.type="sawtooth";b.type="sine";
+ a.frequency.setValueAtTime(46,t);a.frequency.linearRampToValueAtTime(34,t+5);b.frequency.setValueAtTime(23,t);b.frequency.linearRampToValueAtTime(17,t+5);
+ g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.11,t+4.5);a.connect(lp);b.connect(lp);lp.connect(g);g.connect(OUT());a.start(t);b.start(t);DRN={a:a,b:b,g:g}}catch(e){}}
+function droneOff(){if(!DRN)return;try{var t=AC.currentTime;DRN.g.gain.cancelScheduledValues(t);DRN.g.gain.setValueAtTime(Math.max(.0002,DRN.g.gain.value),t);DRN.g.gain.exponentialRampToValueAtTime(.0001,t+.5);DRN.a.stop(t+.6);DRN.b.stop(t+.6)}catch(e){}DRN=null}
 function addLine(l){var d=document.createElement("div");d.textContent=l[1];if(l[2])d.className=l[2];
  term.insertBefore(d,bar);while(term.querySelectorAll("div:not(#od-bar)").length>9)term.querySelector("div:not(#od-bar)").remove();
  beep(l[3]||700,.07,l[2]==="r"?"sawtooth":"square",l[2]==="r"?.04:.02)}
@@ -6680,6 +6701,12 @@ function wall(ht){
    var lead=clamp(1-(ry-r*cs)/(cs*7),0,1);
    ctx.fillStyle=h>.93?"rgba(255,200,212,"+Math.min(1,.95)+")":"rgba(255,51,85,"+Math.min(1,.28+(h-.5)*.7+lead*.45)+")";
    ctx.fillText(h>.8?"1":h>.68?"0":"\u2592",x,r*cs)}}
+ if(wp>0){var sur=.5+.5*Math.sin(ht/700)*Math.sin(ht/1900),sw=Math.max(34,cs*3),ns=Math.ceil(W/sw),sl=Math.floor(ht/1400);
+  for(var sI=0;sI<ns;sI++){var sx0=sI*sw;if(gapW>0&&sx0+sw>gx0&&sx0<gx1)continue;
+   var bh=ry-hash(sI,3,sl)*cs*6*(1-hack.gap);if(bh<2)continue;
+   ctx.fillStyle="rgba(38,0,9,.55)";ctx.fillRect(sx0,0,sw-2,bh);ctx.fillStyle="rgba(255,51,85,"+(.35+.3*sur)+")";ctx.fillRect(sx0,bh-2,sw-2,2)}
+  for(var tl=0;tl<5;tl++){var th=hash(tl,9,tick),ty=ry-th*cs*8;if(ty<0)continue;ctx.fillStyle="rgba(255,205,215,"+(.15+.25*th)+")";ctx.fillRect(hash(tl,7,tick)*W,ty,W*.35*hash(tl,5,tick),1.5)}
+  var vg=ctx.createRadialGradient(cx,H/2,H*.25,cx,H/2,H*.95);vg.addColorStop(0,"rgba(0,0,0,0)");vg.addColorStop(1,"rgba(50,0,10,"+(.68*wp*(.72+.28*sur))+")");ctx.fillStyle=vg;ctx.fillRect(0,0,W,H)}
  if(wp>0&&wp<1){var sg=ctx.createLinearGradient(0,ry-80,0,ry);sg.addColorStop(0,"rgba(255,51,85,0)");sg.addColorStop(1,"rgba(255,51,85,.4)");
   ctx.fillStyle=sg;ctx.fillRect(0,ry-80,W,80);ctx.fillStyle="rgba(255,215,222,.95)";ctx.fillRect(0,ry-1.5,W,3)}
  if(hack.gap>0){
@@ -6692,16 +6719,17 @@ function hackStep(){
  var ht=performance.now()-hack.t0;
  while(hack.i<LINES.length&&LINES[hack.i][0]<=ht){addLine(LINES[hack.i]);hack.i++}
  hack.hi=clamp(ht/1200,0,1);
- hack.gl=clamp(ht/3200,0,1);
- hack.wall=ease(clamp((ht-1800)/1500,0,1));
- var prev=hack.gap;hack.gap=ht>4100?ease(clamp((ht-4100)/1300,0,1)):0;
- if(prev===0&&hack.gap>0)boom();
- var p=clamp((ht-1400)/3400,0,1);bar.style.opacity=ht>=1400?1:0;barf.style.width=(p*100)+"%";
- cv.style.transform="translate("+((Math.random()-.5)*hack.gl*7)+"px,"+((Math.random()-.5)*hack.gl*5)+"px)";
- if(ht>5200)flash.style.opacity=.6*clamp((ht-5200)/450,0,1);
+ hack.gl=clamp(ht/5200,0,1);
+ hack.wall=ease(clamp((ht-2200)/2800,0,1));
+ if(ht>1800&&!hack.dr){hack.dr=1;droneOn()}
+ var prev=hack.gap;hack.gap=ht>6600?ease(clamp((ht-6600)/1500,0,1)):0;
+ if(prev===0&&hack.gap>0){droneOff();boom()}
+ var p=clamp((ht-1400)/5000,0,1);bar.style.opacity=ht>=1400?1:0;barf.style.width=(p*100)+"%";
+ var gA=hack.gl*4+hack.wall*9,tt=ht/1000;cv.style.transform="translate("+(Math.sin(tt*37)*gA*.5+(Math.random()-.5)*gA*.6)+"px,"+(Math.sin(tt*29+1)*gA*.4+(Math.random()-.5)*gA*.4)+"px) scale("+(1+.025*hack.wall)+")";
+ if(ht>7800)flash.style.opacity=.6*clamp((ht-7800)/450,0,1);
  // Sanctuary starts loading underneath, so the tear shows it
- if(ht>=4150&&!hack.opened){hack.opened=true;try{if(window.SATURN&&window.SATURN.open)window.SATURN.open()}catch(e){}}
- if(ht>=5700&&!hack.fin){hack.fin=true;finish()}
+ if(ht>=6650&&!hack.opened){hack.opened=true;try{if(window.SATURN&&window.SATURN.open)window.SATURN.open()}catch(e){}}
+ if(ht>=8300&&!hack.fin){hack.fin=true;finish()}
  return ht}
 
 function draw(){
@@ -6726,19 +6754,19 @@ function loop(){
 function onResize(){size();cells=build();rain=buildRain()}
 function onKey(e){if(e.key!=="Escape")return;e.preventDefault();
  if(isDM){if(!hack.on)dmEnd()}else finish()}
-function resetHack(){hack.on=false;hack.i=0;hack.hi=hack.gl=hack.wall=hack.gap=0;hack.opened=false;hack.fin=false;
+function resetHack(){droneOff();hack.dr=0;hack.on=false;hack.i=0;hack.hi=hack.gl=hack.wall=hack.gap=0;hack.opened=false;hack.fin=false;
  clearTimeout(labT);term.hidden=true;term.style.opacity="";term.innerHTML='<div id="od-bar"><i id="od-barf"></i></div>';bar=$("od-bar");barf=$("od-barf");
  flash.style.opacity=0;cv.style.transform="";lab.textContent="sanctuary";lab.classList.remove("hot");lab.style.opacity="";wait.classList.remove("on")}
 function start(dmView,skipIntro){
  if(running)return false;
  running=true;ending=false;isDM=!!dmView;frame=0;rainT=0;resetHack();ctl.classList.remove("on");ctl.style.display=isDM?"":"none";wait.style.display=isDM?"none":"";
- ov.hidden=false;size();cells=build();rain=buildRain();t0=performance.now()-(skipIntro?(SETTLE+60)*16.667:0);lastDraw=performance.now();
+ ov.hidden=false;sndHint(true);size();cells=build();rain=buildRain();t0=performance.now()-(skipIntro?(SETTLE+60)*16.667:0);lastDraw=performance.now();
  void ov.offsetWidth;ov.classList.add("on");
  window.addEventListener("resize",onResize);document.addEventListener("keydown",onKey);
  clearTimeout(idle);if(!isDM)idle=setTimeout(finish,IDLE_MS);
  raf=requestAnimationFrame(loop);return true}
 function stop(){
- running=false;cancelAnimationFrame(raf);clearTimeout(idle);ov.hidden=true;ov.classList.remove("on");ctl.classList.remove("on");resetHack();
+ running=false;sndHint(false);cancelAnimationFrame(raf);clearTimeout(idle);ov.hidden=true;ov.classList.remove("on");ctl.classList.remove("on");resetHack();
  window.removeEventListener("resize",onResize);document.removeEventListener("keydown",onKey)}
 function finish(){
  if(!running||ending)return;ending=true;ctl.classList.remove("on");wait.classList.remove("on");ov.classList.remove("on");
