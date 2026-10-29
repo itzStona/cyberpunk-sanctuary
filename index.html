@@ -3377,7 +3377,7 @@ function dec(s){var t=document.createElement("textarea");t.innerHTML=String(s==n
 function clean(s,n){return esc(dec(s).slice(0,n||200))}
 function store(k,v){try{if(v===undefined)return localStorage.getItem("cps_mp_"+k);localStorage.setItem("cps_mp_"+k,v)}catch(e){return null}}
 function slug(s){return String(s||"").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"")}
-function topic(){var r=slug(MP.room).slice(0,30);return "cpsanct-"+(r?"t-"+r:"s-"+(slug(location.host+location.pathname.replace(/index\.html$/,"")).slice(0,40)||"local"))}
+function topic(){var r=slug(MP.room).slice(0,30);return "cpsanct-"+(r?"t-"+r:"s-"+(slug(location.host.replace(/^www\./,"")+location.pathname.replace(/index\.html$/,"").replace(/\/+$/,"")).slice(0,40)||"local"))}
 function myName(){var h=document.querySelector('[data-k="handle"]');return(MP.name||store("name")||(h&&h.value)||"Runner").trim().slice(0,24)||"Runner"}
 function ntfy(tp){var ev;return{
  pub:function(o){try{fetch(HOST+tp,{method:"POST",body:JSON.stringify(o)}).catch(function(){})}catch(e){}},
@@ -3387,11 +3387,11 @@ function ntfy(tp){var ev;return{
  bye:function(o){try{navigator.sendBeacon(HOST+tp,JSON.stringify(o))}catch(e){}}}}
 
 var BROKERS=["wss://broker.emqx.io:8084/mqtt","wss://broker.hivemq.com:8884/mqtt","wss://test.mosquitto.org:8081/mqtt"];
-function mqtt(tp){var ws=null,i=0,dead=false,pt=null,rt=null,cbs,stt,buf=new Uint8Array(0),up=false,te=new TextEncoder(),td=new TextDecoder(),top="cpsanct/"+tp;
+function mqtt(tp,fixed){var ws=null,i=0,dead=false,pt=null,rt=null,cbs,stt,buf=new Uint8Array(0),up=false,te=new TextEncoder(),td=new TextDecoder(),top="cpsanct/"+tp;
  function str(s){var b=te.encode(s);return[b.length>>8,b.length&255].concat(Array.from(b))}
  function pkt(h,body){var o=[],n=body.length;do{var d=n%128;n=Math.floor(n/128);if(n>0)d|=128;o.push(d)}while(n>0);return new Uint8Array([h].concat(o,body))}
  function retry(){clearTimeout(rt);if(!dead)rt=setTimeout(open,1500)}
- function open(){if(dead)return;var url=BROKERS[i%BROKERS.length];i++;var w;try{w=new WebSocket(url,"mqtt")}catch(e){return retry()}
+ function open(){if(dead)return;var url=fixed||BROKERS[i%BROKERS.length];i++;var w;try{w=new WebSocket(url,"mqtt")}catch(e){return retry()}
   ws=w;w.binaryType="arraybuffer";buf=new Uint8Array(0);
   w.onopen=function(){w.send(pkt(0x10,[0,4,77,81,84,84,4,2,0,30].concat(str("cps"+cid+Math.random().toString(36).slice(2,6)))))};
   w.onmessage=function(e){var n=new Uint8Array(e.data),b=new Uint8Array(buf.length+n.length);b.set(buf);b.set(n,buf.length);buf=b;parse(w,url)};
@@ -3403,21 +3403,25 @@ function mqtt(tp){var ws=null,i=0,dead=false,pt=null,rt=null,cbs,stt,buf=new Uin
    else if(t===3){var tl=(body[0]<<8)|body[1],q=(h>>1)&3,s=2+tl+(q?2:0);try{cbs(JSON.parse(td.decode(body.slice(s))))}catch(e){}}}}
  return{pub:function(o){if(ws&&up&&ws.readyState===1)try{ws.send(pkt(0x30,str(top).concat(Array.from(te.encode(JSON.stringify(o))))))}catch(e){}},
   sub:function(cb,st){cbs=cb;stt=st;open()},close:function(){dead=true;clearInterval(pt);clearTimeout(rt);up=false;if(ws){try{ws.close()}catch(e){}}ws=null}}}
-function multi(tp){var A=ntfy(tp),B=mqtt(tp),ok=[false,false];return{pub:function(o){A.pub(o);B.pub(o)},
- sub:function(cb,st){A.sub(cb,function(v,l){ok[0]=v;MP.diag[0]=l;st(ok[0]||ok[1])});B.sub(cb,function(v,l){ok[1]=v;MP.diag[1]=l;st(ok[0]||ok[1])})},
- close:function(){A.close();B.close()},bye:function(o){A.bye(o);B.pub(o)}}}
+function multi(tp){var A=ntfy(tp),Bs=BROKERS.map(function(u){return mqtt(tp,u)}),ok=[false].concat(BROKERS.map(function(){return false})),lastN=0;
+ /* ntfy.sh only allows roughly one anonymous post every few seconds, so position updates go to it sparingly; the MQTT brokers carry the fast stream */
+ return{pub:function(o){Bs.forEach(function(b){b.pub(o)});if(o.k==="sp"){var n=Date.now();if(n-lastN<4500)return;lastN=n}A.pub(o)},
+ sub:function(cb,st){A.sub(cb,function(v,l){ok[0]=v;MP.diag[0]=l;st(ok.some(Boolean))});Bs.forEach(function(b,j){b.sub(cb,function(v,l){ok[j+1]=v;MP.diag[j+1]=l;st(ok.some(Boolean))})})},
+ close:function(){A.close();Bs.forEach(function(b){b.close()})},bye:function(o){A.bye(o);Bs.forEach(function(b){b.pub(o)})}}}
 /* roll hook */
 var _lr=window.logRoll;
 window.logRoll=function(l,t,n,c){_lr(l,t,n,c);if(MP.rx||MP.st!=="on"||n==="—"||n==="✗")return;send({k:"roll",l:String(l).slice(0,120),t:String(t).slice(0,300),n:String(n).slice(0,40),x:c||""})};
 function showRoll(from,d){var cls=String(d.x||"").replace(/[^a-z ]/g,"").slice(0,20);MP.rx=true;try{_lr("◈ "+esc(from)+" · "+clean(d.l,120),clean(d.t,300),clean(d.n,40),cls+" remote")}finally{MP.rx=false}}
+var OFF={};/* per-sender clock offset: skewed device clocks used to make two players invisible to each other */
+function fresh(c,d,lim){var ts=+d.ts;if(!isFinite(ts)||!ts)return true;var n=Date.now()-ts;if(OFF[c]===undefined||n<OFF[c])OFF[c]=n;return n-OFF[c]<lim}
 function send(o){if(!MP.tr)return;o.i=Math.random().toString(36).slice(2,10);o.c=cid;o.p=MP.name;o.ts=Date.now();MP.tr.pub(o)}
 function recv(d){if(!d||typeof d!=="object"||d.c===cid||!d.c)return;if(d.i){if(seen[d.i])return;if(Object.keys(seen).length>800)seen={};seen[d.i]=1}
  var nm=dec(d.p||"Runner").slice(0,24)||"Runner",c=String(d.c).slice(0,12);
  if(d.k==="bye"){delete MP.people[c];ui();return}
  if(d.k!=="hb"&&d.k!=="hello"&&d.k!=="roll"&&d.k!=="gig"&&d.k!=="bm"&&d.k!=="ql"&&d.k!=="eb"&&d.k!=="od"&&d.k!=="ob"&&d.k!=="oe"&&d.k!=="sp"&&d.k!=="sx")return;
  var isNew=!MP.people[c];MP.people[c]={n:nm,t:Date.now()};
- if(d.k==="hello")setTimeout(function(){send({k:"hb"})},Math.random()*1500);if(d.k==="gig")window.dispatchEvent(new CustomEvent("cps:gig",{detail:d}));if(d.k==="bm")window.dispatchEvent(new CustomEvent("cps:bm",{detail:d}));if(d.k==="ql")window.dispatchEvent(new CustomEvent("cps:ql",{detail:d}));if(d.k==="eb")window.dispatchEvent(new CustomEvent("cps:eb",{detail:d}));if((d.k==="sp"||d.k==="sx")&&Math.abs(Date.now()-(+d.ts||0))<15000)window.dispatchEvent(new CustomEvent("cps:"+d.k,{detail:d}));if((d.k==="od"||d.k==="ob"||d.k==="oe")&&Math.abs(Date.now()-(+d.ts||0))<120000)window.dispatchEvent(new CustomEvent("cps:"+d.k,{detail:d}));if(d.k==="hello")window.dispatchEvent(new Event("cps:hello"));
- if(d.k==="roll"&&Math.abs(Date.now()-(+d.ts||0))<600000)showRoll(nm,d);
+ if(d.k==="hello")setTimeout(function(){send({k:"hb"})},Math.random()*1500);if(d.k==="gig")window.dispatchEvent(new CustomEvent("cps:gig",{detail:d}));if(d.k==="bm")window.dispatchEvent(new CustomEvent("cps:bm",{detail:d}));if(d.k==="ql")window.dispatchEvent(new CustomEvent("cps:ql",{detail:d}));if(d.k==="eb")window.dispatchEvent(new CustomEvent("cps:eb",{detail:d}));if((d.k==="sp"||d.k==="sx")&&fresh(c,d,15000))window.dispatchEvent(new CustomEvent("cps:"+d.k,{detail:d}));if((d.k==="od"||d.k==="ob"||d.k==="oe")&&fresh(c,d,120000))window.dispatchEvent(new CustomEvent("cps:"+d.k,{detail:d}));if(d.k==="hello")window.dispatchEvent(new Event("cps:hello"));
+ if(d.k==="roll"&&fresh(c,d,600000))showRoll(nm,d);
  if(isNew||d.k==="hello")ui()}
 function prune(){var now=Date.now(),ch=false;Object.keys(MP.people).forEach(function(k){if(now-MP.people[k].t>55000){delete MP.people[k];ch=true}});if(ch)ui()}
 function connect(){stop();MP.name=myName();store("name",MP.name);store("room",MP.room);store("on","1");
@@ -3434,7 +3438,7 @@ function render(){if(!m.classList.contains("on"))return;
  '<label>YOUR NAME<input class="fi" id="mpn" value="'+esc(myName())+'" maxlength="24"></label>'+
  '<label>TABLE NAME (OPTIONAL)<input class="fi" id="mpc" value="'+esc(MP.room)+'" maxlength="30" placeholder="blank = everyone on this site"></label>'+
  '<div class="row"><button class="g" data-mp="go">'+(live?"UPDATE":"CONNECT")+'</button>'+(live?'<button class="g" data-mp="leave">DISCONNECT</button>':'')+'</div>'+
- '<div class="st'+(MP.bad?" bad":"")+'">'+esc(MP.msg||(MP.st==="on"?"Live. Rolls you make appear for everyone below.":""))+'</div>'+(MP.diag.length?'<small>'+esc(MP.diag.filter(Boolean).join(" · "))+'</small>':'');
+ '<div class="st'+(MP.bad?" bad":"")+'">'+esc(MP.msg||(MP.st==="on"?"Live. Rolls you make appear for everyone below.":""))+'</div>'+'<small>ROOM: '+esc(topic().replace("cpsanct-",""))+' (everyone must show the same room)</small>'+(MP.diag.length?'<small>'+esc(MP.diag.filter(Boolean).join(" · "))+'</small>':'');
  if(MP.st==="on")h+='<ul>'+list().map(function(x){return'<li><span>'+esc(x.n)+(x.me?" (you)":"")+'</span></li>'}).join("")+'</ul>';
  h+='<small>Everyone with this page open and the same table name sees every roll live, marked with the roller\'s name. Use a table name (like "friday-crew") to keep your group separate from other visitors. Only roll results are shared.</small></div>';
  m.innerHTML=h}
@@ -4930,7 +4934,7 @@ function avDraw(t,VP,cam,scale,fog,RV,PU){
  var dt=Math.min(.1,Math.max(0,t-avLast));avLast=t;var k=1-Math.exp(-dt*9),now=performance.now(),vw=innerWidth,vh=innerHeight,i,j;
  avN=0;
  for(var q=0;q<ids.length;q++){var id=ids[q],a=AV[id];
-  if(now-a.ls>7000){avKill(id);continue}
+  if(now-a.ls>20000){avKill(id);continue}
   a.x+=(a.tx-a.x)*k;a.z+=(a.tz-a.z)*k;a.y+=(a.ty-a.y)*k;var dw=((a.tw-a.w+Math.PI)%TAU+TAU)%TAU-Math.PI;a.w+=dw*k;
   var dm=!!a.m,geo=dm?DMF:SPR,RG=dm?dmRig(a,t,dt):null;avNeed(avN+geo.length+160);
   var mat=Math.max(0,Math.min(1,(t-a.t0)/1.5));mat=mat*mat*(3-2*mat);var m1=1-mat,
