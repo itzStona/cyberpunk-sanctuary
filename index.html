@@ -818,9 +818,12 @@ html[data-theme="sheet"] .sheet{background:#fff;border:0;box-shadow:0 8px 32px r
 html[data-theme="sheet"] header{height:54px;background:#fff;border:0;overflow:hidden;display:flex;align-items:center;justify-content:flex-end;padding:0 3% 0 0}
 html[data-theme="sheet"] header:before{content:"";animation:none;opacity:1;z-index:1;position:absolute;left:0;top:0;bottom:0;width:calc(27% + 24px);height:auto;border-radius:0;box-shadow:none;clip-path:polygon(0 0,100% 0,calc(100% - 24px) 100%,0 100%);background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 430 54' preserveAspectRatio='none'%3E%3Cg transform='translate(430 54) scale(-1 -1)' fill='%23a53ed2'%3E%3Cpath d='M24 0h22L22 54H0zM49 0h21L45 54H24zM74 0h20L68 54H48zM99 0h19L91 54H72zM124 0h18L114 54H96zM149 0h17L137 54H120zM174 0h16L160 54H144zM199 0h15L183 54H168zM224 0h14L206 54H192zM249 0h13L229 54H216zM274 0h12L252 54H240zM299 0h11L275 54H264zM324 0h10L298 54H288zM349 0h9L321 54H312zM374 0h8L344 54H336zM399 0h7L367 54H360zM424 0h6L390 54H384z'/%3E%3C/g%3E%3C/svg%3E") left top/430px 100% no-repeat}
 html[data-theme="sheet"] header:after{content:"";display:block;width:auto;height:auto;border-radius:0;box-shadow:none;animation:none;opacity:1;z-index:0;position:absolute;top:0;right:0;bottom:0;left:27%;background:#a640d6;clip-path:polygon(24px 0,100% 0,calc(100% - 20px) 100%,0 100%)}
+html[data-theme="sheet"] #breach-overlay header:before{content:none!important;display:none!important}
+@media(max-width:600px){html[data-theme="sheet"] header:before{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 430 54'%3E%3Cg fill='%23a53ed2'%3E%3Cpath d='M8 0h8L-16 54h-8zM44 0h9L20 54h-9zM80 0h10L56 54H46zM116 0h11L92 54H81zM152 0h12L128 54h-12zM188 0h13L164 54h-13zM224 0h14L200 54h-14zM260 0h15L236 54h-15zM296 0h16L272 54h-16zM332 0h17L308 54h-17zM368 0h18L344 54h-18zM404 0h19L380 54h-19z'/%3E%3C/g%3E%3C/svg%3E");background-size:430px 100%}}
 html[data-theme="sheet"] body{background:linear-gradient(135deg,#eee2f5 0%,#fff 62%,#fff 100%) fixed!important}
 html[data-theme="sheet"] header .sp{display:none}
 html[data-theme="sheet"] header img{position:relative;z-index:2;height:42px!important;width:auto;margin:0 0 0 auto!important;left:auto;right:auto;top:auto}
+html[data-theme="sheet"] .log .le span{color:#7a2fb0}
 html[data-theme="sheet"] .tabs{background:#fff;border-bottom:3px solid #b044dc;border-image:var(--G) 1}
 html[data-theme="sheet"] .tab,html[data-theme="sheet"] .tgb{color:#3a2150;font-family:var(--fnt);font-weight:400}
 html[data-theme="sheet"] .tab:hover,html[data-theme="sheet"] .tgb:hover{color:#7a2fb0}
@@ -899,10 +902,12 @@ html[data-theme="sheet"] .hpb i{background:linear-gradient(90deg,#7a2fb0,#d65cff
 html[data-theme="sheet"] :is(.act,.tools+*) label{color:#2b1740}
 /* Sanctuary Sheet header, laid out like the printed sheet: IDENTITY on the left, STATS as one row each in the middle, HOLOCALL portrait on the right.
    Scoped to the character header only (this grid used to hit every .top and squeezed the armor row). */
-html[data-theme="sheet"] #p-char>.top:first-child{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(160px,200px) 280px;grid-template-areas:"id stats holo";gap:16px 20px;align-items:start}
-html[data-theme="sheet"] #p-char>.top:first-child>.id{grid-area:id;grid-column:1;grid-row:1;min-width:0}
-html[data-theme="sheet"] #p-char>.top:first-child>.stats{grid-area:stats;grid-column:2;grid-row:1;align-self:start;min-width:0;flex:none;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto;gap:8px 0}
-html[data-theme="sheet"] #p-char>.top:first-child>.holo{grid-area:holo;grid-column:3;grid-row:1;flex:none!important;width:100%!important;max-width:none!important;margin:0!important;align-self:start}
+html[data-theme="sheet"] #p-char>.top:first-child{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(160px,200px) 280px;grid-template-areas:"id stats holo";gap:16px 20px;align-items:stretch}
+html[data-theme="sheet"] #p-char>.top:first-child>.id{grid-area:id;grid-column:1;grid-row:1;min-width:0;align-self:stretch}
+html[data-theme="sheet"] #p-char>.top:first-child>.stats{grid-area:stats;grid-column:2;grid-row:1;align-self:stretch;min-width:0;flex:none;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto;gap:8px 0}
+html[data-theme="sheet"] #p-char>.top:first-child>.holo{grid-area:holo;grid-column:3;grid-row:1;flex:none!important;width:100%!important;max-width:none!important;margin:0!important;align-self:stretch}
+@media(min-width:1051px){html[data-theme="sheet"] #p-char>.top:first-child>.holo{align-self:center;height:fit-content}}
+@media(min-width:1051px){html[data-theme="sheet"] #p-char>.top:first-child>.id{align-self:center;height:fit-content}}
 @media(max-width:1050px){html[data-theme="sheet"] #p-char>.top:first-child{grid-template-columns:minmax(200px,1fr) 280px;grid-template-areas:"id id" "stats holo"}html[data-theme="sheet"] #p-char>.top:first-child>.id{grid-column:1/-1;grid-row:1}html[data-theme="sheet"] #p-char>.top:first-child>.stats{grid-column:1;grid-row:2}html[data-theme="sheet"] #p-char>.top:first-child>.holo{grid-column:2;grid-row:2}}
 html[data-theme="sheet"] .st b{font-size:26px}
 html[data-theme="sheet"] .st input{width:52px;height:40px}
