@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="color-scheme" content="dark"><meta name="theme-color" content="#07040c">
 <title>Cyberpunk Sanctuary</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet"><style>:root{--p1:#8a3fbf;--p2:#d655ff;--hot:#ff3ea5;--ink:#f4e8ff;--mute:#a58bc2;--bg:#07040c;--panel:#120a1d;--field:#1b1030;--line:#4a2275;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--deep0:#0c0616;--deep:#160c26;--deep2:#2c1650;--deep3:#1f1238;--deep4:#24103d;--soft:#ff9bd2;--soft2:#ff7aa8;--p1b:#6a2a9a;--st1:#2a1346;--st2:#170b29;--g1:#3a1160;--g2:#26083e;--h1:#150630;--h2:#34106a;--h3:#10041f;--pl1:#ffb3ec;--pl2:#b447e6;--pl3:#1c0a36;--rg1:#ff6ad5;--rg2:#ffd3f5;--moon:#f4d4ff;--hc:#5ee7ff}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@500;600;700&family=Saira:wght@200;300;400;600&display=swap" rel="stylesheet"><style>:root{--p1:#8a3fbf;--p2:#d655ff;--hot:#ff3ea5;--ink:#f4e8ff;--mute:#a58bc2;--bg:#07040c;--panel:#120a1d;--field:#1b1030;--line:#4a2275;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--deep0:#0c0616;--deep:#160c26;--deep2:#2c1650;--deep3:#1f1238;--deep4:#24103d;--soft:#ff9bd2;--soft2:#ff7aa8;--p1b:#6a2a9a;--st1:#2a1346;--st2:#170b29;--g1:#3a1160;--g2:#26083e;--h1:#150630;--h2:#34106a;--h3:#10041f;--pl1:#ffb3ec;--pl2:#b447e6;--pl3:#1c0a36;--rg1:#ff6ad5;--rg2:#ffd3f5;--moon:#f4d4ff;--hc:#5ee7ff}
 *{box-sizing:border-box}
 html{background:var(--bg)}
 body{margin:0;color:var(--ink);font-family:"Rajdhani","Bahnschrift","Segoe UI",Arial,sans-serif;font-size:16px;background:var(--bg);background:radial-gradient(900px 500px at 85% -5%,color-mix(in srgb,var(--g1) 67%,transparent),transparent),radial-gradient(700px 500px at 0 100%,color-mix(in srgb,var(--g2) 60%,transparent),transparent),var(--bg);min-height:100vh;padding:18px 10px}
@@ -291,7 +291,8 @@ html body .hv{aspect-ratio:3/4}
 html body #himg{filter:none!important}
 }
 </style><script>
-const THEMES={sanctuary:["Sanctuary Purple"],samurai:["Samurai Red",355,12,1],netrunner:["Netrunner Cyan",188,300,1],chrome:["Chrome Mono",215,190,.1],ocean:["Ocean Blue",218,172,1],vice:["Vice Pink",328,190,1],sunset:["Sunset Orange",18,330,1],gold:["Corpo Gold",46,205,.9],mint:["Mint Terminal",160,48,1],ultra:["Ultraviolet",268,140,1],voidred:["Void Red",0,0,.08],spooktober:["Spooktober",24,278,1,{p1:"hsl(24 90% 41%)",p1b:"hsl(18 90% 30%)",p2:"hsl(24 100% 57%)"}],custom:["Custom colours"]};
+const THEMES={sanctuary:["Sanctuary Purple"],samurai:["Samurai Red",355,12,1],netrunner:["Netrunner Cyan",188,300,1],chrome:["Chrome Mono",215,190,.1],ocean:["Ocean Blue",218,172,1],vice:["Vice Pink",328,190,1],sunset:["Sunset Orange",18,330,1],gold:["Corpo Gold",46,205,.9],mint:["Mint Terminal",160,48,1],ultra:["Ultraviolet",268,140,1],voidred:["Void Red",0,0,.08],spooktober:["Spooktober",24,278,1,{p1:"hsl(24 90% 41%)",p1b:"hsl(18 90% 30%)",p2:"hsl(24 100% 57%)"}],sheet:["Sanctuary Sheet",278,330,1,{bg:"#ffffff",panel:"#ffffff",field:"#ffffff",line:"#b974e0",p1:"#7a2fb0",p2:"#d65cff",hot:"#c4189a",ink:"#14091f",mute:"#6b4a85",deep0:"#f7effd",deep:"#ffffff",deep2:"#e9d6f7",deep3:"#f4e9fb",deep4:"#efe0fa",soft:"#a3267f",soft2:"#a3267f",p1b:"#9b3fcf",st1:"#ffffff",st2:"#f5ebfc",g1:"#f0e0fa",g2:"#ffffff",h1:"#7a2fb0",h2:"#d65cff",h3:"#5a1f85",pl1:"#ffd9f5",pl2:"#c25cf0",pl3:"#4b1b78",rg1:"#ff9bd2",rg2:"#ffe0f5",moon:"#ffffff"}],custom:["Custom colours"]};
+const SHEETDEF=THEMES.sheet;try{if(localStorage.getItem("cps_unlock_sheet")!=="1")delete THEMES.sheet}catch(e){delete THEMES.sheet}
 const hueOf=x=>{const r=parseInt(x.slice(1,3),16)/255,g=parseInt(x.slice(3,5),16)/255,b=parseInt(x.slice(5,7),16)/255,M=Math.max(r,g,b),m=Math.min(r,g,b),d=M-m;if(!d)return 0;let h=M==r?((g-b)/d)%6:M==g?(b-r)/d+2:(r-g)/d+4;h=Math.round(h*60);return h<0?h+360:h};
 const saturationOf=x=>{const r=parseInt(x.slice(1,3),16)/255,g=parseInt(x.slice(3,5),16)/255,b=parseInt(x.slice(5,7),16)/255,M=Math.max(r,g,b),m=Math.min(r,g,b),l=(M+m)/2,d=M-m;return d?Math.round(d/(1-Math.abs(2*l-1))*100):0};
 const TKEYS="bg panel field line p1 p2 hot ink mute deep0 deep deep2 deep3 deep4 soft soft2 p1b st1 st2 g1 g2 h1 h2 h3 pl1 pl2 pl3 rg1 rg2 moon".split(" ");
@@ -807,6 +808,101 @@ html body.mach #cyt td:nth-child(4):before{content:"DRIFT DICE"}
 html body.mach #cyt td:nth-child(5):before{content:"DRIFT"}
 html body.mach #cyt td:nth-child(6):before{content:"DRIFT DICE"}
 html body.mach #cyt td:nth-child(7):before{content:"DRIFT"}
+</style><style id="sheetcss">
+/* ===== Theme: Sanctuary Sheet (light printed-sheet look: white page, purple gradient frames, white fields, black table heads) ===== */
+html[data-theme="sheet"]{color-scheme:light;--G:linear-gradient(135deg,#7a2fb0 0%,#a640d6 50%,#d65cff 100%);--fnt:"Saira","Bahnschrift","Rajdhani","Segoe UI",Arial,sans-serif}
+html[data-theme="sheet"] body{background:#fff;color:#14091f;font-family:var(--fnt);font-weight:300}
+html[data-theme="sheet"] body:before,html[data-theme="sheet"] body:after{display:none}
+html[data-theme="sheet"] .sheet{background:#fff;border:0;box-shadow:0 0 0 1px #e8d9f4,0 12px 40px #5b218018;clip-path:none}
+html[data-theme="sheet"] header{height:64px;background:#fff;border:0;overflow:hidden;display:flex;align-items:center;justify-content:flex-end;padding:0 26px 0 0}
+html[data-theme="sheet"] header:before{content:"";animation:none;opacity:1;z-index:1;position:absolute;left:0;top:0;bottom:0;width:26%;height:auto;border-radius:0;box-shadow:none;background:repeating-linear-gradient(115deg,#8a3fbf 0 12px,#fff 12px 26px);clip-path:polygon(0 0,100% 0,calc(100% - 30px) 100%,0 100%)}
+html[data-theme="sheet"] header:after{content:"";display:block;width:auto;height:auto;border-radius:0;box-shadow:none;animation:none;opacity:1;z-index:0;position:absolute;top:0;right:0;bottom:0;left:23%;background:linear-gradient(90deg,#7a2fb0,#b044dc 55%,#d65cff);clip-path:polygon(30px 0,100% 0,100% 100%,0 100%)}
+html[data-theme="sheet"] header .sp{display:none}
+html[data-theme="sheet"] header img{position:relative;z-index:2;height:52px!important;width:auto;margin:0 0 0 auto!important;left:auto;right:auto;top:auto}
+html[data-theme="sheet"] .tabs{background:#fff;border-bottom:3px solid #b044dc;border-image:var(--G) 1}
+html[data-theme="sheet"] .tab,html[data-theme="sheet"] .tgb{color:#3a2150;font-family:var(--fnt);font-weight:400}
+html[data-theme="sheet"] .tab:hover,html[data-theme="sheet"] .tgb:hover{color:#7a2fb0}
+html[data-theme="sheet"] .tab.on,html[data-theme="sheet"] .tgb.on{color:#fff}
+html[data-theme="sheet"] .tgm,html[data-theme="sheet"] .tgm .mi{background:#fff}
+html[data-theme="sheet"] .tgm{border:1px solid #cfa8ea;box-shadow:0 8px 24px #5b218030}
+html[data-theme="sheet"] .mi{color:#14091f}.mi:hover{background:#f1e4fb}
+html[data-theme="sheet"] .sec>h3{background:none;color:#14091f;font:300 21px var(--fnt);letter-spacing:.05em;border:0;padding:0;box-shadow:none;clip-path:none}
+html[data-theme="sheet"] .sec>h3:before,html[data-theme="sheet"] .sec>h3:after{display:none}
+/* gradient frames with white things inside */
+html[data-theme="sheet"] :is(.ip,.cg,.box,.sc,.wc,.rc,.rx,.ag,.tg,.bd){background:var(--G);border:0;padding:8px;box-shadow:none;clip-path:none;color:#fff}
+html[data-theme="sheet"] .cg{padding:6px}
+html[data-theme="sheet"] :is(.ip,.cg,.rx,.rc,.wc,.sc,.ag) :is(h4,h5,.sub){color:#fff;font-family:var(--fnt);font-weight:400;letter-spacing:.14em}
+html[data-theme="sheet"] :is(.f,.ipf,.fi,input,select,textarea){background:#fff;color:#14091f;border-color:#d9b8ef;font-family:var(--fnt);font-weight:400}
+html[data-theme="sheet"] :is(.f,.ipf){border:1px solid #d9b8ef;border-left:1px solid #d9b8ef}
+html[data-theme="sheet"] :is(.f label,.ipf label,.f small){color:#2b1740;font-family:var(--fnt);font-weight:300;letter-spacing:.08em}
+html[data-theme="sheet"] :is(.f label,.ipf label){text-align:right}
+html[data-theme="sheet"] :is(input,textarea)::placeholder{color:#a58bc2;opacity:1}
+html[data-theme="sheet"] select option{background:#fff;color:#14091f}
+html[data-theme="sheet"] th{background:#000;color:#fff;font-family:var(--fnt);font-weight:400;letter-spacing:.12em}
+html[data-theme="sheet"] td{background:#fff;border:1px solid #cf9bec;color:#14091f}
+html[data-theme="sheet"] td input,html[data-theme="sheet"] td select{background:transparent;color:#14091f}
+html[data-theme="sheet"] td.base{color:#14091f}
+html[data-theme="sheet"] .mini{background:#fff;color:#4a1d73;border:1px solid #cfa8ea}
+html[data-theme="sheet"] .mini:hover{background:#7a2fb0;color:#fff}
+html[data-theme="sheet"] .badge{background:#fff;color:#12803e;border:1px solid #cfa8ea}
+html[data-theme="sheet"] .st{background:var(--G);border:0;clip-path:none;color:#fff}
+html[data-theme="sheet"] .st b{color:#fff;font-family:var(--fnt);font-weight:300}
+html[data-theme="sheet"] .st input{background:#fff;color:#14091f}
+html[data-theme="sheet"] .holo{background:var(--G);border:0;color:#fff}
+html[data-theme="sheet"] .lh{background:var(--G)}
+
+html[data-theme="sheet"] .top>.id{background:var(--G);padding:8px;align-content:start}
+html[data-theme="sheet"] .stats{gap:12px 14px;grid-template-columns:repeat(1,1fr);align-content:start}
+html[data-theme="sheet"] .st{background:none;flex-direction:row;justify-content:space-between;align-items:center;padding:0;min-height:0;gap:8px}
+html[data-theme="sheet"] .st b{color:#14091f;font:300 32px/1 var(--fnt);letter-spacing:.02em;cursor:pointer}
+html[data-theme="sheet"] .st b:hover{color:#7a2fb0}
+html[data-theme="sheet"] .st input{width:64px;height:42px;background:var(--G);color:#fff;border:0;font:600 22px var(--fnt);text-align:center}
+html[data-theme="sheet"] .holo :is(span,b,small,div){color:#fff}
+html[data-theme="sheet"] button:disabled{color:#fff;opacity:.55}
+html[data-theme="sheet"] .top>.id{align-self:start}
+html[data-theme="sheet"] button.g,html[data-theme="sheet"] .g:is(button){background:#fff;color:#4a1d73;border:1px solid #cfa8ea}
+html[data-theme="sheet"] button.g:hover{background:#7a2fb0;color:#fff}
+html[data-theme="sheet"] button.g:disabled{opacity:.6;color:#4a1d73}
+html[data-theme="sheet"] .cg td{background:#fff!important;color:#14091f;border:1px solid #cf9bec;text-shadow:none}
+html[data-theme="sheet"] .cg tr:nth-child(even) td{background:#faf4fe!important}
+html[data-theme="sheet"] .cg td.nm{color:#3a2150}
+html[data-theme="sheet"] .cg td.stat{color:#6b4a85}
+html[data-theme="sheet"] .cg td.base{color:#14091f;text-shadow:none}
+html[data-theme="sheet"] .cg h4{background:#2a0d44;color:#fff;padding:6px 10px;margin:0 0 4px;font:400 12px var(--fnt);letter-spacing:.16em;text-transform:uppercase}
+html[data-theme="sheet"] .cg th{background:#000;color:#fff}
+html[data-theme="sheet"] .cg tr{background:transparent}
+html[data-theme="sheet"] .cg .nm em{color:#a3267f}
+html[data-theme="sheet"] .ipu{background:#fff;color:#4a1d73;border:1px solid #cfa8ea}
+html[data-theme="sheet"] :is(.ip,.tg,.rx,.rc,.wc,.sc,.ag,.box) :is(.iph,.ipc span,.ipc label,.tg>label,.tg>span:not(.badge),.tg>b,small.wsn){color:#f6e6ff}
+html[data-theme="sheet"] :is(.wc,.ip,.ag,.sc,.rx,.rc,.tg,.box){--mute:#f6e6ff}
+html[data-theme="sheet"] .vh{--mute:#6b4a85}
+html[data-theme="sheet"] .vh :is(label,small,.sub){color:#4a1d73}
+html[data-theme="sheet"] .ebr button{color:#117a3c}
+html[data-theme="sheet"] .ebr button:nth-of-type(2){color:#b0123f}
+html[data-theme="sheet"] :is(.bd,.rc,.rx,.wc,.sc,.ag,.box,.ip){--hot:#ffe3f6;--soft:#ffffff}
+html[data-theme="sheet"] .bd{--mute:#f6e6ff;color:#fff}
+html[data-theme="sheet"] .bd :is(b,em,span,small,label,h4){color:#fff}
+html[data-theme="sheet"] .bd :is(input,textarea,select){color:#14091f}
+html[data-theme="sheet"] :is(.rc,.wc,.bd,.sc,.ag,.rx)>:is(label,div>label,.f>label){color:#f6e6ff}
+html[data-theme="sheet"] :is(.rc,.wc,.sc,.ag,.rx) label:not(.f label):not(.ipf label){color:#f6e6ff}
+html[data-theme="sheet"] .vs{color:#12803e}
+html[data-theme="sheet"] .holo .hh em{color:#ffe3f6}
+html[data-theme="sheet"] header{height:72px}
+html[data-theme="sheet"] .hpb{background:#fff;border:1px solid #d9b8ef;height:10px}
+html[data-theme="sheet"] .hpb i{background:linear-gradient(90deg,#7a2fb0,#d65cff)}
+html[data-theme="sheet"] :is(.act,.tools+*) label{color:#2b1740}
+/* Sanctuary Sheet header, like the paper sheet: STATS as one row per stat (name, value box) on the left, identity in the middle, HOLOCALL on the right.
+   Scoped to the character header only: this grid used to hit every .top, which squeezed the armor row into a narrow column, and its 3-column stats override broke the rows. */
+html[data-theme="sheet"] #p-char>.top:first-child{display:grid!important;grid-template-columns:minmax(200px,290px) minmax(0,1fr) 232px;grid-template-areas:"stats id holo";gap:16px 28px;align-items:start}
+html[data-theme="sheet"] #p-char>.top:first-child>.stats{grid-area:stats;grid-column:1;grid-row:1;align-self:start;min-width:0;flex:none;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:auto;gap:10px 0}
+html[data-theme="sheet"] #p-char>.top:first-child>.id{grid-area:id;grid-column:2;grid-row:1;min-width:0}
+html[data-theme="sheet"] #p-char>.top:first-child>.holo{grid-area:holo;grid-column:3;grid-row:1;flex:none!important;width:100%!important;max-width:none!important;margin:0!important;align-self:start}
+@media(max-width:1050px){html[data-theme="sheet"] #p-char>.top:first-child{grid-template-columns:minmax(200px,1fr) 232px;grid-template-areas:"stats holo" "id id"}html[data-theme="sheet"] #p-char>.top:first-child>.stats{grid-column:1;grid-row:1}html[data-theme="sheet"] #p-char>.top:first-child>.holo{grid-column:2;grid-row:1}html[data-theme="sheet"] #p-char>.top:first-child>.id{grid-column:1/-1;grid-row:2}}
+html[data-theme="sheet"] .st b{font-size:26px}
+html[data-theme="sheet"] .st input{width:52px;height:40px}
+@media(max-width:760px){html[data-theme="sheet"] #p-char>.top:first-child{grid-template-columns:1fr;grid-template-areas:"holo" "stats" "id"}html[data-theme="sheet"] #p-char>.top:first-child>.holo{grid-column:1;grid-row:1;max-width:240px!important;margin:0 auto!important}html[data-theme="sheet"] #p-char>.top:first-child>.stats{grid-column:1;grid-row:2;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px 18px}html[data-theme="sheet"] #p-char>.top:first-child>.id{grid-column:1;grid-row:3}}
+/* the workbench overlay stays dark */
+html[data-theme="sheet"] #mk-overlay{--ink:#f4e8ff;--mute:#a58bc2;--deep:#160c26;--deep0:#0c0616;--deep2:#2c1650;--field:#1b1030;--line:#4a2275;--panel:#120a1d;--soft:#ff9bd2;--p1:#8a3fbf;--p2:#d655ff;--hot:#ff3ea5;color:#f4e8ff;font-family:"Rajdhani",sans-serif}
 </style></head><body>
 <div class="spookfx" aria-hidden="true"><div class="vignette"></div><div class="fog f1"></div><div class="fog f2"></div><div class="bat" style="top:13vh"><svg viewBox="0 0 64 28" width="46" height="20"><path d="M28 12 29 5 32 10 35 5 36 12C42 5 52 4 62 10 56 12 54 16 52 20 48 16 44 17 41 22 38 18 35 19 32 25 29 19 26 18 23 22 20 17 16 16 12 20 10 16 8 12 2 10 12 4 22 5 28 12Z"/></svg></div><div class="bat b2"><svg viewBox="0 0 64 28" width="38" height="17"><path d="M28 12 29 5 32 10 35 5 36 12C42 5 52 4 62 10 56 12 54 16 52 20 48 16 44 17 41 22 38 18 35 19 32 25 29 19 26 18 23 22 20 17 16 16 12 20 10 16 8 12 2 10 12 4 22 5 28 12Z"/></svg></div><div class="spider">🕷</div><div class="ghost">👻</div><div class="pumpkins">🎃</div><div class="bolt"></div></div>
 <aside class="rail adl" id="rail-l" aria-label="Advertisements"><div class="rt"><span>SPONSORED</span><button class="adx" data-adoff title="Hide ads" aria-label="Hide ads">✕</button></div></aside>
@@ -1349,7 +1445,8 @@ function socNote(tr){if(tr.closest(".cg").querySelector("h4").textContent!="Soci
 function wFire(i,auto){const n=wv(i,"n").value||"Weapon",mag=+wv(i,"m").value||0,sk=auto?"Autofire":wv(i,"s").value;
  const q=wDV(i,auto);if(q.on&&!q.dv){logRoll(n,`${q.rg} is out of range for ${q.t}${auto?" on autofire":""}`,"✗","bad");return}
  if(mag){const cost=auto?10:1,am=+wv(i,"c").value||0;if(am<cost){logRoll(n,auto?"needs 10 rounds":"empty — reload","CLICK","bad");return}wv(i,"c").value=am-cost}
- const go=()=>roll(`${n}${auto?" · AUTOFIRE":""}${q.on?" · "+q.rg:""} (${sk||"no skill"})`,sb(sk)+(+wv(i,"q").value||0),document.getElementById("rxprec")&&document.getElementById("rxprec").checked&&hasR("Solo")?+val("rx_Solo_pa_p").value||0:0,"precision attack");if(q.on)withDV(q.dv,go);else go();upd()}
+ const aim=!auto&&(/\+1 to Aimed Shots/.test(wv(i,"o").value)||wv(i,"at").value.split(",").some(k=>k==="link"||k==="snipe"||k==="rbs"))?1:0;
+ const go=()=>roll(`${n}${auto?" · AUTOFIRE":""}${q.on?" · "+q.rg:""}${aim?" · AIM +1":""} (${sk||"no skill"})`,sb(sk)+(+wv(i,"q").value||0)+aim,document.getElementById("rxprec")&&document.getElementById("rxprec").checked&&hasR("Solo")?+val("rx_Solo_pa_p").value||0:0,"precision attack");if(q.on)withDV(q.dv,go);else go();upd()}
 function wReload(i){const n=wv(i,"n").value||"Weapon",mag=+wv(i,"m").value||0,am=+wv(i,"c").value||0,rs=+wv(i,"v").value||0,t=Math.min(mag-am,rs);
  if(t<=0){logRoll(n,mag-am<=0?"magazine already full":"no reserve ammo","—","bad");return}wv(i,"c").value=am+t;wv(i,"v").value=rs-t;logRoll(n,"reloaded","+"+t,"ok");upd()}
 document.addEventListener("change",e=>{const m=/^w(\d+)_t$/.exec(e.target.dataset.k||""),p=m&&PRE[e.target.value];if(!p)return;const i=+m[1];
@@ -6808,5 +6905,24 @@ boot.addEventListener("click",function(){if(hack.on||ending)return;bcast("ob");b
 skip.addEventListener("click",function(){if(!hack.on)dmEnd()});
 resetHack();
 })();
+</script>
+<script>
+(function(){
+ var SEQ=["breach","cloak","slide","backdoor","zap"],pos=0;
+ function tok(t){
+  var b=t.closest&&t.closest("[data-breach]");if(b)return"breach";
+  var c=t.closest&&t.closest("#bp-chips .chip");if(c){var l=c.querySelector("span");return l?l.textContent.toLowerCase().replace(/[^a-z]/g,""):"x"}
+  return null}
+ function unlock(){
+  try{localStorage.setItem("cps_unlock_sheet","1")}catch(e){}
+  THEMES.sheet=SHEETDEF;
+  var s=document.getElementById("theme");
+  if(s){if(![].some.call(s.options,function(o){return o.value==="sheet"}))s.insertBefore(new Option(SHEETDEF[0],"sheet"),s.querySelector('option[value="custom"]'));s.value="sheet";s.dispatchEvent(new Event("change",{bubbles:true}))}
+  else{try{applyTheme("sheet");localStorage.setItem("cps_theme","sheet")}catch(e){}}
+  try{logRoll("Breach Protocol","Access sequence accepted. New sheet skin unlocked: Sanctuary Sheet.","UNLOCKED","ok")}catch(e){}}
+ document.addEventListener("click",function(e){
+  var t=tok(e.target);if(!t)return;
+  if(t===SEQ[pos])pos++;else pos=(t===SEQ[0])?1:0;
+  if(pos===SEQ.length){pos=0;unlock()}},true)})();
 </script>
 </body></html>
