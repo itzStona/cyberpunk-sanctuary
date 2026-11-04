@@ -4079,6 +4079,10 @@ html body .tabs{display:flex!important;gap:4px!important;padding:14px 22px 0!imp
 @media(max-width:760px){html body .tabs{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:4px!important;padding:5px 5px calc(5px + env(safe-area-inset-bottom))!important;overflow:visible!important}
 .tgw{position:static}.tgb{width:100%;min-height:50px;clip-path:none;padding:6px 2px;font-size:10px;letter-spacing:.04em;border:0;background:transparent;white-space:normal}.tgb.on{border:0}
 .tgm{top:auto;bottom:calc(100% + 6px);left:6px;right:6px}.mi{min-height:48px;text-align:center}}
+/* five top-level tabs now (HANDBOOK added): tighter padding, shrinking type, and an even 5-up grid on phones */
+.tgb{padding:11px 22px 11px 14px;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:1100px) and (min-width:761px){.tgb{font-size:12px;letter-spacing:.06em;padding:10px 16px 10px 10px}html body .tabs{padding-left:14px!important;padding-right:14px!important}}
+@media(max-width:760px){html body .tabs{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:3px!important}.tgb{font-size:9px;letter-spacing:0;padding:5px 1px;min-height:46px;line-height:1.15;overflow-wrap:anywhere;text-overflow:clip}.tgm{left:4px;right:4px}}
 .bmdm{display:none;flex-direction:column;gap:8px;margin-bottom:10px}html.dm .bmdm{display:flex}
 .bmdm .ctl,#bmSide .ctl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.bmdm .mini.on{background:var(--p2);color:#fff}
 .bmwrap{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:12px;align-items:start}
