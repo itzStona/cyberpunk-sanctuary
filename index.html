@@ -1274,7 +1274,7 @@ document.getElementById("rext").insertAdjacentHTML("beforeend",`<div class="rx" 
 <small id="treff"></small>
 <div id="trleg"></div>
 <div class="rxr qhs" id="trbd"></div>
-<div class="rxr"><button type="button" class="mini" data-trn="1">+1</button><button type="button" class="mini g" data-trn="g">GHOST ROUTINE −3 · DV 10</button><button type="button" class="mini g" data-trn="x">DECOY −1 · DV 12</button><button type="button" class="mini g" data-trn="-3">BURNER CHIP −3</button><button type="button" class="mini g" data-trn="0">WIPE</button><button type="button" class="mini" data-trn="u" id="trundo">UNDO</button></div></div></div>`);
+<div class="rxr"><button type="button" class="mini" data-trn="1">+1</button><button type="button" class="mini g" data-trn="g">GHOST ROUTINE −3 · DV 15</button><button type="button" class="mini g" data-trn="x">DECOY −1 · DV 10</button><button type="button" class="mini g" data-trn="-3">BURNER CHIP −3</button><button type="button" class="mini g" data-trn="0">WIPE</button><button type="button" class="mini" data-trn="u" id="trundo">UNDO</button></div></div></div>`);
 const trV=()=>Math.max(0,Math.min(10,+val("qh_tr").value||0)),trOn=()=>val("qh_tro").value!=="0",trFlag=()=>trOn()&&trV()>=3?2:0;
 function trThr(){return trOn()&&trV()>=5?1:0}
 function trSnap(){TRH.push({t:val("qh_tr").value,i:val("qh_ice").value,c:val("qh_clk").value});if(TRH.length>20)TRH.shift()}
