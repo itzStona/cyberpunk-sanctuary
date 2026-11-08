@@ -1249,6 +1249,77 @@ document.getElementById("rext").insertAdjacentHTML("beforeend",`<div class="rx" 
 <div class="rxr qhs"><span class="badge" id="qhj">NOT JACKED IN</span><span class="badge" id="qhb">NO PASSWALL</span><span class="badge" id="qhu">NET ACTIONS 0</span></div>
 <div class="rxr"><label>TARGET<input class="fi nm3" id="qhtg" placeholder="Name"></label><label>PASSWALL DV<input class="fi" id="qhpw" type="number" min="0" placeholder="none"></label><label>NET ACTIONS / TURN<input class="fi" type="number" min="0" placeholder="auto" data-k="qh_na"></label><label>INTERFACE BONUS<input class="fi" type="number" data-k="qh_b"></label></div>
 <div class="rxr"><button class="mini" data-qhn="in">JACK IN</button><button class="mini" data-qhn="br">BREACH</button><button class="mini g" data-qhn="mb">MARK BREACHED</button><button class="mini" data-qhn="out">JACK OUT</button><button class="mini g" data-qhn="turn">NEW TURN</button></div>`+QH.map((h,i)=>`<div class="rxr"><b>${h[0]}<small>${h[2]}</small></b><label>DV<input class="fi" type="number" min="0" placeholder="?" data-k="qh_dv_${i}"></label><button class="mini" data-qh="${i}">HACK</button></div>`).join("")+"</div>");
+/* TRACE (homebrew): rides on the quickhack panel */
+const TRZ=[[10,"BURNED","Forced jack-out. A Black ICE hit lands and your deck stays tracked."],[7,"PINGED","The owner knows roughly where you are. A security clock starts."],[5,"THROTTLED","Your bandwidth chokes: −1 Net action per turn while Trace stays at 5 or higher."],[3,"FLAGGED","Every quickhack and Breach DV is +2."]];
+const LOUD={"Overheat":1,"Synapse Burnout":1,"Puppet":1,"System Reset":1,"Short Circuit":1};
+const TRH=[];
+document.head.insertAdjacentHTML("beforeend",`<style>
+.trh{align-items:center;justify-content:space-between}
+.trn{display:flex;align-items:baseline;gap:8px}.trn b{flex:none;font:700 42px "Orbitron",sans-serif;color:var(--hot);text-shadow:0 0 14px color-mix(in srgb,var(--hot) 55%,transparent)}.trn span{font:600 11px "Orbitron",sans-serif;letter-spacing:.2em;color:var(--mute)}
+.trg{display:flex;align-items:center;gap:6px;font:600 9px "Orbitron",sans-serif;letter-spacing:.15em;color:var(--mute)}.trg input{width:18px;height:18px;accent-color:var(--p2)}
+.trm,.trt{display:grid;grid-template-columns:repeat(10,1fr);gap:3px}
+.trm{margin:8px 0 3px}
+.tseg{height:34px;padding:0;border:1px solid var(--line);background:var(--field);cursor:pointer;clip-path:none}
+.tseg.on{background:var(--c);border-color:var(--c);box-shadow:0 0 10px color-mix(in srgb,var(--c) 60%,transparent)}
+.tz1{--c:var(--hc)}.tz2{--c:#ffb86b}.tz3{--c:#ff7a45}.tz4{--c:var(--hot)}
+.trt{font:600 11px "Orbitron",sans-serif;text-align:center;color:var(--mute);margin-bottom:6px}.trt .th{color:var(--soft2)}
+.trl.cur b{color:var(--soft2)}
+@media (prefers-reduced-motion:no-preference){.trm.hot .tseg.on{animation:trp 1s ease-in-out infinite alternate}}
+@keyframes trp{to{filter:brightness(1.6)}}
+</style>`);
+document.getElementById("rext").insertAdjacentHTML("beforeend",`<div class="rx" data-rxp="Netrunner" hidden id="trx"><h4>TRACE · HOMEBREW<span>EVERY MISTAKE LEAVES A TRAIL</span></h4><small>A failed quickhack or Breach adds 2. Loud hacks (Overheat, Synapse Burnout, Puppet, System Reset, Short Circuit) add 1 even when they land, and 3 if they fail (a normal hack adds 2 on a fail). Each turn you stay jacked in after the third adds 1. Tap a segment to set Trace by hand. At 5+ Trace you lose 1 Net action per turn. To shed Trace you must be jacked in and spend a Net action on GHOST ROUTINE or DECOY.</small>
+<input type="hidden" data-k="qh_tr"><input type="hidden" data-k="qh_ice"><input type="hidden" data-k="qh_clk"><input type="hidden" data-k="qh_tro">
+<div class="rxr trh"><div class="trn"><b id="trnum">0</b><span>/ 10</span></div><span class="badge" id="trst">CLEAN</span><label class="trg"><input type="checkbox" id="trtog"> TRACE ON</label></div>
+<div id="trbody"><div class="trm" id="trm"></div><div class="trt" id="trt"></div>
+<small id="treff"></small>
+<div id="trleg"></div>
+<div class="rxr qhs" id="trbd"></div>
+<div class="rxr"><button type="button" class="mini" data-trn="1">+1</button><button type="button" class="mini g" data-trn="g">GHOST ROUTINE −3 · DV 10</button><button type="button" class="mini g" data-trn="x">DECOY −1 · DV 12</button><button type="button" class="mini g" data-trn="-3">BURNER CHIP −3</button><button type="button" class="mini g" data-trn="0">WIPE</button><button type="button" class="mini" data-trn="u" id="trundo">UNDO</button></div></div></div>`);
+const trV=()=>Math.max(0,Math.min(10,+val("qh_tr").value||0)),trOn=()=>val("qh_tro").value!=="0",trFlag=()=>trOn()&&trV()>=3?2:0;
+function trThr(){return trOn()&&trV()>=5?1:0}
+function trSnap(){TRH.push({t:val("qh_tr").value,i:val("qh_ice").value,c:val("qh_clk").value});if(TRH.length>20)TRH.shift()}
+function trAdd(n,why){if(!trOn())return;const o=trV(),v=Math.max(0,Math.min(10,o+n));if(v===o)return;trSnap();val("qh_tr").value=v;
+ logRoll("Trace +"+(v-o),why+" · now "+v+" / 10",v,"bad");
+ const z=TRZ.find(z=>o<z[0]&&v>=z[0]);if(z)logRoll("Trace · "+z[1],z[2],"!","bad");
+ if(o<7&&v>=7&&val("qh_clk").value===""){const c=d(6);val("qh_clk").value=c;logRoll("Security clock","arrives in "+c+" turn"+(c>1?"s":""),c,"bad")}
+ if(o<10&&v>=10){QHS.jack=false;QHS.breach=false;QHS.jt=0;logRoll("Burned","forced jack-out","✗","bad")}
+ upd();qhUi()}
+function trTo(v,why){const o=trV();if(v>=o)return;trSnap();val("qh_tr").value=v;logRoll("Trace −"+(o-v),why+" · now "+v+" / 10",v,"ok");upd()}
+function trAct(kind){const g=kind==="g",name=g?"Ghost Routine":"Decoy",dv=g?15:10,stop=m=>{logRoll(name,m,"✗","bad");qhUi()};
+ if(!qhRank())return stop("set your Netrunner RANK first");
+ if(!QHS.jack)return stop("Jack In first (1 Net action)");
+ if(!trV())return stop("Trace is already 0");
+ if(!qhNet())return;
+ const r=qhCheck(name,dv);
+ if(!r.win){qhUi();return}
+ if(g){trTo(Math.max(0,trV()-3),name)}
+ else{const ice=+val("qh_ice").value||0;if(ice){val("qh_ice").value=ice-1;logRoll("Decoy","a hunter chases the fake trail instead","✓","ok")}trTo(Math.max(0,trV()-1),name)}
+ upd();qhUi()}
+function trTurn(){if(!trOn())return;
+ if(QHS.jack){QHS.jt=(QHS.jt||0)+1;if(QHS.jt>3)trAdd(1,"lingering, turn "+QHS.jt)}
+ const c=val("qh_clk").value;if(c!==""&&+c>0){const n=+c-1;val("qh_clk").value=n;logRoll("Security clock",n?"arrives in "+n+" turn"+(n>1?"s":""):"Security has arrived",n,"bad");upd()}}
+function trUi(){const m=$("#trm");if(!m)return;const v=trV(),on=trOn(),ice=+val("qh_ice").value||0,ck=val("qh_clk").value,sig=[v,on,ice,ck,TRH.length].join("|");if(m.dataset.s===sig)return;m.dataset.s=sig;
+ $("#trtog").checked=on;$("#trbody").hidden=!on;$("#trnum").textContent=v;
+ const z=TRZ.find(z=>v>=z[0]);$("#trst").textContent=z?z[1]:"CLEAN";$("#trst").className="badge"+(v>=7?" mw":v>=3?" sw":"");
+ $("#treff").textContent=z?z[2]:"Quiet so far. Failed hacks, loud hacks and lingering all add Trace.";
+ let h="";for(let k=1;k<=10;k++)h+=`<button type="button" class="tseg tz${k<=2?1:k<=4?2:k<=6?3:4}${k<=v?" on":""}" data-trs="${k}" aria-label="Set Trace to ${k}"></button>`;
+ m.innerHTML=h;m.className="trm"+(v>=5?" hot":"");
+ let t="";for(let k=1;k<=10;k++)t+=`<span${[3,5,7,10].includes(k)?' class="th"':""}>${k}</span>`;$("#trt").innerHTML=t;
+ $("#trleg").innerHTML=TRZ.slice().reverse().map(z=>`<div class="rxr trl${v>=z[0]?" cur":""}"><b>${z[0]} · ${z[1]}<small>${z[2]}</small></b></div>`).join("");
+ let b="";if(ice)b+=`<span class="badge mw">HUNTERS ${ice}</span><button type="button" class="mini g" data-trn="h">TAKE ONE DOWN</button>`;
+ if(ck!=="")b+=`<span class="badge mw">${+ck?"SECURITY IN "+ck:"SECURITY HERE"}</span><button type="button" class="mini g" data-trn="c">CLEAR CLOCK</button>`;
+ $("#trbd").innerHTML=b;$("#trbd").style.display=b?"":"none";$("#trundo").disabled=!TRH.length}
+document.addEventListener("click",e=>{const b=e.target.closest("#trx [data-trs],#trx [data-trn]");if(!b||b.disabled)return;
+ if(b.dataset.trs){let g=+b.dataset.trs;const o=trV();if(g===o)g=o-1;if(g>o)trAdd(g-o,"set by hand");else if(g<o)trTo(g,"set by hand");return}
+ const n=b.dataset.trn;
+ if(n==="1")trAdd(1,"added by hand");
+ else if(n==="0")trTo(0,"Wiped");
+ else if(n==="-3")trTo(Math.max(0,trV()-3),"Burner chip");
+ else if(n==="g"||n==="x")trAct(n);
+ else if(n==="u"){const u=TRH.pop();if(u){val("qh_tr").value=u.t;val("qh_ice").value=u.i;val("qh_clk").value=u.c;logRoll("Trace","undid the last change · now "+trV()+" / 10",trV(),"");upd()}}
+ else if(n==="h"){val("qh_ice").value=Math.max(0,(+val("qh_ice").value||0)-1);logRoll("Hunter","taken down","✓","ok");upd()}
+ else if(n==="c"){val("qh_clk").value="";logRoll("Security clock","cleared","✓","ok");upd()}});
+document.addEventListener("change",e=>{if(e.target.id==="trtog"){val("qh_tro").value=e.target.checked?"1":"0";upd()}});
 const qhRank=()=>rkOf("Netrunner"),qhKey=()=>($("#qhtg").value||"").trim().toLowerCase()||"(target)";
 function withDV(dv,fn){const e=$("#dv");let o=null;if(dv&&![...e.options].some(x=>+x.value==dv)){o=document.createElement("option");o.value=dv;e.appendChild(o)}const old=e.value;if(dv)e.value=dv;try{return fn()}finally{e.value=old;if(o)o.remove()}}
 function qhUi(){const j=$("#qhj");if(!j)return;const cap=qhCap(),pw=+$("#qhpw").value||0,b=$("#qhb"),u=$("#qhu");
@@ -1257,10 +1328,10 @@ function qhUi(){const j=$("#qhj");if(!j)return;const cap=qhCap(),pw=+$("#qhpw").
  u.textContent="NET ACTIONS "+QHS.used+(cap?" / "+cap:"");u.className="badge"+(cap&&QHS.used>=cap?" mw":"");if(window.bpNetBar)window.bpNetBar()}
 function hasNetSuit(){for(let r=0;r<80;r++){const n=val("inv"+r+"_n"),q=val("inv"+r+"_q");if(n&&/net[\s-]*runn(?:ing|er)(?:'s)?[\s-]*suit/i.test(n.value)&&(!q||q.value===""||+q.value>0))return true}return false}
 function qhNet(){const cap=qhCap();if(cap&&QHS.used>=cap){logRoll("Net actions","all "+cap+" used this turn: press NEW TURN","✗","bad");return false}QHS.used++;return true}
-function qhCap(){const v=+val("qh_na").value||0;if(v)return v;const r=qhRank();return r?(r>=10?5:r>=7?4:r>=4?3:2):0}
+function qhCap(){const v=+val("qh_na").value||0;let c=v;if(!v){const r=qhRank();c=r?(r>=10?5:r>=7?4:r>=4?3:2):0}return c&&typeof trThr==="function"?Math.max(1,c-trThr()):c}
 function qhMove(label){const cap=qhCap(),of=cap?" / "+cap:"";if(cap&&QHS.used>=cap)return{ok:false,msg:"No Net actions left ("+QHS.used+" / "+cap+"). Press END TURN above to refresh them, or UNPLUG."};
  QHS.used++;logRoll("Breach Protocol",label+" · Net action "+QHS.used+of,"NET −1","");qhUi();return{ok:true,msg:""}}
-function qhCheck(label,dv){return withDV(dv,()=>roll(label,qhRank(),+val("qh_b").value||0,"bonus"))}
+function qhCheck(label,dv){const f=dv?trFlag():0;return withDV(dv+f,()=>roll(label+(f?" (Flagged, DV +2)":""),qhRank(),+val("qh_b").value||0,"bonus"))}
 function qhJack(){const rk=qhRank();if(!rk){logRoll("Jack In","set your Netrunner RANK first","—","bad");return}
  if(QHS.jack){logRoll("Jack In","already connected","—","");return}
  const fr=hasNetSuit();if(!fr&&!qhNet()){qhUi();return}
@@ -1272,8 +1343,8 @@ function qhBreach(){const rk=qhRank(),pw=+$("#qhpw").value||0;if(!rk){logRoll("B
  if(!pw){QHS.breach=true;logRoll("Breach","no Passwall on this target: nothing to bypass","—","");qhUi();return}
  if(QHS.breach){logRoll("Breach","Passwall already bypassed","—","");return}
  if(!qhNet()){qhUi();return}
- const r=qhCheck("Breach · Passwall DV "+pw,pw);if(r.win)QHS.breach=true;qhUi()}
-function qhOut(){if(!QHS.jack){logRoll("Jack Out","not connected","—","");return}if(!qhNet()){qhUi();return}QHS.jack=false;QHS.breach=false;logRoll("Jack Out","safely disconnected","DONE","ok");qhUi()}
+ const r=qhCheck("Breach · Passwall DV "+pw,pw);if(r.win)QHS.breach=true;else trAdd(2,"failed Breach");qhUi()}
+function qhOut(){if(!QHS.jack){logRoll("Jack Out","not connected","—","");return}if(!qhNet()){qhUi();return}QHS.jack=false;QHS.breach=false;QHS.jt=0;logRoll("Jack Out","safely disconnected","DONE","ok");qhUi()}
 function qhMark(){QHS.jack=true;QHS.breach=true;logRoll("Breach","marked as done (minigame or GM call)","DONE","ok");qhUi()}
 /* Breach Protocol <-> sheet: the overlay reads and writes the open character only through this object */
 function takeLuck(){const lk=Math.max(0,Math.min(+$("#lk2").value||0,+val("luck").value||0));if(lk){val("luck").value=+val("luck").value-lk;$("#lk2").value=0;upd()}return lk}
@@ -1315,7 +1386,7 @@ const BPX={
  runs:()=>val("bp_log").value,
  saveRuns:v=>{val("bp_log").value=v;upd()}
 };
-function qhTurn(){QHS.used=0;QHS.hit={};logRoll("New turn","Net actions and quickhack targets reset","—","");qhUi()}
+function qhTurn(){QHS.used=0;QHS.hit={};logRoll("New turn","Net actions and quickhack targets reset","—","");trTurn();qhUi()}
 function qhHack(i){const h=QH[i],rk=qhRank(),dv=+val("qh_dv_"+i).value||0,key=qhKey(),pw=+$("#qhpw").value||0,stop=m=>{logRoll("Quickhack · "+h[0],m,"✗","bad");qhUi()};
  if(!rk)return stop("set your Netrunner RANK first");
  if(!QHS.jack)return stop("Jack In first (1 Net action)");
@@ -1324,8 +1395,8 @@ function qhHack(i){const h=QH[i],rk=qhRank(),dv=+val("qh_dv_"+i).value||0,key=qh
  if(QHS.hit[key])return stop("already quickhacked "+(key=="(target)"?"this target":key)+" this turn");
  if(!qhNet())return;
  QHS.hit[key]=1;const r=qhCheck("Quickhack · "+h[0],dv);
- if(r.win){logRoll(h[0]+" lands",h[2],"✓","ok");if(h[3])dice(h[0]+" damage",h[3])}
- else logRoll(h[0]+" fails",r.tot+" vs DV "+dv+": no effect, and this target is used up for the turn","✗","bad");
+ if(r.win){logRoll(h[0]+" lands",h[2],"✓","ok");if(h[3])dice(h[0]+" damage",h[3]);if(LOUD[h[0]])trAdd(1,h[0]+" is loud")}
+ else{logRoll(h[0]+" fails",r.tot+" vs DV "+(dv+trFlag())+": no effect, and this target is used up for the turn","✗","bad");trAdd(LOUD[h[0]]?3:2,"failed "+h[0])}
  qhUi()}
 
 
@@ -1364,7 +1435,7 @@ function persistCharacters(){
  try{localStorage.setItem(CHARACTERS_KEY,JSON.stringify(characters.map(c=>({id:c.id,data:c.data}))));characters.forEach(c=>{if(c.portrait)localStorage.setItem("cps_portrait_"+c.id,c.portrait)});localStorage.setItem(ACTIVE_CHARACTER_KEY,current.id);localStorage.setItem("cps_sheet",JSON.stringify(current.data));const notice=document.getElementById("charNotice");notice.textContent="Saved locally";notice.classList.remove("error")}
  catch(e){const notice=document.getElementById("charNotice");notice.textContent="SAVE FAILED · browser storage unavailable";notice.classList.add("error");console.error("Could not save character data",e)}
 }
-function clearCharacterSession(){LOG.length=0;$("#logl").innerHTML="";QHS.jack=false;QHS.breach=false;QHS.used=0;QHS.hit={};lastBuy=null}
+function clearCharacterSession(){LOG.length=0;$("#logl").innerHTML="";QHS.jack=false;QHS.breach=false;QHS.used=0;QHS.hit={};QHS.jt=0;TRH.length=0;lastBuy=null}
 function loadCharacter(id){const next=characters.find(c=>c.id===id);if(!next)return;activeCharacterId=next.id;inputs.forEach(i=>{i.value=next.data[i.dataset.k]??""});showP(next.portrait||"");hf.value="";clearCharacterSession();renderCharacters();calc();save()}
 function activateCharacter(id){save();loadCharacter(id)}
 function addCharacter(){save();const c={id:newCharacterId(),data:def(),portrait:""};characters.push(c);activeCharacterId=c.id;inputs.forEach(i=>{i.value=c.data[i.dataset.k]??""});showP("");hf.value="";clearCharacterSession();renderCharacters();calc();save()}
@@ -1602,7 +1673,7 @@ function setTab(n){if(!document.getElementById("p-"+n))n="char";document.querySe
 try{setTab(localStorage.getItem("cps_tab")||"char")}catch(_){setTab("char")}
 document.addEventListener("change",e=>{if(e.target.id=="qhtg"){QHS.jack=false;QHS.breach=false;qhUi()}if(e.target.id=="qhpw"){QHS.breach=false;qhUi()}});
 const cin=c=>val(LST[c].cnt),rkOf=r=>{for(let i=1;i<4;i++)if(val("role"+i).value==r)return+val("rank"+i).value||0;return 0},hasR=r=>[1,2,3].some(i=>val("role"+i).value==r);
-function rxUpd(){qhUi();document.querySelectorAll("[data-rxp]").forEach(p=>{const r=p.dataset.rxp;p.hidden=!hasR(r);const sm=p.querySelector("[data-sum]");if(p.hidden||!sm)return;let t=0;p.querySelectorAll('[data-k$="_p"]').forEach(x=>t+=+x.value||0);const k=rkOf(r);const bud=r=="Tech"?2*k:k;let cap=false;if(r=="Tech")p.querySelectorAll('[data-k$="_p"]').forEach(x=>{const o=(+x.value||0)>k;x.style.borderColor=o?"var(--hot)":"";x.title=o?"Max "+k+" per specialty (1 per rank-up)":"";cap=cap||o});
+function rxUpd(){qhUi();if(typeof trUi==="function")trUi();document.querySelectorAll("[data-rxp]").forEach(p=>{const r=p.dataset.rxp;p.hidden=!hasR(r);const sm=p.querySelector("[data-sum]");if(p.hidden||!sm)return;let t=0;p.querySelectorAll('[data-k$="_p"]').forEach(x=>t+=+x.value||0);const k=rkOf(r);const bud=r=="Tech"?2*k:k;let cap=false;if(r=="Tech")p.querySelectorAll('[data-k$="_p"]').forEach(x=>{const o=(+x.value||0)>k;x.style.borderColor=o?"var(--hot)":"";x.title=o?"Max "+k+" per specialty (1 per rank-up)":"";cap=cap||o});
 sm.textContent=r=="Tech"?`POINTS ${t} / ${bud} (2 × RANK ${k})${cap?" · SPECIALTY OVER RANK":""}`:`POINTS ${t} / RANK ${k}`;sm.classList.toggle("ov",t>bud||cap)})}
 function invEsc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 function invN(){return Math.max(28,Math.min(80,+val("invcount").value||28))}
