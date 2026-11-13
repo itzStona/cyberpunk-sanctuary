@@ -4647,13 +4647,9 @@ html[data-theme="sheet"] #cpsmp{border:3px solid transparent;background:linear-g
 }
 </style>
 <style id="cpsmdm">
-#cpsmp .cm-new{display:block;width:calc(100% - 28px);margin:12px 14px;padding:11px 14px;background:var(--hb,var(--y));color:var(--ht,#000);border:0;font-weight:700;font-size:14px;font-family:inherit;letter-spacing:.2em;cursor:pointer;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
-#cpsmp .cm-new:hover{filter:brightness(1.15)}
 #cpsmp .cm-sec{padding:8px 14px 6px;font:11px "Share Tech Mono",ui-monospace,monospace;letter-spacing:.18em;color:var(--dim);text-transform:uppercase;border-bottom:1px solid var(--ln);background:var(--bg2)}
 #cpsmp .cm-l>.cm-s{padding:16px 14px;font:12px "Share Tech Mono",ui-monospace,monospace;color:var(--dim)}
 #cpsmp .cm-l>.cm-s.bad{color:var(--r)}
-html[data-theme="liquid"] #cpsmp .cm-new,html[data-theme="comic"] #cpsmp .cm-new,html[data-theme="poster"] #cpsmp .cm-new,html[data-theme="vapor"] #cpsmp .cm-new,html[data-theme="aero"] #cpsmp .cm-new,html[data-theme="spooktober"] #cpsmp .cm-new,html[data-theme="tokyo"] #cpsmp .cm-new,html[data-theme="gothic"] #cpsmp .cm-new,html[data-theme="sheet"] #cpsmp .cm-new{clip-path:none;border-radius:10px}
-html[data-theme="comic"] #cpsmp .cm-new{border:3px solid #111;box-shadow:3px 3px 0 #111}
 </style>
 <script id="cpsmsg-js">
 /* MESSAGES: player chat (table + whispers) on top of the PARTY relay. History is kept per table in this browser only. */
@@ -4685,22 +4681,12 @@ function badge(){var n=0;for(var k in un)n+=un[k]||0;var b=G("cpsmBadge");b.hidd
 function head(){var st=S().st==="on",cnt=Object.keys(S().people||{}).length+1,w=G("cpsmWarn"),msg="",bad=false;
  G("cpsmBack").hidden=view==="list";
  if(view==="list"){G("cpsmTitle").textContent="MESSAGES";G("cpsmSub").textContent=st?"SIGNAL OK // "+cnt+" CONNECTED":"NO SIGNAL"}
- else if(view==="pick"){G("cpsmTitle").textContent="NEW DM";G("cpsmSub").textContent=st?"PICK A CONNECTED PLAYER":"NO SIGNAL"}
  else{G("cpsmTitle").textContent=th==="*"?"TABLE CHAT":thName;G("cpsmSub").textContent=th==="*"?"ROOM: "+(rk()||"OPEN CHANNEL"):(online()[th.slice(1)]?"ONLINE // WHISPER":"OFFLINE // MAY NOT RECEIVE")}
  if(!st){msg="NO SIGNAL // open PARTY and hit CONNECT to send and receive.";bad=true}
  else if(rk()===""&&(view==="list"||th==="*"))msg="OPEN CHANNEL // everyone on this site can read table chat. Set a TABLE NAME in PARTY.";
  else msg="// relayed over public servers, not encrypted. Keep secrets out.";
  w.textContent=msg;w.className="cm-w"+(bad?" bad":"")}
-function renderPick(){var L=G("cpsmList");L.textContent="";var on=online(),mine=norm(me()),keys=Object.keys(on).filter(function(k){return k!==mine}).sort();
- if(S().st!=="on"){L.appendChild(el("div","cm-s bad","// NO SIGNAL - open PARTY and hit CONNECT first."));return}
- if(!keys.length){L.appendChild(el("div","cm-s","// NOBODY ELSE IS CONNECTED TO THIS TABLE YET"));return}
- L.appendChild(el("div","cm-sec","CONNECTED TO THIS TABLE ("+keys.length+")"));
- keys.forEach(function(k){var nm=on[k],b=el("button","cm-i");b.type="button";b.appendChild(ava(nm,false,true));
-  var mid=el("div","cm-mid"),hasH=H.some(function(m){return m.th==="@"+k});
-  mid.appendChild(el("div","cm-n",nm));mid.appendChild(el("div","cm-p",hasH?"Open conversation":"Start a direct message"));b.appendChild(mid);
-  b.addEventListener("click",function(){openThread("@"+k)});L.appendChild(b)})}
-function renderList(){if(view==="pick"){renderPick();return}var L=G("cpsmList");L.textContent="";
- var nb=el("button","cm-new","+ NEW DM");nb.type="button";nb.addEventListener("click",function(){view="pick";refresh()});L.appendChild(nb);
+function renderList(){var L=G("cpsmList");L.textContent="";
  var shown=0;threads().forEach(function(t){if(!shown&&!t.tbl){L.appendChild(el("div","cm-sec","DIRECT MESSAGES"))}if(!t.tbl)shown++;
  var b=el("button","cm-i");b.type="button";b.appendChild(ava(t.name,t.tbl,t.tbl?false:t.on));
  var mid=el("div","cm-mid"),pv=t.last?((t.last.out?"You: ":(t.tbl?t.last.from+": ":""))+t.last.t):(t.tbl?"Everyone in the room":(t.on?"Online - tap to whisper":"Offline"));
@@ -4743,7 +4729,7 @@ window.addEventListener("cps:msg",function(e){var d=e.detail||{},text=String(d.t
  add({th:id,out:0,from:from,t:text,ts:Date.now(),nn:nn});
  if(open&&view==="chat"&&th===id){renderChat();return}
  un[id]=(un[id]||0)+1;if(!open)toast(from,text,id);if(open)refresh();else badge()});
-setInterval(function(){if(!open)return;if(S().st!==lastSt){refresh();return}head();if(view!=="chat")renderList()},4000);
+setInterval(function(){if(!open)return;if(S().st!==lastSt){refresh();return}head();if(view==="list")renderList()},4000);
 window.__msgOpen=show;
 })();
 </script>
