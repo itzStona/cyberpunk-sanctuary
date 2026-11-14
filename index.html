@@ -7755,7 +7755,7 @@ function open(){
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!ov.hidden)close()})}
  build();ov.hidden=false;document.documentElement.classList.add("cpsp");$("#cpsNote").hidden=true;ov.scrollTop=0}
 function close(){if(ov)ov.hidden=true;document.documentElement.classList.remove("cpsp")}
-function land(on){let e=document.getElementById("cpsLand");if(!on){if(e)e.remove();return}if(!e){e=document.createElement("style");e.id="cpsLand";e.textContent="@page{size:A4 landscape;margin:7mm}";document.head.appendChild(e)}}
+function land(on){let e=document.getElementById("cpsLand");if(!on){if(e)e.remove();return}if(!e){e=document.createElement("style");e.id="cpsLand";e.textContent="@page{size:A4 landscape;margin:6mm}";document.head.appendChild(e)}}
 function doPrint(){const n=$("#cpsNote");let fired=false;land(true);window.addEventListener("afterprint",()=>land(false),{once:true});setTimeout(()=>land(false),60000);const f=()=>{fired=true};window.addEventListener("beforeprint",f,{once:true});
  try{window.print()}catch(e){}
  setTimeout(()=>{window.removeEventListener("beforeprint",f);if(!fired){n.hidden=false;n.textContent="Printing looks blocked in this viewer. Use OPEN IN NEW TAB or SAVE AS FILE, then print from there."}},900)}
