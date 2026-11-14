@@ -238,7 +238,7 @@ html.printing .pn{display:block}
 @media print{
 html,html body{background:#fff!important;min-height:0!important;padding:0!important;margin:0!important}
 html body{font-size:10pt!important}
-html body *{background:transparent!important;color:#000!important;box-shadow:none!important;text-shadow:none!important;animation:none!important;transition:none!important;clip-path:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;filter:none!important}
+html body *:not(#cpsOv):not(#cpsOv *){background:transparent!important;color:#000!important;box-shadow:none!important;text-shadow:none!important;animation:none!important;transition:none!important;clip-path:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;filter:none!important}
 html body .sheet{max-width:none!important;width:100%!important;border:0!important;padding:0!important;margin:0!important}
 html body header{height:auto!important;padding:0 0 6px!important;border-bottom:2px solid #000!important;overflow:visible!important;display:flex}
 html body header:before,html body header:after,html body .sp{display:none!important}
@@ -1042,7 +1042,7 @@ html[data-theme="sheet"] #mk-overlay{--ink:var(--sc-f4e8ff,#f4e8ff);--mute:var(-
 <div class="rx" id="stg" hidden></div>
 <div class="wgrid" id="wgrid"></div></div></section>
 <section class="pn" id="p-act"><div class="sec"><h3>ACTIONS <small>one MOVE + one ACTION per turn · tap a card to use it</small></h3><div id="actRoot"></div></div></section>
-<section class="pn" id="p-inv"><div class="sec"><h3>INVENTORY</h3><div class="ip" style="margin:0 0 12px"><div class="ipf av"><label>EUROBUCKS</label><input data-k="eb" type="number" placeholder="0"></div><div class="ebr"><input class="fi" id="ebadd" type="number" min="0" placeholder="amount"><input class="fi" id="ebwhy" maxlength="60" placeholder="what for? (optional)" style="width:180px"><button data-ebadd="1">+ GAIN</button><button class="g" data-ebadd="-1">− SPEND</button><button id="xferbtn" type="button">SEND TO PLAYER</button></div></div><details class="ebl" id="ebld"><summary>EUROBUCKS LEDGER <small id="eblc"></small></summary><div id="ebl"></div><div class="rr"><button class="mini" id="ebundo">UNDO LAST</button><button class="mini g" id="ebclr">CLEAR LEDGER</button></div></details><input type="hidden" data-k="invcount"><input type="hidden" data-k="eblog"><input type="hidden" data-k="ebpend"><input type="hidden" data-k="wpend"><div class="itb"><input class="fi" id="invq" placeholder="Search items, notes, place…"><select class="fi" id="invft"></select><select class="fi" id="invfp"><option value="">All places</option><option value="on">On me</option><option value="off">Stored / elsewhere</option></select><button class="mini" data-isort="n">SORT A–Z</button><button class="mini" data-isort="t">BY TYPE</button><button class="mini" data-isort="v">BY VALUE</button></div><div class="isum" id="invsum"></div><div class="box scroll"><table id="inv"></table></div><datalist id="invwhere"></datalist><datalist id="invweap"></datalist><datalist id="vplaces"></datalist><datalist id="vtypes"><option>Car</option><option>Bike</option><option>Truck</option><option>Van</option><option>Aerodyne</option><option>AV</option><option>Boat</option><option>Drone</option><option>Mech</option><option>Other</option></datalist></div><div class="sec"><h3>VEHICLES <button class="mini" id="addv" style="margin-left:12px">+ ADD VEHICLE</button><button class="mini" data-pay="v|all" style="margin-left:6px">PAY ALL UPKEEP</button><small id="vehsum"></small></h3><input type="hidden" data-k="vcount"><div class="vh" id="vlist"></div></div><div class="sec"><h3>HOUSING <button class="mini" id="addh" style="margin-left:12px">+ ADD HOME</button><button class="mini" data-pay="h|all" style="margin-left:6px">PAY ALL RENT</button><small id="rentsum"></small></h3><input type="hidden" data-k="hcount"><div class="vh" id="hlist"></div><datalist id="hstypes"><option>Capsule</option><option>Cargo container</option><option>Apartment</option><option>House</option><option>Safehouse</option><option>Penthouse</option><option>Shared flat</option></datalist></div></section>
+<section class="pn" id="p-inv"><div class="sec"><h3>INVENTORY</h3><div class="ip" style="margin:0 0 12px"><div class="ipf av"><label>EUROBUCKS</label><input data-k="eb" type="number" placeholder="0"></div><div class="ebr"><input class="fi" id="ebadd" type="number" min="0" placeholder="amount"><input class="fi" id="ebwhy" maxlength="60" placeholder="what for? (optional)" style="width:180px"><button data-ebadd="1">+ GAIN</button><button class="g" data-ebadd="-1">− SPEND</button><button id="xferbtn" type="button">SEND TO PLAYER</button></div></div><details class="ebl" id="ebld"><summary>EUROBUCKS LEDGER <small id="eblc"></small></summary><div id="ebl"></div><div class="rr"><button class="mini" id="ebundo">UNDO LAST</button><button class="mini g" id="ebclr">CLEAR LEDGER</button></div></details><input type="hidden" data-k="invcount"><input type="hidden" data-k="eblog"><input type="hidden" data-k="ebpend"><input type="hidden" data-k="wpend"><div class="itb"><input class="fi" id="invq" placeholder="Search items, notes, place…"><select class="fi" id="invft"></select><select class="fi" id="invfp"><option value="">All places</option><option value="on">On me</option><option value="off">Stored / elsewhere</option></select><button class="mini" data-isort="n">SORT A–Z</button><button class="mini" data-isort="t">BY TYPE</button><button class="mini" data-isort="v">BY VALUE</button></div><div class="isum" id="invsum"></div><div class="ip" id="ammoRes" hidden style="margin:0 0 12px"><h4>AMMO RESERVE <small style="opacity:.7;letter-spacing:.08em">counted as gear automatically</small></h4><div class="isum" id="ammoList" style="margin:0"></div></div><div class="box scroll"><table id="inv"></table></div><datalist id="invwhere"></datalist><datalist id="invweap"></datalist><datalist id="vplaces"></datalist><datalist id="vtypes"><option>Car</option><option>Bike</option><option>Truck</option><option>Van</option><option>Aerodyne</option><option>AV</option><option>Boat</option><option>Drone</option><option>Mech</option><option>Other</option></datalist></div><div class="sec"><h3>VEHICLES <button class="mini" id="addv" style="margin-left:12px">+ ADD VEHICLE</button><button class="mini" data-pay="v|all" style="margin-left:6px">PAY ALL UPKEEP</button><small id="vehsum"></small></h3><input type="hidden" data-k="vcount"><div class="vh" id="vlist"></div></div><div class="sec"><h3>HOUSING <button class="mini" id="addh" style="margin-left:12px">+ ADD HOME</button><button class="mini" data-pay="h|all" style="margin-left:6px">PAY ALL RENT</button><small id="rentsum"></small></h3><input type="hidden" data-k="hcount"><div class="vh" id="hlist"></div><datalist id="hstypes"><option>Capsule</option><option>Cargo container</option><option>Apartment</option><option>House</option><option>Safehouse</option><option>Penthouse</option><option>Shared flat</option></datalist></div></section>
 <section class="pn" id="p-cyber"><div class="sec"><h3 data-o="CYBERWARE " data-m="MODULES &amp; COHERENCE ">CYBERWARE </h3><input type="hidden" data-k="cwcount"><div class="ip" style="margin:0 0 12px"><div class="ipf"><label data-o="HUMANITY" data-m="COHERENCE">HUMANITY</label><input id="hcur" readonly></div><div class="ipf"><label>MAX</label><input id="hmax" readonly></div><div class="ipf av"><label data-o="LOST" data-m="DRIFT">LOST</label><input id="hlost" readonly></div><div class="ipf"><label data-o="EFFECTIVE EMP" data-m="AFFECT (EMP)">EFFECTIVE EMP</label><input id="heff" readonly></div><span class="badge" id="hbadge">STABLE</span><p class="iph" data-org>Max Humanity is EMP × 10. Every full 10 points lost costs 1 EMP, and the sheet applies that to EMP skills automatically. Press INSTALL on a location to add that foundation, then pick the location on each option and how many slots it uses. Type dice like 2d6 and press ROLL to fill in the loss.</p></div>
 <div class="ip" style="margin:0 0 12px"><h4 data-o="THERAPY &amp; EVENTS" data-m="RECALIBRATION &amp; SHOCKS">THERAPY &amp; EVENTS</h4>
 <div class="ipf"><label data-o="RECOVERED" data-m="RESTORED">RECOVERED</label><input data-k="hrec" type="number" min="0"></div>
@@ -1719,6 +1719,9 @@ function invUpd(){
  if(!be&&n<80){val("invcount").value=n+8;upd();return}
  $("#invsum").innerHTML=(named?`<span class="chip"><b>${fmtN(cnt)}</b> items</span>`:`<span class="chip">No items yet</span>`)+(tv?`<span class="chip">value <b>${fmtN(tv)}</b> eb</span>`:"")+(wAll?`<span class="chip"><b>${fmtN(wOn)}</b> kg on me</span><span class="chip"><b>${fmtN(wAll)}</b> kg total</span>`:"")+(filt?`<span class="chip">showing <b>${shown}</b></span>`:"");
  setDL("invweap",wp);
+ {const A=[];for(let i=0;i<12;i++){const rs=+wv(i,"v").value||0;if(rs>0)A.push({w:wv(i,"n").value.trim()||("Weapon "+(i+1)),q:rs,t:wv(i,"a").value||"Basic"})}
+  const bx=$("#ammoRes"),L=$("#ammoList");if(bx&&L){bx.hidden=!A.length;const h=A.map(a=>`<span class="chip"><b>${fmtN(a.q)}</b> ${invEsc(a.t)} ammo <small>· ${invEsc(a.w)}</small></span>`).join("");if(L.dataset.h!==h){L.dataset.h=h;L.innerHTML=h}
+   if(A.length)$("#invsum").insertAdjacentHTML("beforeend",`<span class="chip"><b>${fmtN(A.reduce((x,a)=>x+a.q,0))}</b> reserve rounds</span>`)}}
  {const el=$("#ebl"),a=ebArr(),h=a.length?a.map(x=>{const d=+x.d||0;return`<div class="ebe ${d<0?"neg":"pos"}"><span>${invEsc(x.t)}</span><em>${invEsc(x.w||"")}</em><b>${d<0?"−":"+"}${fmtN(Math.abs(d))}</b><i>${fmtN(+x.b||0)}</i></div>`}).join(""):"<small>No transactions yet.</small>";if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h}$("#eblc").textContent=a.length?"("+a.length+")":""}}
 var XF={el:null,done:{}};
 function xfPend(){let a=[];try{a=JSON.parse(val("ebpend").value||"[]")}catch(_){}return Array.isArray(a)?a:[]}
@@ -7566,14 +7569,74 @@ window.cpsEnemies={ENS,sync,list};
 const $=s=>document.querySelector(s),esc=s=>String(s==null?"":s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 const v=k=>{const e=document.querySelector('[data-k="'+k+'"]');return e?String(e.value||"").trim():""};
 const idv=id=>{const e=document.getElementById(id);return e?String(e.value||"").trim():""};
-const CSS='.cpsPg{box-sizing:border-box;background:#fff;color:#000;font:10pt/1.35 Arial,Helvetica,sans-serif;width:210mm;max-width:100%;margin:0 auto;padding:11mm 12mm}'
+let CSS='.cpsPg{box-sizing:border-box;background:#fff;color:#000;font:10pt/1.35 Arial,Helvetica,sans-serif;width:210mm;max-width:100%;margin:0 auto;padding:11mm 12mm}'
 +'.cpsPg *{box-sizing:border-box}.cpsPg h1{font:700 20pt Arial,sans-serif;margin:0;letter-spacing:0}.cpsPg .sub{margin:1pt 0 8pt;font-size:9.5pt;color:#444}'
 +'.cpsPg h2{font:700 8pt Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;margin:9pt 0 3pt;border-bottom:1px solid #000;padding-bottom:1pt}'
 +'.cpsPg .row{display:flex;gap:0;border:1px solid #000;margin:0 0 6pt}.cpsPg .row>div{flex:1;text-align:center;padding:3pt 2pt;border-right:1px solid #000}.cpsPg .row>div:last-child{border-right:0}'
 +'.cpsPg .row b{display:block;font:700 7pt Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#444}.cpsPg .row span{font:700 14pt Arial,sans-serif}'
 +'.cpsPg .sk{columns:3;column-gap:14pt;font-size:9.5pt}.cpsPg .sk div{display:flex;justify-content:space-between;gap:6pt;break-inside:avoid;border-bottom:1px dotted #bbb;padding:.5pt 0}.cpsPg .sk b{font-weight:700}.cpsPg .sk i{font-style:normal;color:#555;font-size:8pt}'
 +'.cpsPg table{width:100%;border-collapse:collapse}.cpsPg th{font:700 7.5pt Arial,sans-serif;text-align:left;padding:1pt 6pt 1pt 0;border-bottom:1px solid #777;text-transform:uppercase;letter-spacing:.06em}.cpsPg td{padding:2pt 6pt 2pt 0;font-size:9.5pt;vertical-align:top;border:0;border-bottom:1px dotted #ccc}.cpsPg td small{display:block;color:#555;font-size:8pt}'
-+'.cpsPg p{margin:0 0 2pt}.cpsPg .gr{columns:2;column-gap:16pt}.cpsPg .gr div{break-inside:avoid;margin:0 0 1pt}.cpsPg .nt{white-space:pre-wrap}.cpsPg .e{color:#666}';
++'.cpsPg p{margin:0 0 2pt}.cpsPg .gr{columns:2;column-gap:16pt}.cpsPg .gr div{break-inside:avoid;margin:0 0 1pt}.cpsPg .nt{white-space:pre-wrap}.cpsPg .e{color:#666}'
+;
+const RTG=`
+.cpsPg{--ink:#2b1646;--pu:#7a2fb0;--pk:#c93a93;--t1:#f6effb;--t2:#ebdff6;--t3:#fbeaf4;--ln:#cdb6e2;position:relative;font-family:"Rajdhani","Segoe UI",Arial,sans-serif}
+.cpsPg *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.cpsPg .pg{position:relative;break-after:page;page-break-after:always;}.cpsPg .pg:last-child{break-after:auto;page-break-after:auto}
+.cpsPg .pg>*:not(.r-wm){position:relative;z-index:1}.cpsPg .r-wm{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.cpsPg .sm{font-size:8.5pt}
+@media screen{.cpsPg .pg+.pg{border-top:1px dashed #b9a5cf;margin-top:10mm;padding-top:8mm}.cpsPg{width:297mm;max-width:none;padding:7mm}}
+.cpsPg .r-tt{display:flex;align-items:center;gap:9pt;background:linear-gradient(100deg,#1c0a36 0,#3a1768 58%,#5b2290 100%);color:#f4e8ff;padding:0 10pt;height:9.5mm;margin:0 0 4pt;overflow:hidden;border-bottom:1px solid #ff9bd2;border-radius:1.5mm}
+.cpsPg .r-tt b{font:500 12pt "Orbitron","Rajdhani",Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#f4e8ff}
+.cpsPg .r-tt em{font:500 8pt "Rajdhani",Arial,sans-serif;letter-spacing:.2em;font-style:normal;color:#ffc4e8;margin-left:auto;text-transform:uppercase}
+.cpsPg .r-tt svg.r-stripe{height:100%;width:42mm;flex:none}
+.cpsPg .r-tt .r-hdl{border:1px solid #ff9bd2;color:#ffd3f1;font:500 10pt "Rajdhani",Arial,sans-serif;letter-spacing:.14em;padding:0 11pt;height:6.5mm;display:flex;align-items:center;border-radius:3.5mm;text-transform:uppercase;background:rgba(255,255,255,.07)}
+.cpsPg .r-ft{display:flex;justify-content:space-between;border-top:1px solid var(--ln);margin-top:5pt;padding-top:2pt;font:500 6.5pt "Rajdhani",Arial,sans-serif;letter-spacing:.22em;color:#8a74a3;text-transform:uppercase}
+.cpsPg .r-h2{display:flex;align-items:center;gap:5pt;font:600 8pt "Rajdhani",Arial,sans-serif;letter-spacing:.2em;text-transform:uppercase;margin:0 0 3pt;color:var(--pu)}
+.cpsPg .r-h2:before{content:"";width:6pt;height:6pt;background:var(--pk);transform:rotate(45deg)}
+.cpsPg .r-h2:after{content:"";flex:1;height:1px;background:var(--ln)}
+.cpsPg .r-fb{border:1px solid var(--ln);border-left:2px solid var(--pk);border-radius:1mm;background:rgba(255,255,255,.85);padding:1.5pt 4pt;min-height:9mm}
+.cpsPg .r-fb b{display:block;font:600 6pt "Rajdhani",Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--pu)}
+.cpsPg .r-fb span{display:block;font:500 11.5pt "Rajdhani",Arial,sans-serif;line-height:1.2;color:var(--ink)}.cpsPg .r-fb span.sm{font-size:9pt;font-weight:400}
+.cpsPg .r-fb.tall{min-height:19mm}.cpsPg .r-fb.tall span{font:400 9pt "Rajdhani",Arial,sans-serif;white-space:pre-wrap}
+.cpsPg .r-bl{display:flex!important;align-items:flex-end;gap:3pt;min-height:6mm}
+.cpsPg .r-bl u{flex:1;min-width:9mm;height:5mm;border-bottom:1px solid var(--pu);text-decoration:none}.cpsPg .r-bl s{flex:1;text-decoration:none}
+.cpsPg .r-wt .r-bl{min-height:0}.cpsPg .r-wt .r-bl u{height:3.4mm;min-width:8mm}.cpsPg .r-bl em{font:500 9pt "Rajdhani",Arial,sans-serif;font-style:normal;color:var(--pu);white-space:nowrap}
+.cpsPg .r-p1{display:grid;grid-template-columns:66mm 1fr;gap:8pt}
+.cpsPg .r-side{display:grid;gap:3pt;align-content:start}
+.cpsPg .r-idr{display:grid;grid-template-columns:34mm 1fr;gap:3pt}.cpsPg .r-idc{display:grid;grid-template-rows:repeat(3,1fr);gap:3pt;min-width:0}.cpsPg .r-idc .r-fb{min-height:0}.cpsPg .r-idc .r-fb span{overflow-wrap:anywhere}.cpsPg .r-pt{height:44mm;border:1px solid var(--ln);border-radius:1.5mm;background:linear-gradient(160deg,#f6effb 0,#e4d4f1 100%);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.cpsPg .r-pt img{width:100%;height:100%;object-fit:cover;transform-origin:50% 50%;user-select:none;-webkit-user-drag:none}.cpsPg .r-pt.mv{cursor:grab;touch-action:none}.cpsPg .r-pt.mvg{cursor:grabbing}.cpsPg .r-hint{position:absolute;left:3pt;right:3pt;bottom:3pt;text-align:center;line-height:1.15;font:500 6.5pt "Rajdhani",Arial,sans-serif;letter-spacing:.06em;color:#fff;background:rgba(43,22,70,.7);padding:1pt 6pt;border-radius:3mm;pointer-events:none;z-index:2}@media print{.cpsPg .r-hint{display:none!important}}.cpsPg .r-pt svg{width:46%;height:86%;stroke:#a58bc2;fill:none;stroke-width:1.8}
+.cpsPg .r-stg{display:grid;grid-template-columns:repeat(3,1fr);gap:3pt}
+.cpsPg .r-sb{border:1px solid var(--ln);border-radius:1mm;text-align:center;background:rgba(255,255,255,.85);overflow:hidden}.cpsPg .r-sb i{display:block;background:var(--t2);color:var(--pu);font:600 6.8pt "Rajdhani",Arial,sans-serif;font-style:normal;letter-spacing:.2em;padding:1pt 0}
+.cpsPg .r-sb:nth-child(3n+2) i{background:var(--t3);color:var(--pk)}.cpsPg .r-sb span{display:block;font:500 15pt "Rajdhani",Arial,sans-serif;line-height:1.15;min-height:7mm;color:var(--ink)}
+.cpsPg .r-vt{display:grid;grid-template-columns:1fr 1fr;gap:3pt}
+.cpsPg .r-bar{height:3pt;background:var(--t2);border-radius:2pt;margin-top:1pt;overflow:hidden}.cpsPg .r-bar i{display:block;height:100%;background:var(--pk)}.cpsPg .r-bar.hm i{background:var(--pu)}
+.cpsPg .r-ar{display:grid;grid-template-columns:repeat(3,1fr);gap:3pt}.cpsPg .r-ar .r-fb{min-height:8.5mm}
+.cpsPg .r-main{display:grid;gap:4pt;min-width:0;align-content:start}
+.cpsPg table.r-wt{width:100%;border-collapse:collapse}.cpsPg .r-wt th{font:600 6.5pt "Rajdhani",Arial,sans-serif;text-align:left;border:1px solid var(--ln);padding:1.5pt 3pt;text-transform:uppercase;letter-spacing:.1em;background:var(--t2);color:var(--pu)}
+.cpsPg .r-wt td{border:1px solid var(--ln);padding:0 3pt;height:4.6mm;font-size:8.5pt;background:rgba(255,255,255,.85)}.cpsPg .r-wt tr:nth-child(even) td{background:var(--t1)}
+.cpsPg .r-skg{display:grid;grid-template-columns:repeat(3,1fr);gap:5pt;align-items:start}.cpsPg .r-skc{min-width:0}.cpsPg .r-sc{break-inside:avoid;border:1px solid var(--ln);border-radius:1mm;margin:0 0 4pt;background:rgba(255,255,255,.85);overflow:hidden}
+.cpsPg .r-sc h3{margin:0;background:var(--t2);color:var(--pu);font:600 7.5pt "Rajdhani",Arial,sans-serif;letter-spacing:.14em;padding:1.5pt 4pt;text-transform:uppercase;border-left:2px solid var(--pk)}
+.cpsPg .r-sc.a2 h3{background:var(--t3);color:var(--pk)}
+.cpsPg .r-sh,.cpsPg .r-sr{display:grid;grid-template-columns:1fr 7mm 9mm 9mm;gap:0 2pt;padding:0 3pt;border-bottom:1px solid #e6dbef;line-height:3.3mm}
+.cpsPg .r-sh{font:600 6pt "Rajdhani",Arial,sans-serif;color:#8a74a3;letter-spacing:.08em;text-transform:uppercase}
+.cpsPg .r-sr{font-size:6.8pt}.cpsPg .r-sr:nth-child(odd){background:#fcfaff}.cpsPg .r-sr span:not(:first-child),.cpsPg .r-sh span:not(:first-child),.cpsPg .r-sr b{text-align:center}
+.cpsPg .r-sr.t span:first-child{font-weight:600}.cpsPg .r-sr.t b{background:var(--t2);color:var(--pu);font-weight:600;border-radius:2mm}.cpsPg .r-sr i{font-style:normal;color:#8a74a3;font-size:6pt}
+.cpsPg .r-grp{display:grid;grid-template-columns:8mm 1fr;gap:4pt;margin:0 0 5pt}
+.cpsPg .r-grp>.r-vl{background:var(--t2);color:var(--pu);border-radius:1mm;writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;font:600 7.5pt "Rajdhani",Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;display:flex;align-items:center;justify-content:center}
+.cpsPg .r-grp:nth-of-type(even)>.r-vl{background:var(--t3);color:var(--pk)}
+.cpsPg .r-g4{display:grid;grid-template-columns:repeat(4,1fr);gap:4pt}.cpsPg .r-g2{display:grid;grid-template-columns:1fr 1fr 2fr;gap:4pt}
+.cpsPg .r-p3{display:grid;grid-template-columns:1.15fr 1fr;gap:8pt}
+.cpsPg .r-cw{display:grid;grid-template-columns:1fr 1fr;gap:4pt;align-content:start}.cpsPg .r-cb{border:1px solid var(--ln);border-radius:1mm;min-height:12mm;break-inside:avoid;background:rgba(255,255,255,.85);overflow:hidden}
+.cpsPg .r-cb h3{margin:0;background:var(--t2);color:var(--pu);font:600 7.5pt "Rajdhani",Arial,sans-serif;letter-spacing:.14em;padding:1.5pt 4pt;text-transform:uppercase;border-left:2px solid var(--pk)}
+.cpsPg .r-cr{padding:2pt 4pt;border-bottom:1px solid #e6dbef;font-size:8.5pt}.cpsPg .r-cr span{display:block;font-size:7.5pt;color:#7d6a95}
+.cpsPg .r-rt{display:grid;gap:4pt;align-content:start}.cpsPg .r-rt .r-fb.tall{min-height:15mm}
+.cpsPg .r-gl{display:grid;grid-template-columns:1fr 1fr;column-gap:8pt;border:1px solid var(--ln);border-radius:1mm;padding:1pt 5pt 3pt;background:rgba(255,255,255,.85)}
+.cpsPg .r-gline{height:5.6mm;border-bottom:1px solid var(--ln);font-size:8.5pt;line-height:5.6mm;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;break-inside:avoid}
+.cpsPg .r-gline i{font-style:normal;color:var(--pk);font-size:6pt;letter-spacing:.12em;margin-left:4pt;text-transform:uppercase}
+`.replace(/(^|[;{\s])(color|background|background-color):([^;}]+)/g,'$1$2:$3!important');
+CSS+=RTG;
+
+
 function collect(){
  const g=id=>idv(id);const handle=v("handle")||"Unnamed",full=v("lp_name");
  const roles=[1,2,3].map(i=>{const r=v("role"+i);return r?r+(v("rank"+i)?" "+v("rank"+i):""):""}).filter(Boolean);
@@ -7584,18 +7647,65 @@ function collect(){
  const weapons=[];for(let i=0;i<12;i++){const n=v("w"+i+"_n");if(!n)continue;const sk=v("w"+i+"_s"),q=+v("w"+i+"_q")||0,b=bse(sk);weapons.push({n,t:v("w"+i+"_t"),sk,atk:b===""?"":(+b+q),d:v("w"+i+"_d"),r:v("w"+i+"_r"),c:v("w"+i+"_c"),m:v("w"+i+"_m"),o:[v("w"+i+"_o"),window.wsNames?wsNames(v("w"+i+"_at")):""].filter(Boolean).join(" \u00b7 "),eq:v("w"+i+"_e")==="1"})}
  const cyber=[];for(let i=0;i<48;i++){const n=v("cw"+i+"_n");if(n)cyber.push((n)+(v("cw"+i+"_t")?" ("+v("cw"+i+"_t")+")":"")+(v("cw"+i+"_o")?" — "+v("cw"+i+"_o"):""))}
  const gear=[];for(let i=0;i<80;i++){const n=v("inv"+i+"_n");if(n)gear.push((v("inv"+i+"_q")&&v("inv"+i+"_q")!=="1"?v("inv"+i+"_q")+"× ":"")+n+(v("inv"+i+"_o")?" — "+v("inv"+i+"_o"):""))}
- return{handle,full,roles,st:ST.map(s=>[s,v("st_"+s)||"0"]),hp:v("hp"),hpm:g("hpmax"),sw:g("sw"),ds:g("ds"),luck:v("luck"),luckm:v("luckmax"),mach:(document.getElementById("rmode")||{}).value==="1",hum:g("hcur"),humm:g("hmax"),eb:v("eb"),hsp:v("hsp"),hmx:v("hmax"),bsp:v("bsp"),bmx:v("bmax"),skills,weapons,cyber,gear,ab:v("ability")}}
+ const allsk=[];document.querySelectorAll("tr[data-sk]").forEach(tr=>{const cg=tr.closest(".cg"),h4=cg&&cg.querySelector("h4"),sp=tr.querySelector(".sp2"),lvl=tr.querySelector(".lv");
+  allsk.push({cat:h4?h4.textContent.trim():"",n:tr.dataset.sk+(sp&&sp.value.trim()?": "+sp.value.trim():""),x2:+tr.dataset.m>1,st:tr.dataset.st,lv:lvl&&lvl.value!==""?lvl.value:"",base:(tr.querySelector("[data-b]")||{}).textContent||""})});
+ const lp={};["name","age","born","status","bio","orig","pers","cloth","aff","val","feel","person","poss","fam","child","crisis","goals","friends","love","enemies","family"].forEach(k=>lp[k]=v("lp_"+k));
+ const cyx=[];for(let i=0;i<48;i++){const n=v("cw"+i+"_n");if(!n)continue;cyx.push({n,t:v("cw"+i+"_t")||"Other",s:v("cw"+i+"_s"),x:v("cw"+i+"_x"),h:v("cw"+i+"_h"),o:v("cw"+i+"_o")})}
+ const im=document.getElementById("himg"),portrait=im&&!im.hidden&&im.getAttribute("src")?im.getAttribute("src"):"";
+ const ammo=[];for(let i=0;i<12;i++){const rs=+v("w"+i+"_v")||0;if(rs>0)ammo.push(rs+"× "+(v("w"+i+"_a")||"Basic")+" ammo — "+(v("w"+i+"_n")||("Weapon "+(i+1))))}
+ return{ammo,portrait,allsk,lp,cyx,ipE:v("ip_earned"),ipS:v("ip_spent"),ipA:idv("ipav"),rep:v("rp_lv"),alias:v("rp_al"),repEv:v("rp_ev"),cwn:v("cw_notes"),handle,full,roles,st:ST.map(s=>[s,v("st_"+s)||"0"]),hp:v("hp"),hpm:g("hpmax"),sw:g("sw"),ds:g("ds"),luck:v("luck"),luckm:v("luckmax"),mach:(document.getElementById("rmode")||{}).value==="1",hum:g("hcur"),humm:g("hmax"),eb:v("eb"),hsp:v("hsp"),hmx:v("hmax"),bsp:v("bsp"),bmx:v("bmax"),skills,weapons,cyber,gear,ab:v("ability")}}
 function html(c){
- const bx=(l,x)=>'<div><b>'+l+'</b><span>'+(x===""?'—':esc(x))+'</span></div>';
- let h='<h1>'+esc(c.handle)+'</h1><div class="sub">'+(c.full?esc(c.full)+' · ':'')+(c.roles.length?esc(c.roles.join(' / ')):'No role chosen')+'</div>';
- h+='<div class="row">'+bx('HP',(c.hp===""?"":c.hp)+(c.hpm?' / '+c.hpm:''))+bx('Seriously wounded',c.sw)+bx('Death save',c.ds)+bx('Luck',(c.luck===""?"":c.luck)+(c.luckm?' / '+c.luckm:''))+(c.hum?bx(c.mach?'Coherence':'Humanity',c.hum+(c.humm?' / '+c.humm:'')):'')+bx('Eurobucks',c.eb)+'</div>';
- h+='<div class="row">'+c.st.map(s=>bx(s[0],s[1])).join('')+'</div>';
- h+='<div class="row">'+bx('Head SP',(c.hsp===""?"":c.hsp)+(c.hmx?' / '+c.hmx:''))+bx('Body SP',(c.bsp===""?"":c.bsp)+(c.bmx?' / '+c.bmx:''))+'</div>';
- h+='<h2>Skills</h2>'+(c.skills.length?'<div class="sk">'+c.skills.map(s=>'<div><span>'+esc(s.n)+' <i>'+esc(s.st)+' +'+s.lv+'</i></span><b>'+esc(s.base)+'</b></div>').join('')+'</div>':'<p class="e">No trained skills.</p>');
- h+='<h2>Weapons</h2>'+(c.weapons.length?'<table><tr><th>Weapon</th><th>Skill</th><th>Attack</th><th>Damage</th><th>ROF</th><th>Ammo</th></tr>'+c.weapons.map(w=>'<tr><td>'+esc(w.n)+(w.t?'<small>'+esc(w.t)+(w.o?' · '+esc(w.o):'')+'</small>':(w.o?'<small>'+esc(w.o)+'</small>':''))+'</td><td>'+esc(w.sk)+'</td><td>'+(w.atk===""?'':'+'+w.atk)+'</td><td>'+esc(w.d)+'</td><td>'+esc(w.r)+'</td><td>'+(w.m?esc((w.c||'0')+' / '+w.m):'')+'</td></tr>').join('')+'</table>':'<p class="e">No weapons.</p>');
- if(c.cyber.length)h+='<h2>'+(c.mach?'Modules':'Cyberware')+'</h2><div class="gr">'+c.cyber.map(x=>'<div>'+esc(x)+'</div>').join('')+'</div>';
- if(c.gear.length)h+='<h2>Gear</h2><div class="gr">'+c.gear.map(x=>'<div>'+esc(x)+'</div>').join('')+'</div>';
- if(c.ab)h+='<h2>Role abilities &amp; notes</h2><p class="nt">'+esc(c.ab)+'</p>';
+ const E=x=>x===""||x==null?"&nbsp;":esc(x),fb=(l,x,k)=>'<div class="r-fb'+(k?" "+k:"")+'"><b>'+l+'</b><span>'+E(x)+'</span></div>';
+ const vb=(l,cur,max)=>'<div class="r-fb"><b>'+l+'</b><span class="r-bl">'+(c.blank?'<u></u>':'<s>'+E(cur)+'</s>')+(max?'<em>/ '+esc(max)+'</em>':'')+'</span></div>';
+ const num=x=>{const n=parseFloat(x);return isNaN(n)?0:n},pct=(a,m)=>m>0?Math.max(0,Math.min(100,Math.round(num(a)/num(m)*100))):0;
+ const wm=id=>'<svg class="r-wm" aria-hidden="true"><defs><pattern id="hx'+id+'" width="28" height="48.5" patternUnits="userSpaceOnUse"><path d="M14 0l14 8v16.2L14 32.3 0 24.2V8zM14 32.3v16.2" fill="none" stroke="#7a2fb0" stroke-opacity=".07"/></pattern></defs><rect width="100%" height="100%" fill="url(#hx'+id+')"/></svg>';
+ const logo=id=>'<svg viewBox="0 0 54 30" width="36" height="20" aria-hidden="true"><defs><radialGradient id="pl'+id+'" cx=".32" cy=".3" r=".85"><stop offset="0" stop-color="#ffb3ec"/><stop offset=".45" stop-color="#b447e6"/><stop offset="1" stop-color="#1c0a36"/></radialGradient></defs><ellipse cx="27" cy="15" rx="25" ry="5.5" fill="none" stroke="#ff9bd2" stroke-width="1" transform="rotate(-12 27 15)" opacity=".75"/><circle cx="27" cy="15" r="9.5" fill="url(#pl'+id+')"/><path d="M3.5 19.2C15 24 40 21 50.5 11.2" fill="none" stroke="#ff9bd2" stroke-width="1" opacity=".9"/></svg>';
+ const stripe='<svg class="r-stripe" viewBox="0 0 120 22" preserveAspectRatio="none" aria-hidden="true"><g stroke="#ff9bd2" stroke-opacity=".45" stroke-width=".8" fill="none"><path d="M0 22L22 0M14 22L36 0M28 22L50 0M42 22L64 0M56 22L78 0M70 22L92 0M84 22L106 0M98 22L120 0"/></g></svg>';
+ const tt=(id,t,r)=>'<div class="r-tt">'+logo(id)+'<b>'+t+'</b><span class="r-hdl">'+esc(c.handle)+'</span>'+stripe+(r?'<em>'+r+'</em>':'')+'</div>';
+ const ft=n=>'<div class="r-ft"><span>'+esc(c.handle)+(c.roles.length?' · '+esc(c.roles.join(' / ')):'')+'</span><span>Page '+n+' / 3</span></div>';
+ const stv=n=>{const q=c.st.find(z=>z[0]===n);return q?q[1]:""};
+ const sil='<svg viewBox="0 0 100 120"><circle cx="50" cy="38" r="20"/><path d="M12 118c2-30 16-44 38-44s36 14 38 44"/></svg>';
+ /* PAGE 1 */
+ let h='<section class="pg">'+wm(1)+tt(1,"Character sheet",c.mach?"Machine-born":"Organic")+'<div class="r-p1"><div class="r-side">';
+ h+='<div class="r-idr"><div class="r-pt'+(c.portrait&&!c.nohint?' mv':'')+'">'+(c.portrait?'<img alt="" src="'+esc(c.portrait)+'" style="transform:translate('+(c.ptx||0)+'%,'+(c.pty||0)+'%) scale('+(c.ptz||1)+')">'+(c.nohint?'':'<span class="r-hint">drag to move · scroll to zoom</span>'):sil)+'</div><div class="r-idc">'+fb("Handle",c.handle)+fb("Role &amp; rank",c.roles.join(" / "))+fb("Aliases",c.alias)+'</div></div>';
+ h+='<div class="r-stg">'+["INT","DEX","REF","TECH","COOL","WILL","MOVE","BODY","EMP"].map(n=>'<div class="r-sb"><i>'+n+'</i><span>'+E(stv(n))+'</span></div>').join("")+'</div>';
+ h+='<div class="r-vt"><div class="r-fb"><b>Hit points</b><span class="r-bl">'+(c.blank?'<u></u>':'<s>'+E(c.hp)+'</s>')+(c.hpm?'<em>/ '+esc(c.hpm)+'</em>':'')+'</span><div class="r-bar"><i style="width:'+(c.blank?0:pct(c.hp,c.hpm))+'%"></i></div></div>'
+  +fb("Seriously wounded",c.sw)+fb("Death save",c.ds)
+  +'<div class="r-fb"><b>'+(c.mach?"Coherence":"Humanity")+'</b><span class="r-bl">'+(c.blank?'<u></u>':'<s>'+E(c.hum)+'</s>')+(c.humm?'<em>/ '+esc(c.humm)+'</em>':'')+'</span><div class="r-bar hm"><i style="width:'+(c.blank?0:pct(c.hum,c.humm))+'%"></i></div></div>'
+  +vb("Luck",c.luck,c.luckm)+fb("Eurobucks",c.eb)+'</div>';
+ h+='<div class="r-ar">'+vb("Head SP",c.hsp,c.hmx)+vb("Body SP",c.bsp,c.bmx)+vb("Shield","","")+'</div>';
+ h+='<div class="r-ar">'+fb("IP earned",c.ipE)+fb("IP spent",c.ipS)+fb("IP avail.",c.ipA)+'</div></div>';
+ h+='<div class="r-main"><div><div class="r-h2">Weapons</div><table class="r-wt"><tr><th>Weapon</th><th>Skill</th><th>Atk</th><th>DMG</th><th>ROF</th><th>Ammo</th><th>Notes</th></tr>';
+ const wr=c.weapons.slice(0,5);while(wr.length<3)wr.push(null);
+ h+=wr.map(w=>w?'<tr><td>'+esc(w.n)+'</td><td>'+esc(w.sk)+'</td><td>'+(w.atk===""?"":"+"+w.atk)+'</td><td>'+esc(w.d)+'</td><td>'+esc(w.r)+'</td><td>'+(w.m?(c.blank?'<span class="r-bl"><u></u><em>/ '+esc(w.m)+'</em></span>':esc((w.c||"0")+" / "+w.m)):"")+'</td><td>'+esc([w.t,w.o].filter(Boolean).join(" · "))+'</td></tr>':'<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>').join("")+'</table></div>';
+ h+='<div><div class="r-h2">Skills</div><div class="r-skg">';
+ const cats=[];c.allsk.forEach(k=>{let g=cats.find(z=>z.n===k.cat);if(!g){g={n:k.cat,r:[],i:cats.length};cats.push(g)}g.r.push(k)});
+ const catH=g=>'<div class="r-sc a'+(g.i%2+1)+'"><h3>'+esc(g.n)+' skills</h3><div class="r-sh"><span>Skill</span><span>Lvl</span><span>Stat</span><span>Base</span></div>'
+  +g.r.map(k=>{const tr=k.lv!==""&&+k.lv>0;return '<div class="r-sr'+(tr?" t":"")+'"><span>'+esc(k.n)+(k.x2?' <i>×2</i>':'')+'</span><span>'+E(k.lv)+'</span><span>'+esc(k.st)+'</span><b>'+(tr?esc(k.base):"&nbsp;")+'</b></div>'}).join("")+'</div>';
+ const cols=[[],[],[]],hts=[0,0,0];cats.slice().sort((x,y)=>y.r.length-x.r.length).forEach(g=>{const m=hts.indexOf(Math.min(...hts));cols[m].push(g);hts[m]+=g.r.length+2.6});
+ h+=cols.map(col=>'<div class="r-skc">'+col.sort((x,y)=>x.i-y.i).map(catH).join("")+'</div>').join("");
+ h+='</div></div></div></div>'+ft(1)+'</section>';
+ /* PAGE 2 */
+ const L=c.lp,lb=(l,x,k)=>'<div class="r-fb tall'+(k?" "+k:"")+'"><b>'+l+'</b><span>'+E(x)+'</span></div>';
+ const grp=(t,inner,cls)=>'<div class="r-grp"><div class="r-vl">'+t+'</div><div class="'+(cls||"r-g4")+'">'+inner+'</div></div>';
+ h+='<section class="pg">'+wm(2)+tt(2,"Lifepath",esc(L.name||""))
+  +grp("Identity",lb("Full name",L.name)+lb("Age",L.age)+lb(c.mach?"Activated":"Born",L.born)+lb("Status",L.status))
+  +grp("Style",lb("Cultural origins",L.orig)+lb("Personality",L.pers)+lb("Clothing style",L.cloth)+lb("Affectation",L.aff))
+  +grp("Values",lb("What do you value most?",L.val)+lb("Feelings about people?",L.feel)+lb("Most valued person",L.person)+lb("Most valued possession",L.poss))
+  +grp("Background",lb("Family background",L.fam)+lb("Childhood environment",L.child)+lb("Family crisis",L.crisis)+lb("Life goals",L.goals))
+  +grp("People",lb("Friends",L.friends)+lb("Tragic love affairs",L.love)+lb("Enemies",L.enemies)+lb("Family",L.family))
+  +grp("Rep &amp; bio",lb("Reputation rank",c.rep)+lb("Reputation events",c.repEv)+lb("Bio",L.bio),"r-g2")
+  +ft(2)+'</section>';
+ /* PAGE 3: cyberware (left) + big gear area (right) */
+ const order=[],gp={};c.cyx.forEach(x=>{if(!gp[x.t]){gp[x.t]=[];order.push(x.t)}gp[x.t].push(x)});
+ h+='<section class="pg fl">'+wm(3)+tt(3,c.mach?"Modules &amp; gear":"Cyberware &amp; gear",(c.mach?"Coherence ":"Humanity ")+(c.blank?"____":E(c.hum))+(c.humm?" / "+esc(c.humm):""))+'<div class="r-p3"><div>';
+ h+=order.length?'<div class="r-cw">'+order.map(t=>'<div class="r-cb"><h3>'+esc(t)+'</h3>'+gp[t].map(x=>'<div class="r-cr"><b>'+esc(x.n)+'</b><span>'+[x.s?x.s+" slot"+(+x.s>1?"s":""):"",x.x?"HL "+x.x:"",x.h?"−"+x.h:"",x.o].filter(Boolean).map(esc).join(" · ")+'</span></div>').join("")+'</div>').join("")+'</div>':'<p class="e">No cyberware installed.</p>';
+ const items=c.gear.map(x=>'<div class="r-gline">'+esc(x)+'</div>').concat((c.ammo||[]).map(x=>'<div class="r-gline">'+esc(x)+'<i>auto · reserve</i></div>'));
+ let want=Math.max(28,items.length+(items.length%2));while(items.length<want)items.push('<div class="r-gline">&nbsp;</div>');
+ h+='</div><div class="r-rt"><div><div class="r-h2">Gear</div><div class="r-gl"><div>'+items.slice(0,items.length/2).join("")+'</div><div>'+items.slice(items.length/2).join("")+'</div></div></div>';
+ h+='<div><div class="r-h2">Role ability notes</div><div class="r-fb tall"><span class="sm">'+(c.ab?esc(c.ab):"&nbsp;")+'</span></div></div>';
+ h+='<div><div class="r-h2">Cyberware notes</div><div class="r-fb tall"><span class="sm">'+(c.cwn?esc(c.cwn):"&nbsp;")+'</span></div></div>';
+ h+='</div></div>'+ft(3)+'</section>';
  return h}
 const st=document.createElement("style");st.textContent=CSS.replace(/\.cpsPg/g,"#cpsOv .cpsPg")
 +'#cpsOv{position:fixed;inset:0;z-index:400;background:#000d;overflow:auto;padding:0 0 24px}#cpsOv[hidden]{display:none}'
@@ -7607,25 +7717,36 @@ const st=document.createElement("style");st.textContent=CSS.replace(/\.cpsPg/g,"
 +'html.cpsp #cpsOv .cpsPg{box-shadow:none!important;width:auto!important;max-width:none!important;padding:0!important;margin:0!important}'
 +'html body #cpsOv .cpsPg td{border:0!important;border-bottom:1px dotted #ccc!important;padding:2pt 6pt 2pt 0!important;font-size:9.5pt!important}html body #cpsOv .cpsPg th{background:transparent!important;border:0!important;border-bottom:1px solid #777!important;padding:1pt 6pt 1pt 0!important;font:700 7.5pt Arial,sans-serif!important}'
 +'html body #cpsOv .cpsPg .row>div{border:0!important;border-right:1px solid #000!important}html body #cpsOv .cpsPg .row>div:last-child{border-right:0!important}html body #cpsOv .cpsPg .row{border:1px solid #000!important}}'
-+'@page{size:A4;margin:9mm}';
++'';
 document.head.appendChild(st);
-let ov=null,cur=null;
-function standalone(c){return '<!doctype html><html><head><meta charset="utf-8"><title>'+esc(c.handle)+' · character sheet</title><style>body{margin:0;background:#fff}@page{size:A4;margin:9mm}'+CSS+'@media print{.cpsPg{padding:0;width:auto}}</style></head><body><div class="cpsPg">'+html(c)+'</div></body></html>'}
-function build(){cur=collect();$("#cpsPg").innerHTML=html(cur)}
+let ov=null,cur=null,blankV=true,ptx=0,pty=0,ptz=1,ptsrc="";
+function standalone(c){return '<!doctype html><html><head><meta charset="utf-8"><title>'+esc(c.handle)+' · character sheet</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Rajdhani:wght@400;500;600&display=swap"><style>body{margin:0;background:#fff}@page{size:A4 landscape;margin:7mm}'+CSS+'@media print{.cpsPg{padding:0;width:auto}}</style></head><body><div class="cpsPg">'+html(Object.assign({},c,{nohint:true}))+'</div></body></html>'}
+function build(){cur=collect();cur.blank=blankV;if(cur.portrait!==ptsrc){ptsrc=cur.portrait;ptx=0;pty=0;ptz=1}cur.ptx=ptx;cur.pty=pty;cur.ptz=ptz;$("#cpsPg").innerHTML=html(cur)}
 function open(){
  if(!ov){ov=document.createElement("div");ov.id="cpsOv";ov.hidden=true;
-  ov.innerHTML='<div class="cpsTb"><b>PRINT PREVIEW · MINIMAL SHEET</b><button type="button" data-cps="print">PRINT</button><button type="button" class="g" data-cps="tab">OPEN IN NEW TAB</button><button type="button" class="g" data-cps="save">SAVE AS FILE</button><button type="button" class="g" data-cps="full">FULL SHEET (ALL TABS)</button><button type="button" class="g" data-cps="close">CLOSE</button><p class="cpsNote" id="cpsNote" hidden></p></div><div class="cpsPg" id="cpsPg"></div>';
+  ov.innerHTML='<div class="cpsTb"><b>PRINT PREVIEW · MINIMAL SHEET</b><button type="button" data-cps="print">PRINT</button><button type="button" class="g" data-cps="tab">OPEN IN NEW TAB</button><button type="button" class="g" data-cps="save">SAVE AS FILE</button><button type="button" class="g" data-cps="pm">PHOTO −</button><button type="button" class="g" data-cps="pz">PHOTO +</button><button type="button" class="g" data-cps="pr">RESET PHOTO</button><button type="button" class="g" data-cps="vit" id="cpsVit">VITALS: BLANK / MAX</button><button type="button" class="g" data-cps="full">FULL SHEET (ALL TABS)</button><button type="button" class="g" data-cps="close">CLOSE</button><p class="cpsNote" id="cpsNote" hidden></p></div><div class="cpsPg" id="cpsPg"></div>';
   document.body.appendChild(ov);
+  const ptApply=()=>{const im=ov.querySelector(".r-pt img");if(im)im.style.transform="translate("+ptx+"%,"+pty+"%) scale("+ptz+")"},clamp=(x,a,b)=>Math.min(b,Math.max(a,x));
+  let drag=null;
+  ov.addEventListener("pointerdown",e=>{const f=e.target.closest(".r-pt");if(!f||!f.querySelector("img"))return;drag={x:e.clientX,y:e.clientY,w:f.clientWidth||1,h:f.clientHeight||1,id:e.pointerId,f};try{f.setPointerCapture(e.pointerId)}catch(_){}f.classList.add("mvg");e.preventDefault()});
+  ov.addEventListener("pointermove",e=>{if(!drag||e.pointerId!==drag.id)return;ptx=clamp(ptx+(e.clientX-drag.x)/drag.w*100,-100,100);pty=clamp(pty+(e.clientY-drag.y)/drag.h*100,-100,100);drag.x=e.clientX;drag.y=e.clientY;ptApply()});
+  const endDrag=e=>{if(!drag||(e.pointerId!==undefined&&e.pointerId!==drag.id))return;drag.f.classList.remove("mvg");drag=null;if(cur){cur.ptx=ptx;cur.pty=pty;cur.ptz=ptz}};
+  ov.addEventListener("pointerup",endDrag);ov.addEventListener("pointercancel",endDrag);
+  ov.addEventListener("wheel",e=>{const f=e.target.closest(".r-pt");if(!f||!f.querySelector("img"))return;e.preventDefault();ptz=clamp(ptz*Math.exp(-e.deltaY/400),.5,4);ptApply();if(cur)cur.ptz=ptz},{passive:false});
   ov.addEventListener("click",e=>{const b=e.target.closest("[data-cps]");if(!b)return;const a=b.dataset.cps,n=$("#cpsNote");
    if(a==="close")close();
    else if(a==="print")doPrint();
+   else if(a==="pz"||a==="pm"){ptz=clamp(a==="pz"?ptz*1.1:ptz/1.1,.5,4);ptApply();cur.ptz=ptz}
+   else if(a==="pr"){ptx=0;pty=0;ptz=1;ptApply();cur.ptx=0;cur.pty=0;cur.ptz=1}
+   else if(a==="vit"){blankV=!blankV;b.textContent=blankV?"VITALS: BLANK / MAX":"VITALS: CURRENT / MAX";build()}
    else if(a==="full"){close();setTimeout(()=>window.print(),50)}
    else if(a==="tab"){const w=window.open("","_blank");if(!w){n.hidden=false;n.textContent="Your browser blocked the new tab here. Use SAVE AS FILE instead, then open the file and print it.";return}w.document.open();w.document.write(standalone(cur));w.document.close();setTimeout(()=>{try{w.focus();w.print()}catch(x){}},400)}
    else if(a==="save"){try{const bl=new Blob([standalone(cur)],{type:"text/html"}),u=URL.createObjectURL(bl),l=document.createElement("a");l.href=u;l.download=((cur.handle||"character").replace(/[^\w\-]+/g,"_"))+"-sheet.html";document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);n.hidden=false;n.textContent="Saved. Open the file in your browser and press Ctrl+P (or Cmd+P) to print or save as PDF."}catch(x){n.hidden=false;n.textContent="Saving was blocked here. Try OPEN IN NEW TAB."}}});
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!ov.hidden)close()})}
  build();ov.hidden=false;document.documentElement.classList.add("cpsp");$("#cpsNote").hidden=true;ov.scrollTop=0}
 function close(){if(ov)ov.hidden=true;document.documentElement.classList.remove("cpsp")}
-function doPrint(){const n=$("#cpsNote");let fired=false;const f=()=>{fired=true};window.addEventListener("beforeprint",f,{once:true});
+function land(on){let e=document.getElementById("cpsLand");if(!on){if(e)e.remove();return}if(!e){e=document.createElement("style");e.id="cpsLand";e.textContent="@page{size:A4 landscape;margin:7mm}";document.head.appendChild(e)}}
+function doPrint(){const n=$("#cpsNote");let fired=false;land(true);window.addEventListener("afterprint",()=>land(false),{once:true});setTimeout(()=>land(false),60000);const f=()=>{fired=true};window.addEventListener("beforeprint",f,{once:true});
  try{window.print()}catch(e){}
  setTimeout(()=>{window.removeEventListener("beforeprint",f);if(!fired){n.hidden=false;n.textContent="Printing looks blocked in this viewer. Use OPEN IN NEW TAB or SAVE AS FILE, then print from there."}},900)}
 document.addEventListener("click",e=>{if(e.target.closest("#cpsPrint")){e.preventDefault();open()}});
