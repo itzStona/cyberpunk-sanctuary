@@ -7684,7 +7684,7 @@ function html(c){
   +'<div class="r-fb"><b>'+(c.mach?"Coherence":"Humanity")+'</b><span class="r-bl">'+(c.blank?'<u></u>':'<s>'+E(c.hum)+'</s>')+(c.humm?'<em>/ '+esc(c.humm)+'</em>':'')+'</span><div class="r-bar hm"><i style="width:'+(c.blank?0:pct(c.hum,c.humm))+'%"></i></div></div>'
   +vb("Luck",c.luck,c.luckm)+vb("Eurobucks",c.eb,"")+'</div>';
  h+='<div class="r-ar">'+vb("Head SP",c.hsp,c.hmx)+vb("Body SP",c.bsp,c.bmx)+vb("Shield","","")+'</div>';
- h+='<div class="r-ar">'+fb("IP earned",c.ipE)+fb("IP spent",c.ipS)+fb("IP avail.",c.ipA)+'</div></div>';
+ h+='<div class="r-ar">'+fb("IP earned",c.ipE)+fb("IP spent",c.ipS)+fb("IP avail.",c.blank?"":c.ipA)+'</div></div>';
  h+='<div class="r-main"><div><div class="r-h2">Weapons</div><table class="r-wt"><tr><th>Weapon</th><th>Skill</th><th>Atk</th><th>DMG</th><th>ROF</th><th>Ammo</th><th>Notes</th></tr>';
  const wr=c.weapons.slice(0,5);while(wr.length<3)wr.push(null);
  h+=wr.map(w=>w?'<tr><td>'+esc(w.n)+'</td><td>'+esc(w.sk)+'</td><td>'+(w.atk===""?"":"+"+w.atk)+'</td><td>'+esc(w.d)+'</td><td>'+esc(w.r)+'</td><td>'+(w.m?(c.blank?'<span class="r-bl"><u></u><em>/ '+esc(w.m)+'</em></span>':esc((w.c||"0")+" / "+w.m)):"")+'</td><td>'+esc([w.t,w.o].filter(Boolean).join(" · "))+'</td></tr>':'<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>').join("")+'</table></div>';
