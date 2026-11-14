@@ -7581,10 +7581,11 @@ let CSS='.cpsPg{box-sizing:border-box;background:#fff;color:#000;font:10pt/1.35 
 const RTG=`
 .cpsPg{--ink:#2b1646;--pu:#7a2fb0;--pk:#c93a93;--t1:#f6effb;--t2:#ebdff6;--t3:#fbeaf4;--ln:#cdb6e2;position:relative;font-family:"Rajdhani","Segoe UI",Arial,sans-serif}
 .cpsPg *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.cpsPg .pg{position:relative;display:flex;flex-direction:column;justify-content:space-between;width:285mm;height:196mm;max-height:196mm;box-sizing:border-box;overflow:hidden;break-after:page;page-break-after:always;break-inside:avoid;page-break-inside:avoid;}.cpsPg .pg:last-child{break-after:auto;page-break-after:auto}
+.cpsPg .pg{position:relative;display:flex;flex-direction:column;justify-content:space-between;width:285mm;height:196mm;max-height:196mm;box-sizing:border-box;overflow:hidden;break-after:page;page-break-after:always;break-inside:avoid;page-break-inside:avoid}.cpsPg .pg:last-child{break-after:auto;page-break-after:auto}
 .cpsPg .pg>*:not(.r-wm){position:relative;z-index:1}.cpsPg .r-wm{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .cpsPg .sm{font-size:8.2pt}
 @media screen{.cpsPg .pg+.pg{border-top:1px dashed #b9a5cf;margin-top:8mm;padding-top:6mm}.cpsPg{width:297mm;max-width:none;padding:6mm}}
+@media print{.cpsPg .pg{width:100%;max-width:281mm;height:192mm;max-height:192mm;margin:0 auto}}
 .cpsPg .r-tt{display:flex;align-items:center;gap:9pt;background:linear-gradient(100deg,#1c0a36 0,#3a1768 58%,#5b2290 100%);color:#f4e8ff;padding:0 10pt;height:8.5mm;margin:0 0 3pt;overflow:hidden;border-bottom:1px solid #ff9bd2;border-radius:1.5mm;flex:none}
 .cpsPg .r-tt b{font:500 11.5pt "Orbitron","Rajdhani",Arial,sans-serif;letter-spacing:.3em;text-transform:uppercase;color:#f4e8ff}
 .cpsPg .r-tt em{font:500 8pt "Rajdhani",Arial,sans-serif;letter-spacing:.2em;font-style:normal;color:#ffc4e8;margin-left:auto;text-transform:uppercase}
@@ -7648,7 +7649,7 @@ CSS+=RTG;
 
 function collect(){
  const g=id=>idv(id);const handle=v("handle")||"Unnamed",full=v("lp_name");
- const roles=[1,2,3].map(i=>{const r=v("role"+i);return r?r+(v("rank"+i)?" "+v("rank"+i):""):""}).filter(Boolean);
+ const roleData=[1,2,3].map(i=>({role:v("role"+i),rank:v("rank"+i)})).filter(x=>x.role),roles=roleData.map(x=>x.role+(x.rank?" "+x.rank:"")),roleNames=roleData.map(x=>x.role);
  const ST=["INT","REF","DEX","TECH","COOL","WILL","MOVE","BODY","EMP"];
  const skills=[];document.querySelectorAll("tr[data-sk]").forEach(tr=>{const lv=+tr.querySelector(".lv").value||0,bn=+(tr.querySelector(".bonus input")||{}).value||0;if(!lv&&!bn)return;
   const sp=tr.querySelector(".sp2"),nm=tr.dataset.sk+(sp&&sp.value.trim()?": "+sp.value.trim():"");skills.push({n:nm,st:tr.dataset.st,lv,base:(tr.querySelector("[data-b]")||{}).textContent||"",raw:tr.dataset.sk})});
@@ -7662,7 +7663,7 @@ function collect(){
  const cyx=[];for(let i=0;i<48;i++){const n=v("cw"+i+"_n");if(!n)continue;cyx.push({n,t:v("cw"+i+"_t")||"Other",s:v("cw"+i+"_s"),x:v("cw"+i+"_x"),h:v("cw"+i+"_h"),o:v("cw"+i+"_o")})}
  const im=document.getElementById("himg"),portrait=im&&!im.hidden&&im.getAttribute("src")?im.getAttribute("src"):"";
  const ammo=[];for(let i=0;i<12;i++){const rs=+v("w"+i+"_v")||0;if(rs>0)ammo.push(rs+"× "+(v("w"+i+"_a")||"Basic")+" ammo — "+(v("w"+i+"_n")||("Weapon "+(i+1))))}
- return{ammo,portrait,allsk,lp,cyx,ipE:v("ip_earned"),ipS:v("ip_spent"),ipA:idv("ipav"),rep:v("rp_lv"),alias:v("rp_al"),repEv:v("rp_ev"),cwn:v("cw_notes"),handle,full,roles,st:ST.map(s=>[s,v("st_"+s)||"0"]),hp:v("hp"),hpm:g("hpmax"),sw:g("sw"),ds:g("ds"),luck:v("luck"),luckm:v("luckmax"),mach:(document.getElementById("rmode")||{}).value==="1",hum:g("hcur"),humm:g("hmax"),eb:v("eb"),hsp:v("hsp"),hmx:v("hmax"),bsp:v("bsp"),bmx:v("bmax"),skills,weapons,cyber,gear,ab:v("ability")}}
+ return{ammo,portrait,allsk,lp,cyx,ipE:v("ip_earned"),ipS:v("ip_spent"),ipA:idv("ipav"),rep:v("rp_lv"),alias:v("rp_al"),repEv:v("rp_ev"),cwn:v("cw_notes"),handle,full,roles,roleNames,st:ST.map(s=>[s,v("st_"+s)||"0"]),hp:v("hp"),hpm:g("hpmax"),sw:g("sw"),ds:g("ds"),luck:v("luck"),luckm:v("luckmax"),mach:(document.getElementById("rmode")||{}).value==="1",hum:g("hcur"),humm:g("hmax"),eb:v("eb"),hsp:v("hsp"),hmx:v("hmax"),bsp:v("bsp"),bmx:v("bmax"),skills,weapons,cyber,gear,ab:v("ability")}}
 function html(c){
  const E=x=>x===""||x==null?"&nbsp;":esc(x),fb=(l,x,k)=>'<div class="r-fb'+(k?" "+k:"")+'"><b>'+l+'</b><span>'+E(x)+'</span></div>';
  const vb=(l,cur,max)=>'<div class="r-fb"><b>'+l+'</b><span class="r-bl">'+(c.blank?'<u></u>':'<s>'+E(cur)+'</s>')+(max?'<em>/ '+esc(max)+'</em>':'')+'</span></div>';
@@ -7671,12 +7672,12 @@ function html(c){
  const logo=id=>'<svg viewBox="0 0 54 30" width="36" height="20" aria-hidden="true"><defs><radialGradient id="pl'+id+'" cx=".32" cy=".3" r=".85"><stop offset="0" stop-color="#ffb3ec"/><stop offset=".45" stop-color="#b447e6"/><stop offset="1" stop-color="#1c0a36"/></radialGradient></defs><ellipse cx="27" cy="15" rx="25" ry="5.5" fill="none" stroke="#ff9bd2" stroke-width="1" transform="rotate(-12 27 15)" opacity=".75"/><circle cx="27" cy="15" r="9.5" fill="url(#pl'+id+')"/><path d="M3.5 19.2C15 24 40 21 50.5 11.2" fill="none" stroke="#ff9bd2" stroke-width="1" opacity=".9"/></svg>';
  const stripe='<svg class="r-stripe" viewBox="0 0 120 22" preserveAspectRatio="none" aria-hidden="true"><g stroke="#ff9bd2" stroke-opacity=".45" stroke-width=".8" fill="none"><path d="M0 22L22 0M14 22L36 0M28 22L50 0M42 22L64 0M56 22L78 0M70 22L92 0M84 22L106 0M98 22L120 0"/></g></svg>';
  const tt=(id,t,r)=>'<div class="r-tt">'+logo(id)+'<b>'+t+'</b><span class="r-hdl">'+esc(c.handle)+'</span>'+stripe+(r?'<em>'+r+'</em>':'')+'</div>';
- const ft=n=>'<div class="r-ft"><span>'+esc(c.handle)+(c.roles.length?' · '+esc(c.roles.join(' / ')):'')+'</span><span>Page '+n+' / 3</span></div>';
+ const ft=n=>{const roles=c.blank?c.roleNames:c.roles;return '<div class="r-ft"><span>'+esc(c.handle)+(roles.length?' · '+esc(roles.join(' / ')):'')+'</span><span>Page '+n+' / 3</span></div>'};
  const stv=n=>{const q=c.st.find(z=>z[0]===n);return q?q[1]:""};
  const sil='<svg viewBox="0 0 100 120"><circle cx="50" cy="38" r="20"/><path d="M12 118c2-30 16-44 38-44s36 14 38 44"/></svg>';
  /* PAGE 1 */
  let h='<section class="pg">'+wm(1)+tt(1,"Character sheet",c.mach?"Machine-born":"Organic")+'<div class="r-p1"><div class="r-side">';
- h+='<div class="r-idr"><div class="r-pt'+(c.portrait&&!c.nohint?' mv':'')+'">'+(c.portrait?'<img alt="" src="'+esc(c.portrait)+'" style="transform:translate('+(c.ptx||0)+'%,'+(c.pty||0)+'%) scale('+(c.ptz||1)+')">'+(c.nohint?'':'<span class="r-hint">drag to move · scroll to zoom</span>'):sil)+'</div><div class="r-idc">'+fb("Handle",c.handle)+fb("Role &amp; rank",c.roles.join(" / "))+'</div></div>';
+ h+='<div class="r-idr"><div class="r-pt'+(c.portrait&&!c.nohint?' mv':'')+'">'+(c.portrait?'<img alt="" src="'+esc(c.portrait)+'" style="transform:translate('+(c.ptx||0)+'%,'+(c.pty||0)+'%) scale('+(c.ptz||1)+')">'+(c.nohint?'':'<span class="r-hint">drag to move · scroll to zoom</span>'):sil)+'</div><div class="r-idc">'+fb("Handle",c.handle)+fb("Role &amp; rank",(c.blank?c.roleNames:c.roles).join(" / "))+'</div></div>';
  h+='<div class="r-stg">'+["INT","DEX","REF","TECH","COOL","WILL","MOVE","BODY","EMP"].map(n=>'<div class="r-sb"><i>'+n+'</i><span>'+E(stv(n))+'</span></div>').join("")+'</div>';
  h+='<div class="r-vt"><div class="r-fb"><b>Hit points</b><span class="r-bl">'+(c.blank?'<u></u>':'<s>'+E(c.hp)+'</s>')+(c.hpm?'<em>/ '+esc(c.hpm)+'</em>':'')+'</span><div class="r-bar"><i style="width:'+(c.blank?0:pct(c.hp,c.hpm))+'%"></i></div></div>'
   +fb("Seriously wounded",c.sw)+fb("Death save",c.ds)
@@ -7755,7 +7756,7 @@ function open(){
   document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!ov.hidden)close()})}
  build();ov.hidden=false;document.documentElement.classList.add("cpsp");$("#cpsNote").hidden=true;ov.scrollTop=0}
 function close(){if(ov)ov.hidden=true;document.documentElement.classList.remove("cpsp")}
-function land(on){let e=document.getElementById("cpsLand");if(!on){if(e)e.remove();return}if(!e){e=document.createElement("style");e.id="cpsLand";e.textContent="@page{size:A4 landscape;margin:6mm}";document.head.appendChild(e)}}
+function land(on){let e=document.getElementById("cpsLand");if(!on){if(e)e.remove();return}if(!e){e=document.createElement("style");e.id="cpsLand";e.textContent="@page{size:A4 landscape;margin:8mm}";document.head.appendChild(e)}}
 function doPrint(){const n=$("#cpsNote");let fired=false;land(true);window.addEventListener("afterprint",()=>land(false),{once:true});setTimeout(()=>land(false),60000);const f=()=>{fired=true};window.addEventListener("beforeprint",f,{once:true});
  try{window.print()}catch(e){}
  setTimeout(()=>{window.removeEventListener("beforeprint",f);if(!fired){n.hidden=false;n.textContent="Printing looks blocked in this viewer. Use OPEN IN NEW TAB or SAVE AS FILE, then print from there."}},900)}
