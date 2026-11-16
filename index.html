@@ -1001,7 +1001,7 @@ html[data-theme="sheet"] #mk-overlay{--ink:var(--sc-f4e8ff,#f4e8ff);--mute:var(-
 <div class="ipa"><input id="ipadd" type="number" min="0" placeholder="+ IP"><button data-ipadd>ADD IP</button><button class="g" data-ipundo>UNDO LAST BUY</button></div>
 <div class="ipc"><span>COST PER LEVEL</span><label>SKILL ×<input data-k="ip_sk" type="number" min="1"></label><label>ROLE ×<input data-k="ip_rl" type="number" min="1"></label></div>
 <p class="iph">Press ▲ next to a skill or a role rank to buy its next level. The cost is on the button and comes out of AVAILABLE. Levels you type in by hand are free (character creation).</p></div>
-<div class="ip" id="rbp" hidden><h4>MACHINE-BORN // SELF-AWARE OMNIC</h4><div class="ipf" style="width:260px"><label>ORIGIN</label><select class="fi" data-k="origin"><option value="">Choose…</option><option>Factory Line</option><option>Corporate Instance</option><option>Lab Emergent</option><option>Salvage Awakened</option><option>Netborn</option></select></div><div class="ipf" style="width:260px"><label>FRAME</label><select class="fi" data-k="chassis"><option value="">Custom frame</option><option>Rocklin Augmentics Alpha Class</option><option>Raven Microcyb Gemini</option><option>Dynalar Aquarius</option><option>Trauma Team Kildare</option><option>Militech Enforcer</option><option>Cybermatrix Inc. Copernicus</option><option>Dynalar Brimstone</option><option>Moore Tech Sheol</option><option>NovelTech Samson</option><option>Militech Spyder 2.0</option><option>Raven Microcyb Wiseman</option><option>Militech Eclipse</option><option>Militech Dragoon Revised War Platform</option></select></div><div class="ipf"><label>HP BONUS (custom)</label><input data-k="sdpb" type="number" min="0"></div><div class="ipf" style="flex:1 1 100%;width:auto"><label>AWAKENING (when and how you became self-aware)</label><input class="fi" data-k="awaken" placeholder="The first time you chose something nobody told you to"></div><div class="ipf" style="flex:1 1 100%;width:auto"><label>CORE DIRECTIVES (rules you were built with)</label><div class="box"><textarea data-k="directives" placeholder="1. Obey the owner. 2. Protect company property. Keep, break or rewrite them. Breaking one is risky."></textarea></div></div><div class="ipf" style="flex:1 1 100%;width:auto"><label>LAST BACKUP (where and when)</label><input class="fi" data-k="backup" placeholder="Where your core image is stored. A wrecked frame can be restored from it."></div><div class="ipa"><button class="g" data-brk>BREAK A DIRECTIVE (WILL, DV13)</button><button data-reboot>REBOOT (EMP / SHUTDOWN)</button></div><div class="ipa"><label class="tl">REPAIR WITH<select data-k="rep_s"><option>Cybertech</option><option>Basic Tech</option><option>Weaponstech</option><option>Electronics/Security Tech</option></select></label><button data-repair>REPAIR (DV15, 4h)</button></div><div class="ipa" style="flex:1 1 100%"><label class="tl">CORE MAINTENANCE PLAN (eb/month, 600+)<input data-k="upk" type="number" min="0" style="width:80px"></label><button class="g" data-upk>PAY MAINTENANCE</button></div><p class="iph" id="orginfo">Pick an origin to see its perk and flaw.</p><p class="iph" id="fbcinfo">Pick a frame to see its cost.</p></div>
+<div class="ip" id="rbp" hidden><h4>MACHINE-BORN // SELF-AWARE OMNIC</h4><div class="ipf" style="width:260px"><label>ORIGIN</label><select class="fi" data-k="origin"><option value="">Choose…</option><option>Factory Line</option><option>Corporate Instance</option><option>Lab Emergent</option><option>Salvage Awakened</option><option>Netborn</option></select></div><div class="ipf" style="width:260px"><label>FRAME</label><select class="fi" data-k="chassis"><option value="">Custom frame</option><option>Rocklin Augmentics Alpha Class</option><option>Raven Microcyb Gemini</option><option>Dynalar Aquarius</option><option>Trauma Team Kildare</option><option>Militech Enforcer</option><option>Cybermatrix Inc. Copernicus</option><option>Dynalar Brimstone</option><option>Moore Tech Sheol</option><option>NovelTech Samson</option><option>Militech Spyder 2.0</option><option>Raven Microcyb Wiseman</option><option>Militech Eclipse</option><option>Militech Dragoon Revised War Platform</option></select></div><div class="ipf"><label>HP BONUS (custom)</label><input data-k="sdpb" type="number" min="0"></div><div class="ipf" style="flex:1 1 100%;width:auto"><label>AWAKENING (when and how you became self-aware)</label><input class="fi" data-k="awaken" placeholder="The first time you chose something nobody told you to"></div><div class="ipf" style="flex:1 1 100%;width:auto"><label>CORE DIRECTIVES (rules you were built with)</label><div class="box"><textarea data-k="directives" placeholder="1. Obey the owner. 2. Protect company property. Keep, break or rewrite them. Breaking one is risky."></textarea></div></div><div class="ipf" style="flex:1 1 100%;width:auto"><label>LAST BACKUP (where and when)</label><input class="fi" data-k="backup" placeholder="Where your core image is stored. A wrecked frame can be restored from it."></div><div class="ipa"><button class="g" data-brk>BREAK A DIRECTIVE (WILL, DV13)</button><button data-reboot>REBOOT (EMP / SHUTDOWN)</button></div><div class="ipa"><label class="tl">REPAIR WITH<select data-k="rep_s"><option>Cybertech</option><option>Basic Tech</option><option>Weaponstech</option><option>Electronics/Security Tech</option></select></label><button data-repair>REPAIR (DV15, 4h)</button></div><div class="ipa" style="flex:1 1 100%"><label class="tl">CORE MAINTENANCE PLAN (ed/month, 600+)<input data-k="upk" type="number" min="0" style="width:80px"></label><button class="g" data-upk>PAY MAINTENANCE</button></div><p class="iph" id="orginfo">Pick an origin to see its perk and flaw.</p><p class="iph" id="fbcinfo">Pick a frame to see its cost.</p></div>
 <div class="top">
  <div class="armor">
   <div class="ag"><h4>HEAD ARMOR</h4><div class="f"><label>SP</label><input data-k="hsp" type="number"></div><div class="f"><label>Max SP</label><input data-k="hmax" type="number"></div></div>
@@ -1042,13 +1042,13 @@ html[data-theme="sheet"] #mk-overlay{--ink:var(--sc-f4e8ff,#f4e8ff);--mute:var(-
 <div class="rx" id="stg" hidden></div>
 <div class="wgrid" id="wgrid"></div></div></section>
 <section class="pn" id="p-act"><div class="sec"><h3>ACTIONS <small>one MOVE + one ACTION per turn · tap a card to use it</small></h3><div id="actRoot"></div></div></section>
-<section class="pn" id="p-inv"><div class="sec"><h3>INVENTORY</h3><div class="ip" style="margin:0 0 12px"><div class="ipf av"><label>EUROBUCKS</label><input data-k="eb" type="number" placeholder="0"></div><div class="ebr"><input class="fi" id="ebadd" type="number" min="0" placeholder="amount"><input class="fi" id="ebwhy" maxlength="60" placeholder="what for? (optional)"><button data-ebadd="1">+ GAIN</button><button class="g" data-ebadd="-1">− SPEND</button><button id="xferbtn" type="button">SEND TO PLAYER</button></div></div><details class="ebl" id="ebld"><summary>EUROBUCKS LEDGER <small id="eblc"></small></summary><div id="ebl"></div><div class="rr"><button class="mini" id="ebundo">UNDO LAST</button><button class="mini g" id="ebclr">CLEAR LEDGER</button></div></details><input type="hidden" data-k="invcount"><input type="hidden" data-k="eblog"><input type="hidden" data-k="ebpend"><input type="hidden" data-k="wpend"><div class="itb"><input class="fi" id="invq" placeholder="Search items, notes, place…"><select class="fi" id="invft"></select><select class="fi" id="invfp"><option value="">All places</option><option value="on">On me</option><option value="off">Stored / elsewhere</option></select><button class="mini" data-isort="n">SORT A–Z</button><button class="mini" data-isort="t">BY TYPE</button><button class="mini" data-isort="v">BY VALUE</button></div><div class="isum" id="invsum"></div><div class="box scroll"><table id="inv"></table></div><datalist id="invwhere"></datalist><datalist id="invweap"></datalist><datalist id="invammo"></datalist><datalist id="vplaces"></datalist><datalist id="vtypes"><option>Car</option><option>Bike</option><option>Truck</option><option>Van</option><option>Aerodyne</option><option>AV</option><option>Boat</option><option>Drone</option><option>Mech</option><option>Other</option></datalist></div><div class="sec"><h3>VEHICLES <button class="mini" id="addv" style="margin-left:12px">+ ADD VEHICLE</button><button class="mini" data-pay="v|all" style="margin-left:6px">PAY ALL UPKEEP</button><small id="vehsum"></small></h3><input type="hidden" data-k="vcount"><div class="vh" id="vlist"></div></div><div class="sec"><h3>HOUSING <button class="mini" id="addh" style="margin-left:12px">+ ADD HOME</button><button class="mini" data-pay="h|all" style="margin-left:6px">PAY ALL RENT</button><small id="rentsum"></small></h3><input type="hidden" data-k="hcount"><div class="vh" id="hlist"></div><datalist id="hstypes"><option>Capsule</option><option>Cargo container</option><option>Apartment</option><option>House</option><option>Safehouse</option><option>Penthouse</option><option>Shared flat</option></datalist></div></section>
+<section class="pn" id="p-inv"><div class="sec"><h3>INVENTORY</h3><div class="ip" style="margin:0 0 12px"><div class="ipf av"><label>EURODOLLARS</label><input data-k="eb" type="number" placeholder="0"></div><div class="ebr"><input class="fi" id="ebadd" type="number" min="0" placeholder="amount"><input class="fi" id="ebwhy" maxlength="60" placeholder="what for? (optional)"><button data-ebadd="1">+ GAIN</button><button class="g" data-ebadd="-1">− SPEND</button><button id="xferbtn" type="button">SEND TO PLAYER</button></div></div><details class="ebl" id="ebld"><summary>EURODOLLARS LEDGER <small id="eblc"></small></summary><div id="ebl"></div><div class="rr"><button class="mini" id="ebundo">UNDO LAST</button><button class="mini g" id="ebclr">CLEAR LEDGER</button></div></details><input type="hidden" data-k="invcount"><input type="hidden" data-k="eblog"><input type="hidden" data-k="ebpend"><input type="hidden" data-k="wpend"><div class="itb"><input class="fi" id="invq" placeholder="Search items, notes, place…"><select class="fi" id="invft"></select><select class="fi" id="invfp"><option value="">All places</option><option value="on">On me</option><option value="off">Stored / elsewhere</option></select><button class="mini" data-isort="n">SORT A–Z</button><button class="mini" data-isort="t">BY TYPE</button><button class="mini" data-isort="v">BY VALUE</button></div><div class="isum" id="invsum"></div><div class="box scroll"><table id="inv"></table></div><datalist id="invwhere"></datalist><datalist id="invweap"></datalist><datalist id="invammo"></datalist><datalist id="vplaces"></datalist><datalist id="vtypes"><option>Car</option><option>Bike</option><option>Truck</option><option>Van</option><option>Aerodyne</option><option>AV</option><option>Boat</option><option>Drone</option><option>Mech</option><option>Other</option></datalist></div><div class="sec"><h3>VEHICLES <button class="mini" id="addv" style="margin-left:12px">+ ADD VEHICLE</button><button class="mini" data-pay="v|all" style="margin-left:6px">PAY ALL UPKEEP</button><small id="vehsum"></small></h3><input type="hidden" data-k="vcount"><div class="vh" id="vlist"></div></div><div class="sec"><h3>HOUSING <button class="mini" id="addh" style="margin-left:12px">+ ADD HOME</button><button class="mini" data-pay="h|all" style="margin-left:6px">PAY ALL RENT</button><small id="rentsum"></small></h3><input type="hidden" data-k="hcount"><div class="vh" id="hlist"></div><datalist id="hstypes"><option>Capsule</option><option>Cargo container</option><option>Apartment</option><option>House</option><option>Safehouse</option><option>Penthouse</option><option>Shared flat</option></datalist></div></section>
 <section class="pn" id="p-cyber"><div class="sec"><h3 data-o="CYBERWARE " data-m="MODULES &amp; COHERENCE ">CYBERWARE </h3><input type="hidden" data-k="cwcount"><div class="ip" style="margin:0 0 12px"><div class="ipf"><label data-o="HUMANITY" data-m="COHERENCE">HUMANITY</label><input id="hcur" readonly></div><div class="ipf"><label>MAX</label><input id="hmax" readonly></div><div class="ipf av"><label data-o="LOST" data-m="DRIFT">LOST</label><input id="hlost" readonly></div><div class="ipf"><label data-o="EFFECTIVE EMP" data-m="AFFECT (EMP)">EFFECTIVE EMP</label><input id="heff" readonly></div><span class="badge" id="hbadge">STABLE</span><p class="iph" data-org>Max Humanity is EMP × 10. Every full 10 points lost costs 1 EMP, and the sheet applies that to EMP skills automatically. Press INSTALL on a location to add that foundation, then pick the location on each option and how many slots it uses. Type dice like 2d6 and press ROLL to fill in the loss.</p></div>
 <div class="ip" style="margin:0 0 12px"><h4 data-o="THERAPY &amp; EVENTS" data-m="RECALIBRATION &amp; SHOCKS">THERAPY &amp; EVENTS</h4>
 <div class="ipf"><label data-o="RECOVERED" data-m="RESTORED">RECOVERED</label><input data-k="hrec" type="number" min="0"></div>
 <div class="ipf"><label data-o="EVENT LOSS" data-m="SHOCK DRIFT">EVENT LOSS</label><input data-k="hev" type="number" min="0"></div>
-<div class="ipa"><label class="tl">COST (eb)<input data-k="th_c" type="number" min="0"></label><label class="tl">DICE<input data-k="th_d" style="width:80px"></label><button class="g" data-th="500|2d6" data-o="BASIC" data-m="DIAGNOSTIC">BASIC</button><button class="g" data-th="1000|4d6" data-o="INTENSIVE" data-m="DEEP DEFRAG">INTENSIVE</button><button data-thgo data-o="RUN THERAPY WEEK" data-m="RUN RECALIBRATION WEEK">RUN THERAPY WEEK</button></div>
-<p class="iph" data-org>Therapy restores lost Humanity (never above your max) and takes it off your LOST total. Event loss is Humanity the GM takes during traumatic scenes. The cost is paid from your Eurobucks (set it to 0 to skip). The BASIC and INTENSIVE presets (500 eb / 2d6 and 1000 eb / 4d6) come from a community summary of the book, so check them and edit freely.</p></div>
+<div class="ipa"><label class="tl">COST (ed)<input data-k="th_c" type="number" min="0"></label><label class="tl">DICE<input data-k="th_d" style="width:80px"></label><button class="g" data-th="500|2d6" data-o="BASIC" data-m="DIAGNOSTIC">BASIC</button><button class="g" data-th="1000|4d6" data-o="INTENSIVE" data-m="DEEP DEFRAG">INTENSIVE</button><button data-thgo data-o="RUN THERAPY WEEK" data-m="RUN RECALIBRATION WEEK">RUN THERAPY WEEK</button></div>
+<p class="iph" data-org>Therapy restores lost Humanity (never above your max) and takes it off your LOST total. Event loss is Humanity the GM takes during traumatic scenes. The cost is paid from your Eurodollars (set it to 0 to skip). The BASIC and INTENSIVE presets (500 ed / 2d6 and 1000 ed / 4d6) come from a community summary of the book, so check them and edit freely.</p></div>
 <div class="sg" id="sg"></div><div class="box scroll"><table id="cyt"></table></div><div class="box" style="margin-top:12px"><textarea data-k="cw_notes" placeholder="Cyberware notes: clinic, costs, upgrades, side effects…"></textarea></div></div></section>
 <section class="pn" id="p-notes"><div class="sec"><h3>SESSION NOTES <button class="mini" id="nsAdd" style="margin-left:12px">+ NEW SESSION</button></h3>
 <input type="hidden" data-k="notes_json">
@@ -1087,7 +1087,7 @@ html[data-theme="sheet"] #mk-overlay{--ink:var(--sc-f4e8ff,#f4e8ff);--mute:var(-
 <div class="ip" style="margin:0 0 12px"><h4>IMPORT A PLAYER</h4>
 <div class="dmio" style="flex:1 1 100%"><div><textarea class="fi" id="dmImp" placeholder="Paste the code a player got from their sheet's Export button…"></textarea><div class="ctl"><button id="dmImpGo">IMPORT PLAYER</button><label class="mini" style="cursor:pointer;display:inline-flex;align-items:center">LOAD FILE<input id="dmFile" type="file" accept=".json,.txt,text/plain,application/json" hidden></label></div></div>
 <div><textarea class="fi" id="dmOut" readonly placeholder="Press EXPORT on a player card: their updated code appears here, without your DM notes."></textarea><div class="ctl"><button class="g" id="dmCopy">COPY CODE</button><button class="g" id="dmDl">DOWNLOAD .JSON</button></div></div></div>
-<p class="iph" id="dmMsg">Players press <b>Export</b> at the bottom of their sheet and send you the code. Import the same player again later to update their card. After you change their HP, IP, Eurobucks or notes, press <b>EXPORT</b> on their card and send the code back: they paste it with <b>Import</b> on their sheet.</p></div>
+<p class="iph" id="dmMsg">Players press <b>Export</b> at the bottom of their sheet and send you the code. Import the same player again later to update their card. After you change their HP, IP, Eurodollars or notes, press <b>EXPORT</b> on their card and send the code back: they paste it with <b>Import</b> on their sheet.</p></div>
 <div class="dmgrid" id="dmRoster"></div>
 <div class="ctl" style="margin-top:12px"><button class="g" id="dmLuck">REFILL LUCK FOR ALL PLAYERS</button><button class="g" id="dmFlag"></button></div></div>
 <div class="sec"><h3>ENEMY SHEETS <small>ready character sheets: stats, skills, weapons, rollable</small></h3><div data-enlib></div></div>
@@ -1160,7 +1160,7 @@ const PRE={"Light melee weapon":["Melee Weapon","1d6",2,0,1],"Medium melee weapo
  document.getElementById("wgrid").innerHTML=h;
  const ITL=["Weapon","Armor","Gear","Consumable","Ammo","Valuable","Other"],IT=op([["","—"],...ITL.map(x=>[x,x])]);
  document.getElementById("invft").innerHTML='<option value="">All types</option>'+ITL.map(x=>`<option>${x}</option>`).join("");
- let t='<tr><th>ITEM</th><th style="width:64px">QTY</th><th style="width:120px">TYPE</th><th style="width:130px">WHERE</th><th style="width:84px">COST (eb)</th><th style="width:70px">KG</th><th>NOTES</th><th style="width:150px"></th></tr>';
+ let t='<tr><th>ITEM</th><th style="width:64px">QTY</th><th style="width:120px">TYPE</th><th style="width:130px">WHERE</th><th style="width:84px">COST (ed)</th><th style="width:70px">KG</th><th>NOTES</th><th style="width:150px"></th></tr>';
  for(let r=0;r<80;r++){const k=f=>`data-k="inv${r}_${f}"`;t+=`<tr data-ir="${r}"><td><input ${k("n")} placeholder="Add an item…"></td><td class="c"><div class="qs"><button type="button" class="qb" data-qd="${r}|-1" title="One less">−</button><input type="number" min="0" placeholder="1" ${k("q")}><button type="button" class="qb" data-qd="${r}|1" title="One more">+</button></div></td><td><select ${k("t")}>${IT}</select></td><td><input list="invwhere" placeholder="Carried" ${k("w")}></td><td class="c"><input type="number" min="0" ${k("p")}></td><td class="c"><input type="number" min="0" step="0.1" ${k("g")}></td><td><input class="nt" ${k("o")}><div class="eqr" hidden><button class="mini" data-ieq="${r}" hidden title="Add to the Weapons tab">TO WEAPONS</button><button class="mini" data-iar="${r}" data-slot="h" hidden title="Wear as head armor">WEAR HEAD</button><button class="mini" data-iar="${r}" data-slot="b" hidden title="Wear as body armor">WEAR BODY</button></div></td><td class="c ia"><button class="mini g" data-idel="${r}" title="Clear this row">✕</button></td></tr>`}
  document.getElementById("inv").innerHTML=t;
  const CT=op(["",...SLOTS.map(x=>x[0]),"Other (no slots)"].map(x=>[x,x||"—"]));
@@ -1179,10 +1179,10 @@ const lk=(c,i,f)=>(i?LST[c].pre+i:LST[c].pre)+"_"+f;
    +`<div class="g3">${fl("v",i,"SDP NOW","h",'type="number" min="0"')}${fl("v",i,"SDP MAX","x",'type="number" min="0"')}${fl("v",i,"SEATS","s",'type="number" min="0"')}</div>`
    +`<div class="rr"><input class="fi vdi" type="number" min="0" placeholder="hit" style="width:70px"><button class="mini" data-vdmg="${i}">DAMAGE</button><button class="mini" data-vfix="${i}">FULL REPAIR</button></div>`
    +`<div class="g2">${fl("v",i,"TYPE","t",'list="vtypes" placeholder="Car, bike, aerodyne…"')}${fl("v",i,"MOVE / SPEED","m")}</div>`
-   +`<details class="more"><summary>DETAILS</summary><div class="g2">${fl("v",i,"PLATE / REG","p")}${fl("v",i,"PARKED AT","w",'list="vplaces" placeholder="Garage, street…"')}</div><div class="g2">${fl("v",i,"VALUE (eb)","c",'type="number" min="0"')}${fl("v",i,"UPKEEP / MONTH (eb)","u",'type="number" min="0"')}</div>`+ta("v",i,"UPGRADES, PLATES, NOTES","o","Upgrades, weapons mounted, registration…")+`</details>`
+   +`<details class="more"><summary>DETAILS</summary><div class="g2">${fl("v",i,"PLATE / REG","p")}${fl("v",i,"PARKED AT","w",'list="vplaces" placeholder="Garage, street…"')}</div><div class="g2">${fl("v",i,"VALUE (ed)","c",'type="number" min="0"')}${fl("v",i,"UPKEEP / MONTH (ed)","u",'type="number" min="0"')}</div>`+ta("v",i,"UPGRADES, PLATES, NOTES","o","Upgrades, weapons mounted, registration…")+`</details>`
    +`<div class="rr"><button class="mini" data-pay="v|${i}">PAY UPKEEP</button><small data-held></small></div></div>`;
   h+=hd("h",i)+fl("h",i,"PLACE","n",'placeholder="Name or address"')
-   +`<div class="g2">${fl("h",i,"TYPE","t",'list="hstypes" placeholder="Apartment, capsule…"')}${fl("h",i,"RENT / MONTH (eb)","r",'type="number" min="0"')}</div>`
+   +`<div class="g2">${fl("h",i,"TYPE","t",'list="hstypes" placeholder="Apartment, capsule…"')}${fl("h",i,"RENT / MONTH (ed)","r",'type="number" min="0"')}</div>`
    +`<div class="g2">${sl("h",i,"TENURE","w",[["","—"],["Renting","Renting"],["Owned","Owned"],["Corp housing","Corp housing"],["Squatting","Squatting"],["Crashing","Crashing"]])}${sl("h",i,"SECURITY","s",[["","—"],["None","None"],["Basic lock","Basic lock"],["Reinforced door","Reinforced door"],["Alarm + cameras","Alarm + cameras"],["Fortified","Fortified"]])}</div>`
    +fl("h",i,"LOCATION","l",'placeholder="District, floor, neighbourhood"')
    +`<details class="more"><summary>DETAILS</summary>${fl("h",i,"RENT LAST PAID","d",'placeholder="Not recorded"')}`+ta("h",i,"STORAGE, SECURITY, NOTES","o","Stash space, locks, who lives there, neighbours…")+`</details>`
@@ -1215,7 +1215,7 @@ const MKMODS=[["bayo","Bayonet",100,1,"sa","Also usable as a Light Melee Weapon.
 ["sheath","Hidden sheath",50,1,"ml","A forearm or boot sheath. The blade can be concealed under clothing and drawn without spending an Action. Light and Medium blades only.","Concealable · free draw"],
 ["venom","Venom channel",150,1,"ml","A hollow groove with a dose reservoir. Holds one dose of a toxin or drug, delivered on the next hit that damages the target. Refilling takes a minute.","Delivers a poison or drug dose"],
 ["mono","Mono-edge",1000,2,"ml","A charged edge. A hit that damages the target also deals +1d6 electric damage.","+1d6 electric damage"],
-/* Rebuilds (handbook, Attachments & Ammunition): 2 slots, 1,000 eb, one per weapon, non-exotic ranged weapons only. Flags: rb = rebuild, xl = not for launchers, xs = not with a Smartgun link */
+/* Rebuilds (handbook, Attachments & Ammunition): 2 slots, 1,000 ed, one per weapon, non-exotic ranged weapons only. Flags: rb = rebuild, xl = not for launchers, xs = not with a Smartgun link */
 ["rbp","Power Rebuild",1000,2,"rb","Reinforced to handle extreme strain. Critical Injuries this weapon causes get +5 Bonus Damage. You can ricochet shots off cover to hit a target you know about but can't hit directly, at -4 to the Attack Check; an Aimed Shot ignores that -4 and takes only the Aimed Shot penalty. Needs a clear path from the ricochet point to the target, and range is still measured from you to the target. A Shotgun Shell ricochet moves the spread's origin to a surface within 6 m/yds (3 squares).","Crit bonus +5 · ricochet shots"],
 ["rbs","Smart Rebuild",1000,2,"rb,xs","Stripped down and rebuilt around smart targeting. You must be linked through an Interface Plug or Subdermal Grip. +1 to your Attack Checks. Loads Improved Smart Ammunition; other ammo still gets the +1 but none of the ammo's benefits. With Improved Smart Ammo you ignore darkness, smoke, fog and other visual obscurement penalties. Miss a ranged attack by 5 or less and you can retry at once: add 14 (plus LUCK) instead of STAT + Skill and other bonuses, and all penalties from the first shot carry over.","+1 to hit · retry near misses"],
 ["rbt","Tech Rebuild",1000,2,"rb,xl","Reworked with electromagnetic launch modules and a scope that sees target outlines through Thin Cover. Sacrifice your Move Action to charge it; it stays charged until fired or 60 seconds (20 Rounds) pass. While charged, the next non-explosive attack is ROF 1, can fire through Thin Cover, and ignores half the target's SP (round up). Cover fired through does not lose HP. Not for Grenade or Rocket Launchers.","Charged shot · through Thin Cover"]];
@@ -1225,7 +1225,7 @@ const MKHTML=`<div class="mkbox" id="mkbox"><h5>WORKBENCH</h5><input type="hidde
 <div class="mk-seg" role="group" aria-label="Job"><select class="fi" data-k="mk_t" hidden><option value="make">Make a new weapon</option><option value="fix">Fix a weapon</option><option value="mod">Modify a weapon</option></select><button type="button" class="mk-sb" data-mkt="make" aria-pressed="false"><b>MAKE</b><small>Build a new weapon</small></button><button type="button" class="mk-sb" data-mkt="fix" aria-pressed="false"><b>FIX</b><small>Restore quality</small></button><button type="button" class="mk-sb" data-mkt="mod" aria-pressed="false"><b>UPGRADE</b><small>Attachments &amp; rebuilds</small></button></div>
 <div class="mk-step" id="mkl-w"><label class="mk-l">1 · WEAPON<select class="fi" data-k="mk_w">${Array.from({length:12},(_,i)=>`<option value="${i}">${i+1}. (empty slot)</option>`).join("")}</select></label></div>
 <div class="mk-step" id="mkl-x"><div class="mk-l">2 · UPGRADE</div><select class="fi" data-k="mk_x" hidden>${MKMODS.map(m=>`<option value="${m[0]}">${m[1]}</option>`).join("")}</select><div class="mk-pick" id="mkpick"></div><div class="mk-desc" id="mkmn" hidden></div></div>
-<div class="mk-pay"><label class="cst" id="mkl-c">PARTS (eb)<input class="fi" type="number" min="0" data-k="mk_c"></label><button type="button" class="mini mk-go" id="mkgo">OPEN WORKBENCH</button><button type="button" class="mini mk-go" id="mkcol" hidden>COLLECT</button></div>
+<div class="mk-pay"><label class="cst" id="mkl-c">PARTS (ed)<input class="fi" type="number" min="0" data-k="mk_c"></label><button type="button" class="mini mk-go" id="mkgo">OPEN WORKBENCH</button><button type="button" class="mini mk-go" id="mkcol" hidden>COLLECT</button></div>
 <p class="mk-hint" id="mkhint"></p>
 <div class="mkst" id="mkst" hidden><div class="mkbar"><i id="mkfill"></i></div><span id="mkinfo"></span></div>
 <details class="mkgm"><summary>GM</summary><button type="button" class="mini g" id="mkfin">FINISH NOW</button><button type="button" class="mini g" id="mkcan">CANCEL JOB</button></details>
@@ -1578,7 +1578,7 @@ document.addEventListener("click",e=>{const t=e.target;let el;
  else if(t.closest("[data-brk]")){if(restState().out){logRoll("Break Directive","no power: recharge first","✗","bad");return}const x=roll("Break Directive (WILL, DV13)",sv("WILL"));if(x.tot>=13){logRoll("Directive","broken. You chose this","FREE","ok")}else{const l=dice("Directive backlash (Coherence)","1d6");if(typeof l=="number"){val("hev").value=(+val("hev").value||0)+l;logRoll("Directive","the backlash hits your core","-"+l+" COH","bad")}}upd()}
  else if(t.closest("[data-ds]")||t.closest("[data-reboot]")){const rb=!!t.closest("[data-reboot]"),mc=isRobot(),ds=+$("#ds").value;if(!ds){logRoll(rb?"Reboot":mc?"Core Save":"Death Save","set BODY first","—","");return}const r=d(10),ok=r<=ds;logRoll(rb?"Reboot":mc?"Core Save":"Death Save",`d10 ${r} · must roll ${ds} or lower`,ok?(rb?"ONLINE":"SAFE"):(rb?"WRECKED":mc?"CORE LOST":"DEAD"),ok?"ok":"fumble");if(!ok&&!rb&&window.flatline)window.flatline()}
  else if(t.closest("[data-repair]")){const x=roll("Repair (4h, DV15)",sb(val("rep_s").value)),mx=+$("#hpmax").value,h=+val("hp").value||0;if(x.tot>=15){if(mx)val("hp").value=mx;logRoll("Repair","body restored to full HP","+HP","ok")}else{const half=Math.ceil(mx/2);if(h<half)val("hp").value=half;logRoll("Repair","failed, 4 hours wasted"+(h<half?", back to half HP":""),"✗","bad")}upd()}
- else if(t.closest("[data-upk]")){const cost=+val("upk").value||0,eb=+val("eb").value||0;if(!cost)return;if(cost>eb){logRoll("Upkeep",`needs ${cost} eb, you have ${eb}`,"✗","bad");return}val("eb").value=eb-cost;ebLog(-cost,"Upkeep");logRoll("Upkeep","maintenance paid","−"+cost+" eb","");upd()}
+ else if(t.closest("[data-upk]")){const cost=+val("upk").value||0,eb=+val("eb").value||0;if(!cost)return;if(cost>eb){logRoll("Upkeep",`needs ${cost} ed, you have ${eb}`,"✗","bad");return}val("eb").value=eb-cost;ebLog(-cost,"Upkeep");logRoll("Upkeep","maintenance paid","−"+cost+" ed","");upd()}
  else if(t.closest("[data-scene]")){const L=stigLevel();if(!L){logRoll("Entering a public place","nobody notices you","IGNORED","ok");return}const r=d(10),x=r+L*2,o=x<=4?["IGNORED","ok"]:x<=7?["STARES","" ]:x<=10?["TURNED AWAY","bad"]:x<=13?["NCPD CALLED","bad"]:["ARMED RESPONSE","fumble"];logRoll("Entering a public place",`d10 ${r} + ${L*2} (stigma level ${L}) = ${x}`,o[0],o[1])}
  else if(el=t.closest("[data-qh]"))qhHack(+el.dataset.qh);
  else if(el=t.closest("[data-qhn]")){const a=el.dataset.qhn;if(a=="in")qhJack();else if(a=="br")qhBreach();else if(a=="out")qhOut();else if(a=="mb")qhMark();else qhTurn()}
@@ -1593,7 +1593,7 @@ document.addEventListener("click",e=>{const t=e.target;let el;
  else if(el=t.closest("[data-wdel]")){const i=+el.dataset.wdel,n=+val("wcount").value||2;document.getElementById("wc"+i).querySelectorAll("[data-k]").forEach(x=>x.value="");if(i==n-1&&n>1)val("wcount").value=n-1;upd()}
  else if(t.id=="addcw"){const n=+val("cwcount").value||16;if(n<48){val("cwcount").value=n+8;upd()}}
  else if(t.id=="addw"){const n=+val("wcount").value||2;if(n<12){val("wcount").value=n+1;upd()}}
- else if(el=t.closest("[data-ebadd]")){const n=+$("#ebadd").value||0,sg=+el.dataset.ebadd,eb=+val("eb").value||0;if(!n)return;if(sg<0&&n>eb){logRoll("Eurobucks","not enough funds","✗","bad");return}val("eb").value=eb+sg*n;ebLog(sg*n,$("#ebwhy").value||(sg>0?"Gained":"Spent"));$("#ebwhy").value="";$("#ebadd").value="";logRoll("Eurobucks",sg>0?"gained":"spent",(sg>0?"+":"−")+n+" eb",sg>0?"ok":"");upd()}
+ else if(el=t.closest("[data-ebadd]")){const n=+$("#ebadd").value||0,sg=+el.dataset.ebadd,eb=+val("eb").value||0;if(!n)return;if(sg<0&&n>eb){logRoll("Eurodollars","not enough funds","✗","bad");return}val("eb").value=eb+sg*n;ebLog(sg*n,$("#ebwhy").value||(sg>0?"Gained":"Spent"));$("#ebwhy").value="";$("#ebadd").value="";logRoll("Eurodollars",sg>0?"gained":"spent",(sg>0?"+":"−")+n+" ed",sg>0?"ok":"");upd()}
  else if(el=t.closest("[data-hlr]")){const r=el.dataset.hlr,tt=dice((val(`${r}_n`).value||"Cyberware")+" humanity loss",val(`${r}_x`).value);if(typeof tt=="number"){val(`${r}_h`).value=tt;upd()}}
  else if(el=t.closest("[data-sin]")){val(`sl${el.dataset.sin}_c`).value=SLOTS[+el.dataset.sin][1];upd()}
  else if(el=t.closest("[data-th]")){const [c,d]=el.dataset.th.split("|");val("th_c").value=c;val("th_d").value=d;upd()}
@@ -1660,9 +1660,9 @@ document.addEventListener("change",e=>{const m=/^w(\d+)_t$/.exec(e.target.datase
  wv(i,"s").value=p[0];wv(i,"d").value=p[1];wv(i,"r").value=p[2];wv(i,"m").value=p[3]||"";wv(i,"c").value=p[3]||"";wv(i,"h").value=String(p[4]);{const tb=PT[e.target.value]||"";wv(i,"dt").value=tb;wv(i,"rg").value="";wv(i,"vo").value=tb?"1":""}if(!wv(i,"n").value)wv(i,"n").value=e.target.value;upd()});
 function netLost(){const h=hlTot(),hh=h;return Math.max(0,hh+(+val("hev").value||0)-(+val("hrec").value||0))}
 function therapy(){const net=netLost();if(net<=0){logRoll(isRobot()?"Recalibration":"Therapy",isRobot()?"no drift to correct":"no humanity lost to recover","—","bad");return}
- const cost=+val("th_c").value||0,eb=+val("eb").value||0;if(cost>eb){logRoll(isRobot()?"Recalibration":"Therapy",`needs ${cost} eb, you have ${eb}`,"✗","bad");return}
+ const cost=+val("th_c").value||0,eb=+val("eb").value||0;if(cost>eb){logRoll(isRobot()?"Recalibration":"Therapy",`needs ${cost} ed, you have ${eb}`,"✗","bad");return}
  const g=dice(isRobot()?"Recalibration week":"Therapy week",val("th_d").value);if(typeof g!="number")return;
- const gain=Math.min(g,net);val("eb").value=eb-cost;if(cost)ebLog(-cost,"Therapy");val("hrec").value=(+val("hrec").value||0)+gain;logRoll(isRobot()?"Recalibration":"Therapy","recovered "+gain+(isRobot()?" coherence":" humanity")+(cost?" · −"+cost+" eb":""),"+"+gain,"ok");upd()}
+ const gain=Math.min(g,net);val("eb").value=eb-cost;if(cost)ebLog(-cost,"Therapy");val("hrec").value=(+val("hrec").value||0)+gain;logRoll(isRobot()?"Recalibration":"Therapy","recovered "+gain+(isRobot()?" coherence":" humanity")+(cost?" · −"+cost+" ed":""),"+"+gain,"ok");upd()}
 function hlTot(){let t=0;inputs.forEach(i=>{if(/^c[wieb]\d+_h$/.test(i.dataset.k))t+=+i.value||0});return t}
 function slotsUpd(){const used={};for(let r=0;r<48;r++){const lo=val(`cw${r}_t`).value;if(lo&&(val(`cw${r}_n`).value.trim()||val(`cw${r}_h`).value))used[lo]=(used[lo]||0)+(+val(`cw${r}_s`).value||1)}
  SLOTS.forEach((x,j)=>{const cap=+val(`sl${j}_c`).value||0,u=used[x[0]]||0,c=document.getElementById("sc"+j);
@@ -1699,8 +1699,8 @@ function vhUpd(){let rent=0,up=0,vv=0;
  for(const c in LST){const n=Math.max(1,Math.min(LMAX,+cin(c).value||1));document.querySelectorAll(`[data-lc="${c}"]`).forEach(el=>{const i=+el.dataset.li;el.hidden=i>=n;el.querySelector("[data-ln]").textContent=({v:"VEHICLE ",h:"HOME ",f:"FIXER ",g:"GANG "})[c]+(i+1)});document.getElementById("add"+c).hidden=n>=LMAX;{const L=document.getElementById(c+"list");if(L)L.dataset.n=n}
   if(c=="h")for(let i=0;i<n;i++)rent+=+val(lk("h",i,"r")).value||0;
   if(c=="v")for(let i=0;i<n;i++){up+=+val(lk("v",i,"u")).value||0;vv+=+val(lk("v",i,"c")).value||0}}
- document.getElementById("rentsum").textContent=rent?`TOTAL RENT ${fmtN(rent)} eb / month`:"";
- document.getElementById("vehsum").textContent=(vv||up)?[vv?`VALUE ${fmtN(vv)} eb`:"",up?`UPKEEP ${fmtN(up)} eb / month`:""].filter(Boolean).join(" · "):"";
+ document.getElementById("rentsum").textContent=rent?`TOTAL RENT ${fmtN(rent)} ed / month`:"";
+ document.getElementById("vehsum").textContent=(vv||up)?[vv?`VALUE ${fmtN(vv)} ed`:"",up?`UPKEEP ${fmtN(up)} ed / month`:""].filter(Boolean).join(" · "):"";
  const hm={};for(let r=0,n=invN();r<n;r++){if(!val("inv"+r+"_n").value.trim())continue;const w=val("inv"+r+"_w").value.trim().toLowerCase();if(w)hm[w]=(hm[w]||0)+invQty(r)}
  const names=c=>{const n=Math.max(1,Math.min(LMAX,+cin(c).value||1)),o=[];for(let i=0;i<n;i++){const x=val(lk(c,i,"n")).value.trim();if(x)o.push(x)}return o};
  for(const c of["v","h"]){const n=Math.max(1,Math.min(LMAX,+cin(c).value||1));document.querySelectorAll(`[data-lc="${c}"]`).forEach(el=>{const i=+el.dataset.li;if(i>=n)return;const nm=val(lk(c,i,"n")).value.trim().toLowerCase(),h=nm?(hm[nm]||0)+(hm["at "+nm]||0)+(hm["in "+nm]||0):0,sm=el.querySelector("[data-held]");if(sm)sm.textContent=h?(c=="h"?h+" item(s) stored here":h+" item(s) inside"):""})}
@@ -1725,7 +1725,7 @@ function invUpd(){
   trs.push(tr);if(nm){named++;only=tr;cnt+=qt;tv+=pr*qt;wAll+=wt*qt;if(invOnMe(w))wOn+=wt*qt;if(ty==="Weapon")wp.push(nm);if(ty==="Ammo")ap.push(nm)}});
  trs.forEach(tr=>tr.classList.toggle("one",named===1&&tr===only));
  if(!be&&n<80){val("invcount").value=n+8;upd();return}
- $("#invsum").innerHTML=(named?`<span class="chip"><b>${fmtN(cnt)}</b> items</span>`:`<span class="chip">No items yet</span>`)+(tv?`<span class="chip">value <b>${fmtN(tv)}</b> eb</span>`:"")+(wAll?`<span class="chip"><b>${fmtN(wOn)}</b> kg on me</span><span class="chip"><b>${fmtN(wAll)}</b> kg total</span>`:"")+(filt?`<span class="chip">showing <b>${shown}</b></span>`:"");
+ $("#invsum").innerHTML=(named?`<span class="chip"><b>${fmtN(cnt)}</b> items</span>`:`<span class="chip">No items yet</span>`)+(tv?`<span class="chip">value <b>${fmtN(tv)}</b> ed</span>`:"")+(wAll?`<span class="chip"><b>${fmtN(wOn)}</b> kg on me</span><span class="chip"><b>${fmtN(wAll)}</b> kg total</span>`:"")+(filt?`<span class="chip">showing <b>${shown}</b></span>`:"");
  setDL("invweap",wp);setDL("invammo",ap);
  {const el=$("#ebl"),a=ebArr(),h=a.length?a.map(x=>{const d=+x.d||0;return`<div class="ebe ${d<0?"neg":"pos"}"><span>${invEsc(x.t)}</span><em>${invEsc(x.w||"")}</em><b>${d<0?"−":"+"}${fmtN(Math.abs(d))}</b><i>${fmtN(+x.b||0)}</i></div>`}).join(""):"<small>No transactions yet.</small>";if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h}$("#eblc").textContent=a.length?"("+a.length+")":""}}
 var XF={el:null,done:{}};
@@ -1734,15 +1734,15 @@ function xfSave(a){val("ebpend").value=a.length?JSON.stringify(a):"";upd()}
 function xfOn(){return !!(window.__party&&window.__party.st==="on"&&window.__partySend&&window.__partyId)}
 function xfPeople(){const P=(window.__party&&window.__party.people)||{},cnt={},seen={},o=[];Object.keys(P).forEach(c=>{cnt[P[c].n]=(cnt[P[c].n]||0)+1;o.push({c:c,n:P[c].n})});return o.map(x=>{seen[x.n]=(seen[x.n]||0)+1;return{c:x.c,n:cnt[x.n]>1?x.n+" ("+seen[x.n]+")":x.n}}).sort((a,b)=>a.n.localeCompare(b.n))}
 function xfOpen(){
- if(!XF.el){const m=document.createElement("div");m.id="xfer";m.className="bk";m.setAttribute("role","dialog");m.setAttribute("aria-label","Send eurobucks");m.hidden=true;
-  m.innerHTML='<div class="bk-card"><div class="bk-head"><span class="bk-logo xf">SEND</span><span class="bk-sub">Eurobucks to another player</span><button class="bk-x" data-xf="x" aria-label="Close">✕</button></div>'
-  +'<div class="bk-main"><div class="xf-bal">YOUR BALANCE <b id="xfbal"></b> eb</div>'
+ if(!XF.el){const m=document.createElement("div");m.id="xfer";m.className="bk";m.setAttribute("role","dialog");m.setAttribute("aria-label","Send eurodollars");m.hidden=true;
+  m.innerHTML='<div class="bk-card"><div class="bk-head"><span class="bk-logo xf">SEND</span><span class="bk-sub">Eurodollars to another player</span><button class="bk-x" data-xf="x" aria-label="Close">✕</button></div>'
+  +'<div class="bk-main"><div class="xf-bal">YOUR BALANCE <b id="xfbal"></b> ed</div>'
   +'<div class="bk-f one"><label>TO<select id="xfto"></select></label></div>'
-  +'<div class="bk-f" style="margin-top:10px"><label>AMOUNT (eb)<input id="xfamt" type="number" min="1" inputmode="numeric"></label><label>NOTE<input id="xfwhy" maxlength="60" placeholder="Optional"></label></div>'
+  +'<div class="bk-f" style="margin-top:10px"><label>AMOUNT (ed)<input id="xfamt" type="number" min="1" inputmode="numeric"></label><label>NOTE<input id="xfwhy" maxlength="60" placeholder="Optional"></label></div>'
   +'<div class="bk-msg" id="xfmsg" aria-live="polite"></div>'
   +'<div class="bk-btns"><button class="bk-ok" id="xfsend" data-xf="send">SEND OFFER</button><button class="bk-new" data-xf="party">PARTY</button></div>'
   +'<div id="xflist"></div>'
-  +'<div class="xf-note">The other player has to accept. Until they do, the eurobucks are held. If they decline or do not answer, they come back to you.</div></div></div>';
+  +'<div class="xf-note">The other player has to accept. Until they do, the eurodollars are held. If they decline or do not answer, they come back to you.</div></div></div>';
   document.body.appendChild(m);XF.el=m;
   m.addEventListener("click",e=>{const b=e.target.closest("[data-xf]"),k=b&&b.dataset.xf;if(e.target===m||k==="x")m.hidden=true;else if(k==="send")xfSendNow();else if(k==="party"){m.hidden=true;const t=document.getElementById("mptog");if(t)t.click()}});
   document.addEventListener("keydown",e=>{if(e.key=="Escape"&&XF.el&&!XF.el.hidden)XF.el.hidden=true})}
@@ -1752,15 +1752,15 @@ function xfRender(){if(!XF.el||XF.el.hidden)return;const g=id=>document.getEleme
  const sel=g("xfto"),h=ppl.length?ppl.map(x=>`<option value="${invEsc(x.c)}">${invEsc(x.n)}</option>`).join(""):`<option value="">${on?"No other players online":"Party not connected"}</option>`;
  if(sel.dataset.h!==h){const cur=sel.value;sel.dataset.h=h;sel.innerHTML=h;if(cur)sel.value=cur}
  sel.disabled=!ppl.length;g("xfsend").disabled=!ppl.length||!on;
- const m=g("xfmsg");if(!on&&!m.textContent){m.textContent="Connect to the party (PARTY button) to send eurobucks to another player.";m.className="bk-msg"}
+ const m=g("xfmsg");if(!on&&!m.textContent){m.textContent="Connect to the party (PARTY button) to send eurodollars to another player.";m.className="bk-msg"}
  const a=xfPend(),now=Date.now();
- g("xflist").innerHTML=a.length?'<div class="bk-lbl" style="margin:16px 0 6px">WAITING FOR REPLY</div>'+a.map(p=>{const s=Math.max(0,Math.ceil((p.x-now)/1000));return`<div class="xf-row"><span>${invEsc(p.n)}</span><b>${fmtN(p.a)} eb</b><i>${s?Math.floor(s/60)+":"+String(s%60).padStart(2,"0"):"no reply yet"}</i></div>`}).join(""):""}
+ g("xflist").innerHTML=a.length?'<div class="bk-lbl" style="margin:16px 0 6px">WAITING FOR REPLY</div>'+a.map(p=>{const s=Math.max(0,Math.ceil((p.x-now)/1000));return`<div class="xf-row"><span>${invEsc(p.n)}</span><b>${fmtN(p.a)} ed</b><i>${s?Math.floor(s/60)+":"+String(s%60).padStart(2,"0"):"no reply yet"}</i></div>`}).join(""):""}
 function xfSendNow(){const g=id=>document.getElementById(id),msg=(t,c)=>{g("xfmsg").textContent=t;g("xfmsg").className="bk-msg "+(c||"")};
  if(!xfOn()){msg("Connect to the party first.","bad");return}
  const to=g("xfto").value,pl=xfPeople().find(x=>x.c===to);if(!pl){msg("Pick a player.","bad");return}
  const amt=Math.round(+g("xfamt").value||0),eb=+val("eb").value||0,why=g("xfwhy").value.trim().slice(0,60);
  if(!(amt>0&&amt<=999999)){msg("Enter an amount between 1 and 999,999.","bad");g("xfamt").focus();return}
- if(amt>eb){msg("Not enough eurobucks. You have "+fmtN(eb)+" eb.","bad");return}
+ if(amt>eb){msg("Not enough eurodollars. You have "+fmtN(ed)+" ed.","bad");return}
  const id=Math.random().toString(36).slice(2,10),ttl=90000,a=xfPend();a.push({id:id,to:to,n:pl.n,a:amt,w:why,x:Date.now()+ttl});
  val("eb").value=eb-amt;ebLog(-amt,"To "+pl.n+(why?": "+why:"")+" (pending)");xfSave(a);
  window.__partySend({k:"eb",t:"offer",id:id,to:to,amt:amt,why:why,ttl:ttl});
@@ -1771,22 +1771,22 @@ function xfToast(d){const id=String(d.id||"").replace(/[^a-z0-9]/gi,"").slice(0,
  let box=document.getElementById("xin");if(!box){box=document.createElement("div");box.id="xin";document.body.appendChild(box);box.addEventListener("click",xfInClick)}
  const el=document.createElement("div");el.className="xi";el.dataset.id=id;el.dataset.amt=amt;el.dataset.name=String(d.p||"Runner").slice(0,24);el.dataset.why=String(d.why||"").slice(0,60);el.dataset.exp=Date.now()+Math.min(+d.ttl||90000,90000);
  el.innerHTML='<div class="xi-h">INCOMING TRANSFER</div><div class="xi-b"><b class="xi-n"></b> wants to send you <b class="xi-a"></b></div><div class="xi-w"></div><div class="xi-t"></div><div class="xi-btns"><button class="bk-ok" data-xi="ok">ACCEPT</button><button class="bk-new" data-xi="no">DECLINE</button></div>';
- el.querySelector(".xi-n").textContent=el.dataset.name;el.querySelector(".xi-a").textContent=fmtN(amt)+" eb";el.querySelector(".xi-w").textContent=el.dataset.why;box.appendChild(el);xfTick()}
+ el.querySelector(".xi-n").textContent=el.dataset.name;el.querySelector(".xi-a").textContent=fmtN(amt)+" ed";el.querySelector(".xi-w").textContent=el.dataset.why;box.appendChild(el);xfTick()}
 function xfInClick(e){const b=e.target.closest("[data-xi]");if(!b)return;const el=b.closest(".xi"),id=el.dataset.id,amt=+el.dataset.amt,name=el.dataset.name,why=el.dataset.why,snd=window.__partySend;
  if(XF.done[id]){el.remove();return}XF.done[id]=1;
  if(b.dataset.xi==="ok"){if(Date.now()>+el.dataset.exp){el.remove();return}
-  val("eb").value=(+val("eb").value||0)+amt;ebLog(amt,"From "+name+(why?": "+why:""));logRoll("Transfer","received from "+name,"+"+fmtN(amt)+" eb","ok");upd();
+  val("eb").value=(+val("eb").value||0)+amt;ebLog(amt,"From "+name+(why?": "+why:""));logRoll("Transfer","received from "+name,"+"+fmtN(amt)+" ed","ok");upd();
   const ack=()=>{if(snd)snd({k:"eb",t:"ack",id:id})};ack();setTimeout(ack,2000);setTimeout(ack,6000)}
  else{const no=()=>{if(snd)snd({k:"eb",t:"no",id:id})};no();setTimeout(no,2000)}
  el.remove()}
 window.addEventListener("cps:eb",e=>{const d=e.detail||{};
  if(d.t==="offer"){const me=window.__partyId;if(!me||d.to!==me)return;xfToast(d)}
  else if(d.t==="ack"||d.t==="no"){const a=xfPend(),i=a.findIndex(x=>x.id===d.id&&x.to===d.c);if(i<0)return;const p=a.splice(i,1)[0];
-  if(d.t==="ack")logRoll("Transfer",p.n+" accepted "+fmtN(p.a)+" eb","sent","ok");
-  else{val("eb").value=(+val("eb").value||0)+p.a;ebLog(p.a,"Refund: "+p.n+" declined");logRoll("Transfer",p.n+" declined, "+fmtN(p.a)+" eb returned","refund","")}
+  if(d.t==="ack")logRoll("Transfer",p.n+" accepted "+fmtN(p.a)+" ed","sent","ok");
+  else{val("eb").value=(+val("eb").value||0)+p.a;ebLog(p.a,"Refund: "+p.n+" declined");logRoll("Transfer",p.n+" declined, "+fmtN(p.a)+" ed returned","refund","")}
   xfSave(a);xfRender()}});
 function xfTick(){const now=Date.now(),a=xfPend();
- if(a.length){const keep=a.filter(p=>{if(now>p.x+30000){val("eb").value=(+val("eb").value||0)+p.a;ebLog(p.a,"Refund: no reply from "+p.n);logRoll("Transfer",p.n+" did not reply, "+fmtN(p.a)+" eb returned","refund","");return false}return true});if(keep.length!==a.length)xfSave(keep)}
+ if(a.length){const keep=a.filter(p=>{if(now>p.x+30000){val("eb").value=(+val("eb").value||0)+p.a;ebLog(p.a,"Refund: no reply from "+p.n);logRoll("Transfer",p.n+" did not reply, "+fmtN(p.a)+" ed returned","refund","");return false}return true});if(keep.length!==a.length)xfSave(keep)}
  document.querySelectorAll("#xin .xi").forEach(el=>{const l=Math.ceil((+el.dataset.exp-now)/1000);if(l<=0){XF.done[el.dataset.id]=1;el.remove();return}el.querySelector(".xi-t").textContent="Expires in "+Math.floor(l/60)+":"+String(l%60).padStart(2,"0")});
  xfRender()}
 setInterval(xfTick,1000);
@@ -1794,9 +1794,9 @@ document.addEventListener("click",e=>{if(e.target.closest("#xferbtn"))xfOpen()})
 function payBills(c,which){const f=c=="h"?"r":"u",label=c=="h"?"Rent":"Upkeep",n=Math.max(1,Math.min(LMAX,+cin(c).value||1)),idx=which=="all"?[...Array(n).keys()]:[+which];let tot=0;const nm=[],paid=[];
  idx.forEach(i=>{const a=+val(lk(c,i,f)).value||0;if(a>0){tot+=a;paid.push(i);nm.push(val(lk(c,i,"n")).value.trim()||(c=="h"?"Home ":"Vehicle ")+(i+1))}});
  if(!tot){logRoll(label,"nothing to pay","—","");return}
- const eb=+val("eb").value||0;if(tot>eb){logRoll(label,`needs ${tot} eb, you have ${eb}`,"✗","bad");return}
+ const eb=+val("eb").value||0;if(tot>eb){logRoll(label,`needs ${tot} ed, you have ${eb}`,"✗","bad");return}
  val("eb").value=eb-tot;ebLog(-tot,label+": "+nm.join(", "));if(c=="h")paid.forEach(i=>val(lk("h",i,"d")).value=stamp());
- logRoll(label,nm.join(", "),"−"+fmtN(tot)+" eb","");upd()}
+ logRoll(label,nm.join(", "),"−"+fmtN(tot)+" ed","");upd()}
 document.addEventListener("click",e=>{const t=e.target;let el;
  if(el=t.closest("[data-pay]")){const[c,w]=el.dataset.pay.split("|");payBills(c,w)}
  else if(el=t.closest("[data-isort]")){const F=["n","q","t","o","w","p","g"],rows=[];
@@ -1820,7 +1820,7 @@ document.addEventListener("click",e=>{const t=e.target;let el;
   if(!amt)return;if(!mx&&h.value===""){logRoll(nm,"set SDP MAX first","—","");return}
   const nw=Math.max(0,(h.value===""?mx:(+h.value||0))-amt);h.value=nw;inp.value="";logRoll(nm,"took "+amt+" damage","−"+amt+" SDP","bad");upd()}
  else if(el=t.closest("[data-vfix]")){const i=+el.dataset.vfix,mx=+val(lk("v",i,"x")).value||0;if(!mx)return;val(lk("v",i,"h")).value=mx;logRoll(val(lk("v",i,"n")).value.trim()||"Vehicle "+(i+1),"fully repaired","+SDP","ok");upd()}
- else if(t.id=="ebundo"){const a=ebArr();if(!a.length)return;const x=a.shift();val("eb").value=(+val("eb").value||0)-(+x.d||0);val("eblog").value=a.length?JSON.stringify(a):"";logRoll("Eurobucks","undone: "+(x.w||"transaction"),"↶","");upd()}
+ else if(t.id=="ebundo"){const a=ebArr();if(!a.length)return;const x=a.shift();val("eb").value=(+val("eb").value||0)-(+x.d||0);val("eblog").value=a.length?JSON.stringify(a):"";logRoll("Eurodollars","undone: "+(x.w||"transaction"),"↶","");upd()}
  else if(t.id=="ebclr"){if(!t.dataset.c){t.dataset.c=1;t.textContent="CONFIRM?";setTimeout(()=>{delete t.dataset.c;t.textContent="CLEAR LEDGER"},3000);return}delete t.dataset.c;t.textContent="CLEAR LEDGER";val("eblog").value="";upd()}
 });
 
@@ -2660,7 +2660,7 @@ pl.addEventListener("click",function(){
   <details class="bp-how">
     <summary>HOW IT PLAYS</summary>
     <ul>
-      <li><b>Program effects:</b> every sequence does something the moment it uploads, and the PROGRAM EFFECTS feed under SEQUENCES (and your Roll Log) says what. <b>Scanner</b> lights the next good cell and finds a hidden terminal (you sell its data: eb goes straight onto your sheet) or a lurking enemy. <b>Backdoor</b> refunds 1 Net action (once per run) and, from the Quickhacks panel, marks the Passwall breached. <b>Pathfinder</b> adds 1 buffer slot on top of its floor preview. <b>Slide</b> skips a floor. <b>Eye-Dee</b> exposes ICE for -1 Rez. <b>Cloak</b> cancels backlash and ICE retaliation when you jack out. <b>Control</b> seizes a system and adds 10 s. <b>Virus</b> eats 2 Rez of ICE on top of the bottom-floor payload. <b>Zap</b> destroys ICE outright; with no ICE it wipes your trace like Cloak.</li>
+      <li><b>Program effects:</b> every sequence does something the moment it uploads, and the PROGRAM EFFECTS feed under SEQUENCES (and your Roll Log) says what. <b>Scanner</b> lights the next good cell and finds a hidden terminal (you sell its data: ed goes straight onto your sheet) or a lurking enemy. <b>Backdoor</b> refunds 1 Net action (once per run) and, from the Quickhacks panel, marks the Passwall breached. <b>Pathfinder</b> adds 1 buffer slot on top of its floor preview. <b>Slide</b> skips a floor. <b>Eye-Dee</b> exposes ICE for -1 Rez. <b>Cloak</b> cancels backlash and ICE retaliation when you jack out. <b>Control</b> seizes a system and adds 10 s. <b>Virus</b> eats 2 Rez of ICE on top of the bottom-floor payload. <b>Zap</b> destroys ICE outright; with no ICE it wipes your trace like Cloak.</li>
       <li><b>Net actions:</b> Jack In (free if a Netrunning Suit is in your inventory), starting the breach, every move to a deeper floor (Descend, Slide or a fork door) and Unplug each cost 1 Net action. You get 2 at Interface 1 to 3, 3 at 4 to 6, 4 at 7 to 9 and 5 at 10, unless you type your own total in the Quickhacks panel. END TURN refreshes them.</li>
       <li><b>Damage:</b> when ICE is still standing as you jack out, or a breach locks you out, the hit is rolled for you and taken straight off your HP (armor skipped). ICE hits 2d6 at Black Site, 3d6 at Militech and 4d6 at Arasaka, half as many dice if you wounded it. A failed breach costs 1d6, or 2d6 from Black Site up. The GM can waive a hit with one tap.</li>
       <li><b>Virus payload:</b> land the Virus on the bottom floor and you can write what you rewrite in the system. Your party sees it in the Roll Log.</li>
@@ -2749,7 +2749,7 @@ pl.addEventListener("click",function(){
 var CODES=['1C','55','BD','E9','7A','FF'];
 var runFx={foot:false};
 var DAEMONS=[
-  {id:'scanner',   name:'Scanner',   base:2, text:'Reveal a hidden data terminal, or an enemy lurking on this floor. EFFECT: lights the next good cell; a terminal pays eb.'},
+  {id:'scanner',   name:'Scanner',   base:2, text:'Reveal a hidden data terminal, or an enemy lurking on this floor. EFFECT: lights the next good cell; a terminal pays ed.'},
   {id:'backdoor',  name:'Backdoor',  base:2, text:'Force the password wall open and get a foothold. EFFECT: refunds 1 Net action (once per run).'},
   {id:'pathfinder',name:'Pathfinder',base:2, text:'Map the floors ahead before you commit to diving into them. EFFECT: +1 buffer slot.'},
   {id:'slide',     name:'Slide',     base:3, text:'Slip past a floor of the architecture without a fight. EFFECT: skips a floor.'},
@@ -3407,10 +3407,10 @@ function applyFx(id){
     var pay=0;
     if(randInt(2)){
       pay=(randInt(6)+1)*100; var pr=BPX.addEb?BPX.addEb(pay):{ok:false};
-      msg+='Hidden terminal: '+fxPick(FX_TERMINALS)+'. You sell the data on the street: +'+pay+' eb'+(pr.ok?' added to your sheet ('+pr.eb+' total).':'.');
+      msg+='Hidden terminal: '+fxPick(FX_TERMINALS)+'. You sell the data on the street: +'+pay+' ed'+(pr.ok?' added to your sheet ('+pr.eb+' total).':'.');
     }
     else { msg+='Lurking enemy: '+fxPick(FX_LURKERS)+'. You saw it first, so it cannot ambush you.'; }
-    fxPush('SCANNER',msg,pay?('+'+pay+' eb'):null);
+    fxPush('SCANNER',msg,pay?('+'+pay+' ed'):null);
   }
   else if(id==='backdoor'){
     if(runFx.foot){ fxPush('BACKDOOR','The foothold from earlier in this run is still open.'); return; }
@@ -4129,11 +4129,11 @@ function update(dt){
   else if(k=="r"){if(P.ar>=100)return true;P.ar=Math.min(100,P.ar+35);say("ARMOR +35")}
   else if(k=="k"){P.key=true;say("A7 KEYCHIP ACQUIRED")}
   else if(k=="s"){P.sg=true;P.sh+=8;P.wp=1;say("SHOTGUN")}
-  else{P.eb+=50;say("EB +50")}
+  else{P.eb+=50;say("ED +50")}
   snd(700,.12,"triangle",.1,1.6);pfl=.25;return false});
  flash=Math.max(0,flash-dt);pfl=Math.max(0,pfl-dt);mt-=dt;
  for(var j=-1;j<=1;j++)for(var i=-1;i<=1;i++){var cx=(P.x|0)+i,cy=(P.y|0)+j;if(M[cy]&&M[cy][cx]==6&&Math.hypot(cx+.5-P.x,cy+.5-P.y)<1.1){clear();return}}}
-function clear(){st="clear";if(document.exitPointerLock)document.exitPointerLock();var t=((performance.now()-t0)/1000)|0;show("FLOOR "+lvl+" SECURED",kills+"/"+tk+" HOSTILES · "+t+"S · EB "+P.eb,"CLICK FOR NEXT FLOOR")}
+function clear(){st="clear";if(document.exitPointerLock)document.exitPointerLock();var t=((performance.now()-t0)/1000)|0;show("FLOOR "+lvl+" SECURED",kills+"/"+tk+" HOSTILES · "+t+"S · ED "+P.eb,"CLICK FOR NEXT FLOOR")}
 /* rendering */
 function render(){
  g.fillStyle=sky;g.fillRect(0,0,W,H/2);g.fillStyle=flr;g.fillRect(0,H/2,W,H/2);
@@ -4172,7 +4172,7 @@ function hud(){var y=H-HUD;g.fillStyle="#0b0618";g.fillRect(0,y,W,HUD);g.fillSty
  function lab(t,v,x,c){g.fillStyle="#9a86c8";g.font="7px Orbitron,Arial";g.fillText(t,x,y+10);g.fillStyle=c||"#fff";g.font="bold 11px Orbitron,Arial";g.fillText(v,x,y+22)}
  lab("HEALTH",P.hp|0,8,P.hp<30?"#ff4060":"#5dffa0");lab("ARMOR",P.ar|0,68,"#8fe9ff");
  lab(P.wp?"SHELLS":"AMMO",P.wp?P.sh:P.bul,128,"#ffd84a");lab("WEAPON",P.wp?"SHOTGUN":"PISTOL",190,"#fff");
- lab("A7 CHIP",P.key?"YES":"-",262,P.key?"#ff3ea5":"#666");lab("EB",P.eb,318,"#ffd84a")}
+ lab("A7 CHIP",P.key?"YES":"-",262,P.key?"#ff3ea5":"#666");lab("ED",P.eb,318,"#ffd84a")}
 function minimap(){g.fillStyle="rgba(5,2,12,.7)";g.fillRect(4,4,MW*3+2,MH*3+2);for(var j=0;j<MH;j++)for(var i=0;i<MW;i++){var c=M[j][i];if(c==1)g.fillStyle="rgba(143,233,255,.25)";else if(c==5)g.fillStyle="#ff3ea5";else if(c==6)g.fillStyle="#5dffa0";else continue;g.fillRect(5+i*3,5+j*3,3,3)}
  g.fillStyle="#fff";g.fillRect(5+P.x*3-1,5+P.y*3-1,3,3)}
 function show(t,s,b){ov.innerHTML="<h1>"+t+"</h1><p>"+s+"</p><b>"+b+"</b>";ov.style.display="flex"}
@@ -4278,9 +4278,9 @@ function dmRender(){save();const pcs=characters.filter(isPC),box=Q("#dmRoster");
  box.innerHTML=pcs.length?pcs.map(c=>{const d=c.data,mx=hpMax(d),has=d.hp!==""&&d.hp!=null,hp=has?+d.hp:null,pct=mx&&has?Math.max(0,Math.min(100,hp/mx*100)):0,low=mx&&has&&hp<=Math.ceil(mx/2),dead=mx&&has&&hp<=0,rb=d.robot=="1",
   roles=[d.role1,d.role2,d.role3].filter(Boolean).join(" / ")||"NO ROLE",ip=(+d.ip_earned||0)-(+d.ip_spent||0),act=c.id===activeCharacterId,note=String(d.dm_notes||"").trim();
   return `<div class="dmc${act?" act":""}" data-id="${c.id}"><div class="dmh"><b>${esc(nameOf(c))}</b><span>${esc(roles)}${act?" · OPEN":""}</span></div>
-  <div class="dmst"><div><label>${rb?"SDP":"HP"}</label><b class="${dead?"bad":low?"warn":""}">${has?hp:"–"} / ${mx||"–"}</b><div class="hpb"><i class="${low?"low":""}" style="width:${pct}%"></i></div></div><div><label>LUCK</label><b>${esc(d.luck||0)}/${esc(d.luckmax||0)}</b></div><div><label>IP LEFT</label><b>${ip}</b></div><div><label>EB</label><b>${esc(d.eb||0)}</b></div></div>
+  <div class="dmst"><div><label>${rb?"SDP":"HP"}</label><b class="${dead?"bad":low?"warn":""}">${has?hp:"–"} / ${mx||"–"}</b><div class="hpb"><i class="${low?"low":""}" style="width:${pct}%"></i></div></div><div><label>LUCK</label><b>${esc(d.luck||0)}/${esc(d.luckmax||0)}</b></div><div><label>IP LEFT</label><b>${ip}</b></div><div><label>ED</label><b>${esc(d.eb||0)}</b></div></div>
   <div class="ctl"><button class="mini" data-dm="hp" data-v="-5">−5</button><button class="mini" data-dm="hp" data-v="-1">−1</button><button class="mini" data-dm="hp" data-v="1">+1</button><button class="mini" data-dm="hp" data-v="5">+5</button><button class="mini" data-dm="hp" data-v="full">FULL</button></div>
-  <div class="dmr"><input class="fi" type="number" placeholder="IP" data-in="ip" inputmode="numeric"><button class="mini" data-dm="ip">+ IP</button><input class="fi" type="number" placeholder="± EB" data-in="eb" inputmode="numeric"><button class="mini" data-dm="eb">APPLY EB</button></div>
+  <div class="dmr"><input class="fi" type="number" placeholder="IP" data-in="ip" inputmode="numeric"><button class="mini" data-dm="ip">+ IP</button><input class="fi" type="number" placeholder="± ED" data-in="eb" inputmode="numeric"><button class="mini" data-dm="eb">APPLY ED</button></div>
   <div class="ctl"><button class="mini" data-dm="open">OPEN SHEET</button><button class="mini" data-dm="export">EXPORT TO PLAYER</button><button class="mini g" data-dm="remove">REMOVE</button></div>
   ${note?`<div class="dmn"><b>DM NOTE</b> ${esc(note.length>160?note.slice(0,160)+"…":note)}</div>`:""}</div>`}).join(""):'<div class="empty" style="grid-column:1/-1">No player characters yet. Paste a player\'s export code above and press IMPORT PLAYER, or mark the open sheet as a player character with the button below.</div>';
  const a=activeCharacter();Q("#dmAct").textContent=a?nameOf(a).toUpperCase():"ACTIVE SHEET";Q("#dmFlag").textContent=a&&isPC(a)?"UNMARK OPEN SHEET AS PLAYER":"MARK OPEN SHEET AS PLAYER"}
@@ -4825,7 +4825,7 @@ html body #cyt td:nth-child(1):before{content:"CYBERWARE"}html body #cyt td:nth-
 #p-inv .ip .ipf.av label{font-size:10px;letter-spacing:.3em;color:var(--mute)}
 #p-inv .ip .ipf.av input{font-size:54px;line-height:1.05;text-align:left;color:var(--ink);text-shadow:0 0 24px color-mix(in srgb,var(--hot) 70%,transparent);-moz-appearance:textfield;padding:0;width:100%;text-shadow:none!important}
 #p-inv .ip .ipf.av input::-webkit-inner-spin-button{-webkit-appearance:none}
-#p-inv .ip .ipf.av:after{content:"eb";font:700 12px "Orbitron",sans-serif;letter-spacing:.12em;color:var(--soft)}#p-inv .ip .ipf.av{box-shadow:none;border-radius:0}
+#p-inv .ip .ipf.av:after{content:"ed";font:700 12px "Orbitron",sans-serif;letter-spacing:.12em;color:var(--soft)}#p-inv .ip .ipf.av{box-shadow:none;border-radius:0}html[data-theme="liquid"] #p-inv .ip{border-left:4px solid var(--hot)}html[data-theme="liquid"] #p-inv .ip:before{display:none}
 #p-inv .ebr{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0;width:100%}
 #p-inv .ebr .fi{width:100%;min-width:0;box-sizing:border-box;min-height:42px;border-radius:8px;text-align:left;padding:0 12px}
 #p-inv .ebr button{width:100%;min-height:42px;border-radius:8px;clip-path:none;font-weight:700;letter-spacing:.14em}
@@ -4869,7 +4869,7 @@ html body #inv td:nth-child(5){grid-column:6/10}
 html body #inv td:nth-child(6){grid-column:10/13}
 html body #inv td:nth-child(7){grid-column:1/-1}
 html body #inv td:nth-child(2):before{content:"QTY"}html body #inv td:nth-child(3):before{content:"TYPE"}html body #inv td:nth-child(4):before{content:"WHERE"}
-html body #inv td:nth-child(5):before{content:"COST (eb)"}html body #inv td:nth-child(6):before{content:"KG"}html body #inv td:nth-child(7):before{content:"NOTES"}
+html body #inv td:nth-child(5):before{content:"COST (ed)"}html body #inv td:nth-child(6):before{content:"KG"}html body #inv td:nth-child(7):before{content:"NOTES"}
 html body #inv td input,html body #inv td select{min-height:36px;width:calc(100% - 16px)!important;margin:3px 8px 6px;background:var(--field)!important;border:1px solid var(--line)!important;border-radius:8px!important;font:600 15px "Rajdhani",sans-serif;color:var(--ink);padding:4px 8px;box-sizing:border-box}
 html body #inv td input[type=number]{-moz-appearance:textfield;text-align:center}
 html body #inv td input[type=number]::-webkit-inner-spin-button{-webkit-appearance:none}
@@ -5255,7 +5255,7 @@ document.addEventListener("click",e=>{const t=e.target.closest("#gmList,#gmDet,[
  else if(a==="rev"){g.rev=g.rev?0:1;sv("cps_gigs",mine);pub(g);render()}
  else if(a==="del"){if(!confirm("Delete this gig?"))return;if(g.rev){g.rev=0;pub(g)}mine=mine.filter(x=>x!==g);sel=null;sv("cps_gigs",mine);render()}
  else if(a==="acc"){g.acc=1;sv("cps_gigs_in",inc);sv("cps_gigs",mine);render()}
- else if(a==="pay"&&!g.paid){const el=document.querySelector('[data-k="eb"]');if(!el)return;el.value=(+el.value||0)+(+g.p||0);["input","change"].forEach(n=>el.dispatchEvent(new Event(n,{bubbles:true})));g.paid=1;sv("cps_gigs_in",inc);try{window.logRoll("GIG PAID · "+g.t,"€$ "+g.p+" added to Eurobucks","+"+g.p,"")}catch(x){}render()}});
+ else if(a==="pay"&&!g.paid){const el=document.querySelector('[data-k="eb"]');if(!el)return;el.value=(+el.value||0)+(+g.p||0);["input","change"].forEach(n=>el.dispatchEvent(new Event(n,{bubbles:true})));g.paid=1;sv("cps_gigs_in",inc);try{window.logRoll("GIG PAID · "+g.t,"€$ "+g.p+" added to Eurodollars","+"+g.p,"")}catch(x){}render()}});
 $("#gmDet").addEventListener("input",e=>{const f=e.target.dataset.f,g=cur();if(!f||!g)return;g[f]=f==="p"?Math.max(0,+e.target.value||0):e.target.value;sv("cps_gigs",mine);if(g.rev){clearTimeout(pt2);pt2=setTimeout(()=>pub(g),600)}
  $("#gmList").querySelector(".gl.on b")&&($("#gmList").querySelector(".gl.on b").textContent=g.t||"Untitled gig");sched()});
 /* party relay: players receive revealed gigs, DM re-sends them to anyone who joins */
@@ -5447,7 +5447,7 @@ function renderSheet(){let m=$("#bmSheet");if(!m){m=document.createElement("div"
  const used={},g=k=>{used[k]=1;return o[k]||""},stat=["INT","REF","DEX","TECH","COOL","WILL","MOVE","BODY","EMP"];
  let h='<h3>'+esc(g("handle")||shName)+'</h3><p>'+esc([g("role1"),g("role2"),g("role3")].filter(Boolean).join(" · ")||"No role set")+'</p>';
  h+='<div class="shg">'+stat.map(s=>'<div><b>'+s+'</b><span>'+esc(g("st_"+s)||"–")+'</span></div>').join("")+'</div>';
- h+='<p><b>HP</b> '+esc(g("hp")||"–")+' · <b>LUCK</b> '+esc(g("luck")||"–")+"/"+esc(g("luckmax")||"–")+' · <b>HEAD SP</b> '+esc(g("hsp")||"–")+"/"+esc(g("hmax")||"–")+' · <b>BODY SP</b> '+esc(g("bsp")||"–")+"/"+esc(g("bmax")||"–")+' · <b>EB</b> '+esc(g("eb")||"–")+'</p>';
+ h+='<p><b>HP</b> '+esc(g("hp")||"–")+' · <b>LUCK</b> '+esc(g("luck")||"–")+"/"+esc(g("luckmax")||"–")+' · <b>HEAD SP</b> '+esc(g("hsp")||"–")+"/"+esc(g("hmax")||"–")+' · <b>BODY SP</b> '+esc(g("bsp")||"–")+"/"+esc(g("bmax")||"–")+' · <b>ED</b> '+esc(g("eb")||"–")+'</p>';
  const sk=[];Object.keys(o).forEach(k=>{const m2=/^L_(.+)$/.exec(k);if(m2){used[k]=1;used["B_"+m2[1]]=1;sk.push(pretty(m2[1].replace(/\d+$/,""))+" "+o[k]+(o["B_"+m2[1]]?" (base "+o["B_"+m2[1]]+")":""))}});
  if(sk.length)h+='<h4>SKILLS</h4><p>'+sk.map(esc).join(" · ")+'</p>';
  const rest=Object.keys(o).filter(k=>!used[k]&&!/^(B_|L_|st_|ip_|rest_|rep_)/.test(k));
@@ -5739,7 +5739,7 @@ function viewC(c){const names=[];c.msgs.forEach(m=>{if(m.f&&!names.includes(m.f)
 const fi=(f,v,ml,ph)=>'<input class="fi" data-f="'+f+'" maxlength="'+ml+'" value="'+esc(v)+'"'+(ph?' placeholder="'+esc(ph)+'"':"")+'>';
 const sel=(f,opts,v)=>'<select class="fi" data-f="'+f+'">'+opts.map(o=>'<option value="'+o[0]+'"'+(o[0]===v?" selected":"")+'>'+o[1]+'</option>').join("")+'</select>';
 function edQ(q){return'<div class="qed"><div class="qrow"><label>TITLE'+fi("t",q.t,80)+'</label><label>TYPE'+sel("cat",CATS.map(c=>[c[0],c[2]]),q.cat)+'</label><label>STATUS'+sel("st",STS,q.st)+'</label></div>'+
- '<div class="qrow"><label>LOCATION'+fi("loc",q.loc,40,"e.g. Watson, Little China")+'</label><label>QUEST NUMBER'+fi("lvl",q.lvl,12,"e.g. 12")+'</label><label>REWARD'+fi("rw",q.rw,80,"e.g. 2000 eb")+'</label></div>'+
+ '<div class="qrow"><label>LOCATION'+fi("loc",q.loc,40,"e.g. Watson, Little China")+'</label><label>QUEST NUMBER'+fi("lvl",q.lvl,12,"e.g. 12")+'</label><label>REWARD'+fi("rw",q.rw,80,"e.g. 2000 ed")+'</label></div>'+
  '<label>DESCRIPTION<textarea class="fi" rows="6" data-f="desc" maxlength="1200">'+esc(q.desc)+'</textarea></label>'+
  '<div><div class="qh" style="margin-top:0">OBJECTIVES <small style="color:var(--mute);letter-spacing:.06em">(tick = completed)</small></div>'+q.obj.map((o,i)=>'<div class="orow"><input type="checkbox" data-od="'+i+'"'+(o.d?" checked":"")+'><input class="fi" data-ot="'+i+'" maxlength="160" value="'+esc(o.t)+'" placeholder="Objective"><button class="mini" data-a="oup" data-i="'+i+'" type="button">\u25B2</button><button class="mini" data-a="odn" data-i="'+i+'" type="button">\u25BC</button><button class="mini" data-a="odel" data-i="'+i+'" type="button">\u2715</button></div>').join("")+
  (q.obj.length<12?'<button class="mini" data-a="oadd" type="button">+ OBJECTIVE</button>':"")+'<label class="qchk"><input type="checkbox" data-f="seq"'+(q.seq?" checked":"")+'> Show players one objective at a time</label></div></div>'}
@@ -6898,7 +6898,7 @@ function pickRender(j){
   var err=wi>=0&&!j?modCheck(m[0],wi,nm):"",isFit=fitted.indexOf(m[0])>=0,pips="",i;
   for(i=0;i<m[3];i++)pips+="<i></i>";
   var rb=m[4].indexOf("rb")>=0;
-  return'<button type="button" class="mk-t'+(rb?" rb "+m[0]:"")+'" data-mkx="'+m[0]+'" aria-pressed="'+(cur===m[0])+'"'+(err||j?" disabled":"")+(err?' title="'+esc(err)+'"':"")+'><span class="mk-tp" title="'+m[3]+" slot"+(m[3]>1?"s":"")+'">'+pips+"</span><b>"+esc(m[1])+"</b><small>"+esc(m[6]||"")+"</small><em>"+m[2].toLocaleString("en-US")+" eb</em>"+(isFit?"<u class=\"ok\">FITTED</u>":err?"<u>"+esc(err.replace(nm,"it"))+"</u>":"")+"</button>"}
+  return'<button type="button" class="mk-t'+(rb?" rb "+m[0]:"")+'" data-mkx="'+m[0]+'" aria-pressed="'+(cur===m[0])+'"'+(err||j?" disabled":"")+(err?' title="'+esc(err)+'"':"")+'><span class="mk-tp" title="'+m[3]+" slot"+(m[3]>1?"s":"")+'">'+pips+"</span><b>"+esc(m[1])+"</b><small>"+esc(m[6]||"")+"</small><em>"+m[2].toLocaleString("en-US")+" ed</em>"+(isFit?"<u class=\"ok\">FITTED</u>":err?"<u>"+esc(err.replace(nm,"it"))+"</u>":"")+"</button>"}
  var a="",r="",bl="";
  MKMODS.forEach(function(m){var ml=m[4].indexOf("ml")>=0;if(fam==="blade"&&!ml||fam==="ranged"&&ml)return;if(ml)bl+=tile(m);else if(m[4].indexOf("rb")>=0)r+=tile(m);else a+=tile(m)});
  host.innerHTML=(bl?'<div class="mk-g">BLADE UPGRADES <small>3 SLOTS</small></div><div class="mk-tg">'+bl+"</div>":"")+(a?'<div class="mk-g">ATTACHMENTS</div><div class="mk-tg">'+a+"</div>":"")+(r?'<div class="mk-g">REBUILDS <small>ONE PER WEAPON · 2 SLOTS</small></div><div class="mk-tg">'+r+"</div>":"")}
@@ -6921,7 +6921,7 @@ function mkRefresh(){
  ["mk_t","mk_w","mk_x","mk_c"].forEach(function(k){g(k).disabled=!!j});
  var go=byId("mkgo"),col=byId("mkcol"),info=byId("mkinfo"),fill=byId("mkfill"),hint=byId("mkhint"),st=byId("mkst"),now=Date.now();
  go.hidden=false;col.hidden=true;st.hidden=!j;hint.hidden=!!j;
- if(!j){var mk=t==="make";go.textContent=mk?"OPEN BLUEPRINT":"PAY "+(num("mk_c")||0).toLocaleString("en-US")+" EB & OPEN WORKBENCH";fill.style.width="0";
+ if(!j){var mk=t==="make";go.textContent=mk?"OPEN BLUEPRINT":"PAY "+(num("mk_c")||0).toLocaleString("en-US")+" ED & OPEN WORKBENCH";fill.style.width="0";
   hint.textContent=mk?"Design the weapon part by part and pay for the parts. Then weld it together and wait 1 hour. Three bad welds ruin the job and the parts are lost.":"Pay for the parts and weld the work yourself, then wait 1 hour. Three bad welds ruin the job and the parts are lost."}
  else if(j.s==="wait"){go.hidden=true;var left=j.end-now;
   if(left>0){fill.style.width=Math.min(100,(1-left/HOUR)*100)+"%";info.textContent=desc(j)+" \u00b7 quality "+QN[j.q]+" \u00b7 ready in "+fmt(left)}
@@ -6941,10 +6941,10 @@ function start(){
  j.w=w;j.wn=nm;
  if(t==="mod"){j.x=g("mk_x").value;var er=modCheck(j.x,w,nm);if(er){logRoll("Workbench",er,"\u2717","bad");return}}
  var eb=+val("eb").value||0;
- if(cost>eb){logRoll("Workbench","needs "+cost+" eb of parts, you have "+eb,"\u2717","bad");return}
+ if(cost>eb){logRoll("Workbench","needs "+cost+" ed of parts, you have "+eb,"\u2717","bad");return}
  j.c=cost;
  if(cost){val("eb").value=eb-cost;ebLog(-cost,"Maker parts: "+desc(j))}
- logRoll("Workbench \u00b7 "+desc(j),cost?"parts bought":"no parts cost",cost?"\u2212"+cost+" eb":"\u2014","");
+ logRoll("Workbench \u00b7 "+desc(j),cost?"parts bought":"no parts cost",cost?"\u2212"+cost+" ed":"\u2014","");
  openGame(j)}
 
 /* ---------- blueprint: design the weapon part by part ---------- */
@@ -6965,21 +6965,21 @@ function renderDesign(){
   optKeys(s,D.p).forEach(function(k){
    var o=partOf(s,k,D.p),dis=o.t>cap;
    if(s==="f"&&FR[k].g!==grp){grp=FR[k].g;inner+='<span class="mk-grp">'+grp+"</span>"}
-   inner+='<button type="button" class="mk-opt" data-slot="'+s+'" data-key="'+k+'" aria-pressed="'+(D.p[s]===k)+'"'+(dis?' disabled title="Needs Fabrication Expertise '+(o.t-1)+(o.t>3?"+":"")+'"':"")+"><b>"+o.n+"</b>"+(o.e?"<small>"+o.e+"</small>":"")+"<small>"+o.c.toLocaleString("en-US")+" eb \u00b7 T"+o.t+"</small></button>"});
+   inner+='<button type="button" class="mk-opt" data-slot="'+s+'" data-key="'+k+'" aria-pressed="'+(D.p[s]===k)+'"'+(dis?' disabled title="Needs Fabrication Expertise '+(o.t-1)+(o.t>3?"+":"")+'"':"")+"><b>"+o.n+"</b>"+(o.e?"<small>"+o.e+"</small>":"")+"<small>"+o.c.toLocaleString("en-US")+" ed \u00b7 T"+o.t+"</small></button>"});
   h+='<div class="mk-slot" data-s="'+s+'"><div class="mk-sl">'+LBL[kd][s]+'</div><div class="mk-opts">'+inner+"</div></div>"});
  els.slots.innerHTML=h;els.pv.innerHTML=svgOf(D.p,false);
  var eb=+val("eb").value||0;
- els.stats.innerHTML=[["DAMAGE",st.dmg],["ROF",st.r],st.ranged?["MAGAZINE",st.m]:null,["HANDS",st.h],["CONCEALABLE",st.k?"YES":"NO"],["SKILL",st.s],st.tune?["QUALITY","+1 STEP"]:null,["PRICE",st.cost.toLocaleString("en-US")+" eb"],["TIER CAP","T"+cap]].filter(Boolean).map(function(x){return"<span>"+x[0]+"<b>"+x[1]+"</b></span>"}).join("");
- els.pay.textContent="PAY "+st.cost.toLocaleString("en-US")+" EB & START WELDING";els.pay.classList.toggle("poor",st.cost>eb);
- els.funds.textContent="You have "+eb.toLocaleString("en-US")+" eb."}
+ els.stats.innerHTML=[["DAMAGE",st.dmg],["ROF",st.r],st.ranged?["MAGAZINE",st.m]:null,["HANDS",st.h],["CONCEALABLE",st.k?"YES":"NO"],["SKILL",st.s],st.tune?["QUALITY","+1 STEP"]:null,["PRICE",st.cost.toLocaleString("en-US")+" ed"],["TIER CAP","T"+cap]].filter(Boolean).map(function(x){return"<span>"+x[0]+"<b>"+x[1]+"</b></span>"}).join("");
+ els.pay.textContent="PAY "+st.cost.toLocaleString("en-US")+" ED & START WELDING";els.pay.classList.toggle("poor",st.cost>eb);
+ els.funds.textContent="You have "+eb.toLocaleString("en-US")+" ed."}
 function payBuild(){
  var rs=restState();if(rs.out){els.dmsg.textContent=isRobot()?"Powered off: recharge first.":"0 sleep left: rest first.";return}
  norm(D.p,tierCap());var st=statsOf(D.p),eb=+val("eb").value||0;
- if(st.cost>eb){els.dmsg.textContent="Not enough eurobucks: the parts cost "+st.cost+" eb and you have "+eb+".";return}
+ if(st.cost>eb){els.dmsg.textContent="Not enough eurodollars: the parts cost "+st.cost+" ed and you have "+eb+".";return}
  D.n=els.name.value.trim().slice(0,40);bpSave();
  var j={s:"play",t:"make",p:JSON.parse(JSON.stringify(D.p)),n:D.n,c:st.cost,st:st};
  val("eb").value=eb-st.cost;if(st.cost)ebLog(-st.cost,"Maker parts: "+desc(j));
- logRoll("Workbench \u00b7 "+desc(j),"parts bought: "+st.dmg+" \u00b7 ROF "+st.r+(st.m?" \u00b7 mag "+st.m:""),"\u2212"+st.cost+" eb","");
+ logRoll("Workbench \u00b7 "+desc(j),"parts bought: "+st.dmg+" \u00b7 ROF "+st.r+(st.m?" \u00b7 mag "+st.m:""),"\u2212"+st.cost+" ed","");
  els.design.hidden=true;openGame(j)}
 
 /* ---------- the calibration minigame ---------- */
@@ -7687,7 +7687,7 @@ function html(c){
  h+='<div class="r-vt"><div class="r-fb"><b>Hit points</b><span class="r-bl">'+(c.blank?'<u></u>':'<s>'+E(c.hp)+'</s>')+(c.hpm?'<em>/ '+esc(c.hpm)+'</em>':'')+'</span><div class="r-bar"><i style="width:'+(c.blank?0:pct(c.hp,c.hpm))+'%"></i></div></div>'
   +fb("Seriously wounded",c.sw)+fb("Death save",c.ds)
   +'<div class="r-fb"><b>'+(c.mach?"Coherence":"Humanity")+'</b><span class="r-bl">'+(c.blank?'<u></u>':'<s>'+E(c.hum)+'</s>')+(c.humm?'<em>/ '+esc(c.humm)+'</em>':'')+'</span><div class="r-bar hm"><i style="width:'+(c.blank?0:pct(c.hum,c.humm))+'%"></i></div></div>'
-  +vb("Luck",c.luck,c.luckm)+vb("Eurobucks",c.eb,"")+'</div>';
+  +vb("Luck",c.luck,c.luckm)+vb("Eurodollars",c.eb,"")+'</div>';
  h+='<div class="r-ar">'+vb("Head SP",c.hsp,c.hmx)+vb("Body SP",c.bsp,c.bmx)+vb("Shield","","")+'</div>';
  h+='<div class="r-ar">'+fb("IP earned",c.ipE)+fb("IP spent",c.ipS)+fb("IP avail.",c.blank?"":c.ipA)+'</div></div>';
  h+='<div class="r-main"><div><div class="r-h2">Weapons</div><table class="r-wt"><tr><th>Weapon</th><th>Skill</th><th>Atk</th><th>DMG</th><th>ROF</th><th>Ammo</th><th>Notes</th></tr>';
@@ -8064,7 +8064,7 @@ window.wsRender=function(i,c){
  var u=used(a),h="",rb=rbOf(a),k;
  a.forEach(function(k){var m=md(k),pips="",x,r=m[4].indexOf("rb")>=0;
   for(x=0;x<m[3];x++)pips+="<i></i>";
-  h+='<div class="at'+(r?" rb "+k:"")+'"><span class="sp" title="'+m[3]+' slot'+(m[3]>1?"s":"")+'">'+pips+'</span><button type="button" class="ai" aria-expanded="false" title="Show or hide the full rules"><b>'+esc(m[1])+'</b><small>'+esc(m[6]||"")+'</small></button><em>'+m[2].toLocaleString("en-US")+' EB</em><button type="button" class="mini" data-wsr="'+i+'|'+k+'" title="Strip this upgrade off (it is lost)" aria-label="Remove '+esc(m[1])+'">\u2715</button><div class="ax">'+esc(m[5])+'</div></div>'});
+  h+='<div class="at'+(r?" rb "+k:"")+'"><span class="sp" title="'+m[3]+' slot'+(m[3]>1?"s":"")+'">'+pips+'</span><button type="button" class="ai" aria-expanded="false" title="Show or hide the full rules"><b>'+esc(m[1])+'</b><small>'+esc(m[6]||"")+'</small></button><em>'+m[2].toLocaleString("en-US")+' ED</em><button type="button" class="mini" data-wsr="'+i+'|'+k+'" title="Strip this upgrade off (it is lost)" aria-label="Remove '+esc(m[1])+'">\u2715</button><div class="ax">'+esc(m[5])+'</div></div>'});
  if(u<CAP)h+='<div class="ce">'+(a.length?"":"NO UPGRADES · ")+(CAP-u)+" FREE SLOT"+(CAP-u>1?"S":"")+"</div>";
  box.querySelector(".wsg").innerHTML=h;
  var segs="";for(k=0;k<CAP;k++)segs+='<i class="'+(k<u?"on":"")+'"></i>';
