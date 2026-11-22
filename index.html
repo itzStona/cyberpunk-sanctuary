@@ -8766,7 +8766,7 @@ var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(m){r
 var rnd=function(n){return 1+Math.floor(Math.random()*n)};
 var fmt=function(n){return String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,",")};
 var clamp=function(v,a,b,d){v=+v;return isNaN(v)?d:Math.max(a,Math.min(b,Math.round(v)))};
-var TI=[["LOW-KEY",10],["STANDARD",13],["BIG SCORE",16]],CL={legit:"LEGIT",grey:"GREY",illegal:"ILLEGAL"};
+var TI=[["LOW-KEY",12],["STANDARD",16],["BIG SCORE",20]],CL={legit:"LEGIT",grey:"GREY",illegal:"ILLEGAL"};
 var HU=[
 {id:"courier",n:"Courier Runs",c:"legit",d:"Packages, food and sealed envelopes across the city, fast and no questions.",sk:["Drive Land Vehicle","Athletics","Local Expert","Streetwise"],rl:["Nomad"],p:[30,70,170]},
 {id:"tutor",n:"Tutoring & Translation",c:"legit",d:"Teach, translate, write reports for students and execs with no time.",sk:["Education","Language","Science","Library Search"],rl:["Exec","Media"],p:[30,75,170]},
